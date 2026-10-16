@@ -1,4 +1,4 @@
-import { signal, effect, type Signal, type CleanupFn } from '@nova/signals';
+import { signal, effect, type Signal, type CleanupFn } from '@zuari/signals';
 import { generateAnchorName, setElementAnchor } from './anchor.js';
 import { createTooltip } from './tooltip.js';
 

@@ -1,9 +1,9 @@
 /**
- * @nova/core
- * The unified export for the Nova UI/UX Framework.
+ * @zuari/core
+ * The unified export for the Zuari UI/UX Framework.
  */
 
-export * from '@nova/signals';
-export * from '@nova/tokens';
-export * from '@nova/glyphs';
-export * from '@nova/headless';
+export * from '@zuari/signals';
+export * from '@zuari/tokens';
+export * from '@zuari/glyphs';
+export * from '@zuari/headless';

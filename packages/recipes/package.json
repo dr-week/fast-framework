@@ -1,5 +1,5 @@
 {
-  "name": "@nova/recipes",
+  "name": "@zuari/recipes",
   "version": "0.1.0",
   "description": "Zero-runtime, native @scope SCSS/CSS design recipes for Aether-Glyph minimalist UI",
   "type": "module",

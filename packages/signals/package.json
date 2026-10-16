@@ -1,5 +1,5 @@
 {
-  "name": "@nova/signals",
+  "name": "@zuari/signals",
   "version": "0.1.0",
   "description": "Ultra-lightweight (<1KB), zero-dependency fine-grained reactive state graph based on TC39 Signals",
   "type": "module",

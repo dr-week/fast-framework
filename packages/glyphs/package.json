@@ -1,5 +1,5 @@
 {
-  "name": "@nova/glyphs",
+  "name": "@zuari/glyphs",
   "version": "0.1.0",
   "description": "Zero-runtime, mathematically balanced vector glyph engine for Aether-Glyph minimalist UI",
   "type": "module",

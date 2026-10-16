@@ -1,6 +1,6 @@
-import { signal, effect } from '@nova/signals';
-import { createGlyphButton } from '@nova/headless';
-import { SparkleGlyph, CommandGlyph, LayersGlyph, GridGlyph, TunerGlyph } from '@nova/glyphs';
+import { signal, effect } from '@zuari/signals';
+import { createGlyphButton } from '@zuari/headless';
+import { SparkleGlyph, CommandGlyph, LayersGlyph, GridGlyph, TunerGlyph } from '@zuari/glyphs';
 
 const app = document.getElementById('app')!;
 
@@ -16,9 +16,9 @@ header.style.alignItems = 'center';
 header.style.gap = '12px';
 
 header.innerHTML = `
-  <div class="hero-badge">Aether-Glyph v0.1 • Zero-VDOM</div>
-  <h1 class="hero-title">Nova UI Framework</h1>
-  <p class="hero-subtitle">Icon-first minimalist design language powered by TC39 Signals, native @scope CSS, and CSS Anchor Positioning.</p>
+  <div class="hero-badge">Zuari • Tidal Speed • Zero-VDOM</div>
+  <h1 class="hero-title">Zuari UI Framework</h1>
+  <p class="hero-subtitle">Born on the Goan tide. Icon-first minimalist design language powered by TC39 Signals, native @scope CSS, and CSS Anchor Positioning.</p>
 `;
 app.appendChild(header);
 

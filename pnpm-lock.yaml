@@ -14,19 +14,19 @@ importers:
 
   packages/core:
     dependencies:
-      '@nova/glyphs':
+      '@zuari/glyphs':
         specifier: workspace:*
         version: link:../glyphs
-      '@nova/headless':
+      '@zuari/headless':
         specifier: workspace:*
         version: link:../headless
-      '@nova/recipes':
+      '@zuari/recipes':
         specifier: workspace:*
         version: link:../recipes
-      '@nova/signals':
+      '@zuari/signals':
         specifier: workspace:*
         version: link:../signals
-      '@nova/tokens':
+      '@zuari/tokens':
         specifier: workspace:*
         version: link:../tokens
 
@@ -34,7 +34,7 @@ importers:
 
   packages/headless:
     dependencies:
-      '@nova/signals':
+      '@zuari/signals':
         specifier: workspace:*
         version: link:../signals
 
@@ -46,22 +46,22 @@ importers:
 
   playground:
     dependencies:
-      '@nova/core':
+      '@zuari/core':
         specifier: workspace:*
         version: link:../packages/core
-      '@nova/glyphs':
+      '@zuari/glyphs':
         specifier: workspace:*
         version: link:../packages/glyphs
-      '@nova/headless':
+      '@zuari/headless':
         specifier: workspace:*
         version: link:../packages/headless
-      '@nova/recipes':
+      '@zuari/recipes':
         specifier: workspace:*
         version: link:../packages/recipes
-      '@nova/signals':
+      '@zuari/signals':
         specifier: workspace:*
         version: link:../packages/signals
-      '@nova/tokens':
+      '@zuari/tokens':
         specifier: workspace:*
         version: link:../packages/tokens
     devDependencies:

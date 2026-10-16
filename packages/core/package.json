@@ -1,17 +1,17 @@
 {
-  "name": "@nova/core",
+  "name": "@zuari/core",
   "version": "0.1.0",
-  "description": "Unified entry point for the Nova Framework - Next-generation UI/UX framework",
+  "description": "Unified entry point for Zuari - Ultra-lightweight, platform-first web UI/UX framework",
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "@nova/signals": "workspace:*",
-    "@nova/tokens": "workspace:*",
-    "@nova/glyphs": "workspace:*",
-    "@nova/headless": "workspace:*",
-    "@nova/recipes": "workspace:*"
+    "@zuari/signals": "workspace:*",
+    "@zuari/tokens": "workspace:*",
+    "@zuari/glyphs": "workspace:*",
+    "@zuari/headless": "workspace:*",
+    "@zuari/recipes": "workspace:*"
   },
   "exports": {
     ".": {

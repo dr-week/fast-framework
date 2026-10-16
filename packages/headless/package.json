@@ -1,5 +1,5 @@
 {
-  "name": "@nova/headless",
+  "name": "@zuari/headless",
   "version": "0.1.0",
   "description": "Zero-style, accessible UI primitives powered by TC39 Signals and native browser Anchor Positioning",
   "type": "module",
@@ -7,7 +7,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "@nova/signals": "workspace:*"
+    "@zuari/signals": "workspace:*"
   },
   "exports": {
     ".": {

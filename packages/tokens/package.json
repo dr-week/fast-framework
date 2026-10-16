@@ -1,5 +1,5 @@
 {
-  "name": "@nova/tokens",
+  "name": "@zuari/tokens",
   "version": "0.1.0",
   "description": "Zero-runtime, strictly-typed OKLCH design tokens with native CSS @property generator",
   "type": "module",
