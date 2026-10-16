@@ -1,18 +1,18 @@
-# Nova Framework User Manual & Developer Guide
+# Zuari Framework User Manual & Developer Guide
 
-Welcome to the official manual for **Nova**, the ultra-lightweight, platform-first web UI/UX framework designed for high performance and the **Aether-Glyph** minimalist design language.
+Welcome to the official manual for **Zuari**, the ultra-lightweight, platform-first web UI/UX framework born on the tidal waters of Goa, India.
 
 ---
 
 ## 📖 Table of Contents
-1. [Introduction & Core Philosophy](#1-introduction--core-philosophy)
+1. [Introduction & The Story of Zuari](#1-introduction--the-story-of-zuari)
 2. [Installation & Setup](#2-installation--setup)
 3. [The Aether-Glyph Minimalist Design Language](#3-the-aether-glyph-minimalist-design-language)
 4. [User Manual: Building Your First App](#4-user-manual-building-your-first-app)
-   - [Atomic State Management (`@nova/signals`)](#atomic-state-management-novasignals)
-   - [Accessible Headless UI (`@nova/headless`)](#accessible-headless-ui-novaheadless)
-   - [Precision Vector Glyphs (`@nova/glyphs`)](#precision-vector-glyphs-novaglyphs)
-   - [Native Scoped Styling (`@nova/recipes`)](#native-scoped-styling-novarecipes)
+   - [Atomic State Management (`@zuari/signals`)](#atomic-state-management-zuarisignals)
+   - [Accessible Headless UI (`@zuari/headless`)](#accessible-headless-ui-zuariheadless)
+   - [Precision Vector Glyphs (`@zuari/glyphs`)](#precision-vector-glyphs-zuariglyphs)
+   - [Native Scoped Styling (`@zuari/recipes`)](#native-scoped-styling-zuarirecipes)
 5. [Developer & Architecture Guidelines](#5-developer--architecture-guidelines)
    - [Zero Monolith Rule](#zero-monolith-rule)
    - [Strict Type Invariance](#strict-type-invariance)
@@ -21,11 +21,13 @@ Welcome to the official manual for **Nova**, the ultra-lightweight, platform-fir
 
 ---
 
-## 1. Introduction & Core Philosophy
+## 1. Introduction & The Story of Zuari
 
-Nova is built on three unwavering principles:
-* **Direct DOM Reactivity:** State updates mutate exact text nodes and attributes directly via fine-grained signals—without running a Virtual DOM diffing engine.
-* **Platform-First Primitives:** Instead of bundling 40KB of JavaScript to manage overlays and styling, Nova delegates layout to native browser standards: **CSS Anchor Positioning**, **native `@scope`**, and typed **`@property`** tokens.
+The **Zuari River** is the largest, most vital tidal lifeline of Goa. Originating in the Western Ghats, it surges with raw gravitational velocity, cutting through stone and meeting the vast Arabian Sea in an effortless, frictionless tide.
+
+Zuari is built on three unwavering principles:
+* **Direct Tidal Reactivity:** State updates mutate exact text nodes and attributes directly via fine-grained signals—without running a Virtual DOM diffing engine.
+* **Platform-First Primitives:** Instead of bundling 40KB of JavaScript to manage overlays and styling, Zuari delegates layout to native browser standards: **CSS Anchor Positioning**, **native `@scope`**, and typed **`@property`** tokens.
 * **Icon-First Minimalist Aesthetics (Aether-Glyph):** Interfaces should be clean, quiet, and fast. Labels are deferred to anchor-tethered micro-tooltips, keeping visual focus sharp.
 
 ---
@@ -33,14 +35,14 @@ Nova is built on three unwavering principles:
 ## 2. Installation & Setup
 
 ### Installing via Package Manager
-Nova is a collection of standalone packages under the `@nova/*` namespace:
+Zuari is a collection of standalone packages under the `@zuari/*` namespace:
 
 ```bash
 # Install the complete framework
-pnpm add @nova/core
+pnpm add @zuari/core
 
 # Or install only specific micro-modules
-pnpm add @nova/signals @nova/headless @nova/glyphs @nova/recipes
+pnpm add @zuari/signals @zuari/headless @zuari/glyphs @zuari/recipes
 ```
 
 ### Installing Directly from GitHub
@@ -64,13 +66,13 @@ Traditional user interfaces are cluttered with redundant text banners, repetitiv
 
 ## 4. User Manual: Building Your First App
 
-Here is a step-by-step walkthrough of creating an interactive, accessible application using Nova:
+Here is a step-by-step walkthrough of creating an interactive, accessible application using Zuari:
 
-### Step 1: Atomic State Management (`@nova/signals`)
+### Step 1: Atomic State Management (`@zuari/signals`)
 Create fine-grained reactive state without component re-renders:
 
 ```typescript
-import { signal, computed, effect } from '@nova/signals';
+import { signal, computed, effect } from '@zuari/signals';
 
 // Create atomic reactive signals
 const counter = signal(0);
@@ -84,13 +86,13 @@ effect(() => {
 counter.value++; // Effect automatically fires
 ```
 
-### Step 2: Accessible Headless UI (`@nova/headless`)
+### Step 2: Accessible Headless UI (`@zuari/headless`)
 Create an icon-first button tethered to an anchor-positioned tooltip:
 
 ```typescript
-import { createGlyphButton } from '@nova/headless';
-import { SparkleGlyph } from '@nova/glyphs';
-import '@nova/recipes/aether.css';
+import { createGlyphButton } from '@zuari/headless';
+import { SparkleGlyph } from '@zuari/glyphs';
+import '@zuari/recipes/aether.css';
 
 const aiButton = createGlyphButton({
   label: 'AI Intelligence Copilot', // Read by screen readers
@@ -116,7 +118,7 @@ if (aiButton.tooltipElement) {
 
 ## 5. Developer & Architecture Guidelines
 
-To maintain the architectural integrity of Nova, all code contributions must comply with these guidelines:
+To maintain the architectural integrity of Zuari, all code contributions must comply with these guidelines:
 
 ### Zero Monolith Rule
 * Never write "god files" that combine state logic, DOM rendering, and styling into a single module.

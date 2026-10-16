@@ -1,4 +1,4 @@
-# @nova/headless
+# @zuari/headless
 
 > *Interactive behaviors without the 40KB of JavaScript math to figure out where a tooltip belongs.*
 
@@ -6,16 +6,16 @@
 [![Accessibility](https://img.shields.io/badge/A11y-WCAG_2.2-green.svg?style=flat-square)](#)
 [![Anchor Positioning](https://img.shields.io/badge/Positioning-Native_CSS_Anchor-cyan.svg?style=flat-square)](#)
 
-`@nova/headless` delivers accessible, unstyled behavioral logic for modern UI components.
+`@zuari/headless` delivers accessible, unstyled behavioral logic for modern UI components.
 
-Instead of bundling third-party positioning libraries that hijack the browser's scroll thread with continuous bounding-box calculations, `@nova/headless` pairs directly with **native CSS Anchor Positioning** (`anchor-name` / `position-anchor`).
+Instead of bundling third-party positioning libraries that hijack the browser's scroll thread with continuous bounding-box calculations, `@zuari/headless` pairs directly with **native CSS Anchor Positioning** (`anchor-name` / `position-anchor`).
 
 ---
 
 ## 📦 Installation
 
 ```bash
-pnpm add @nova/headless
+pnpm add @zuari/headless
 ```
 
 ---
@@ -26,7 +26,7 @@ pnpm add @nova/headless
 Generates unique anchor tokens and sets native CSS anchor rules directly on elements:
 
 ```typescript
-import { generateAnchorName, setElementAnchor, tetherToAnchor } from '@nova/headless';
+import { generateAnchorName, setElementAnchor, tetherToAnchor } from '@zuari/headless';
 
 const trigger = document.createElement('button');
 const popup = document.createElement('div');
@@ -44,7 +44,7 @@ The browser handles scrolling, collision detection, and layout natively on the c
 Creates a fully accessible tooltip linked to an anchor element with automatic `role="tooltip"`:
 
 ```typescript
-import { createTooltip } from '@nova/headless';
+import { createTooltip } from '@zuari/headless';
 
 const { tooltipElement, anchorName, id } = createTooltip({
   content: 'View workspace settings'
@@ -57,8 +57,8 @@ const { tooltipElement, anchorName, id } = createTooltip({
 Ties together reactive state signals, anchor positioning, and ARIA attributes in one clean primitive:
 
 ```typescript
-import { signal } from '@nova/signals';
-import { createGlyphButton } from '@nova/headless';
+import { signal } from '@zuari/signals';
+import { createGlyphButton } from '@zuari/headless';
 
 const isActive = signal(false);
 

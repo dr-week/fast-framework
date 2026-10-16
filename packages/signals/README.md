@@ -1,4 +1,4 @@
-# @nova/signals
+# @zuari/signals
 
 > *Because diffing an entire Virtual DOM tree when a counter increments is a crime against battery life.*
 
@@ -6,7 +6,7 @@
 [![Dependencies](https://img.shields.io/badge/Dependencies-0-brightgreen.svg?style=flat-square)](#)
 [![TypeScript](https://img.shields.io/badge/Strict-100%25-blue.svg?style=flat-square)](#)
 
-`@nova/signals` is a fine-grained, dependency-tracking reactive state graph designed in alignment with the emerging TC39 Signals standard. 
+`@zuari/signals` is a fine-grained, dependency-tracking reactive state graph designed in alignment with the emerging TC39 Signals standard. 
 
 It does not reconcile trees. It does not re-render component functions. When a value changes, it notifies only the exact downstream computations that depend on it.
 
@@ -15,9 +15,9 @@ It does not reconcile trees. It does not re-render component functions. When a v
 ## 📦 Installation
 
 ```bash
-pnpm add @nova/signals
+pnpm add @zuari/signals
 # Or directly from GitHub:
-pnpm add github:your-username/fast#packages/signals
+pnpm add github:dr-week/fast-framework#packages/signals
 ```
 
 ---
@@ -26,7 +26,7 @@ pnpm add github:your-username/fast#packages/signals
 
 ### 1. Atomic State (`signal`)
 ```typescript
-import { signal } from '@nova/signals';
+import { signal } from '@zuari/signals';
 
 const count = signal(0);
 
@@ -39,7 +39,7 @@ console.log(count.value); // 42
 Computed values evaluate lazily and cache their results. If none of the dependencies change, re-reading the computed value costs zero CPU cycles.
 
 ```typescript
-import { signal, computed } from '@nova/signals';
+import { signal, computed } from '@zuari/signals';
 
 const price = signal(100);
 const taxRate = signal(0.18);
@@ -53,7 +53,7 @@ console.log(total.value); // 118
 Effects automatically record their dependencies upon execution and re-run whenever any tracked dependency updates. If your effect returns a cleanup function, it will run before the next execution.
 
 ```typescript
-import { signal, effect } from '@nova/signals';
+import { signal, effect } from '@zuari/signals';
 
 const status = signal('idle');
 
@@ -73,7 +73,7 @@ dispose(); // Clean teardown
 Got 5 signal updates in a row? Don't trigger 5 separate render cascades like it's 2014. Batch them into a single synchronous commit:
 
 ```typescript
-import { signal, batch } from '@nova/signals';
+import { signal, batch } from '@zuari/signals';
 
 const x = signal(0);
 const y = signal(0);
@@ -91,8 +91,8 @@ batch(() => {
 No monoliths here. You can import internal modules directly:
 
 ```typescript
-import { Signal, signal } from '@nova/signals/signal';
-import { batch } from '@nova/signals/scheduler';
+import { Signal, signal } from '@zuari/signals/signal';
+import { batch } from '@zuari/signals/scheduler';
 ```
 
 ---

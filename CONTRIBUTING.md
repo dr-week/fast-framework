@@ -1,10 +1,10 @@
-# Contributing to Nova
+# Contributing to Zuari
 
-First off, thank you for considering contributing to Nova! We love web platform purists, performance obsessives, and developers who get uncomfortable when an `npm install` downloads 300 megabytes of dependencies.
+First off, thank you for considering contributing to Zuari! We love web platform purists, performance obsessives, and developers who get uncomfortable when an `npm install` downloads 300 megabytes of dependencies.
 
 ---
 
-## 🧭 The Nova Prime Directives
+## 🧭 The Zuari Prime Directives
 
 Before opening a pull request, ask yourself these four questions:
 
@@ -38,12 +38,12 @@ pnpm dev
 
 ## 📂 Repository Structure
 
-* `packages/signals/` — Fine-grained TC39 reactive dependency graph.
-* `packages/tokens/` — Typed OKLCH color definitions & CSS `@property` generator.
-* `packages/glyphs/` — Precision vector glyphs.
-* `packages/headless/` — Unstyled behavioral accessibility & native anchor positioning.
-* `packages/recipes/` — Zero-runtime `@scope` CSS modules.
-* `packages/core/` — Clean unified export barrel.
+* `packages/signals/` — Fine-grained TC39 reactive dependency graph (`@zuari/signals`).
+* `packages/tokens/` — Typed OKLCH color definitions & CSS `@property` generator (`@zuari/tokens`).
+* `packages/glyphs/` — Precision vector glyphs (`@zuari/glyphs`).
+* `packages/headless/` — Unstyled behavioral accessibility & native anchor positioning (`@zuari/headless`).
+* `packages/recipes/` — Zero-runtime `@scope` CSS modules (`@zuari/recipes`).
+* `packages/core/` — Clean unified export barrel (`@zuari/core`).
 * `playground/` — Interactive showcase for manual verification and benchmarks.
 
 ---
