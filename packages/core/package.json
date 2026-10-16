@@ -1,0 +1,41 @@
+{
+  "name": "@nova/core",
+  "version": "0.1.0",
+  "description": "Unified entry point for the Nova Framework - Next-generation UI/UX framework",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@nova/signals": "workspace:*",
+    "@nova/tokens": "workspace:*",
+    "@nova/glyphs": "workspace:*",
+    "@nova/headless": "workspace:*",
+    "@nova/recipes": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./signals": {
+      "types": "../signals/dist/index.d.ts",
+      "import": "../signals/dist/index.js"
+    },
+    "./tokens": {
+      "types": "../tokens/dist/index.d.ts",
+      "import": "../tokens/dist/index.js"
+    },
+    "./glyphs": {
+      "types": "../glyphs/dist/index.d.ts",
+      "import": "../glyphs/dist/index.js"
+    },
+    "./headless": {
+      "types": "../headless/dist/index.d.ts",
+      "import": "../headless/dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}

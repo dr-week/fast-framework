@@ -1,0 +1,22 @@
+{
+  "name": "@nova/playground",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@nova/core": "workspace:*",
+    "@nova/signals": "workspace:*",
+    "@nova/tokens": "workspace:*",
+    "@nova/glyphs": "workspace:*",
+    "@nova/headless": "workspace:*",
+    "@nova/recipes": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.2.0"
+  }
+}

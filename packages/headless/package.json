@@ -1,0 +1,21 @@
+{
+  "name": "@nova/headless",
+  "version": "0.1.0",
+  "description": "Zero-style, accessible UI primitives powered by TC39 Signals and native browser Anchor Positioning",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@nova/signals": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}

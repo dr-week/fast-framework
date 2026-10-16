@@ -1,0 +1,12 @@
+{
+  "name": "@nova/recipes",
+  "version": "0.1.0",
+  "description": "Zero-runtime, native @scope SCSS/CSS design recipes for Aether-Glyph minimalist UI",
+  "type": "module",
+  "sideEffects": ["./styles/**/*.css", "./styles/**/*.scss"],
+  "main": "./styles/index.css",
+  "exports": {
+    "./aether.css": "./styles/aether.css",
+    "./aether.scss": "./styles/aether.scss"
+  }
+}

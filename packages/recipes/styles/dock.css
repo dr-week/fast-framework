@@ -1,0 +1,17 @@
+/* ==========================================================================
+   Nova Framework - Scoped Dock / Ribbon Recipe
+   ========================================================================== */
+@scope (.nova-glyph-dock) {
+  :scope {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px;
+    background: var(--nova-color-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--nova-color-border);
+    border-radius: 18px;
+    box-shadow: 0 16px 36px -8px oklch(0% 0 0 / 0.35);
+  }
+}

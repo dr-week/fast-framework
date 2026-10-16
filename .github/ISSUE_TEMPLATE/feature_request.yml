@@ -1,0 +1,39 @@
+name: Feature request
+description: Suggest an idea or enhancement for Nova
+title: "[FEATURE]: "
+labels: ["enhancement", "proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We welcome proposals for new headless primitives, design language tokens, and performance optimizations.
+  - type: input
+    id: package
+    attributes:
+      label: Target Package
+      description: Which package should this belong to?
+      placeholder: "@nova/headless, @nova/glyphs, etc."
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or Motivation
+      description: Is your feature request related to a problem or missing native capability?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution / API Design
+      description: Describe your proposed solution and how the developer API should look.
+    validations:
+      required: true
+  - type: checkboxes
+    id: platform_check
+    attributes:
+      label: Platform-First Check
+      description: Confirm this adheres to our platform-first guidelines.
+      options:
+        - label: This uses native browser primitives (e.g. CSS Anchor, @scope, signals) rather than heavy JS polyfills.
+          required: true

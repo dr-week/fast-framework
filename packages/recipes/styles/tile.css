@@ -1,0 +1,54 @@
+/* ==========================================================================
+   Nova Framework - Scoped Tile Button Recipe
+   ========================================================================== */
+@scope (.nova-glyph-tile) {
+  :scope {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--nova-radius-squircle);
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--nova-color-glyph);
+    cursor: pointer;
+    outline: none;
+    transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 160ms ease,
+                color 160ms ease,
+                border-color 160ms ease,
+                box-shadow 160ms ease;
+
+    &:hover {
+      background: var(--nova-color-surface-hover);
+      color: var(--nova-color-glyph-active);
+      border-color: var(--nova-color-border);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: scale(0.92);
+    }
+
+    &[data-active="true"] {
+      background: var(--nova-color-surface-hover);
+      color: var(--nova-color-accent);
+      border-color: var(--nova-color-accent-glow);
+      box-shadow: 0 0 16px var(--nova-color-accent-glow);
+    }
+
+    /* Notification Glow Dot */
+    &[data-badge="true"]::after {
+      content: '';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--nova-color-accent);
+      box-shadow: 0 0 8px var(--nova-color-accent);
+    }
+  }
+}

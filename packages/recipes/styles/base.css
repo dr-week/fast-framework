@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Nova Framework - Token Layer (Reset & Variables)
+   ========================================================================== */
+:root {
+  --nova-color-background: oklch(14% 0.015 260);
+  --nova-color-surface: oklch(19% 0.02 260 / 0.65);
+  --nova-color-surface-hover: oklch(25% 0.03 260 / 0.85);
+  --nova-color-border: oklch(100% 0 0 / 0.08);
+  --nova-color-glyph: oklch(78% 0.015 260);
+  --nova-color-glyph-active: oklch(98% 0.01 260);
+  --nova-color-accent: oklch(75% 0.18 190);
+  --nova-color-accent-glow: oklch(75% 0.18 190 / 0.25);
+  --nova-radius-squircle: 14px;
+}

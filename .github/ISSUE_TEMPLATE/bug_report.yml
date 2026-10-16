@@ -1,0 +1,42 @@
+name: Bug report
+description: Create a report to help us improve Nova
+title: "[BUG]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the details below so we can reproduce and fix it quickly.
+  - type: input
+    id: package
+    attributes:
+      label: Affected Package
+      description: Which @nova/* package is affected? (e.g., @nova/signals, @nova/headless)
+      placeholder: "@nova/headless"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Code or Steps
+      description: Minimal code snippet or steps to reproduce the behavior.
+      placeholder: |
+        import { signal } from '@nova/signals';
+        // ...
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser version, Node version, OS.
+      placeholder: "Chrome 130+, Windows 11, Node v24.15"
+    validations:
+      required: true
