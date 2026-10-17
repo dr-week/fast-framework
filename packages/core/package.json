@@ -11,7 +11,9 @@
     "@zuari/tokens": "workspace:*",
     "@zuari/glyphs": "workspace:*",
     "@zuari/headless": "workspace:*",
-    "@zuari/recipes": "workspace:*"
+    "@zuari/recipes": "workspace:*",
+    "@zuari/ui": "workspace:*",
+    "@zuari/wasm": "workspace:*"
   },
   "exports": {
     ".": {
@@ -33,6 +35,14 @@
     "./headless": {
       "types": "../headless/dist/index.d.ts",
       "import": "../headless/dist/index.js"
+    },
+    "./ui": {
+      "types": "../ui/dist/index.d.ts",
+      "import": "../ui/dist/index.js"
+    },
+    "./wasm": {
+      "types": "../wasm/dist/index.d.ts",
+      "import": "../wasm/dist/index.js"
     }
   },
   "scripts": {

@@ -68,6 +68,7 @@ All packages are standalone, independently versioned, and tree-shakeable (`sideE
 | [`@zuari/headless`](./packages/headless) | Accessible logic (`Dialog`, `CommandPalette`, `AnchorTooltip`) | **~1.8 KB** | Framework Agnostic |
 | [`@zuari/glyphs`](./packages/glyphs) | Precision vector engine with GPU path morphing (`d: path(...)`) | **~0.8 KB** | SVG / HTML5 |
 | [`@zuari/ui`](./packages/ui) | Pre-built kit (`Switch`, `Slider`, `Tabs`, `Popover`, `Card`, `Badge`) | **~2.0 KB** | Plug & Play |
+| [`@zuari/wasm`](./packages/wasm) | Zero-copy linear memory bridge for Rust/Zig & compile-time TypeSpec contracts | **~0.9 KB** | Rust, Zig, Wasm C-ABI |
 | [`@zuari/tokens`](./packages/tokens) | Typed OKLCH color palettes & native browser `@property` generator | **0 KB** | CSS-in-JS Pipeline |
 | [`@zuari/recipes`](./packages/recipes) | Zero-runtime `@scope` modern CSS/SCSS design recipes | **0 KB** | Native CSS Engine |
 | [`@zuari/core`](./packages/core) | Unified meta-package consolidating the entire platform | **< 2.5 KB** | Complete Framework |
@@ -141,6 +142,26 @@ document.body.appendChild(render(card).fragment);
 
 ---
 
+### 🦀 Systems & Future Languages Support (`@zuari/wasm`)
+
+Zuari integrates directly with modern systems languages without serialization overhead:
+- **Rust & Zig WebAssembly ABI**: Zero-copy bidirectional synchronization between TC39 signals and WebAssembly linear memory (`DataView` / `Float64Array`).
+- **TypeSpec (`.tsp`) AST Contracts**: Declarative compile-time component interfaces and micro-frontend boundary definitions.
+
+```typescript
+import { createWasmStruct, defineContract, emitTypeSpec } from '@zuari/wasm';
+
+// Zero-copy Rust/Zig memory bridge
+const struct = createWasmStruct({ memory: wasmInstance.exports.memory }, {
+  fps: { offset: 0, type: 'i32', initial: 60 },
+  coherence: { offset: 4, type: 'f32', initial: 0.99 }
+});
+
+struct.fps.signal.value = 120; // Auto-flushes directly to native Wasm linear memory
+```
+
+---
+
 ### 🛠️ Verification & Test Matrix
 
 Zuari maintains an automated test matrix with 100% type-soundness verification:
@@ -150,7 +171,7 @@ Zuari maintains an automated test matrix with 100% type-soundness verification:
 git clone https://github.com/dr-week/fast-framework.git
 cd fast-framework && pnpm install
 
-# Run Test Suite (36 Unit Tests across 9 Suites)
+# Run Test Suite (40 Unit Tests across 10 Suites)
 pnpm test
 
 # Production Build across all Monorepo Packages

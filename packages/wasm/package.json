@@ -1,0 +1,29 @@
+{
+  "name": "@zuari/wasm",
+  "version": "0.1.0",
+  "description": "Next-generation systems language interop layer for Zuari (Rust, Zig, and TypeSpec AST contracts)",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@zuari/signals": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./abi": {
+      "types": "./dist/abi/index.d.ts",
+      "import": "./dist/abi/index.js"
+    },
+    "./spec": {
+      "types": "./dist/spec/index.d.ts",
+      "import": "./dist/spec/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}

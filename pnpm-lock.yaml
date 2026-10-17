@@ -38,6 +38,12 @@ importers:
       '@zuari/tokens':
         specifier: workspace:*
         version: link:../tokens
+      '@zuari/ui':
+        specifier: workspace:*
+        version: link:../ui
+      '@zuari/wasm':
+        specifier: workspace:*
+        version: link:../wasm
 
   packages/dom:
     dependencies:
@@ -73,6 +79,12 @@ importers:
       '@zuari/recipes':
         specifier: workspace:*
         version: link:../recipes
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+
+  packages/wasm:
+    dependencies:
       '@zuari/signals':
         specifier: workspace:*
         version: link:../signals
