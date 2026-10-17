@@ -8,6 +8,7 @@
   "types": "./dist/index.d.ts",
   "dependencies": {
     "@zuari/signals": "workspace:*",
+    "@zuari/dom": "workspace:*",
     "@zuari/tokens": "workspace:*",
     "@zuari/glyphs": "workspace:*",
     "@zuari/headless": "workspace:*",
@@ -24,6 +25,10 @@
     "./signals": {
       "types": "../signals/dist/index.d.ts",
       "import": "../signals/dist/index.js"
+    },
+    "./dom": {
+      "types": "../dom/dist/index.d.ts",
+      "import": "../dom/dist/index.js"
     },
     "./tokens": {
       "types": "../tokens/dist/index.d.ts",
