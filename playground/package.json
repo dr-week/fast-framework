@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@zuari/core": "workspace:*",
+    "@zuari/dom": "workspace:*",
     "@zuari/signals": "workspace:*",
     "@zuari/tokens": "workspace:*",
     "@zuari/glyphs": "workspace:*",

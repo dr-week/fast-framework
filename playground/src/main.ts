@@ -1,6 +1,7 @@
-import { signal, effect } from '@zuari/signals';
-import { createGlyphButton } from '@zuari/headless';
+import { signal } from '@zuari/signals';
+import { html, render } from '@zuari/dom';
 import { SparkleGlyph, CommandGlyph, LayersGlyph, GridGlyph, TunerGlyph } from '@zuari/glyphs';
+import { createGlyphButton } from '@zuari/headless';
 
 const app = document.getElementById('app')!;
 
@@ -8,19 +9,16 @@ const app = document.getElementById('app')!;
 const activeTab = signal<'spark' | 'cmd' | 'layers' | 'grid' | 'tune'>('spark');
 const clickCount = signal(0);
 
-// 2. Render Header
-const header = document.createElement('div');
-header.style.display = 'flex';
-header.style.flexDirection = 'column';
-header.style.alignItems = 'center';
-header.style.gap = '12px';
-
-header.innerHTML = `
-  <div class="hero-badge">Zuari • Tidal Speed • Zero-VDOM</div>
-  <h1 class="hero-title">Zuari UI Framework</h1>
-  <p class="hero-subtitle">Born on the Goan tide. Icon-first minimalist design language powered by TC39 Signals, native @scope CSS, and CSS Anchor Positioning.</p>
+// 2. Render Declarative UI using @zuari/dom (html`...`)
+const headerView = html`
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+    <div class="hero-badge">Zuari • Tidal Speed • Zero-VDOM</div>
+    <h1 class="hero-title">Zuari UI Framework</h1>
+    <p class="hero-subtitle">Born on the Goan tide. Declarative direct-to-DOM template literals (<code>html\`...\`</code>) without Virtual DOM overhead.</p>
+  </div>
 `;
-app.appendChild(header);
+
+app.appendChild(render(headerView).fragment);
 
 // 3. Floating Glyph Ribbon (The Minimalist Dock)
 const dock = document.createElement('nav');
@@ -39,11 +37,6 @@ const buttons = [
 buttons.forEach((item) => {
   const isItemActive = signal(activeTab.value === item.id);
 
-  // Sync with global activeTab signal
-  effect(() => {
-    isItemActive.value = activeTab.value === item.id;
-  });
-
   const btnInstance = createGlyphButton({
     label: item.label,
     tooltip: item.tip,
@@ -51,6 +44,10 @@ buttons.forEach((item) => {
     onClick: () => {
       activeTab.value = item.id;
       clickCount.value++;
+      // Sync active state
+      buttons.forEach(b => {
+        if (b.id === item.id) isItemActive.value = true;
+      });
     }
   });
 
@@ -59,10 +56,8 @@ buttons.forEach((item) => {
     btnInstance.buttonElement.setAttribute('data-badge', 'true');
   }
 
-  // Append SVG vector glyph inside button
   const icon = item.glyph({ size: 20 });
   btnInstance.buttonElement.appendChild(icon);
-
   dock.appendChild(btnInstance.buttonElement);
 
   if (btnInstance.tooltipElement) {
@@ -73,20 +68,12 @@ buttons.forEach((item) => {
 
 app.appendChild(dock);
 
-// 4. Reactive Status Card (Demonstrating Granular DOM Updates)
-const statusCard = document.createElement('div');
-statusCard.className = 'status-card';
+// 4. Reactive Status Card using Declarative @zuari/dom Template
+const statusView = html`
+  <div class="status-card">
+    <div class="status-pulse"></div>
+    <span>Active: <strong>${() => activeTab.value.toUpperCase()}</strong> • Interactions: <strong>${clickCount}</strong></span>
+  </div>
+`;
 
-const pulse = document.createElement('div');
-pulse.className = 'status-pulse';
-
-const statusText = document.createElement('span');
-
-statusCard.appendChild(pulse);
-statusCard.appendChild(statusText);
-app.appendChild(statusCard);
-
-// Fine-grained direct text node mutation (No VDOM tree diffing)
-effect(() => {
-  statusText.textContent = `Active Glyph: ${activeTab.value.toUpperCase()} • Interactions: ${clickCount.value}`;
-});
+app.appendChild(render(statusView).fragment);
