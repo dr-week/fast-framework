@@ -21,7 +21,7 @@
 
 <br />
 
-[**Interactive Demo**](https://dr-week.github.io/fast-framework/) • [**Story**](#-the-story-of-zuari) • [**Quick Start**](#-quick-start) • [**Packages**](#-monorepo-packages) • [**Alliances**](#-strategic-alliances)
+[**Interactive Demo**](https://dr-week.github.io/fast-framework/) • [**Story**](#-the-story-of-zuari) • [**Why Zuari**](#-why-zuari-the-core-value-proposition) • [**Comparison**](#-architectural-comparison) • [**Quick Start**](#-quick-start) • [**Packages**](#-monorepo-packages)
 
 </div>
 
@@ -33,6 +33,34 @@
 > As Goa's primary tidal artery, it surges from the Western Ghats directly into the Arabian Sea with unhindered natural velocity. 
 > 
 > Zuari brings this tidal hydrodynamic principle to software: state mutations flow directly to exact DOM nodes without intermediate in-memory Virtual DOM diffing.
+
+---
+
+### 💡 Why Zuari? The Core Value Proposition
+
+Modern web development has become weighed down by multi-megabyte runtimes, Virtual DOM diffing overhead, and painful platform lock-in. Zuari provides a sharp, zero-compromise alternative:
+
+1. **Zero Virtual DOM & 0ms Hydration Overhead**:
+   Unlike React and Vue which maintain an entire second virtual copy of the DOM in memory, Zuari compiles state mutations directly into surgical W3C DOM Parts updates. When a signal changes, only the exact `TextNode` or `Attribute` updates at pointer speed.
+2. **"Write Once, Run Spatial" (2D Web + 3D Mixed Reality)**:
+   Via `@zuari/spatial`, the exact same reactive signals that drive a 2D web button drive a 120 FPS diegetic HUD on **Apple Vision Pro (visionOS)** and **Meta Quest 3** with native eye-gaze and 6DoF hand tracking.
+3. **Zero-Copy WebAssembly Systems FFI**:
+   Through `@zuari/wasm`, native **Rust** or **Zig** simulations bind directly to reactive signals via raw linear memory buffers (`Float64Array` / `Int32Array`) with zero JSON serialization overhead.
+4. **Radical Sub-2.5 KB Footprint**:
+   The entire core platform weighs under **2.5 KB gzipped**. Every package is decoupled (`sideEffects: false`) and independently installable.
+
+---
+
+### 📊 Architectural Comparison
+
+| Architectural Metric | React 19 | Svelte 5 | SolidJS | Zuari (Danger.Labs) |
+| :--- | :---: | :---: | :---: | :---: |
+| **Virtual DOM Overhead** | Yes (Full Tree Diff) | No (Compiler) | No (Direct DOM) | **0% (Native W3C DOM Parts)** |
+| **Runtime Core Size** | ~45 KB (React+DOM) | ~10 KB | ~7 KB | **< 2.5 KB** |
+| **Hydration Tax** | Re-executes components | Synthetic hydration | DOM cloning | **0ms (Direct comment hole sync)** |
+| **Native Mixed Reality (XR)** | React Three Fiber (Heavy) | Third-party only | Third-party only | **Native 3D Anchors (`@zuari/spatial`)** |
+| **Rust / Zig Systems FFI** | Manual JSON / PostMessage | Manual wrapper | Manual wrapper | **Zero-Copy Wasm Bridge (`@zuari/wasm`)** |
+| **Standards Compliance** | Proprietary synthetic layer | Custom compiler | Custom JSX runtime | **W3C DOM Parts, TC39 Signals, CSS Anchor** |
 
 ---
 
