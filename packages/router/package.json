@@ -1,0 +1,21 @@
+{
+  "name": "@zuari/router",
+  "version": "0.1.0",
+  "description": "Ultra-lightweight (<1KB) Router combining the Navigation API, Speculation Rules API, and View Transitions Level 2",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@zuari/signals": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}

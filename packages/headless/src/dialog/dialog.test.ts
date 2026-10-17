@@ -1,8 +1,9 @@
 import { describe, it, expect, vi } from 'vitest';
 import { signal } from '@zuari/signals';
 import { createDialog } from './index.js';
+import { applyReadingFlow } from '../invoker.js';
 
-describe('@zuari/headless createDialog', () => {
+describe('@zuari/headless createDialog & Invoker Commands', () => {
   it('creates an accessible HTMLDialogElement with initial closed state', () => {
     const dialog = createDialog();
     expect(dialog.dialogElement.tagName.toLowerCase()).toBe('dialog');
@@ -66,4 +67,27 @@ describe('@zuari/headless createDialog', () => {
     dialog.close();
     expect(onClose).toHaveBeenCalledTimes(1);
   });
+
+  it('binds HTML Invoker Commands (<button commandfor command="show-modal">) and applies CSS reading-flow', () => {
+    const dialog = createDialog({ id: 'my-dialog' });
+    dialog.dialogElement.showModal = vi.fn(() => {
+      dialog.dialogElement.open = true;
+    });
+
+    const btn = document.createElement('button');
+    dialog.bindInvoker(btn, 'show-modal');
+
+    expect(btn.getAttribute('commandfor')).toBe('my-dialog');
+    expect(btn.getAttribute('command')).toBe('show-modal');
+
+    btn.click();
+    expect(dialog.isOpen.value).toBe(true);
+    expect(dialog.dialogElement.showModal).toHaveBeenCalledTimes(1);
+
+    const grid = document.createElement('div');
+    applyReadingFlow(grid, 'grid-rows');
+    expect(grid.getAttribute('data-reading-flow')).toBe('grid-rows');
+    expect(grid.style.getPropertyValue('reading-flow')).toBe('grid-rows');
+  });
 });
+

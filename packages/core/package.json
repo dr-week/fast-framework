@@ -15,7 +15,12 @@
     "@zuari/recipes": "workspace:*",
     "@zuari/ui": "workspace:*",
     "@zuari/wasm": "workspace:*",
-    "@zuari/spatial": "workspace:*"
+    "@zuari/spatial": "workspace:*",
+    "@zuari/webgpu": "workspace:*",
+    "@zuari/sync": "workspace:*",
+    "@zuari/ai": "workspace:*",
+    "@zuari/router": "workspace:*",
+    "@zuari/wit": "workspace:*"
   },
   "exports": {
     ".": {
@@ -53,9 +58,30 @@
     "./spatial": {
       "types": "../spatial/dist/index.d.ts",
       "import": "../spatial/dist/index.js"
+    },
+    "./webgpu": {
+      "types": "../webgpu/dist/index.d.ts",
+      "import": "../webgpu/dist/index.js"
+    },
+    "./sync": {
+      "types": "../sync/dist/index.d.ts",
+      "import": "../sync/dist/index.js"
+    },
+    "./ai": {
+      "types": "../ai/dist/index.d.ts",
+      "import": "../ai/dist/index.js"
+    },
+    "./router": {
+      "types": "../router/dist/index.d.ts",
+      "import": "../router/dist/index.js"
+    },
+    "./wit": {
+      "types": "../wit/dist/index.d.ts",
+      "import": "../wit/dist/index.js"
     }
   },
   "scripts": {
     "build": "tsc"
   }
 }
+

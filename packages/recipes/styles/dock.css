@@ -5,6 +5,7 @@
   :scope {
     display: inline-flex;
     align-items: center;
+    reading-flow: flex-visual;
     gap: 8px;
     padding: 6px;
     background: var(--nova-color-surface);
@@ -15,3 +16,4 @@
     box-shadow: 0 16px 36px -8px oklch(0% 0 0 / 0.35);
   }
 }
+

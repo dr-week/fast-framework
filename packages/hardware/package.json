@@ -1,0 +1,45 @@
+{
+  "name": "@zuari/hardware",
+  "version": "0.1.0",
+  "description": "Modular futuristic hardware, tactical optics, drone FPV telemetry, handheld gaming, KaiOS/dumbphone D-Pad, and smart appliance IoT primitives for Zuari",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@zuari/signals": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./tactical": {
+      "types": "./dist/tactical/index.d.ts",
+      "import": "./dist/tactical/index.js"
+    },
+    "./drone": {
+      "types": "./dist/drone/index.d.ts",
+      "import": "./dist/drone/index.js"
+    },
+    "./gaming": {
+      "types": "./dist/gaming/index.d.ts",
+      "import": "./dist/gaming/index.js"
+    },
+    "./dpad": {
+      "types": "./dist/dpad/index.d.ts",
+      "import": "./dist/dpad/index.js"
+    },
+    "./appliance": {
+      "types": "./dist/appliance/index.d.ts",
+      "import": "./dist/appliance/index.js"
+    },
+    "./display": {
+      "types": "./dist/display/index.d.ts",
+      "import": "./dist/display/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}

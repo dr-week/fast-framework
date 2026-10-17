@@ -1,13 +1,19 @@
 import { signal, effect, type CleanupFn } from '@zuari/signals';
 import type { DialogOptions, DialogInstance } from './types.js';
 import { captureFocus, restoreFocus } from './focus.js';
+import { bindInvokerCommand, type CommandEventLike } from '../invoker.js';
+
+let dialogIdCounter = 0;
 
 /**
- * Creates an accessible, unstyled modal primitive utilizing the browser-native <dialog> element.
+ * Creates an accessible, unstyled modal primitive utilizing the browser-native <dialog> element
+ * and HTML Invoker Commands API (`commandfor` / `command="show-modal"`).
  * Zero third-party focus-trapping libraries required.
  */
 export function createDialog(options: DialogOptions = {}): DialogInstance {
   const dialog = document.createElement('dialog');
+  const id = options.id ?? `zuari-dialog-${++dialogIdCounter}`;
+  dialog.id = id;
   dialog.setAttribute('role', 'dialog');
   dialog.setAttribute('aria-modal', 'true');
 
@@ -45,20 +51,35 @@ export function createDialog(options: DialogOptions = {}): DialogInstance {
     }
   };
 
-  // 2. Native Cancel / Escape Event
+  // 2. Native Cancel / Escape Event & Close Event synchronization
   const handleCancel = (event: Event) => {
     if (!closeOnEsc) {
       event.preventDefault();
       return;
     }
-    // Browser closes modal natively on escape; synchronize our reactive signal
     isOpen.value = false;
+  };
+
+  const handleClose = () => {
+    isOpen.value = false;
+  };
+
+  // 3. HTML Invoker Commands API ('command' event listener)
+  const handleCommand = (event: Event) => {
+    const cmd = (event as CommandEventLike).command;
+    if (cmd === 'show-modal') {
+      open();
+    } else if (cmd === 'close') {
+      close();
+    }
   };
 
   dialog.addEventListener('click', handleBackdropClick);
   dialog.addEventListener('cancel', handleCancel);
+  dialog.addEventListener('close', handleClose);
+  dialog.addEventListener('command', handleCommand);
 
-  // 3. Reactive Signal Synchronization with Native showModal() / close()
+  // 4. Reactive Signal Synchronization with Native showModal() / close()
   const disposeEffect = effect(() => {
     if (isOpen.value) {
       if (!dialog.open && typeof dialog.showModal === 'function') {
@@ -75,21 +96,33 @@ export function createDialog(options: DialogOptions = {}): DialogInstance {
     }
   });
 
+  const bindInvoker = (
+    button: HTMLButtonElement,
+    command: 'show-modal' | 'close' | `--${string}` = 'show-modal'
+  ): CleanupFn => {
+    return bindInvokerCommand(button, dialog, command);
+  };
+
   const destroy: CleanupFn = () => {
     disposeEffect();
     dialog.removeEventListener('click', handleBackdropClick);
     dialog.removeEventListener('cancel', handleCancel);
+    dialog.removeEventListener('close', handleClose);
+    dialog.removeEventListener('command', handleCommand);
     if (dialog.open && typeof dialog.close === 'function') {
       dialog.close();
     }
   };
 
   return {
+    id,
     dialogElement: dialog,
     isOpen,
     open,
     close,
     toggle,
+    bindInvoker,
     destroy
   };
 }
+

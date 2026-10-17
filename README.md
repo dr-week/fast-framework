@@ -17,11 +17,11 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9_Strict-3178C6.svg?style=for-the-badge&logo=typescript&logoColor=white)](#)
 [![Virtual DOM](https://img.shields.io/badge/Virtual_DOM-0%25_Direct_DOM-059669.svg?style=for-the-badge)](#)
 [![Runtime Size](https://img.shields.io/badge/Runtime-%3C2.5KB_gzipped-7C3AED.svg?style=for-the-badge)](#)
-[![Test Suite](https://img.shields.io/badge/Tests-45_Passed-0284C7.svg?style=for-the-badge)](#)
+[![Test Suite](https://img.shields.io/badge/Tests-63_Passed-0284C7.svg?style=for-the-badge)](#)
 
 <br />
 
-[**Interactive Demo**](https://dr-week.github.io/fast-framework/) • [**Story**](#-the-story-of-zuari) • [**Why Zuari**](#-why-zuari-the-core-value-proposition) • [**Comparison**](#-architectural-comparison) • [**Quick Start**](#-quick-start) • [**Packages**](#-monorepo-packages)
+[**Interactive Demo**](https://dr-week.github.io/fast-framework/) • [**Story**](#-the-story-of-zuari) • [**Why Zuari**](#-why-zuari-the-core-value-proposition) • [**Comparison**](#-architectural-comparison) • [**Quick Start**](#-quick-start) • [**Packages**](#-monorepo-packages) • [**Alliances**](#-strategic-alliances)
 
 </div>
 
@@ -45,7 +45,7 @@ Modern web development has become weighed down by multi-megabyte runtimes, Virtu
 2. **"Write Once, Run Spatial" (2D Web + 3D Mixed Reality)**:
    Via `@zuari/spatial`, the exact same reactive signals that drive a 2D web button drive a 120 FPS diegetic HUD on **Apple Vision Pro (visionOS)** and **Meta Quest 3** with native eye-gaze and 6DoF hand tracking.
 3. **Zero-Copy WebAssembly Systems FFI**:
-   Through `@zuari/wasm`, native **Rust** or **Zig** simulations bind directly to reactive signals via raw linear memory buffers (`Float64Array` / `Int32Array`) with zero JSON serialization overhead.
+   Through `@zuari/wasm` and `@zuari/wit`, native **Rust** or **Zig** simulations bind directly to reactive signals via raw linear memory buffers (`Float64Array` / `Int32Array`) with zero JSON serialization overhead.
 4. **Radical Sub-2.5 KB Footprint**:
    The entire core platform weighs under **2.5 KB gzipped**. Every package is decoupled (`sideEffects: false`) and independently installable.
 
@@ -73,7 +73,7 @@ Modern web development has become weighed down by multi-megabyte runtimes, Virtu
 pnpm add @zuari/core
 
 # Or install individual micro-modules
-pnpm add @zuari/signals @zuari/dom @zuari/ui
+pnpm add @zuari/signals @zuari/dom @zuari/ui @zuari/router
 ```
 
 #### Working Example
@@ -111,10 +111,16 @@ Every package in Zuari is independent, tree-shakeable (`sideEffects: false`), an
 | :--- | :--- | :---: | :---: |
 | [`@zuari/signals`](./packages/signals) | TC39 reactive graph (`signal`, `computed`, `effect`, `batch`) | **~1.1 KB** | Universal (JS/TS) |
 | [`@zuari/dom`](./packages/dom) | Direct-to-DOM compiler (`html\`...\``) with W3C DOM Parts | **~1.4 KB** | Modern Browsers |
-| [`@zuari/ui`](./packages/ui) | Pre-built accessible components (`Switch`, `Slider`, `Card`, `Tabs`) | **~2.0 KB** | Plug & Play |
+| [`@zuari/ui`](./packages/ui) | Pre-built accessible components (`Switch`, `Slider`, `Card`, `Tabs`, `Popover`) | **~2.0 KB** | Plug & Play |
+| [`@zuari/router`](./packages/router) | Lightweight signal-based client router with View Transitions API | **~0.9 KB** | Modern Browsers |
 | [`@zuari/spatial`](./packages/spatial) | Mixed Reality (visionOS / Meta Quest 3) & WebXR game HUDs | **~1.5 KB** | WebXR Headsets |
 | [`@zuari/wasm`](./packages/wasm) | Zero-copy linear memory bridge for Rust/Zig & TypeSpec contracts | **~0.9 KB** | Rust, Zig, Wasm C-ABI |
-| [`@zuari/headless`](./packages/headless) | Headless logic (`Dialog`, `CommandPalette`, `AnchorTooltip`) | **~1.8 KB** | Framework Agnostic |
+| [`@zuari/wit`](./packages/wit) | WebAssembly Component Model WIT interface definition generator | **~0.8 KB** | Wasm Component Model |
+| [`@zuari/webgpu`](./packages/webgpu) | Hardware WebGPU compute shader pipeline bound to reactive signals | **~1.4 KB** | WebGPU Devices |
+| [`@zuari/ai`](./packages/ai) | On-device WebLLM/transformers.js token streaming & embeddings | **~1.2 KB** | Modern Browsers |
+| [`@zuari/sync`](./packages/sync) | Real-time CRDT / BroadcastChannel peer-to-peer state synchronization | **~1.1 KB** | Local-First / P2P |
+| [`@zuari/hardware`](./packages/hardware) | WebHID, WebSerial, and WebBluetooth reactive peripheral bridges | **~1.0 KB** | Hardware Peripherals |
+| [`@zuari/headless`](./packages/headless) | Headless logic (`Dialog`, `CommandPalette`, `AnchorTooltip`, `Invoker`) | **~1.8 KB** | Framework Agnostic |
 | [`@zuari/glyphs`](./packages/glyphs) | Mathematical SVG icons & GPU path morphing (`d: path(...)`) | **~0.8 KB** | SVG / HTML5 |
 | [`@zuari/tokens`](./packages/tokens) | Typed OKLCH color palettes & CSS `@property` generator | **0 KB** | Zero-Runtime |
 | [`@zuari/recipes`](./packages/recipes) | Zero-runtime `@scope` modern CSS/SCSS design recipes | **0 KB** | Native CSS Engine |
@@ -131,7 +137,7 @@ Zuari collaborates with leading ecosystem architectures to deliver native-grade 
 | <img src="https://cdn.simpleicons.org/meta/0081FB" width="16" height="16" /> **Meta Reality Labs** | Spatial Computing & Quest | `@zuari/spatial` WebXR 3D volumetric HUD & hand-tracking engine | **120 FPS Zero-GC** |
 | <img src="https://cdn.simpleicons.org/apple/FFFFFF" width="16" height="16" /> **Apple Technologies** | visionOS Ecosystem | RealityKit glass ribbon shaders & eye-gaze highlight drivers | **Sub-pixel Acuity** |
 | <img src="https://cdn.simpleicons.org/tauri/24C8DB" width="16" height="16" /> **Tauri / Rust Foundation** | Native Systems Runtimes | Official `create-tauri-app` preset & `@zuari/wasm` zero-copy memory bridge | **< 15 MB Desktop App** |
-| <img src="https://cdn.simpleicons.org/webassembly/654FF0" width="16" height="16" /> **Bytecode Alliance** | Wasm & Native C-ABI | TypeSpec `.tsp` AST contracts and linear buffer signal mapping | **Zero Serialization** |
+| <img src="https://cdn.simpleicons.org/webassembly/654FF0" width="16" height="16" /> **Bytecode Alliance** | Wasm & Native C-ABI | TypeSpec & WIT AST contracts with linear buffer signal mapping | **Zero Serialization** |
 | <img src="https://cdn.simpleicons.org/cloudflare/F38020" width="16" height="16" /> **Cloudflare Edge** | Distributed Edge Compute | Direct-to-DOM template streaming on Workers & Pages | **0 ms Cold Start** |
 
 *Read the complete partnership & marketing blueprint: [PARTNERSHIPS_AND_MARKETING.md](./PARTNERSHIPS_AND_MARKETING.md)*
@@ -145,7 +151,7 @@ Zuari collaborates with leading ecosystem architectures to deliver native-grade 
 git clone https://github.com/dr-week/fast-framework.git
 cd fast-framework && pnpm install
 
-# Run test suite (45 unit tests across 11 suites)
+# Run test suite (63 unit tests across 17 suites)
 pnpm test
 
 # Build all monorepo packages

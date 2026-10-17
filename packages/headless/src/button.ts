@@ -1,12 +1,17 @@
 import { signal, effect, type Signal, type CleanupFn } from '@zuari/signals';
 import { generateAnchorName, setElementAnchor } from './anchor.js';
 import { createTooltip } from './tooltip.js';
+import type { NativeInvokerCommand } from './invoker.js';
 
 export interface GlyphButtonOptions {
   label: string;
   tooltip?: string | undefined;
   onClick?: ((event: MouseEvent) => void) | undefined;
   active?: Signal<boolean> | boolean | undefined;
+  /** HTML Invoker Commands target element ID (`commandfor` attribute) */
+  commandFor?: string | undefined;
+  /** HTML Invoker Command action (`show-modal`, `toggle-popover`, etc.) */
+  command?: NativeInvokerCommand | undefined;
 }
 
 export interface GlyphButtonInstance {
@@ -17,12 +22,20 @@ export interface GlyphButtonInstance {
 }
 
 /**
- * Creates an accessible, anchor-positioned icon button with zero visual bloat.
+ * Creates an accessible, anchor-positioned icon button with zero visual bloat
+ * and first-class support for the HTML Invoker Commands API (`commandfor` / `command`).
  */
 export function createGlyphButton(options: GlyphButtonOptions): GlyphButtonInstance {
   const btn = document.createElement('button');
   btn.type = 'button';
   btn.setAttribute('aria-label', options.label);
+
+  if (options.commandFor) {
+    btn.setAttribute('commandfor', options.commandFor);
+  }
+  if (options.command) {
+    btn.setAttribute('command', options.command);
+  }
 
   const isActive = typeof options.active === 'object' && options.active !== null && 'value' in options.active
     ? options.active

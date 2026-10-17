@@ -1,0 +1,22 @@
+{
+  "name": "@zuari/wit",
+  "version": "0.1.0",
+  "description": "WASI 0.2 Component Model & WIT (.wit) Parser and Zero-Copy Signal Binding Auto-Generator for Zuari",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@zuari/signals": "workspace:*",
+    "@zuari/wasm": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}

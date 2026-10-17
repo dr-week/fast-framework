@@ -1,34 +1,37 @@
-import { signal, effect, computed } from '@zuari/signals';
+import { signal, effect } from '@zuari/signals';
 import { html, render } from '@zuari/dom';
 import { createMorphGlyph } from '@zuari/glyphs';
 import { generateAnchorName, setElementAnchor, tetherToAnchor } from '@zuari/headless';
+import { createReplView } from './repl.js';
+import { createProofBenchView } from './benchmark.js';
 
 // Load online Lucide icons dynamically via ESM CDN (esm.sh)
 import { 
   Sparkles, 
   Terminal, 
-  Layers, 
   Sliders, 
-  Compass, 
   Github, 
   Boxes, 
   Cpu, 
   Glasses, 
-  Check, 
-  Radio, 
-  ExternalLink 
+  Gauge
 } from 'https://esm.sh/lucide@0.469.0';
 
 const app = document.getElementById('app')!;
 
 // 1. Reactive State Graph
-type ActiveTab = 'core' | 'spatial' | 'wasm' | 'tokens' | 'alliances';
-const currentTab = signal<ActiveTab>('core');
+type ActiveTab = 'repl' | 'bench' | 'core' | 'spatial' | 'wasm' | 'tokens' | 'alliances';
+const currentTab = signal<ActiveTab>('repl');
 const interactions = signal(0);
 const fps = signal(60);
 const sliderVal = signal(65);
-const toggleActive = signal(true);
-const pulseSpeed = signal(1.2);
+const cliPreset = signal<'minimal' | 'desktop' | 'spatial'>('minimal');
+
+const CLI_COMMANDS: Record<'minimal' | 'desktop' | 'spatial', string> = {
+  minimal: 'pnpm create zuari@latest my-app --template minimal',
+  desktop: 'pnpm create zuari@latest my-app --template desktop-tauri',
+  spatial: 'pnpm create zuari@latest my-app --template spatial-xr'
+};
 
 // Icon Renderer Helper
 function renderIcon(iconDef: unknown, size = 18): SVGElement {
@@ -55,7 +58,7 @@ function renderIcon(iconDef: unknown, size = 18): SVGElement {
   return svg;
 }
 
-// 2. Header Section with Radiant Zuari Crest Logo
+// 2. Header Section with Radiant Zuari Crest Logo & Instant CLI Scaffolder Pill
 const header = document.createElement('header');
 header.className = 'spatial-header';
 
@@ -79,6 +82,40 @@ subtitle.className = 'brand-subtitle';
 subtitle.textContent = 'The High-Velocity Web Platform Framework • Danger.Labs';
 header.appendChild(subtitle);
 
+// 10-Second CLI Scaffolder Bar
+const cliBar = document.createElement('div');
+cliBar.className = 'cli-scaffolder-bar';
+const cliView = html`
+  <div class="cli-preset-pills">
+    <button type="button" class="cli-pill" data-preset="minimal" @click=${() => { cliPreset.value = 'minimal'; interactions.value++; }}>minimal</button>
+    <button type="button" class="cli-pill" data-preset="desktop" @click=${() => { cliPreset.value = 'desktop'; interactions.value++; }}>desktop (Tauri)</button>
+    <button type="button" class="cli-pill" data-preset="spatial" @click=${() => { cliPreset.value = 'spatial'; interactions.value++; }}>spatial (WebXR)</button>
+  </div>
+  <div class="cli-cmd-box">
+    <code id="cli-cmd-text">${CLI_COMMANDS.minimal}</code>
+    <button type="button" class="cli-copy-btn" id="cli-copy-btn" @click=${() => {
+      navigator.clipboard?.writeText(CLI_COMMANDS[cliPreset.value]);
+      const btn = document.getElementById('cli-copy-btn');
+      if (btn) {
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 1400);
+      }
+      interactions.value++;
+    }}>Copy</button>
+  </div>
+`;
+cliBar.appendChild(render(cliView).fragment);
+header.appendChild(cliBar);
+
+effect(() => {
+  const activePreset = cliPreset.value;
+  const cmdEl = document.getElementById('cli-cmd-text');
+  if (cmdEl) cmdEl.textContent = CLI_COMMANDS[activePreset];
+  cliBar.querySelectorAll('.cli-pill').forEach((el) => {
+    el.setAttribute('data-active', String(el.getAttribute('data-preset') === activePreset));
+  });
+});
+
 app.appendChild(header);
 
 // 3. Floating Spatial Navigation Dock
@@ -88,6 +125,8 @@ dock.setAttribute('role', 'toolbar');
 dock.setAttribute('aria-label', 'Feature Navigation');
 
 const navItems: Array<{ id: ActiveTab; icon: unknown; label: string }> = [
+  { id: 'repl', icon: Terminal, label: 'Live REPL' },
+  { id: 'bench', icon: Gauge, label: '5K Benchmark' },
   { id: 'core', icon: Sparkles, label: 'Kinetic Core' },
   { id: 'spatial', icon: Glasses, label: 'Spatial / XR' },
   { id: 'wasm', icon: Cpu, label: 'Systems Wasm' },
@@ -160,12 +199,24 @@ const morphStates: Array<'sparkle' | 'loadingRing' | 'checkmark' | 'cross'> = [
 ];
 let morphIdx = 0;
 
+// Persistent REPL & Benchmark instances so edits aren't lost on tab switch
+const replElement = createReplView(() => {
+  interactions.value++;
+});
+const benchElement = createProofBenchView(() => {
+  interactions.value++;
+});
+
 function renderTabContent() {
   showcaseStage.innerHTML = '';
 
   const active = currentTab.value;
 
-  if (active === 'core') {
+  if (active === 'repl') {
+    showcaseStage.appendChild(replElement);
+  } else if (active === 'bench') {
+    showcaseStage.appendChild(benchElement);
+  } else if (active === 'core') {
     // Core Kinetic Demo
     const card = document.createElement('div');
     card.className = 'feature-card';
@@ -319,7 +370,7 @@ const telemetryView = html`
       <span>Core: <strong>&lt; 2.5 KB</strong></span>
     </div>
     <div class="metric-item">
-      <span>Suites: <strong>11 Passed</strong></span>
+      <span>VDOM: <strong>0 Nodes</strong></span>
     </div>
     <div class="metric-item">
       <span>Pulse: <strong>${interactions}</strong></span>

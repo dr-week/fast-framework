@@ -21,8 +21,20 @@ importers:
         specifier: ^5.0.5
         version: 5.0.5(@types/node@26.6.5)(@vitest/coverage-v8@5.0.5)(happy-dom@21.0.3)(vite@6.4.4(@types/node@26.6.5))
 
+  packages/ai:
+    dependencies:
+      '@zuari/dom':
+        specifier: workspace:*
+        version: link:../dom
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+
   packages/core:
     dependencies:
+      '@zuari/ai':
+        specifier: workspace:*
+        version: link:../ai
       '@zuari/dom':
         specifier: workspace:*
         version: link:../dom
@@ -35,12 +47,18 @@ importers:
       '@zuari/recipes':
         specifier: workspace:*
         version: link:../recipes
+      '@zuari/router':
+        specifier: workspace:*
+        version: link:../router
       '@zuari/signals':
         specifier: workspace:*
         version: link:../signals
       '@zuari/spatial':
         specifier: workspace:*
         version: link:../spatial
+      '@zuari/sync':
+        specifier: workspace:*
+        version: link:../sync
       '@zuari/tokens':
         specifier: workspace:*
         version: link:../tokens
@@ -50,6 +68,12 @@ importers:
       '@zuari/wasm':
         specifier: workspace:*
         version: link:../wasm
+      '@zuari/webgpu':
+        specifier: workspace:*
+        version: link:../webgpu
+      '@zuari/wit':
+        specifier: workspace:*
+        version: link:../wit
 
   packages/dom:
     dependencies:
@@ -59,6 +83,12 @@ importers:
 
   packages/glyphs: {}
 
+  packages/hardware:
+    dependencies:
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+
   packages/headless:
     dependencies:
       '@zuari/signals':
@@ -67,9 +97,21 @@ importers:
 
   packages/recipes: {}
 
+  packages/router:
+    dependencies:
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+
   packages/signals: {}
 
   packages/spatial:
+    dependencies:
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+
+  packages/sync:
     dependencies:
       '@zuari/signals':
         specifier: workspace:*
@@ -101,6 +143,21 @@ importers:
         specifier: workspace:*
         version: link:../signals
 
+  packages/webgpu:
+    dependencies:
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+
+  packages/wit:
+    dependencies:
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+      '@zuari/wasm':
+        specifier: workspace:*
+        version: link:../wasm
+
   playground:
     dependencies:
       '@zuari/core':
@@ -121,9 +178,18 @@ importers:
       '@zuari/signals':
         specifier: workspace:*
         version: link:../packages/signals
+      '@zuari/spatial':
+        specifier: workspace:*
+        version: link:../packages/spatial
       '@zuari/tokens':
         specifier: workspace:*
         version: link:../packages/tokens
+      '@zuari/ui':
+        specifier: workspace:*
+        version: link:../packages/ui
+      '@zuari/wasm':
+        specifier: workspace:*
+        version: link:../packages/wasm
     devDependencies:
       vite:
         specifier: ^6.2.0

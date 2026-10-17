@@ -11,3 +11,9 @@ export * from '@zuari/headless';
 export * from '@zuari/ui';
 export * from '@zuari/wasm';
 export * from '@zuari/spatial';
+export * from '@zuari/webgpu';
+export * from '@zuari/sync';
+export * from '@zuari/ai';
+export * from '@zuari/router';
+export * from '@zuari/wit';
+

@@ -24,4 +24,20 @@ describe('@zuari/ui createPopover', () => {
     pop.toggle();
     expect(pop.isOpen.value).toBe(true);
   });
+
+  it('supports HTML Invoker Commands via bindInvoker (<button commandfor command="toggle-popover">)', () => {
+    const pop = createPopover({ id: 'menu-popover' });
+    pop.element.showPopover = vi.fn();
+    pop.element.hidePopover = vi.fn();
+
+    const trigger = document.createElement('button');
+    pop.bindInvoker(trigger, 'toggle-popover');
+
+    expect(trigger.getAttribute('commandfor')).toBe('menu-popover');
+    expect(trigger.getAttribute('command')).toBe('toggle-popover');
+
+    trigger.click();
+    expect(pop.isOpen.value).toBe(true);
+  });
 });
+

@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { createWasmSignal, createWasmStruct } from './abi/bridge.js';
 import { defineContract, emitTypeSpec, createComponentContract } from './spec/typespec.js';
+import { parseWitRecord, witRecordToTypeSpec, createWitStructSignals } from './spec/wit.js';
 
 describe('@zuari/wasm', () => {
   describe('Wasm Memory Signal Bridge', () => {
@@ -50,7 +51,7 @@ describe('@zuari/wasm', () => {
     });
   });
 
-  describe('TypeSpec Contract Definitions', () => {
+  describe('TypeSpec & WASI 0.2 WIT Contract Definitions', () => {
     it('defines and emits clean TypeSpec schema contracts', () => {
       const contract = defineContract({
         name: 'QuantumNodeState',
@@ -85,5 +86,27 @@ describe('@zuari/wasm', () => {
       expect(tsp).toContain('label: string;');
       expect(tsp).toContain('disabled?: boolean;');
     });
+
+    it('parses WASI 0.2 .wit records alongside TypeSpec and binds zero-copy signals', () => {
+      const wit = `
+        record telemetry-frame {
+          frame-id: u32,
+          gpu-temp: f32,
+          clock-drift: f64
+        }
+      `;
+      const spec = parseWitRecord(wit, 'telemetry-frame');
+      expect(spec.byteSize).toBe(16);
+
+      const tspContract = witRecordToTypeSpec(spec);
+      expect(emitTypeSpec(tspContract)).toContain('model telemetry-frame');
+
+      const memory = new ArrayBuffer(32);
+      const signals = createWitStructSignals({ memory }, wit, 'telemetry-frame');
+      signals.frameId!.signal.value = 144;
+      const view = new DataView(memory);
+      expect(view.getUint32(0, true)).toBe(144);
+    });
   });
 });
+

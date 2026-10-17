@@ -12,3 +12,8 @@
   --nova-color-accent-glow: oklch(75% 0.18 190 / 0.25);
   --nova-radius-squircle: 14px;
 }
+
+@view-transition {
+  navigation: auto;
+}
+
