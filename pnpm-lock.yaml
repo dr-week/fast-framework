@@ -35,6 +35,9 @@ importers:
       '@zuari/signals':
         specifier: workspace:*
         version: link:../signals
+      '@zuari/spatial':
+        specifier: workspace:*
+        version: link:../spatial
       '@zuari/tokens':
         specifier: workspace:*
         version: link:../tokens
@@ -62,6 +65,12 @@ importers:
   packages/recipes: {}
 
   packages/signals: {}
+
+  packages/spatial:
+    dependencies:
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
 
   packages/tokens: {}
 

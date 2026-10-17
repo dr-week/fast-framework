@@ -1,0 +1,37 @@
+{
+  "name": "@zuari/spatial",
+  "version": "0.1.0",
+  "description": "Spatial computing, Mixed Reality (visionOS / Meta Quest), and WebXR game HUD runtime for Zuari",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@zuari/signals": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./session": {
+      "types": "./dist/session/index.d.ts",
+      "import": "./dist/session/index.js"
+    },
+    "./anchor": {
+      "types": "./dist/anchor/index.d.ts",
+      "import": "./dist/anchor/index.js"
+    },
+    "./gesture": {
+      "types": "./dist/gesture/index.d.ts",
+      "import": "./dist/gesture/index.js"
+    },
+    "./haptics": {
+      "types": "./dist/haptics/index.d.ts",
+      "import": "./dist/haptics/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}

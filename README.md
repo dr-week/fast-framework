@@ -68,6 +68,7 @@ All packages are standalone, independently versioned, and tree-shakeable (`sideE
 | [`@zuari/headless`](./packages/headless) | Accessible logic (`Dialog`, `CommandPalette`, `AnchorTooltip`) | **~1.8 KB** | Framework Agnostic |
 | [`@zuari/glyphs`](./packages/glyphs) | Precision vector engine with GPU path morphing (`d: path(...)`) | **~0.8 KB** | SVG / HTML5 |
 | [`@zuari/ui`](./packages/ui) | Pre-built kit (`Switch`, `Slider`, `Tabs`, `Popover`, `Card`, `Badge`) | **~2.0 KB** | Plug & Play |
+| [`@zuari/spatial`](./packages/spatial) | Mixed Reality (visionOS / Meta Quest), 3D anchors & WebXR game HUDs | **~1.5 KB** | Apple Vision Pro, Meta Quest |
 | [`@zuari/wasm`](./packages/wasm) | Zero-copy linear memory bridge for Rust/Zig & compile-time TypeSpec contracts | **~0.9 KB** | Rust, Zig, Wasm C-ABI |
 | [`@zuari/tokens`](./packages/tokens) | Typed OKLCH color palettes & native browser `@property` generator | **0 KB** | CSS-in-JS Pipeline |
 | [`@zuari/recipes`](./packages/recipes) | Zero-runtime `@scope` modern CSS/SCSS design recipes | **0 KB** | Native CSS Engine |
@@ -142,6 +143,31 @@ document.body.appendChild(render(card).fragment);
 
 ---
 
+### 🥽 Mixed Reality & Spatial Computing (`@zuari/spatial`)
+
+Native 3D volumetric HUD and spatial gaming primitives for **Apple Vision Pro** and **Meta Quest**:
+- **3D Volumetric Anchors**: Extends CSS Anchor Positioning to 3D affine transforms (`matrix3d(...)`) tethered directly to XR hand joints or world objects.
+- **Unified Eye-Gaze & Hand Tracking**: Normalizes visionOS gaze+pinch with Meta Quest 6DoF hand tracking into atomic reactive signals.
+- **WebXR Lifecycle & Haptics**: Full controller vibration and spatial audio triggers.
+
+```typescript
+import { createSpatialAnchor, bindAnchorToElement, createPinchTracker } from '@zuari/spatial';
+
+// 1. Create a reactive 3D spatial anchor
+const hudAnchor = createSpatialAnchor({ id: 'player-radar', initialPosition: { x: 0, y: 0.2, z: -0.8 } });
+bindAnchorToElement(hudAnchor, document.getElementById('radar-hud')!);
+
+// 2. Gaze + Pinch Gesture Binding
+const pinch = createPinchTracker('right');
+effect(() => {
+  if (pinch.isPinched.value) {
+    console.log('Action triggered at:', pinch.state.value.position);
+  }
+});
+```
+
+---
+
 ### 🦀 Systems & Future Languages Support (`@zuari/wasm`)
 
 Zuari integrates directly with modern systems languages without serialization overhead:
@@ -171,7 +197,7 @@ Zuari maintains an automated test matrix with 100% type-soundness verification:
 git clone https://github.com/dr-week/fast-framework.git
 cd fast-framework && pnpm install
 
-# Run Test Suite (40 Unit Tests across 10 Suites)
+# Run Test Suite (45 Unit Tests across 11 Suites)
 pnpm test
 
 # Production Build across all Monorepo Packages

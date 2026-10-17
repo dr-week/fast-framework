@@ -13,7 +13,8 @@
     "@zuari/headless": "workspace:*",
     "@zuari/recipes": "workspace:*",
     "@zuari/ui": "workspace:*",
-    "@zuari/wasm": "workspace:*"
+    "@zuari/wasm": "workspace:*",
+    "@zuari/spatial": "workspace:*"
   },
   "exports": {
     ".": {
@@ -43,6 +44,10 @@
     "./wasm": {
       "types": "../wasm/dist/index.d.ts",
       "import": "../wasm/dist/index.js"
+    },
+    "./spatial": {
+      "types": "../spatial/dist/index.d.ts",
+      "import": "../spatial/dist/index.js"
     }
   },
   "scripts": {

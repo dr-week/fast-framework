@@ -9,3 +9,4 @@ export * from '@zuari/glyphs';
 export * from '@zuari/headless';
 export * from '@zuari/ui';
 export * from '@zuari/wasm';
+export * from '@zuari/spatial';
