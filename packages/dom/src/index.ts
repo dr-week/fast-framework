@@ -1,4 +1,7 @@
 import { effect, type CleanupFn, type Signal } from '@zuari/signals';
+import { createChildPart, createAttributePart } from './parts/index.js';
+
+export * from './parts/index.js';
 
 export type TemplateValue = 
   | string 
@@ -35,7 +38,7 @@ export function html(strings: TemplateStringsArray, ...values: TemplateValue[]):
 
 /**
  * Renders a TemplateResult directly into a live DOM DocumentFragment,
- * creating fine-grained signal subscriptions for dynamic holes without any VDOM.
+ * creating fine-grained signal subscriptions via W3C DOM Parts without any Virtual DOM.
  */
 export function render(result: TemplateResult): RenderInstance {
   const { strings, values } = result;
@@ -68,7 +71,7 @@ export function render(result: TemplateResult): RenderInstance {
   const clone = template.content.cloneNode(true) as DocumentFragment;
   const cleanups: CleanupFn[] = [];
 
-  // Bind dynamic holes
+  // Bind dynamic holes via DOM Parts
   values.forEach((value, index) => {
     bindDynamicHole(clone, index, value, cleanups);
   });
@@ -89,33 +92,27 @@ function bindDynamicHole(
   value: TemplateValue,
   cleanups: CleanupFn[]
 ): void {
-  // 1. Check for child comment hole
+  // 1. Check for child comment hole -> W3C ChildPart
   const commentNode = findCommentHole(root, `${HOLE_PREFIX}${index}${HOLE_SUFFIX}`);
   
   if (commentNode) {
-    const parent = commentNode.parentNode;
-    if (!parent) return;
-
-    if (value instanceof Node) {
-      parent.replaceChild(value, commentNode);
-      return;
-    }
-
-    const textNode = document.createTextNode('');
-    parent.replaceChild(textNode, commentNode);
+    const childPart = createChildPart(commentNode);
 
     if (isReactive(value)) {
       const dispose = effect(() => {
-        textNode.data = String(unwrap(value) ?? '');
+        childPart.setValue(unwrap(value));
       });
-      cleanups.push(dispose);
+      cleanups.push(() => {
+        dispose();
+        childPart.disconnect?.();
+      });
     } else {
-      textNode.data = String(value ?? '');
+      childPart.setValue(value);
     }
     return;
   }
 
-  // 2. Check for attribute binding
+  // 2. Check for attribute binding -> W3C AttributePart
   const attrMarker = `${ATTR_PREFIX}${index}`;
   const elementWithAttr = findElementWithAttributeMarker(root, attrMarker);
 
@@ -135,18 +132,18 @@ function bindDynamicHole(
       return;
     }
 
+    const attributePart = createAttributePart(element, attrName);
+
     if (isReactive(value)) {
       const dispose = effect(() => {
-        const evaluated = unwrap(value);
-        if (evaluated === false || evaluated === null || evaluated === undefined) {
-          element.removeAttribute(attrName);
-        } else {
-          element.setAttribute(attrName, String(evaluated));
-        }
+        attributePart.setValue(unwrap(value));
       });
-      cleanups.push(dispose);
+      cleanups.push(() => {
+        dispose();
+        attributePart.disconnect?.();
+      });
     } else {
-      element.setAttribute(attrName, String(value ?? ''));
+      attributePart.setValue(value);
     }
   }
 }
