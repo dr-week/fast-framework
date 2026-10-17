@@ -6,3 +6,5 @@
 export * from './types.js';
 export * from './abi/index.js';
 export * from './spec/index.js';
+export * from './polyglot/index.js';
+

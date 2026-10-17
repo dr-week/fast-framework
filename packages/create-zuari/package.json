@@ -1,0 +1,14 @@
+{
+  "name": "create-zuari",
+  "version": "0.1.0",
+  "description": "Interactive CLI scaffolder for Zuari projects (Minimal Web, Spatial XR, Tauri Desktop)",
+  "type": "module",
+  "bin": {
+    "create-zuari": "./bin/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  }
+}

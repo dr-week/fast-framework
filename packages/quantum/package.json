@@ -1,0 +1,21 @@
+{
+  "name": "@zuari/quantum",
+  "version": "0.1.0",
+  "description": "Quantum computing statevector primitives, QuantumNodeState, cognitive neuromorphic units, and OpenQASM 3.0 compiler for Zuari",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@zuari/signals": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}

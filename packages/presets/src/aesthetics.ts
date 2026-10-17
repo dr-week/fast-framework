@@ -1,58 +1,76 @@
 /**
- * @fileoverview Reactive Japanese Minimal & Anime-Artistic UI/UX Preset Controller.
- * Orchestrates OKLCH theme palettes (Washi, Sakura, Komorebi, Tasogare, Aether),
- * lightweight Japanese paper/shoji elevations (Kami, Shoji, Kaze, Sora),
- * and Ma (間) negative-space rhythm.
+ * @fileoverview Reactive UI/UX Design Preset Controller (`createDesignPresets`).
+ * Coordinates simple, intuitive themes ('paper', 'blossom', 'matcha', 'twilight', 'midnight'),
+ * lightweight elevations ('flat', 'soft', 'float', 'halo'),
+ * spacing density ('compact', 'balanced', 'airy'), and surface materials ('paper', 'frosted', 'canvas', 'cel').
  */
 
 import { signal, effect } from '@zuari/signals';
 import {
-  JAPANESE_THEME_PRESETS,
+  THEME_PRESETS,
   applyThemePreset,
-  type JapaneseAestheticPresetName,
-  type ElevationPresetTier,
+  type ThemePresetName,
+  type ElevationPreset,
   type NovaThemeContract
 } from '@zuari/tokens';
 import type {
-  MaSpacingMode,
-  AestheticControllerOptions,
-  AestheticController
+  SpacingPreset,
+  SurfacePreset,
+  DesignPresetOptions,
+  DesignPresetController
 } from './types.js';
 
-export const MA_SPACING_MULTIPLIERS: Record<MaSpacingMode, { gap: string; pad: string; leading: string }> = {
-  compact: { gap: '8px', pad: '14px', leading: '1.4' },
-  zen: { gap: '16px', pad: '24px', leading: '1.65' },
-  airy: { gap: '28px', pad: '36px', leading: '1.8' }
+export const SPACING_PRESET_VALUES: Record<SpacingPreset, { gap: string; pad: string; lineHeight: string }> = {
+  compact: { gap: '8px', pad: '14px', lineHeight: '1.4' },
+  balanced: { gap: '16px', pad: '24px', lineHeight: '1.65' },
+  airy: { gap: '28px', pad: '36px', lineHeight: '1.8' }
 };
 
 /**
- * Applies a lightweight Japanese elevation tier (`kami`, `shoji`, `kaze`, `sora`)
- * to an element via CSS custom properties and data attributes.
+ * Applies a lightweight elevation preset (`flat`, `soft`, `float`, `halo`) to an element.
  */
 export function applyElevationPreset(
   element: HTMLElement,
-  tier: ElevationPresetTier = 'shoji'
+  level: ElevationPreset = 'soft'
 ): void {
-  element.setAttribute('data-zuari-elevation', tier);
-  element.style.boxShadow = `var(--zuari-elevation-${tier})`;
+  element.setAttribute('data-zuari-elevation', level);
+  element.style.boxShadow = `var(--zuari-elevation-${level})`;
 }
 
 /**
- * Creates a reactive UI/UX Aesthetic Preset Controller that synchronizes
- * Japanese minimal themes, lightweight paper elevations, and Ma (間) spatial rhythm.
+ * Applies a surface material preset (`paper`, `frosted`, `canvas`, `cel`) to an element.
  */
-export function createAestheticController(
-  options: AestheticControllerOptions = {}
-): AestheticController {
-  const theme = signal<JapaneseAestheticPresetName>(options.initialTheme ?? 'washi');
-  const elevation = signal<ElevationPresetTier>(options.initialElevation ?? 'shoji');
-  const spacing = signal<MaSpacingMode>(options.initialSpacing ?? 'zen');
-  const activeTokens = signal<NovaThemeContract>(JAPANESE_THEME_PRESETS[theme.peek()]);
+export function applySurfacePreset(
+  element: HTMLElement,
+  surface: SurfacePreset = 'paper'
+): void {
+  element.setAttribute('data-zuari-surface', surface);
+  element.classList.remove(
+    'zuari-surface-paper',
+    'zuari-surface-frosted',
+    'zuari-surface-canvas',
+    'zuari-surface-cel'
+  );
+  element.classList.add(`zuari-surface-${surface}`);
+}
+
+/**
+ * Creates a reactive UI/UX Design Preset Controller with simple, intuitive controls.
+ */
+export function createDesignPresets(
+  options: DesignPresetOptions = {}
+): DesignPresetController {
+  const theme = signal<ThemePresetName>(options.theme ?? 'paper');
+  const elevation = signal<ElevationPreset>(options.elevation ?? 'soft');
+  const spacing = signal<SpacingPreset>(options.spacing ?? 'balanced');
+  const surface = signal<SurfacePreset>(options.surface ?? 'paper');
+  const activeTokens = signal<NovaThemeContract>(THEME_PRESETS[theme.peek()]);
 
   const disposeEffect = effect(() => {
     const currentTheme = theme.value;
     const currentElevation = elevation.value;
     const currentSpacing = spacing.value;
+    const currentSurface = surface.value;
 
     const contract = applyThemePreset(currentTheme, options.targetElement);
     activeTokens.value = contract;
@@ -63,12 +81,13 @@ export function createAestheticController(
 
     if (root) {
       root.setAttribute('data-zuari-elevation-default', currentElevation);
-      root.setAttribute('data-zuari-ma', currentSpacing);
+      root.setAttribute('data-zuari-spacing', currentSpacing);
+      root.setAttribute('data-zuari-surface-default', currentSurface);
 
-      const maSpec = MA_SPACING_MULTIPLIERS[currentSpacing];
-      root.style.setProperty('--zuari-ma-gap', maSpec.gap);
-      root.style.setProperty('--zuari-ma-pad', maSpec.pad);
-      root.style.setProperty('--zuari-ma-leading', maSpec.leading);
+      const spaceSpec = SPACING_PRESET_VALUES[currentSpacing];
+      root.style.setProperty('--zuari-layout-gap', spaceSpec.gap);
+      root.style.setProperty('--zuari-layout-pad', spaceSpec.pad);
+      root.style.setProperty('--zuari-layout-line-height', spaceSpec.lineHeight);
     }
   });
 
@@ -76,18 +95,25 @@ export function createAestheticController(
     theme,
     elevation,
     spacing,
+    surface,
     activeTokens,
     setTheme: (nextTheme) => {
       theme.value = nextTheme;
     },
-    setElevation: (nextTier) => {
-      elevation.value = nextTier;
+    setElevation: (nextLevel) => {
+      elevation.value = nextLevel;
     },
     setSpacing: (nextMode) => {
       spacing.value = nextMode;
     },
-    applyElevationTo: (el, tier) => {
-      applyElevationPreset(el, tier ?? elevation.peek());
+    setSurface: (nextSurface) => {
+      surface.value = nextSurface;
+    },
+    applyElevationTo: (el, level) => {
+      applyElevationPreset(el, level ?? elevation.peek());
+    },
+    applySurfaceTo: (el, surf) => {
+      applySurfacePreset(el, surf ?? surface.peek());
     },
     destroy: () => {
       disposeEffect();

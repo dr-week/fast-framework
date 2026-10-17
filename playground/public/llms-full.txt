@@ -1,0 +1,172 @@
+# ZUARI Framework — Complete AI Engineering Reference (`llms-full.txt`)
+
+> Complete zero-hallucination API specification and canonical code recipes for AI coding agents (Claude Code, Cursor, Antigravity, Windsurf, GitHub Copilot, ChatGPT).
+
+---
+
+## 1. `@zuari/signals` & `@zuari/dom` (Core Reactive DOM Engine)
+
+```typescript
+import { signal, computed, effect, batch } from '@zuari/signals';
+import { html, render } from '@zuari/dom';
+
+const count = signal(0);
+const doubled = computed(() => count.value * 2);
+
+const view = html`
+  <div class="card">
+    <h2>Count: ${count} (Doubled: ${doubled})</h2>
+    <button @click=${() => batch(() => { count.value += 1; })}>
+      Increment
+    </button>
+  </div>
+`;
+
+const { fragment, destroy } = render(view);
+document.getElementById('app')!.appendChild(fragment);
+```
+
+---
+
+## 2. `@zuari/hardware` (Tactical Optics, FPV Drones, Gaming, KaiOS D-Pad, Smart Appliances, Waveguide/E-Ink Displays)
+
+### 2A. Tactical Smart-Optic Ballistics & 9-Axis IMU (`@zuari/hardware/tactical`)
+```typescript
+import { createBallisticReticle, createIMUStream } from '@zuari/hardware/tactical';
+
+const reticle = createBallisticReticle({
+  rangeMeters: 450,
+  windMps: 6.2,
+  muzzleVelocityMps: 820,
+  cantDeg: 0,
+  magCapacity: 30
+});
+// Reactive outputs: reticle.elevationMrad, reticle.windageMrad, reticle.aimX, reticle.aimY, reticle.ammoRemaining
+reticle.triggerShotImpulse(18.5); // Records high-G shot impulse & decrements ammo
+
+const imu = createIMUStream({ roll: 0, pitch: 0, yaw: 180, gForce: 1.0 });
+imu.ingestPacket([12.5, -4.2, 182.0, 1.4]); // Updates imu.horizonTransform
+```
+
+### 2B. Zero-Copy Binary Drone MAVLink / CRSF Telemetry (`@zuari/hardware/drone`)
+```typescript
+import { createDroneTelemetry, encodeDroneBinaryFrame } from '@zuari/hardware/drone';
+
+const drone = createDroneTelemetry();
+// Decode 16-byte binary telemetry frame directly via DataView (zero JSON overhead)
+const packet = encodeDroneBinaryFrame({
+  voltage: 23.8,
+  altitude: 120.5,
+  speed: 88.2,
+  rssi: -55,
+  lq: 99,
+  modeIndex: 0, // 'ACRO' | 'STAB' | 'RTH' | 'LOITER' | 'ARMED' | 'DISARMED'
+  cells: 6
+});
+drone.decodeBinaryFrame(packet);
+```
+
+### 2C. Handheld Gaming, Rabbit R1 Scroll Wheel & Playdate Crank (`@zuari/hardware/gaming`)
+```typescript
+import { createRotaryController, createGamepadSignal } from '@zuari/hardware/gaming';
+
+const wheel = createRotaryController({ min: 0, max: 100, step: 1, initial: 50, wrap: true });
+const unbind = wheel.bindToElement(window); // Binds physical wheel, ArrowUp/Down, and Spacebar PTT
+
+const gamepad = createGamepadSignal(0.08); // 8% deadzone filter
+gamepad.updateFromAxes(0.02, -0.95, 0.4, 0.0, 0.0, 1.0, 0b0001);
+```
+
+### 2D. KaiOS, Dumbphone & Feature Phone D-Pad + T9 Keypad (`@zuari/hardware/dpad`)
+```typescript
+import { createDpadNav } from '@zuari/hardware/dpad';
+
+const dpad = createDpadNav({
+  itemCount: 6,
+  columns: 1,
+  wrap: true,
+  onSelect: (index) => console.log('Selected item:', index)
+});
+// Handle hardware keypad events: 'ArrowUp', 'ArrowDown', 'Enter', 'SoftLeft', 'SoftRight', '0'-'9'
+dpad.handleKeyEvent('ArrowDown');
+dpad.pressT9Digit('2'); // Multi-tap T9 buffer ('a' -> 'b' -> 'c' -> '2')
+```
+
+### 2E. Smart Fridge / Appliance MQTT Router & OLED Burn-In Guard (`@zuari/hardware/appliance`)
+```typescript
+import { createApplianceBridge } from '@zuari/hardware/appliance';
+
+const appliance = createApplianceBridge();
+const freezerTemp = appliance.subscribeTopic('fridge/freezer/tempC', -19);
+appliance.publishPacket('fridge/freezer/tempC', -21);
+appliance.triggerPixelOrbitTick(); // Shifts pixelShiftOffset { x, y } to prevent OLED burn-in
+```
+
+### 2F. Optical Waveguide (530nm Green), NVG, Thermal & 1-Bit E-Ink (`@zuari/hardware/display`)
+```typescript
+import { createDisplayMode } from '@zuari/hardware/display';
+
+// Presets: 'standard' | 'waveguide-green' | 'nvg-phosphor' | 'thermal-flir' | 'laser-pin' | 'eink-1bit'
+const display = createDisplayMode('waveguide-green');
+const stopDisplay = display.applyToElement(document.body);
+```
+
+---
+
+## 3. `@zuari/wasm` (Zero-Copy Rust / Zig / C Linear Memory Bridge)
+
+```typescript
+import { createWasmSignal, createWasmStruct } from '@zuari/wasm';
+
+const memory = new ArrayBuffer(64);
+const sim = createWasmStruct({ memory, baseOffset: 0 }, {
+  x:        { offset: 0,  type: 'f64', initial: 10.5 },
+  y:        { offset: 8,  type: 'f64', initial: 20.0 },
+  entities: { offset: 16, type: 'u32', initial: 5000 }
+});
+
+// Mutating signal flushes directly to byte offset 0 in Wasm linear memory
+sim.x.signal.value = 99.25;
+// Syncing from Wasm reads raw bytes back into the reactive signal
+sim.entities.syncFromWasm();
+```
+
+---
+
+## 4. `@zuari/spatial` (visionOS & Meta Quest 3 WebXR 120 FPS HUDs)
+
+```typescript
+import { createSpatialAnchor, bindAnchorToElement, triggerSpatialHaptic } from '@zuari/spatial';
+
+const anchor = createSpatialAnchor({
+  id: 'hud-dock',
+  initialPosition: { x: 0, y: 1.4, z: -0.8 }
+});
+
+const hudElement = document.getElementById('hud')!;
+const unbindHud = bindAnchorToElement(anchor, hudElement);
+anchor.updateTransform({ x: 0.1, y: 1.45, z: -0.75 });
+```
+
+---
+
+## 5. `@zuari/webgpu` (Compute-Shader Backed Reactive Signals)
+
+```typescript
+import { createGPUBufferSignal, createComputeShader } from '@zuari/webgpu';
+
+const particles = createGPUBufferSignal({
+  initialData: new Float32Array([1, 2, 3, 4])
+});
+
+const compute = createComputeShader({
+  code: `@group(0) @binding(0) var<storage, read_write> data: array<f32>;
+         @compute @workgroup_size(64) fn main(@builtin(global_invocation_id) id: vec3<u32>) {
+           data[id.x] = data[id.x] * 2.0;
+         }`,
+  bindings: [particles],
+  cpuFallback: ([buf]) => { if (buf) for (let i = 0; i < buf.length; i++) buf[i] *= 2; }
+});
+
+await compute.dispatch(1);
+```

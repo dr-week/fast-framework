@@ -1,7 +1,6 @@
 /**
- * @fileoverview Anime & Human-Artistic Web Animations API (WAAPI) Presets.
- * Zero-dependency, GPU-composited keyframe presets inspired by Japanese animation timing
- * (crisp keyframe attack, organic settle, and calligraphic fluidity).
+ * @fileoverview Smooth, Expressive Animation Presets for Zuari (`floatUp`, `popIn`, `slideIn`, `brushIn`, `softPulse`, `ripple`).
+ * Uses native hardware-accelerated Web Animations API (`element.animate`) with simple, memorable names.
  */
 
 import type {
@@ -12,41 +11,42 @@ import type {
 } from './types.js';
 
 export const ANIMATION_PRESETS: Record<AnimationPresetName, AnimationPresetConfig> = {
-  sakuraFloat: {
-    name: 'sakuraFloat',
-    label: 'Sakura Float',
-    japaneseTitle: '桜舞う (Petal Drift)',
+  floatUp: {
+    name: 'floatUp',
+    label: 'Float Up',
+    description: 'Gentle upward drift with a soft, natural settle',
     keyframes: [
-      { opacity: 0, transform: 'translate3d(0, 10px, 0) scale(0.97) rotate(-0.8deg)' },
-      { opacity: 1, transform: 'translate3d(0, -1px, 0) scale(1.005) rotate(0.2deg)', offset: 0.7 },
-      { opacity: 1, transform: 'translate3d(0, 0, 0) scale(1) rotate(0deg)' }
+      { opacity: 0, transform: 'translate3d(0, 10px, 0) scale(0.97)' },
+      { opacity: 1, transform: 'translate3d(0, -1px, 0) scale(1.005)', offset: 0.7 },
+      { opacity: 1, transform: 'translate3d(0, 0, 0) scale(1)' }
     ],
     options: {
-      duration: 340,
+      duration: 320,
       easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
       fill: 'both'
     }
   },
 
-  inkBrushReveal: {
-    name: 'inkBrushReveal',
-    label: 'Sumi-e Brush Reveal',
-    japaneseTitle: '墨絵 (Ink Stroke)',
+  popIn: {
+    name: 'popIn',
+    label: 'Pop In',
+    description: 'Crisp anime-style keyframe pop with a subtle spring overshoot',
     keyframes: [
-      { opacity: 0, transform: 'scaleX(0.92) translateY(4px)', filter: 'blur(3px)' },
-      { opacity: 1, transform: 'scaleX(1) translateY(0)', filter: 'blur(0px)' }
+      { opacity: 0, transform: 'scale(0.86) translateY(6px)' },
+      { opacity: 1, transform: 'scale(1.035) translateY(-2px)', offset: 0.62 },
+      { opacity: 1, transform: 'scale(1) translateY(0)' }
     ],
     options: {
-      duration: 260,
-      easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+      duration: 220,
+      easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
       fill: 'both'
     }
   },
 
-  shojiGlide: {
-    name: 'shojiGlide',
-    label: 'Shoji Screen Glide',
-    japaneseTitle: '障子 (Sliding Screen)',
+  slideIn: {
+    name: 'slideIn',
+    label: 'Slide In',
+    description: 'Smooth, effortless horizontal glide for panels and menus',
     keyframes: [
       { opacity: 0, transform: 'translate3d(-14px, 0, 0)' },
       { opacity: 1, transform: 'translate3d(0, 0, 0)' }
@@ -58,26 +58,25 @@ export const ANIMATION_PRESETS: Record<AnimationPresetName, AnimationPresetConfi
     }
   },
 
-  animePop: {
-    name: 'animePop',
-    label: 'Anime Keyframe Pop',
-    japaneseTitle: '作画スナップ (Sakuga Snap)',
+  brushIn: {
+    name: 'brushIn',
+    label: 'Brush Reveal',
+    description: 'Artistic brushstroke reveal with soft focus transition',
     keyframes: [
-      { opacity: 0, transform: 'scale(0.84) translateY(6px)' },
-      { opacity: 1, transform: 'scale(1.035) translateY(-2px)', offset: 0.62 },
-      { opacity: 1, transform: 'scale(1) translateY(0)' }
+      { opacity: 0, transform: 'scaleX(0.92) translateY(4px)', filter: 'blur(3px)' },
+      { opacity: 1, transform: 'scaleX(1) translateY(0)', filter: 'blur(0px)' }
     ],
     options: {
-      duration: 220,
-      easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+      duration: 260,
+      easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
       fill: 'both'
     }
   },
 
-  komorebiPulse: {
-    name: 'komorebiPulse',
-    label: 'Komorebi Sunlight Breathe',
-    japaneseTitle: '木漏れ日 (Dappled Light)',
+  softPulse: {
+    name: 'softPulse',
+    label: 'Soft Pulse',
+    description: 'Calm, organic breathing glow for highlights and indicators',
     keyframes: [
       { opacity: 0.88, transform: 'scale(0.995)' },
       { opacity: 1, transform: 'scale(1.01)', offset: 0.5 },
@@ -91,12 +90,12 @@ export const ANIMATION_PRESETS: Record<AnimationPresetName, AnimationPresetConfi
     }
   },
 
-  zenRipple: {
-    name: 'zenRipple',
-    label: 'Zen Water Ripple',
-    japaneseTitle: '波紋 (Hamon Ripple)',
+  ripple: {
+    name: 'ripple',
+    label: 'Tactile Ripple',
+    description: 'Quick, responsive touch/click feedback',
     keyframes: [
-      { transform: 'scale(0.95)', opacity: 0.75 },
+      { transform: 'scale(0.95)', opacity: 0.78 },
       { transform: 'scale(1.02)', opacity: 1, offset: 0.5 },
       { transform: 'scale(1)', opacity: 1 }
     ],
@@ -109,9 +108,8 @@ export const ANIMATION_PRESETS: Record<AnimationPresetName, AnimationPresetConfi
 };
 
 /**
- * Triggers a named Japanese minimal / anime-artistic animation preset on a DOM element
- * using the native Web Animations API (`element.animate`), with a graceful fallback
- * for headless/non-WAAPI test environments.
+ * Plays a named animation preset (`floatUp`, `popIn`, `slideIn`, `brushIn`, `softPulse`, `ripple`)
+ * on any HTML element.
  */
 export function animatePreset(
   element: HTMLElement,
@@ -146,7 +144,6 @@ export function animatePreset(
     }
   }
 
-  // Headless / fallback path: apply final keyframe inline
   const finalFrame = preset.keyframes[preset.keyframes.length - 1];
   if (finalFrame) {
     if (finalFrame.opacity !== undefined) {
@@ -167,12 +164,12 @@ export function animatePreset(
 }
 
 /**
- * Staggers a Japanese animation preset across a collection of DOM elements
- * (ideal for Bento grids, navigation docks, and list cascades).
+ * Plays a staggered animation cascade across a list of elements
+ * (great for Bento grids, cards, and navigation menus).
  */
 export function staggerPreset(
   elements: Iterable<HTMLElement>,
-  presetName: AnimationPresetName = 'sakuraFloat',
+  presetName: AnimationPresetName = 'floatUp',
   staggerMs = 45,
   overrides: AnimatePresetOverrides = {}
 ): AnimationHandle[] {

@@ -1,29 +1,29 @@
 /* ==========================================================================
-   Zuari Framework - Modular Japanese Minimal & Anime-Artistic UI/UX Presets
-   Lightweight Paper/Shoji Elevations, Ma (間) Rhythm & Smooth Motion Curves
+   Zuari Framework - Modular Minimal & Artistic UI/UX Presets
+   Easy-to-Use Themes, Lightweight Elevations, Smooth Motion & Ready Templates
    ========================================================================== */
 
 :root {
-  /* Default Lightweight Japanese Elevations (Kami, Shoji, Kaze, Sora) */
-  --zuari-elevation-kami: 0 1px 2px oklch(0% 0 0 / 0.14), 0 0 0 1px oklch(100% 0 0 / 0.06);
-  --zuari-elevation-shoji: 0 4px 14px -2px oklch(0% 0 0 / 0.22), 0 0 0 1px oklch(100% 0 0 / 0.08);
-  --zuari-elevation-kaze: 0 10px 28px -6px oklch(0% 0 0 / 0.28), 0 2px 6px oklch(0% 0 0 / 0.12);
-  --zuari-elevation-sora: 0 20px 44px -10px oklch(0% 0 0 / 0.36), 0 0 24px oklch(75% 0.15 200 / 0.12);
+  /* Lightweight Elevations ('flat', 'soft', 'float', 'halo') */
+  --zuari-elevation-flat: 0 1px 2px oklch(0% 0 0 / 0.14), 0 0 0 1px oklch(100% 0 0 / 0.06);
+  --zuari-elevation-soft: 0 4px 14px -2px oklch(0% 0 0 / 0.22), 0 0 0 1px oklch(100% 0 0 / 0.08);
+  --zuari-elevation-float: 0 10px 28px -6px oklch(0% 0 0 / 0.28), 0 2px 6px oklch(0% 0 0 / 0.12);
+  --zuari-elevation-halo: 0 20px 44px -10px oklch(0% 0 0 / 0.36), 0 0 24px oklch(75% 0.15 200 / 0.12);
 
-  /* Anime & Human-Artistic Motion Curves */
-  --zuari-motion-snappy: cubic-bezier(0.22, 1, 0.36, 1);
-  --zuari-motion-fluid: cubic-bezier(0.16, 1, 0.3, 1);
-  --zuari-motion-gentle: cubic-bezier(0.33, 1, 0.68, 1);
-  --zuari-motion-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Smooth & Expressive Motion Curves ('crisp', 'smooth', 'calm', 'bounce') */
+  --zuari-motion-crisp: cubic-bezier(0.22, 1, 0.36, 1);
+  --zuari-motion-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --zuari-motion-calm: cubic-bezier(0.33, 1, 0.68, 1);
+  --zuari-motion-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  /* Ma (間) Contemplative Whitespace Rhythm */
-  --zuari-ma-gap: 16px;
-  --zuari-ma-pad: 24px;
-  --zuari-ma-leading: 1.65;
+  /* Clean Whitespace & Layout Rhythm ('compact', 'balanced', 'airy') */
+  --zuari-layout-gap: 16px;
+  --zuari-layout-pad: 24px;
+  --zuari-layout-line-height: 1.65;
 }
 
-/* 1. Washi & Sumi (和紙と墨) — Handmade Paper, Sumi Ink & Hanko Vermilion */
-[data-zuari-theme="washi"] {
+/* 1. Paper Theme ('paper') — Warm Minimal Art Paper, Charcoal Ink & Stamp-Red Accent */
+[data-zuari-theme="paper"] {
   --nova-color-background: oklch(97% 0.012 85);
   --nova-color-surface: oklch(99% 0.008 85 / 0.84);
   --nova-color-surface-hover: oklch(95% 0.016 85 / 0.94);
@@ -32,14 +32,14 @@
   --nova-color-glyph-active: oklch(18% 0.015 70);
   --nova-color-accent: oklch(58% 0.21 32);
   --nova-color-accent-glow: oklch(58% 0.21 32 / 0.18);
-  --zuari-elevation-kami: 0 1px 2px oklch(20% 0.02 60 / 0.04), 0 0 0 1px oklch(20% 0.02 60 / 0.07);
-  --zuari-elevation-shoji: 0 4px 12px -2px oklch(20% 0.02 60 / 0.06), 0 1px 3px oklch(20% 0.02 60 / 0.04);
-  --zuari-elevation-kaze: 0 10px 24px -6px oklch(20% 0.02 60 / 0.08), 0 2px 6px oklch(20% 0.02 60 / 0.04);
-  --zuari-elevation-sora: 0 18px 40px -8px oklch(20% 0.02 60 / 0.11), 0 4px 12px oklch(20% 0.02 60 / 0.05);
+  --zuari-elevation-flat: 0 1px 2px oklch(20% 0.02 60 / 0.04), 0 0 0 1px oklch(20% 0.02 60 / 0.07);
+  --zuari-elevation-soft: 0 4px 12px -2px oklch(20% 0.02 60 / 0.06), 0 1px 3px oklch(20% 0.02 60 / 0.04);
+  --zuari-elevation-float: 0 10px 24px -6px oklch(20% 0.02 60 / 0.08), 0 2px 6px oklch(20% 0.02 60 / 0.04);
+  --zuari-elevation-halo: 0 18px 40px -8px oklch(20% 0.02 60 / 0.11), 0 4px 12px oklch(20% 0.02 60 / 0.05);
 }
 
-/* 2. Sakura Daylight (桜日和) — Anime Spring Breeze & Petal Blush */
-[data-zuari-theme="sakura"] {
+/* 2. Blossom Theme ('blossom') — Soft Anime Daylight & Pastel Pink Blush */
+[data-zuari-theme="blossom"] {
   --nova-color-background: oklch(98% 0.01 350);
   --nova-color-surface: oklch(99% 0.008 350 / 0.8);
   --nova-color-surface-hover: oklch(96% 0.02 350 / 0.92);
@@ -50,8 +50,8 @@
   --nova-color-accent-glow: oklch(70% 0.17 352 / 0.2);
 }
 
-/* 3. Komorebi Matcha (木漏れ日) — Sunlight Filtering Through Forest Leaves */
-[data-zuari-theme="komorebi"] {
+/* 3. Matcha Theme ('matcha') — Calm Garden Greens & Soft Sunlight */
+[data-zuari-theme="matcha"] {
   --nova-color-background: oklch(97% 0.014 135);
   --nova-color-surface: oklch(99% 0.01 135 / 0.82);
   --nova-color-surface-hover: oklch(94% 0.022 135 / 0.92);
@@ -62,8 +62,8 @@
   --nova-color-accent-glow: oklch(62% 0.15 148 / 0.18);
 }
 
-/* 4. Tasogare Dusk (黄昏 / かたわれ時) — Anime Twilight & Warm Lantern Glow */
-[data-zuari-theme="tasogare"] {
+/* 4. Twilight Theme ('twilight') — Anime Sunset Dusk & Warm Lantern Amber */
+[data-zuari-theme="twilight"] {
   --nova-color-background: oklch(17% 0.035 275);
   --nova-color-surface: oklch(23% 0.04 275 / 0.72);
   --nova-color-surface-hover: oklch(29% 0.05 275 / 0.86);
@@ -74,22 +74,92 @@
   --nova-color-accent-glow: oklch(76% 0.17 55 / 0.24);
 }
 
-/* Modular Elevation Utility Classes & Data Attributes */
-.zuari-elevation-kami, [data-zuari-elevation="kami"] {
-  box-shadow: var(--zuari-elevation-kami);
-}
-.zuari-elevation-shoji, [data-zuari-elevation="shoji"] {
-  box-shadow: var(--zuari-elevation-shoji);
-}
-.zuari-elevation-kaze, [data-zuari-elevation="kaze"] {
-  box-shadow: var(--zuari-elevation-kaze);
-}
-.zuari-elevation-sora, [data-zuari-elevation="sora"] {
-  box-shadow: var(--zuari-elevation-sora);
+/* 5. Midnight Theme ('midnight') — Deep Spatial Glass & Cyan Glow */
+[data-zuari-theme="midnight"] {
+  --nova-color-background: oklch(14% 0.015 260);
+  --nova-color-surface: oklch(19% 0.02 260 / 0.7);
+  --nova-color-surface-hover: oklch(25% 0.03 260 / 0.85);
+  --nova-color-border: oklch(100% 0 0 / 0.09);
+  --nova-color-glyph: oklch(78% 0.015 260);
+  --nova-color-glyph-active: oklch(96% 0.01 260);
+  --nova-color-accent: oklch(75% 0.18 190);
 }
 
-/* Japanese Hanko (判子) Vermilion Stamp Badge Accent */
-.zuari-hanko-stamp {
+/* Modular Elevation Presets ('flat', 'soft', 'float', 'halo') */
+.zuari-elevation-flat, [data-zuari-elevation="flat"] {
+  box-shadow: var(--zuari-elevation-flat);
+}
+.zuari-elevation-soft, [data-zuari-elevation="soft"] {
+  box-shadow: var(--zuari-elevation-soft);
+}
+.zuari-elevation-float, [data-zuari-elevation="float"] {
+  box-shadow: var(--zuari-elevation-float);
+}
+.zuari-elevation-halo, [data-zuari-elevation="halo"] {
+  box-shadow: var(--zuari-elevation-halo);
+}
+
+/* Modular Surface Material Presets ('paper', 'frosted', 'canvas', 'cel') */
+.zuari-surface-paper, [data-zuari-surface="paper"] {
+  background: var(--nova-color-surface);
+  border: 1px solid var(--nova-color-border);
+  border-radius: var(--nova-radius-squircle);
+}
+
+.zuari-surface-frosted, [data-zuari-surface="frosted"] {
+  background: var(--nova-color-surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--nova-color-border);
+  border-radius: var(--nova-radius-squircle);
+}
+
+.zuari-surface-canvas, [data-zuari-surface="canvas"] {
+  background: transparent;
+  border: 1px dashed var(--nova-color-border);
+  border-radius: var(--nova-radius-squircle);
+}
+
+.zuari-surface-cel, [data-zuari-surface="cel"] {
+  background: var(--nova-color-surface);
+  border: 1.5px solid var(--nova-color-glyph-active);
+  border-radius: 10px;
+}
+
+/* Ready-to-Use Artistic Story Card Template */
+.zuari-story-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--zuari-layout-pad, 24px);
+  line-height: var(--zuari-layout-line-height, 1.65);
+  transition: transform 200ms var(--zuari-motion-crisp), box-shadow 200ms var(--zuari-motion-crisp);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--zuari-elevation-float);
+  }
+}
+
+.zuari-story-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.zuari-tag-pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--nova-color-accent);
+  border: 1px solid var(--nova-color-border);
+}
+
+/* Minimal Red Studio Stamp Badge */
+.zuari-stamp-badge {
   display: inline-grid;
   place-items: center;
   padding: 2px 7px;
@@ -101,37 +171,37 @@
   letter-spacing: 0.08em;
   line-height: 1.2;
   transform: rotate(-2deg);
-  transition: transform var(--zuari-motion-snappy) 180ms;
+  transition: transform var(--zuari-motion-crisp) 180ms;
 
   &:hover {
     transform: rotate(0deg) scale(1.05);
   }
 }
 
-/* Declarative CSS Keyframe Presets */
-@keyframes zuari-sakura-float {
-  0% { opacity: 0; transform: translate3d(0, 10px, 0) scale(0.97) rotate(-0.8deg); }
-  70% { opacity: 1; transform: translate3d(0, -1px, 0) scale(1.005) rotate(0.2deg); }
-  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+/* Declarative CSS Animation Classes */
+@keyframes zuari-float-up {
+  0% { opacity: 0; transform: translate3d(0, 10px, 0) scale(0.97); }
+  70% { opacity: 1; transform: translate3d(0, -1px, 0) scale(1.005); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
-@keyframes zuari-anime-pop {
-  0% { opacity: 0; transform: scale(0.84) translateY(6px); }
+@keyframes zuari-pop-in {
+  0% { opacity: 0; transform: scale(0.86) translateY(6px); }
   62% { opacity: 1; transform: scale(1.035) translateY(-2px); }
   100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-@keyframes zuari-shoji-glide {
+@keyframes zuari-slide-in {
   0% { opacity: 0; transform: translate3d(-14px, 0, 0); }
   100% { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
-.zuari-anim-sakura {
-  animation: zuari-sakura-float 340ms var(--zuari-motion-snappy) both;
+.zuari-anim-float {
+  animation: zuari-float-up 320ms var(--zuari-motion-crisp) both;
 }
 .zuari-anim-pop {
-  animation: zuari-anime-pop 220ms var(--zuari-motion-spring) both;
+  animation: zuari-pop-in 220ms var(--zuari-motion-bounce) both;
 }
-.zuari-anim-shoji {
-  animation: zuari-shoji-glide 240ms var(--zuari-motion-snappy) both;
+.zuari-anim-slide {
+  animation: zuari-slide-in 240ms var(--zuari-motion-crisp) both;
 }

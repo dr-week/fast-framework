@@ -1,45 +1,54 @@
 /**
  * @fileoverview Type definitions for @zuari/presets.
- * Modular Japanese Minimal & Anime-Artistic UI/UX Presets, Lightweight Elevations,
- * Ma (間) Spatial Rhythm, and Web Animations API (WAAPI) Keyframe Presets.
+ * Easy-to-use, memorable UI/UX Design Presets, Lightweight Elevations,
+ * Smooth Animation Presets, and Ready-Made Artistic UI Templates.
  */
 
 import type { Signal, CleanupFn } from '@zuari/signals';
 import type {
-  JapaneseAestheticPresetName,
-  ElevationPresetTier,
+  ThemePresetName,
+  ElevationPreset,
   NovaThemeContract
 } from '@zuari/tokens';
 
 /**
- * Anime & Human-Artistic Animation Preset Names:
- * - 'sakuraFloat': Gentle upward petal drift with subtle rotation settle
- * - 'inkBrushReveal': Calligraphic sumi-e horizontal stroke clip/scale reveal
- * - 'shojiGlide': Smooth Japanese sliding screen horizontal/vertical entrance
- * - 'animePop': Expressive anime keyframe impact snap with subtle overshoot
- * - 'komorebiPulse': Soft dappled-sunlight breathing luminescence
- * - 'zenRipple': Tactile concentric water-drop micro-interaction
+ * Easy-to-remember Animation Preset Names:
+ * - 'floatUp': Gentle upward drift with a soft settle (cards, panels, hero items)
+ * - 'popIn': Crisp anime-style keyframe pop with subtle bounce (buttons, badges, dialogs)
+ * - 'slideIn': Smooth horizontal glide entrance (drawers, menus, list items)
+ * - 'brushIn': Artistic ink-stroke reveal from left to right (headers, banners)
+ * - 'softPulse': Calm breathing glow (status dots, active indicators)
+ * - 'ripple': Quick tactile press feedback (interactive buttons, tiles)
  */
 export type AnimationPresetName =
-  | 'sakuraFloat'
-  | 'inkBrushReveal'
-  | 'shojiGlide'
-  | 'animePop'
-  | 'komorebiPulse'
-  | 'zenRipple';
+  | 'floatUp'
+  | 'popIn'
+  | 'slideIn'
+  | 'brushIn'
+  | 'softPulse'
+  | 'ripple';
 
 /**
- * Japanese Ma (間) Spatial Density & Rhythm Presets:
- * - 'compact': High-information density (Bento utility grid)
- * - 'zen': Balanced human reading & interaction rhythm
- * - 'airy': Gallery / Tokonoma contemplative open whitespace
+ * Clean Whitespace & Density Presets:
+ * - 'compact': Tight, efficient spacing for data-dense toolbars and dashboards
+ * - 'balanced': Natural, comfortable everyday reading and interaction spacing
+ * - 'airy': Open gallery-like whitespace for calm, artistic layouts
  */
-export type MaSpacingMode = 'compact' | 'zen' | 'airy';
+export type SpacingPreset = 'compact' | 'balanced' | 'airy';
+
+/**
+ * Surface Material Presets:
+ * - 'paper': Matte, tactile warm card surface with crisp 1px border
+ * - 'frosted': Soft translucent frosted glass with subtle blur
+ * - 'canvas': Clean, minimal flat canvas surface
+ * - 'cel': Crisp anime cel-shaded card with defined outline and zero blur
+ */
+export type SurfacePreset = 'paper' | 'frosted' | 'canvas' | 'cel';
 
 export interface AnimationPresetConfig {
   readonly name: AnimationPresetName;
   readonly label: string;
-  readonly japaneseTitle: string;
+  readonly description: string;
   readonly keyframes: Keyframe[];
   readonly options: KeyframeAnimationOptions;
 }
@@ -58,21 +67,54 @@ export interface AnimationHandle {
   cancel(): void;
 }
 
-export interface AestheticControllerOptions {
-  readonly initialTheme?: JapaneseAestheticPresetName | undefined;
-  readonly initialElevation?: ElevationPresetTier | undefined;
-  readonly initialSpacing?: MaSpacingMode | undefined;
+export interface DesignPresetOptions {
+  readonly theme?: ThemePresetName | undefined;
+  readonly elevation?: ElevationPreset | undefined;
+  readonly spacing?: SpacingPreset | undefined;
+  readonly surface?: SurfacePreset | undefined;
   readonly targetElement?: HTMLElement | undefined;
 }
 
-export interface AestheticController {
-  readonly theme: Signal<JapaneseAestheticPresetName>;
-  readonly elevation: Signal<ElevationPresetTier>;
-  readonly spacing: Signal<MaSpacingMode>;
+export interface DesignPresetController {
+  readonly theme: Signal<ThemePresetName>;
+  readonly elevation: Signal<ElevationPreset>;
+  readonly spacing: Signal<SpacingPreset>;
+  readonly surface: Signal<SurfacePreset>;
   readonly activeTokens: Signal<NovaThemeContract>;
-  setTheme(theme: JapaneseAestheticPresetName): void;
-  setElevation(tier: ElevationPresetTier): void;
-  setSpacing(mode: MaSpacingMode): void;
-  applyElevationTo(element: HTMLElement, tier?: ElevationPresetTier): void;
+  setTheme(theme: ThemePresetName): void;
+  setElevation(level: ElevationPreset): void;
+  setSpacing(mode: SpacingPreset): void;
+  setSurface(surface: SurfacePreset): void;
+  applyElevationTo(element: HTMLElement, level?: ElevationPreset): void;
+  applySurfaceTo(element: HTMLElement, surface?: SurfacePreset): void;
   destroy: CleanupFn;
 }
+
+/**
+ * Options for ready-to-use artistic UI/UX templates
+ */
+export interface StoryCardTemplateOptions {
+  readonly tag?: string | undefined;
+  readonly stamp?: string | undefined;
+  readonly title: string;
+  readonly subtitle?: string | undefined;
+  readonly elevation?: ElevationPreset | undefined;
+  readonly surface?: SurfacePreset | undefined;
+  readonly animation?: AnimationPresetName | false | undefined;
+  readonly onClick?: ((event: MouseEvent) => void) | undefined;
+}
+
+export interface BentoLayoutTemplateOptions {
+  readonly columns?: 2 | 3 | 4 | undefined;
+  readonly spacing?: SpacingPreset | undefined;
+  readonly staggerAnimation?: AnimationPresetName | false | undefined;
+  readonly items: readonly HTMLElement[];
+}
+
+export interface SectionHeaderTemplateOptions {
+  readonly eyebrow?: string | undefined;
+  readonly title: string;
+  readonly description?: string | undefined;
+  readonly align?: 'left' | 'center' | undefined;
+}
+

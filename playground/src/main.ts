@@ -5,6 +5,9 @@ import { generateAnchorName, setElementAnchor, tetherToAnchor } from '@zuari/hea
 import { createReplView } from './repl.js';
 import { createProofBenchView } from './benchmark.js';
 import { createHardwareLabView } from './hardware-lab.js';
+import { createPolyglotWorkbenchView } from './polyglot-lab.js';
+import { getCompactAiSystemPrompt } from '@zuari/mcp';
+
 
 // Load online Lucide icons dynamically via ESM CDN (esm.sh)
 import { 
@@ -84,7 +87,7 @@ subtitle.className = 'brand-subtitle';
 subtitle.textContent = 'The High-Velocity Web Platform Framework • Danger.Labs';
 header.appendChild(subtitle);
 
-// 10-Second CLI Scaffolder Bar
+// 10-Second CLI Scaffolder Bar + 1-Click AI Agent Context Ingestion
 const cliBar = document.createElement('div');
 cliBar.className = 'cli-scaffolder-bar';
 const cliView = html`
@@ -104,6 +107,15 @@ const cliView = html`
       }
       interactions.value++;
     }}>Copy</button>
+    <button type="button" class="cli-copy-btn" id="ai-copy-btn" title="Copy Zero-Hallucination LLM Prompt for Cursor, Claude & ChatGPT" @click=${() => {
+      navigator.clipboard?.writeText(getCompactAiSystemPrompt());
+      const btn = document.getElementById('ai-copy-btn');
+      if (btn) {
+        btn.textContent = 'AI Prompt Copied!';
+        setTimeout(() => { btn.textContent = '🤖 Copy for AI (llms.txt)'; }, 1600);
+      }
+      interactions.value++;
+    }}>🤖 Copy for AI (llms.txt)</button>
   </div>
 `;
 cliBar.appendChild(render(cliView).fragment);
@@ -212,6 +224,9 @@ const benchElement = createProofBenchView(() => {
 const hardwareElement = createHardwareLabView(() => {
   interactions.value++;
 });
+const polyglotElement = createPolyglotWorkbenchView(() => {
+  interactions.value++;
+});
 
 function renderTabContent() {
   showcaseStage.innerHTML = '';
@@ -267,27 +282,7 @@ function renderTabContent() {
     card.appendChild(render(view).fragment);
     showcaseStage.appendChild(card);
   } else if (active === 'wasm') {
-    // Systems & Future Languages
-    const card = document.createElement('div');
-    card.className = 'feature-card';
-
-    const view = html`
-      <div class="spatial-card-content">
-        <div class="badge-pill">Rust • Zig • TypeSpec</div>
-        <h3 style="margin-top: 8px; font-weight: 500;">Zero-Copy Linear Memory FFI</h3>
-        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 4px;">
-          Synchronizing Wasm Float64Array memory buffers directly with TC39 reactive signals.
-        </p>
-        <div class="memory-buffer-bar">
-          <div class="memory-slot filled">0x00</div>
-          <div class="memory-slot filled">0x04</div>
-          <div class="memory-slot filled">0x08</div>
-          <div class="memory-slot">0x0C</div>
-        </div>
-      </div>
-    `;
-    card.appendChild(render(view).fragment);
-    showcaseStage.appendChild(card);
+    showcaseStage.appendChild(polyglotElement);
   } else if (active === 'tokens') {
     // OKLCH Token Physics & Slider
     const card = document.createElement('div');

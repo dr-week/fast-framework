@@ -1,0 +1,16 @@
+{
+  "name": "@zuari/ssr",
+  "version": "0.1.0",
+  "description": "Streaming Server-Side Rendering (SSR) & 0ms Edge Hydration for Zuari",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@zuari/signals": "workspace:*",
+    "@zuari/dom": "workspace:*"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}

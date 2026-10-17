@@ -53,6 +53,9 @@ importers:
       '@zuari/presets':
         specifier: workspace:*
         version: link:../presets
+      '@zuari/quantum':
+        specifier: workspace:*
+        version: link:../quantum
       '@zuari/recipes':
         specifier: workspace:*
         version: link:../recipes
@@ -84,6 +87,8 @@ importers:
         specifier: workspace:*
         version: link:../wit
 
+  packages/create-zuari: {}
+
   packages/dom:
     dependencies:
       '@zuari/signals':
@@ -110,6 +115,8 @@ importers:
         specifier: workspace:*
         version: link:../signals
 
+  packages/mcp: {}
+
   packages/presets:
     dependencies:
       '@zuari/signals':
@@ -118,6 +125,12 @@ importers:
       '@zuari/tokens':
         specifier: workspace:*
         version: link:../tokens
+
+  packages/quantum:
+    dependencies:
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
 
   packages/recipes: {}
 
@@ -131,6 +144,15 @@ importers:
 
   packages/spatial:
     dependencies:
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+
+  packages/ssr:
+    dependencies:
+      '@zuari/dom':
+        specifier: workspace:*
+        version: link:../dom
       '@zuari/signals':
         specifier: workspace:*
         version: link:../signals
@@ -160,6 +182,15 @@ importers:
       '@zuari/signals':
         specifier: workspace:*
         version: link:../signals
+
+  packages/vite-plugin:
+    dependencies:
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+      vite:
+        specifier: ^5.0.0 || ^6.0.0
+        version: 6.4.4(@types/node@26.6.5)
 
   packages/wasm:
     dependencies:
@@ -199,6 +230,15 @@ importers:
       '@zuari/headless':
         specifier: workspace:*
         version: link:../packages/headless
+      '@zuari/lua':
+        specifier: workspace:*
+        version: link:../packages/lua
+      '@zuari/mcp':
+        specifier: workspace:*
+        version: link:../packages/mcp
+      '@zuari/quantum':
+        specifier: workspace:*
+        version: link:../packages/quantum
       '@zuari/recipes':
         specifier: workspace:*
         version: link:../packages/recipes
@@ -217,6 +257,12 @@ importers:
       '@zuari/wasm':
         specifier: workspace:*
         version: link:../packages/wasm
+      '@zuari/webgpu':
+        specifier: workspace:*
+        version: link:../packages/webgpu
+      '@zuari/wit':
+        specifier: workspace:*
+        version: link:../packages/wit
     devDependencies:
       vite:
         specifier: ^6.2.0

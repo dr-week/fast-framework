@@ -1,78 +1,133 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import {
-  createAestheticController,
+  createDesignPresets,
   animatePreset,
   staggerPreset,
   applyElevationPreset,
+  applySurfacePreset,
+  createStoryCard,
+  createBentoGrid,
+  createStampBadge,
   ANIMATION_PRESETS
 } from './index.js';
-import { JAPANESE_THEME_PRESETS, generateCssVariables } from '@zuari/tokens';
+import { THEME_PRESETS, generateCssVariables } from '@zuari/tokens';
 
-describe('@zuari/presets (Japanese Minimal & Anime-Artistic UI/UX Presets)', () => {
-  it('provides all 5 Japanese aesthetic theme presets with lightweight elevations and motion tokens', () => {
-    expect(Object.keys(JAPANESE_THEME_PRESETS)).toEqual([
-      'aether',
-      'washi',
-      'sakura',
-      'komorebi',
-      'tasogare'
+describe('@zuari/presets (Easy-to-Use Minimal & Artistic UI/UX Presets & Templates)', () => {
+  it('provides 5 easy-to-remember theme presets with lightweight elevations and motion tokens', () => {
+    expect(Object.keys(THEME_PRESETS)).toEqual([
+      'paper',
+      'blossom',
+      'matcha',
+      'twilight',
+      'midnight'
     ]);
 
-    const washiCss = generateCssVariables(JAPANESE_THEME_PRESETS.washi);
-    expect(washiCss).toContain('--zuari-elevation-kami');
-    expect(washiCss).toContain('--zuari-elevation-shoji');
-    expect(washiCss).toContain('--zuari-elevation-kaze');
-    expect(washiCss).toContain('--zuari-elevation-sora');
-    expect(washiCss).toContain('--zuari-motion-snappy');
-    expect(washiCss).toContain('--zuari-motion-spring');
+    const paperCss = generateCssVariables(THEME_PRESETS.paper);
+    expect(paperCss).toContain('--zuari-elevation-flat');
+    expect(paperCss).toContain('--zuari-elevation-soft');
+    expect(paperCss).toContain('--zuari-elevation-float');
+    expect(paperCss).toContain('--zuari-elevation-halo');
+    expect(paperCss).toContain('--zuari-motion-crisp');
+    expect(paperCss).toContain('--zuari-motion-bounce');
   });
 
-  it('reactively switches themes, elevations, and Ma (間) spacing on target element', () => {
+  it('reactively switches themes, elevations, spacing, and surfaces with createDesignPresets', () => {
     const container = document.createElement('div');
-    const controller = createAestheticController({
-      initialTheme: 'washi',
-      initialElevation: 'shoji',
-      initialSpacing: 'zen',
+    const presets = createDesignPresets({
+      theme: 'paper',
+      elevation: 'soft',
+      spacing: 'balanced',
+      surface: 'paper',
       targetElement: container
     });
 
-    expect(container.getAttribute('data-zuari-theme')).toBe('washi');
-    expect(container.getAttribute('data-zuari-ma')).toBe('zen');
-    expect(container.style.getPropertyValue('--zuari-ma-gap')).toBe('16px');
+    expect(container.getAttribute('data-zuari-theme')).toBe('paper');
+    expect(container.getAttribute('data-zuari-spacing')).toBe('balanced');
+    expect(container.style.getPropertyValue('--zuari-layout-gap')).toBe('16px');
 
-    // Switch to Anime Twilight ('tasogare') and 'airy' Ma rhythm
-    controller.setTheme('tasogare');
-    controller.setSpacing('airy');
-    controller.setElevation('kaze');
+    // Switch to 'twilight' theme, 'airy' spacing, 'float' elevation, and 'cel' surface
+    presets.setTheme('twilight');
+    presets.setSpacing('airy');
+    presets.setElevation('float');
+    presets.setSurface('cel');
 
-    expect(container.getAttribute('data-zuari-theme')).toBe('tasogare');
-    expect(container.getAttribute('data-zuari-ma')).toBe('airy');
-    expect(container.getAttribute('data-zuari-elevation-default')).toBe('kaze');
-    expect(controller.activeTokens.value.name).toBe('tasogare');
+    expect(container.getAttribute('data-zuari-theme')).toBe('twilight');
+    expect(container.getAttribute('data-zuari-spacing')).toBe('airy');
+    expect(container.getAttribute('data-zuari-elevation-default')).toBe('float');
+    expect(container.getAttribute('data-zuari-surface-default')).toBe('cel');
+    expect(presets.activeTokens.value.name).toBe('twilight');
 
     const card = document.createElement('div');
-    applyElevationPreset(card, 'sora');
-    expect(card.getAttribute('data-zuari-elevation')).toBe('sora');
-    expect(card.style.boxShadow).toBe('var(--zuari-elevation-sora)');
+    applyElevationPreset(card, 'halo');
+    applySurfacePreset(card, 'frosted');
+    expect(card.getAttribute('data-zuari-elevation')).toBe('halo');
+    expect(card.getAttribute('data-zuari-surface')).toBe('frosted');
+    expect(card.classList.contains('zuari-surface-frosted')).toBe(true);
 
-    controller.destroy();
+    presets.destroy();
   });
 
-  it('applies smooth anime & human-artistic keyframe animation presets and staggered cascades', async () => {
-    expect(Object.keys(ANIMATION_PRESETS)).toContain('sakuraFloat');
-    expect(Object.keys(ANIMATION_PRESETS)).toContain('inkBrushReveal');
-    expect(Object.keys(ANIMATION_PRESETS)).toContain('animePop');
+  it('plays smooth animation presets (floatUp, popIn, slideIn, brushIn, softPulse, ripple)', async () => {
+    expect(Object.keys(ANIMATION_PRESETS)).toEqual([
+      'floatUp',
+      'popIn',
+      'slideIn',
+      'brushIn',
+      'softPulse',
+      'ripple'
+    ]);
 
     const card = document.createElement('div');
-    const handle = animatePreset(card, 'animePop', { duration: 180 });
-    expect(handle.preset).toBe('animePop');
-    expect(card.getAttribute('data-zuari-anim')).toBe('animePop');
+    const handle = animatePreset(card, 'popIn', { duration: 180 });
+    expect(handle.preset).toBe('popIn');
+    expect(card.getAttribute('data-zuari-anim')).toBe('popIn');
     await handle.finished;
 
     const items = [document.createElement('div'), document.createElement('div')];
-    const staggered = staggerPreset(items, 'sakuraFloat', 50);
+    const staggered = staggerPreset(items, 'floatUp', 50);
     expect(staggered).toHaveLength(2);
-    expect(items[0]?.getAttribute('data-zuari-anim')).toBe('sakuraFloat');
-    expect(items[1]?.getAttribute('data-zuari-anim')).toBe('sakuraFloat');
+    expect(items[0]?.getAttribute('data-zuari-anim')).toBe('floatUp');
+    expect(items[1]?.getAttribute('data-zuari-anim')).toBe('floatUp');
+  });
+
+  it('builds modular UI templates (createStoryCard, createBentoGrid, createStampBadge)', () => {
+    const onClick = vi.fn();
+    const card1 = createStoryCard({
+      tag: 'Chapter 01',
+      stamp: 'NEW',
+      title: 'Minimal Canvas',
+      subtitle: 'Lightweight elevation and clean layout.',
+      elevation: 'soft',
+      surface: 'paper',
+      animation: 'floatUp',
+      onClick
+    });
+
+    expect(card1.classList.contains('zuari-story-card')).toBe(true);
+    expect(card1.getAttribute('data-zuari-elevation')).toBe('soft');
+    expect(card1.getAttribute('data-zuari-surface')).toBe('paper');
+    expect(card1.querySelector('.zuari-story-title')?.textContent).toBe('Minimal Canvas');
+    expect(card1.querySelector('.zuari-stamp-badge')?.textContent).toBe('NEW');
+
+    card1.click();
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(card1.getAttribute('data-zuari-anim')).toBe('ripple');
+
+    const card2 = createStoryCard({ title: 'Second Panel' });
+    const bento = createBentoGrid({
+      columns: 2,
+      spacing: 'airy',
+      staggerAnimation: 'popIn',
+      items: [card1, card2]
+    });
+
+    expect(bento.getAttribute('data-columns')).toBe('2');
+    expect(bento.getAttribute('data-zuari-spacing')).toBe('airy');
+    expect(bento.children).toHaveLength(2);
+    expect(card2.getAttribute('data-zuari-anim')).toBe('popIn');
+
+    const stamp = createStampBadge('STUDIO');
+    expect(stamp.className).toBe('zuari-stamp-badge');
+    expect(stamp.textContent).toBe('STUDIO');
   });
 });

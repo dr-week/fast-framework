@@ -1,5 +1,5 @@
-import type { NovaThemeContract, JapaneseAestheticPresetName } from './contract.js';
-import { JAPANESE_THEME_PRESETS } from './themes.js';
+import type { NovaThemeContract, ThemePresetName } from './contract.js';
+import { THEME_PRESETS } from './themes.js';
 
 function kebabCase(str: string): string {
   return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
@@ -7,7 +7,7 @@ function kebabCase(str: string): string {
 
 /**
  * Generates valid browser-native CSS with @property declarations
- * for hardware-accelerated token transitions, lightweight Japanese elevations, and motion curves.
+ * for hardware-accelerated token transitions, lightweight elevations, and motion curves.
  */
 export function generateCssVariables(tokens: NovaThemeContract, selector: string = ':root'): string {
   const cssLines: string[] = [];
@@ -33,7 +33,7 @@ export function generateCssVariables(tokens: NovaThemeContract, selector: string
     cssLines.push(`  ${varName}: ${value};`);
   }
 
-  // Register lightweight Japanese elevation tiers (kami, shoji, kaze, sora)
+  // Register lightweight elevation levels (flat, soft, float, halo)
   if (tokens.elevations) {
     for (const [key, value] of Object.entries(tokens.elevations)) {
       const varName = `--zuari-elevation-${kebabCase(key)}`;
@@ -41,7 +41,7 @@ export function generateCssVariables(tokens: NovaThemeContract, selector: string
     }
   }
 
-  // Register human-artistic & anime motion presets
+  // Register motion presets (crisp, smooth, calm, bounce)
   if (tokens.motion) {
     for (const [key, value] of Object.entries(tokens.motion)) {
       const varName = `--zuari-motion-${kebabCase(key)}`;
@@ -53,14 +53,14 @@ export function generateCssVariables(tokens: NovaThemeContract, selector: string
 }
 
 /**
- * Applies a named Japanese minimal / anime-artistic theme preset directly to a DOM root element
- * (defaults to `document.documentElement`).
+ * Applies a named theme preset ('paper', 'blossom', 'matcha', 'twilight', 'midnight')
+ * directly to a DOM root element (defaults to `document.documentElement`).
  */
 export function applyThemePreset(
-  preset: JapaneseAestheticPresetName | NovaThemeContract,
+  preset: ThemePresetName | NovaThemeContract,
   target?: HTMLElement
 ): NovaThemeContract {
-  const resolved = typeof preset === 'string' ? JAPANESE_THEME_PRESETS[preset] : preset;
+  const resolved = typeof preset === 'string' ? THEME_PRESETS[preset] : preset;
   const root =
     target ?? (typeof document !== 'undefined' ? document.documentElement : undefined);
 
@@ -91,4 +91,5 @@ export function applyThemePreset(
 
   return resolved;
 }
+
 

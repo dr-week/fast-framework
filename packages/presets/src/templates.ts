@@ -1,0 +1,114 @@
+/**
+ * @fileoverview Ready-to-use, modular UI/UX layout & component templates for Zuari.
+ * Provides human-artistic cards, clean Bento grids, stamp badges, and floating action pills
+ * with lightweight elevations and built-in animation presets.
+ */
+
+import type {
+  StoryCardTemplateOptions,
+  BentoLayoutTemplateOptions
+} from './types.js';
+import { applyElevationPreset, applySurfacePreset, SPACING_PRESET_VALUES } from './aesthetics.js';
+import { animatePreset, staggerPreset } from './animations.js';
+
+/**
+ * Creates an artistic, minimal Story Card template (`createStoryCard`) with:
+ * - Lightweight elevation (`flat`, `soft`, `float`, `halo`)
+ * - Surface finish (`paper`, `frosted`, `canvas`, `cel`)
+ * - Optional red stamp badge (`stamp`) and category pill (`tag`)
+ * - Automatic entrance animation preset (`floatUp`, `popIn`, etc.)
+ */
+export function createStoryCard(options: StoryCardTemplateOptions): HTMLElement {
+  const card = document.createElement('article');
+  card.className = 'zuari-story-card';
+
+  applyElevationPreset(card, options.elevation ?? 'soft');
+  applySurfacePreset(card, options.surface ?? 'paper');
+
+  if (options.tag || options.stamp) {
+    const metaRow = document.createElement('div');
+    metaRow.className = 'zuari-story-meta';
+
+    if (options.tag) {
+      const tagEl = document.createElement('span');
+      tagEl.className = 'zuari-tag-pill';
+      tagEl.textContent = options.tag;
+      metaRow.appendChild(tagEl);
+    }
+
+    if (options.stamp) {
+      const stampEl = document.createElement('span');
+      stampEl.className = 'zuari-stamp-badge';
+      stampEl.textContent = options.stamp;
+      metaRow.appendChild(stampEl);
+    }
+
+    card.appendChild(metaRow);
+  }
+
+  const titleEl = document.createElement('h3');
+  titleEl.className = 'zuari-story-title';
+  titleEl.textContent = options.title;
+  card.appendChild(titleEl);
+
+  if (options.subtitle) {
+    const subEl = document.createElement('p');
+    subEl.className = 'zuari-story-subtitle';
+    subEl.textContent = options.subtitle;
+    card.appendChild(subEl);
+  }
+
+  if (options.onClick) {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', (e) => {
+      animatePreset(card, 'ripple');
+      options.onClick?.(e);
+    });
+  }
+
+  if (options.animation !== false) {
+    animatePreset(card, options.animation ?? 'floatUp');
+  }
+
+  return card;
+}
+
+/**
+ * Creates a clean, modular Bento Grid layout (`createBentoGrid`) with balanced whitespace
+ * and automatic staggered entrance animations for child cards.
+ */
+export function createBentoGrid(options: BentoLayoutTemplateOptions): HTMLElement {
+  const grid = document.createElement('section');
+  grid.className = 'zuari-bento-grid';
+
+  const cols = options.columns ?? 3;
+  const spacingMode = options.spacing ?? 'balanced';
+  const spacingTokens = SPACING_PRESET_VALUES[spacingMode];
+
+  grid.setAttribute('data-columns', String(cols));
+  grid.setAttribute('data-zuari-spacing', spacingMode);
+  grid.style.display = 'grid';
+  grid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
+  grid.style.gap = spacingTokens.gap;
+  grid.style.setProperty('reading-flow', 'grid-rows');
+
+  for (const item of options.items) {
+    grid.appendChild(item);
+  }
+
+  if (options.staggerAnimation !== false) {
+    staggerPreset(options.items, options.staggerAnimation ?? 'floatUp', 45);
+  }
+
+  return grid;
+}
+
+/**
+ * Creates an artistic red stamp badge (`createStampBadge`) inspired by minimal studio seals.
+ */
+export function createStampBadge(label: string): HTMLSpanElement {
+  const stamp = document.createElement('span');
+  stamp.className = 'zuari-stamp-badge';
+  stamp.textContent = label;
+  return stamp;
+}

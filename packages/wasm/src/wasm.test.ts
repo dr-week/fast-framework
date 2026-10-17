@@ -108,5 +108,41 @@ describe('@zuari/wasm', () => {
       expect(view.getUint32(0, true)).toBe(144);
     });
   });
+
+  describe('Polyglot Systems Language Emitter & Live Wasm VM Kernel', () => {
+    it('emits identical zero-copy byte layouts across Rust, Zig, C++23, Go, Python, and WGSL', async () => {
+      const { createPolyglotKernelBridge, instantiateEmbeddedWasmKernel } = await import('./polyglot/index.js');
+      const buffer = new ArrayBuffer(64);
+      const bridge = createPolyglotKernelBridge(
+        { memory: buffer },
+        {
+          name: 'OrbitalState',
+          purpose: 'High-frequency orbital mechanics & GPU telemetry packet',
+          fields: [
+            { name: 'epochTick', type: 'u32', initial: 1024 },
+            { name: 'velocityKms', type: 'f64', initial: 7.66 },
+            { name: 'shieldFlux', type: 'f32', initial: 0.98 }
+          ]
+        }
+      );
+
+      expect(bridge.layout.byteSize).toBe(24);
+      expect(bridge.signals.epochTick!.offset).toBe(0);
+      expect(bridge.signals.velocityKms!.offset).toBe(8);
+      expect(bridge.signals.shieldFlux!.offset).toBe(16);
+
+      expect(bridge.emitSource('rust')).toContain('#[repr(C)]');
+      expect(bridge.emitSource('zig')).toContain('extern struct');
+      expect(bridge.emitSource('cpp')).toContain('struct alignas(8) OrbitalState');
+      expect(bridge.emitSource('go')).toContain('type OrbitalState struct');
+      expect(bridge.emitSource('python')).toContain('ctypes.LittleEndianStructure');
+      expect(bridge.emitSource('wgsl')).toContain('struct OrbitalState');
+
+      const wasmKernel = instantiateEmbeddedWasmKernel();
+      expect(wasmKernel.bytecodeSize).toBeGreaterThan(30);
+      expect(wasmKernel.stepHarmonic(10, 5, 2)).toBe(20);
+    });
+  });
 });
+
 

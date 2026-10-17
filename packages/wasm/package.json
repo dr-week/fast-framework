@@ -21,6 +21,10 @@
     "./spec": {
       "types": "./dist/spec/index.d.ts",
       "import": "./dist/spec/index.js"
+    },
+    "./polyglot": {
+      "types": "./dist/polyglot/index.d.ts",
+      "import": "./dist/polyglot/index.js"
     }
   },
   "scripts": {

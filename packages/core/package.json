@@ -23,7 +23,8 @@
     "@zuari/wit": "workspace:*",
     "@zuari/hardware": "workspace:*",
     "@zuari/presets": "workspace:*",
-    "@zuari/lua": "workspace:*"
+    "@zuari/lua": "workspace:*",
+    "@zuari/quantum": "workspace:*"
   },
   "exports": {
     ".": {
@@ -93,6 +94,10 @@
     "./lua": {
       "types": "../lua/dist/index.d.ts",
       "import": "../lua/dist/index.js"
+    },
+    "./quantum": {
+      "types": "../quantum/dist/index.d.ts",
+      "import": "../quantum/dist/index.js"
     }
   },
   "scripts": {

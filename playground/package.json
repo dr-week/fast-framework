@@ -19,7 +19,12 @@
     "@zuari/spatial": "workspace:*",
     "@zuari/wasm": "workspace:*",
     "@zuari/ui": "workspace:*",
-    "@zuari/hardware": "workspace:*"
+    "@zuari/hardware": "workspace:*",
+    "@zuari/lua": "workspace:*",
+    "@zuari/webgpu": "workspace:*",
+    "@zuari/wit": "workspace:*",
+    "@zuari/mcp": "workspace:*",
+    "@zuari/quantum": "workspace:*"
   },
   "devDependencies": {
     "vite": "^6.2.0"

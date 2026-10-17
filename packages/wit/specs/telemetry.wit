@@ -1,0 +1,18 @@
+// [WASI 0.2 WebAssembly Interface Types (.wit) Specification]
+// Parsed by @zuari/wit and @zuari/wasm to generate zero-copy reactive signal structs.
+
+package zuari:polyglot@0.1.0;
+
+interface telemetry-engine {
+  record quantum-telemetry-frame {
+    frame-tick: u32,
+    harmonic-pos: f64,
+    plasma-flux: f32,
+  }
+
+  step-harmonic: func(pos: f64, vel: f64, stiffness: f64) -> f64;
+}
+
+world zuari-polyglot-kernel {
+  export telemetry-engine;
+}

@@ -1,12 +1,14 @@
 import type { Computation, ComputationNode, DependencySignal } from './types.js';
-import { getActiveSubscriber, setActiveSubscriber } from './scheduler.js';
+import { getActiveSubscriber, setActiveSubscriber, scheduleExecution } from './scheduler.js';
 
 /**
  * Read-only memoized signal derived from other signals.
+ * Supports full diamond-dependency propagation and chained computed graphs.
  */
 export class Computed<T> implements DependencySignal {
   private _value!: T;
   private _node: ComputationNode<T>;
+  private _subscribers: Set<ComputationNode<unknown>> = new Set();
   private _isDirty = true;
   private _fn: Computation<T>;
 
@@ -16,7 +18,13 @@ export class Computed<T> implements DependencySignal {
       dependencies: new Set(),
       isStale: true,
       execute: () => {
-        this._isDirty = true;
+        if (!this._isDirty) {
+          this._isDirty = true;
+          const subs = Array.from(this._subscribers);
+          for (const sub of subs) {
+            scheduleExecution(sub);
+          }
+        }
       }
     };
   }
@@ -25,12 +33,10 @@ export class Computed<T> implements DependencySignal {
     if (this._isDirty) {
       this._recompute();
     }
-    if (getActiveSubscriber()) {
-      for (const dep of this._node.dependencies) {
-        dep._unsubscribe(this._node as ComputationNode<unknown>);
-      }
-      this._node.dependencies.clear();
-      this._recompute();
+    const activeSub = getActiveSubscriber();
+    if (activeSub) {
+      this._subscribers.add(activeSub);
+      activeSub.dependencies.add(this);
     }
     return this._value;
   }
@@ -43,13 +49,15 @@ export class Computed<T> implements DependencySignal {
   }
 
   _unsubscribe(node: ComputationNode<unknown>): void {
-    // Forwarded unsubscription if chained
-    for (const dep of this._node.dependencies) {
-      dep._unsubscribe(node);
-    }
+    this._subscribers.delete(node);
   }
 
   private _recompute(): void {
+    for (const dep of this._node.dependencies) {
+      dep._unsubscribe(this._node as ComputationNode<unknown>);
+    }
+    this._node.dependencies.clear();
+
     const prevSub = setActiveSubscriber(this._node as ComputationNode<unknown>);
     try {
       this._value = this._fn();
