@@ -1,0 +1,42 @@
+/* ==========================================================================
+   Zuari UI - Scoped Floating Segmented Tabs Recipe
+   ========================================================================== */
+@scope (.zuari-tabs) {
+  :scope {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    border-radius: var(--nova-radius-squircle);
+    background: var(--nova-color-surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--nova-color-border);
+  }
+
+  button[role="tab"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    color: var(--nova-color-glyph);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+
+    &:hover {
+      color: var(--nova-color-glyph-active);
+    }
+
+    &[aria-selected="true"] {
+      background: var(--nova-color-surface-hover);
+      color: var(--nova-color-accent);
+      box-shadow: 0 2px 8px oklch(0% 0 0 / 0.25);
+    }
+  }
+}
