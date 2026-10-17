@@ -1,0 +1,64 @@
+/* ==========================================================================
+   Zuari Framework - Scoped Command Palette Recipe
+   ========================================================================== */
+@scope (.zuari-command-palette) {
+  :scope {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+    max-width: 540px;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--nova-radius-squircle);
+    background: var(--nova-color-surface);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--nova-color-border);
+    box-shadow: 0 32px 64px -16px oklch(0% 0 0 / 0.6);
+    overflow: hidden;
+    z-index: 9999;
+  }
+
+  input[role="searchbox"] {
+    width: 100%;
+    padding: 16px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--nova-color-border);
+    color: oklch(98% 0 0);
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+
+    &::placeholder {
+      color: oklch(50% 0.02 260);
+    }
+  }
+
+  ul[role="listbox"] {
+    list-style: none;
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 8px;
+    margin: 0;
+
+    li {
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: var(--nova-color-glyph);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 100ms ease;
+
+      &[data-selected="true"],
+      &:hover {
+        background: var(--nova-color-surface-hover);
+        color: var(--nova-color-glyph-active);
+      }
+    }
+  }
+}
