@@ -16,4 +16,7 @@ export * from '@zuari/sync';
 export * from '@zuari/ai';
 export * from '@zuari/router';
 export * from '@zuari/wit';
+export * from '@zuari/presets';
 
+export * from '@zuari/hardware';
+export * from '@zuari/lua';

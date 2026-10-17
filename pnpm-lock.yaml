@@ -41,9 +41,18 @@ importers:
       '@zuari/glyphs':
         specifier: workspace:*
         version: link:../glyphs
+      '@zuari/hardware':
+        specifier: workspace:*
+        version: link:../hardware
       '@zuari/headless':
         specifier: workspace:*
         version: link:../headless
+      '@zuari/lua':
+        specifier: workspace:*
+        version: link:../lua
+      '@zuari/presets':
+        specifier: workspace:*
+        version: link:../presets
       '@zuari/recipes':
         specifier: workspace:*
         version: link:../recipes
@@ -94,6 +103,21 @@ importers:
       '@zuari/signals':
         specifier: workspace:*
         version: link:../signals
+
+  packages/lua:
+    dependencies:
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+
+  packages/presets:
+    dependencies:
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+      '@zuari/tokens':
+        specifier: workspace:*
+        version: link:../tokens
 
   packages/recipes: {}
 
@@ -169,6 +193,9 @@ importers:
       '@zuari/glyphs':
         specifier: workspace:*
         version: link:../packages/glyphs
+      '@zuari/hardware':
+        specifier: workspace:*
+        version: link:../packages/hardware
       '@zuari/headless':
         specifier: workspace:*
         version: link:../packages/headless

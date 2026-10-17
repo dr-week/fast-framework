@@ -885,3 +885,184 @@ body {
   height: 100%;
   border-radius: 999px;
 }
+
+
+/* Hardware & IoT Tactical Lab */
+.hw-lab-shell {
+  width: 100%;
+  border-radius: 24px;
+  background: var(--hw-bg, var(--glass));
+  color: var(--hw-fg, var(--text));
+  border: 1px solid var(--hw-border, var(--border));
+  box-shadow: 0 24px 64px -16px oklch(0% 0 0 / 0.55);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: background-color var(--hw-transition, 160ms ease), color var(--hw-transition, 160ms ease);
+}
+
+.hw-lab-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--hw-border, var(--border));
+  background: oklch(13% 0.02 260 / 0.7);
+}
+
+.hw-display-select {
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: oklch(16% 0.02 260);
+  color: var(--hw-accent, var(--accent));
+  border: 1px solid var(--hw-border, var(--border-glow));
+  outline: none;
+  cursor: pointer;
+}
+
+.hw-lab-stage {
+  padding: 20px;
+}
+
+.hw-panel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: center;
+}
+
+@media (max-width: 780px) {
+  .hw-panel-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hw-visor-box,
+.hw-osd-screen,
+.hw-kaios-phone,
+.hw-rotary-dial-box,
+.hw-appliance-screen {
+  position: relative;
+  min-height: 220px;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid var(--hw-border, var(--border-glow));
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.hw-reticle-svg {
+  width: 155px;
+  height: 155px;
+  color: var(--hw-accent, var(--accent));
+}
+
+.hw-visor-telemetry,
+.hw-osd-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-family: monospace;
+  font-size: 0.72rem;
+  color: var(--hw-fg, var(--text));
+
+  strong {
+    color: var(--hw-accent, var(--accent));
+  }
+}
+
+.hw-osd-horizon {
+  width: 160px;
+  height: 90px;
+  display: grid;
+  place-items: center;
+  border-left: 1px dashed var(--hw-accent, var(--accent));
+  border-right: 1px dashed var(--hw-accent, var(--accent));
+}
+
+.hw-horizon-bar {
+  width: 120px;
+  height: 2px;
+  background: var(--hw-accent, var(--accent));
+  box-shadow: 0 0 8px var(--hw-accent, var(--accent));
+}
+
+.hw-kaios-phone {
+  max-width: 280px;
+  width: 100%;
+  margin: 0 auto;
+  align-items: stretch;
+  gap: 8px;
+  font-family: monospace;
+}
+
+.hw-kaios-statusbar,
+.hw-kaios-softkeys {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+}
+
+.hw-kaios-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hw-kaios-item {
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  border: 1px solid transparent;
+
+  &[data-focused="true"] {
+    background: var(--hw-accent, var(--accent));
+    color: #05080d;
+    font-weight: 700;
+  }
+}
+
+.hw-kaios-t9bar {
+  font-size: 0.72rem;
+  padding: 4px 8px;
+  border-top: 1px dashed var(--hw-border, var(--border));
+}
+
+.hw-controls-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hw-dpad-cluster {
+  display: flex;
+  gap: 8px;
+}
+
+.hw-t9-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.hw-wheel-gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px dashed var(--hw-accent, var(--accent));
+}

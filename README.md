@@ -17,7 +17,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9_Strict-3178C6.svg?style=for-the-badge&logo=typescript&logoColor=white)](#)
 [![Virtual DOM](https://img.shields.io/badge/Virtual_DOM-0%25_Direct_DOM-059669.svg?style=for-the-badge)](#)
 [![Runtime Size](https://img.shields.io/badge/Runtime-%3C2.5KB_gzipped-7C3AED.svg?style=for-the-badge)](#)
-[![Test Suite](https://img.shields.io/badge/Tests-63_Passed-0284C7.svg?style=for-the-badge)](#)
+[![Test Suite](https://img.shields.io/badge/Tests-75_Passed-0284C7.svg?style=for-the-badge)](#)
 
 <br />
 
@@ -120,6 +120,7 @@ Every package in Zuari is independent, tree-shakeable (`sideEffects: false`), an
 | [`@zuari/ai`](./packages/ai) | On-device WebLLM/transformers.js token streaming & embeddings | **~1.2 KB** | Modern Browsers |
 | [`@zuari/sync`](./packages/sync) | Real-time CRDT / BroadcastChannel peer-to-peer state synchronization | **~1.1 KB** | Local-First / P2P |
 | [`@zuari/hardware`](./packages/hardware) | WebHID, WebSerial, and WebBluetooth reactive peripheral bridges | **~1.0 KB** | Hardware Peripherals |
+| [`@zuari/lua`](./packages/lua) | Embedded Lua runtime scripting bridge for game HUDs & modding | **~0.9 KB** | Game Engines & Scripts |
 | [`@zuari/headless`](./packages/headless) | Headless logic (`Dialog`, `CommandPalette`, `AnchorTooltip`, `Invoker`) | **~1.8 KB** | Framework Agnostic |
 | [`@zuari/glyphs`](./packages/glyphs) | Mathematical SVG icons & GPU path morphing (`d: path(...)`) | **~0.8 KB** | SVG / HTML5 |
 | [`@zuari/tokens`](./packages/tokens) | Typed OKLCH color palettes & CSS `@property` generator | **0 KB** | Zero-Runtime |
@@ -151,7 +152,7 @@ Zuari collaborates with leading ecosystem architectures to deliver native-grade 
 git clone https://github.com/dr-week/fast-framework.git
 cd fast-framework && pnpm install
 
-# Run test suite (63 unit tests across 17 suites)
+# Run test suite (75 unit tests across 20 suites)
 pnpm test
 
 # Build all monorepo packages

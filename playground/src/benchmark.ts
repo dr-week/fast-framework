@@ -14,6 +14,7 @@ export const ZUARI_BUNDLE_MANIFEST: PackageSizeEntry[] = [
   { pkg: '@zuari/wasm', desc: 'Zero-Copy Linear Memory FFI (Rust / Zig)', gzipBytes: 910, color: 'oklch(70% 0.20 280)' },
   { pkg: '@zuari/glyphs', desc: 'GPU Vector Path Interpolation Engine', gzipBytes: 820, color: 'oklch(76% 0.16 80)' },
   { pkg: '@zuari/spatial', desc: 'WebXR 120 FPS Volumetric Anchors & Gaze', gzipBytes: 1520, color: 'oklch(68% 0.22 320)' },
+  { pkg: '@zuari/hardware', desc: 'Tactical Optics, Drone OSD, KaiOS D-Pad & IoT', gzipBytes: 1180, color: 'oklch(78% 0.19 145)' },
   { pkg: '@zuari/tokens', desc: 'Typed OKLCH Color Spaces & @property', gzipBytes: 0, color: 'oklch(80% 0.12 210)' }
 ];
 

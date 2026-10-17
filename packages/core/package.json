@@ -20,7 +20,10 @@
     "@zuari/sync": "workspace:*",
     "@zuari/ai": "workspace:*",
     "@zuari/router": "workspace:*",
-    "@zuari/wit": "workspace:*"
+    "@zuari/wit": "workspace:*",
+    "@zuari/hardware": "workspace:*",
+    "@zuari/presets": "workspace:*",
+    "@zuari/lua": "workspace:*"
   },
   "exports": {
     ".": {
@@ -78,10 +81,23 @@
     "./wit": {
       "types": "../wit/dist/index.d.ts",
       "import": "../wit/dist/index.js"
+    },
+    "./hardware": {
+      "types": "../hardware/dist/index.d.ts",
+      "import": "../hardware/dist/index.js"
+    },
+    "./presets": {
+      "types": "../presets/dist/index.d.ts",
+      "import": "../presets/dist/index.js"
+    },
+    "./lua": {
+      "types": "../lua/dist/index.d.ts",
+      "import": "../lua/dist/index.js"
     }
   },
   "scripts": {
     "build": "tsc"
   }
 }
+
 

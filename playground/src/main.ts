@@ -4,6 +4,7 @@ import { createMorphGlyph } from '@zuari/glyphs';
 import { generateAnchorName, setElementAnchor, tetherToAnchor } from '@zuari/headless';
 import { createReplView } from './repl.js';
 import { createProofBenchView } from './benchmark.js';
+import { createHardwareLabView } from './hardware-lab.js';
 
 // Load online Lucide icons dynamically via ESM CDN (esm.sh)
 import { 
@@ -14,13 +15,14 @@ import {
   Boxes, 
   Cpu, 
   Glasses, 
-  Gauge
+  Gauge,
+  Crosshair
 } from 'https://esm.sh/lucide@0.469.0';
 
 const app = document.getElementById('app')!;
 
 // 1. Reactive State Graph
-type ActiveTab = 'repl' | 'bench' | 'core' | 'spatial' | 'wasm' | 'tokens' | 'alliances';
+type ActiveTab = 'repl' | 'bench' | 'hardware' | 'core' | 'spatial' | 'wasm' | 'tokens' | 'alliances';
 const currentTab = signal<ActiveTab>('repl');
 const interactions = signal(0);
 const fps = signal(60);
@@ -127,6 +129,7 @@ dock.setAttribute('aria-label', 'Feature Navigation');
 const navItems: Array<{ id: ActiveTab; icon: unknown; label: string }> = [
   { id: 'repl', icon: Terminal, label: 'Live REPL' },
   { id: 'bench', icon: Gauge, label: '5K Benchmark' },
+  { id: 'hardware', icon: Crosshair, label: 'IoT & Tactical' },
   { id: 'core', icon: Sparkles, label: 'Kinetic Core' },
   { id: 'spatial', icon: Glasses, label: 'Spatial / XR' },
   { id: 'wasm', icon: Cpu, label: 'Systems Wasm' },
@@ -199,11 +202,14 @@ const morphStates: Array<'sparkle' | 'loadingRing' | 'checkmark' | 'cross'> = [
 ];
 let morphIdx = 0;
 
-// Persistent REPL & Benchmark instances so edits aren't lost on tab switch
+// Persistent REPL, Benchmark & Hardware Lab instances so edits aren't lost on tab switch
 const replElement = createReplView(() => {
   interactions.value++;
 });
 const benchElement = createProofBenchView(() => {
+  interactions.value++;
+});
+const hardwareElement = createHardwareLabView(() => {
   interactions.value++;
 });
 
@@ -216,6 +222,8 @@ function renderTabContent() {
     showcaseStage.appendChild(replElement);
   } else if (active === 'bench') {
     showcaseStage.appendChild(benchElement);
+  } else if (active === 'hardware') {
+    showcaseStage.appendChild(hardwareElement);
   } else if (active === 'core') {
     // Core Kinetic Demo
     const card = document.createElement('div');

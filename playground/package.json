@@ -18,7 +18,8 @@
     "@zuari/recipes": "workspace:*",
     "@zuari/spatial": "workspace:*",
     "@zuari/wasm": "workspace:*",
-    "@zuari/ui": "workspace:*"
+    "@zuari/ui": "workspace:*",
+    "@zuari/hardware": "workspace:*"
   },
   "devDependencies": {
     "vite": "^6.2.0"
