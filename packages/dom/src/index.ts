@@ -2,6 +2,7 @@ import { effect, type CleanupFn, type Signal } from '@zuari/signals';
 import { createChildPart, createAttributePart } from './parts/index.js';
 
 export * from './parts/index.js';
+export * from './transition/index.js';
 
 export type TemplateValue = 
   | string 

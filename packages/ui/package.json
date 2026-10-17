@@ -33,6 +33,10 @@
     "./card": {
       "types": "./dist/card/index.d.ts",
       "import": "./dist/card/index.js"
+    },
+    "./popover": {
+      "types": "./dist/popover/index.d.ts",
+      "import": "./dist/popover/index.js"
     }
   },
   "scripts": {

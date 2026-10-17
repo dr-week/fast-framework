@@ -1,0 +1,22 @@
+/* ==========================================================================
+   Zuari UI - Scoped Anchor-Tethered Popover Recipe
+   ========================================================================== */
+@scope (.zuari-popover) {
+  :scope {
+    position: fixed;
+    top: anchor(bottom);
+    left: anchor(center);
+    transform: translateX(-50%) translateY(8px);
+    margin: 0;
+    padding: 16px;
+    border-radius: var(--nova-radius-squircle);
+    background: var(--nova-color-surface);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--nova-color-border);
+    color: oklch(98% 0 0);
+    box-shadow: 0 16px 36px -8px oklch(0% 0 0 / 0.5);
+    outline: none;
+    z-index: 10000;
+  }
+}
