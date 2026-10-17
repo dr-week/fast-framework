@@ -1,27 +1,26 @@
 <div align="center">
 
-```
-███████╗██╗   ██╗ █████╗ ██████╗ ██╗
-╚══███╔╝██║   ██║██╔══██╗██╔══██╗██║
-  ███╔╝ ██║   ██║███████║██████╔╝██║
- ███╔╝  ██║   ██║██╔══██║██╔══██╗██║
-███████╗╚██████╔╝██║  ██║██║  ██║██║
-╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝
-```
+<br />
 
-### High-Velocity Web Platform Framework
-**Danger.Labs** • *Core Systems Group*
+<img src="./packages/recipes/styles/zuari-logo.svg" alt="Zuari Crest Logo" width="128" height="128" />
 
-<br/>
+<br />
+<br />
 
-[![Engine](https://img.shields.io/badge/Danger.Labs-Core_Architecture-000000?style=for-the-badge)](#)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9_Strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](#)
-[![Virtual DOM](https://img.shields.io/badge/Virtual_DOM-0%25_Direct_DOM-059669?style=for-the-badge)](#)
-[![Runtime Size](https://img.shields.io/badge/Core_Runtime-%3C2.5KB_gzipped-7C3AED?style=for-the-badge)](#)
-[![W3C Standards](https://img.shields.io/badge/W3C-DOM_Parts_%26_Anchor_CSS-0891B2?style=for-the-badge)](#)
-[![Origin](https://img.shields.io/badge/Origin-Goa%2C_India-EA580C?style=for-the-badge)](#)
+# ZUARI
+### *The High-Velocity Web Platform Framework.*
+##### An Open Research Initiative by **Danger.Labs**
 
-<br/>
+<br />
+
+[![Engine](https://img.shields.io/badge/Architecture-Danger.Labs-000000.svg?style=for-the-badge)](#)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9_Strict-3178C6.svg?style=for-the-badge&logo=typescript&logoColor=white)](#)
+[![Virtual DOM](https://img.shields.io/badge/Virtual_DOM-0%25_Direct_DOM-059669.svg?style=for-the-badge)](#)
+[![Runtime Size](https://img.shields.io/badge/Runtime-%3C2.5KB_gzipped-7C3AED.svg?style=for-the-badge)](#)
+[![W3C Standards](https://img.shields.io/badge/W3C-DOM_Parts_%26_Anchor_CSS-0891B2.svg?style=for-the-badge)](#)
+[![Origin](https://img.shields.io/badge/Origin-Goa%2C_India-EA580C.svg?style=for-the-badge)](#)
+
+<br />
 
 [**Interactive Demo**](https://dr-week.github.io/fast-framework/) • [**Nomenclature**](#-nomenclature) • [**Architecture**](#-architecture) • [**Ecosystem**](#-ecosystem) • [**Installation**](#-quick-start)
 
@@ -31,10 +30,10 @@
 
 ### 🌊 Nomenclature
 
-> **Origin:** Named after the **Zuari River** in **Goa, India** (historically *Aghanashini*).
-> As Goa's primary tidal artery, it surges from the Western Ghats into the Arabian Sea with unhindered natural velocity. 
+> **Behind the Science:** Named after the **Zuari River** in **Goa, India** (historically *Aghanashini*).
+> As Goa's primary tidal artery, it surges from the Western Ghats directly into the Arabian Sea with unhindered natural velocity. 
 > 
-> Zuari brings this tidal principle to software: state mutations flow directly to exact DOM nodes without intermediate in-memory Virtual DOM diffing.
+> Zuari brings this tidal hydrodynamic principle to software: state mutations flow directly to exact DOM nodes without intermediate in-memory Virtual DOM diffing.
 
 ---
 

@@ -8,3 +8,4 @@ export * from './base.js';
 export * from './actions.js';
 export * from './navigation.js';
 export * from './morph/index.js';
+export * from './logo.js';
