@@ -3,7 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>ZUARI • Flow in Silence</title>
+    <title>ZUARI (&lt;2.5KB) • Zero-Virtual-DOM Web, 120 FPS WebXR, Rust/Zig Wasm &amp; IoT HUD Framework</title>
+    <meta name="description" content="Zuari by Danger.Labs is a sub-2.5KB gzipped, zero-Virtual-DOM reactive platform built on W3C DOM Parts & TC39 Signals for 2D Web, 120 FPS Apple Vision Pro / Meta Quest WebXR HUDs, zero-copy Rust/Zig WebAssembly FFI, FPV Drone OSDs, Tactical Ballistic Optics, KaiOS D-Pad/T9, and 1-bit E-Ink wearables." />
+    <meta name="keywords" content="zuari, web framework, zero virtual dom, tc39 signals, w3c dom parts, webxr hud, visionos, meta quest, rust wasm ffi, zig wasm, fpv drone osd, mavlink, tactical ballistic reticle, kaios dpad, t9 keypad, eink ui, waveguide hud, rabbit r1 rotary, tauri v2, danger labs" />
+    <meta property="og:title" content="ZUARI (<2.5KB) — Zero-VDOM Web, 120 FPS Spatial XR, Wasm & Tactical IoT Framework" />
+    <meta property="og:description" content="0.38ms 5,000-node DOM updates, 120 FPS WebXR Spatial Anchors, Zero-Copy Rust/Zig Wasm Linear Memory FFI, FPV Drone Binary OSD, and KaiOS/Waveguide/E-Ink Hardware Drivers." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dr-week.github.io/fast-framework/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ZUARI (<2.5KB) • High-Velocity Web, Spatial XR & IoT Framework" />
+    <meta name="twitter:description" content="Try the live In-Browser REPL, 5,000-node benchmark, and Tactical/Drone/KaiOS Hardware Lab." />
+    <link rel="alternate" type="text/plain" title="LLM Context (llms.txt)" href="./llms.txt" />
+    <link rel="alternate" type="text/plain" title="Full LLM API Reference (llms-full.txt)" href="./llms-full.txt" />
+    <link rel="alternate" type="application/json" title="AI Agent Manifest" href="./ai-manifest.json" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": "Zuari Framework (@zuari/*)",
+        "codeRepository": "https://github.com/dr-week/fast-framework",
+        "url": "https://dr-week.github.io/fast-framework/",
+        "programmingLanguage": ["TypeScript", "JavaScript", "WebAssembly", "Rust", "Zig", "WGSL"],
+        "runtimePlatform": ["Browser", "WebXR", "Node.js", "QuickJS", "Tauri", "KaiOS"],
+        "license": "https://opensource.org/licenses/MIT",
+        "author": {
+          "@type": "Organization",
+          "name": "Danger.Labs"
+        },
+        "description": "Sub-2.5KB gzipped, zero-Virtual-DOM reactive UI framework using W3C DOM Parts and TC39 Signals for Web, 120 FPS WebXR Spatial HUDs, zero-copy Rust/Zig Wasm FFI, FPV Drone OSDs, Tactical Ballistics, KaiOS D-Pad/T9, and E-Ink/Waveguide wearables."
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -12,6 +41,16 @@
   <body>
     <div id="ambient-canvas"></div>
     <main id="app"></main>
+    <noscript>
+      <article>
+        <h1>Zuari Framework (@zuari/*) by Danger.Labs</h1>
+        <p>Sub-2.5KB gzipped, zero-Virtual-DOM reactive platform built on W3C DOM Parts and TC39 Signals.</p>
+        <ul>
+          <li>AI &amp; LLM Documentation: <a href="./llms.txt">llms.txt</a> | <a href="./llms-full.txt">llms-full.txt</a> | <a href="./ai-manifest.json">ai-manifest.json</a></li>
+          <li>Packages: @zuari/signals, @zuari/dom, @zuari/hardware (tactical, drone, gaming, dpad, appliance, display), @zuari/spatial, @zuari/wasm, @zuari/webgpu, @zuari/mcp.</li>
+        </ul>
+      </article>
+    </noscript>
     <script type="module" src="./src/main.ts"></script>
   </body>
 </html>
