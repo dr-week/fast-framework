@@ -2,71 +2,50 @@
 
 # ZUARI
 ### *The High-Velocity Web Platform Framework.*
-##### An Open Research Initiative by **Danger.Labs**
+##### Developed by **Danger.Labs**
 
-[![Zuari Engine](https://img.shields.io/badge/Architecture-Danger.Labs-000000.svg?style=flat-square)](#)
-[![TypeScript Strict](https://img.shields.io/badge/TypeScript-5.9_Strict-3178C6.svg?style=flat-square)](#)
-[![Zero VDOM](https://img.shields.io/badge/Virtual_DOM-0%25_Direct_DOM-059669.svg?style=flat-square)](#)
-[![Core Footprint](https://img.shields.io/badge/Runtime-%3C2.5KB_gzipped-7C3AED.svg?style=flat-square)](#)
+[![Architecture](https://img.shields.io/badge/Architecture-Danger.Labs-000000.svg?style=flat-square)](#)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9_Strict-3178C6.svg?style=flat-square)](#)
+[![Virtual DOM](https://img.shields.io/badge/Virtual_DOM-0%25_Direct_DOM-059669.svg?style=flat-square)](#)
+[![Runtime](https://img.shields.io/badge/Runtime-%3C2.5KB_gzipped-7C3AED.svg?style=flat-square)](#)
 [![Standards Track](https://img.shields.io/badge/W3C-DOM_Parts_%26_Anchor_CSS-0891B2.svg?style=flat-square)](#)
 [![Origin](https://img.shields.io/badge/Origin-Goa%2C_India-EA580C.svg?style=flat-square)](#)
-[![License: MIT](https://img.shields.io/badge/License-MIT-18181B.svg?style=flat-square)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-18181B.svg?style=flat-square)](LICENSE)
 
 <br />
 
 **Zuari** is an ultra-lightweight, zero-reconciliation reactive web platform developed by **Danger.Labs**.  
-Designed as a post-virtual-DOM standard, it converges **TC39 Signals**, **W3C DOM Parts**, **native CSS Anchor Positioning**, and hardware-composited vector transitions into an integrated, zero-monolith modular architecture.
+Engineered as a post-virtual-DOM standard, it converges **TC39 Signals**, **W3C DOM Parts**, **native CSS Anchor Positioning**, and hardware-composited vector transitions into an integrated, zero-monolith architecture.
 
-[Explore Live Demo](https://dr-week.github.io/fast-framework/) • [The Story of Zuari](#the-story-of-zuari) • [Architecture](#architecture) • [Package Ecosystem](#ecosystem) • [Documentation](#documentation-index)
+[Explore Platform](https://dr-week.github.io/fast-framework/) • [Origin & Nomenclature](#origin--nomenclature) • [Architecture](#architecture) • [Package Ecosystem](#ecosystem) • [Documentation](#documentation-index)
 
 </div>
 
 ---
 
-## 🌊 The Story of Zuari
+## Origin & Nomenclature
 
-> *"Anyone can assemble code, but nature engineers with zero friction. That is Zuari."*
+> *Named after the Zuari River in Goa, India—an ancient tidal waterway whose natural gravitational flow inspires our direct-to-DOM, zero-reconciliation reactive engine.*
 
-<div align="center">
-  <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=80" alt="Goa Coastline and Waters" width="100%" style="border-radius: 14px; max-height: 380px; object-fit: cover;" />
-</div>
-
-<br />
-
-On the southwestern coast of India lies **Goa**, a land carved by centuries of maritime history, red laterite cliffs, and sacred waters. Flowing through its very heart is the **Zuari River** (known anciently as the *Aghanashini*—"the cleanser of all obstacles").
-
-The Zuari is not an ordinary river. It is the largest, most vital **tidal river** in Goa. Originating high up in the dense evergreen canopy of the Western Ghats (Hemad-Bhashi), it gathers kinetic velocity as it cascades through ancient forest corridors, carving through solid granite stone with effortless natural momentum.
-
-As it reaches the coast, it expands into an immense, tidal estuary spanning kilometers across, surging twice a day with the raw gravitational pull of the Arabian Sea. For centuries, while civilizations, dynasties, and colonial powers rose and fell along its banks, the Zuari quietly carried ships, trade, and life across the Konkan coast. It never backs up. It never stalls. It simply yields to natural hydrodynamic physics, letting gravitational tides do the heavy work.
-
-### The Parallel: Why We Named the Framework Zuari
-
-Modern front-end engineering has lost this natural flow:
-* Traditional frameworks have become stagnant reservoirs. To change a single number on a screen, developers are forced to boot 400 kilobytes of JavaScript, construct an entire in-memory duplicate tree of the screen (the Virtual DOM), diff millions of properties in memory, and recalculate coordinates on the main thread using brute-force JavaScript loops.
-* **Zuari restores the tidal principle to software:**
-  * **Direct Tidal Flow (Zero Virtual DOM):** When an event occurs, state changes surge directly to the exact DOM text node or attribute pointer, just as the tidal river flows straight into the ocean without pausing to analyze every grain of sand.
-  * **Natural Anchoring:** Floating menus and overlays dock effortlessly into physical viewport space using browser-native **CSS Anchor Positioning**—letting the browser's C++ compositor engine handle layout naturally.
-  * **Visual Silence (Aether-Glyph):** Minimalist, balanced vector glyphs and progressive disclosure, echoing the quiet, timeless elegance of the Goan horizon.
-
-Zuari is built with reverence for the web platform, engineered to move fast, carry zero bloat, and remain completely frictionless.
+Historically known as the *Aghanashini*, the Zuari River is Goa’s largest tidal river, originating in the Western Ghats and flowing directly into the Arabian Sea without resistance. In software architecture, traditional frameworks act like stagnant reservoirs—forcing applications to diff massive in-memory Virtual DOM trees simply to update a UI element. Zuari mirrors its namesake: state changes surge directly to exact DOM node pointers with zero friction, zero intermediate diffing, and zero synthetic overhead.
 
 ---
 
-## 🏛️ Executive Summary
+## Architecture & Executive Principles
 
-Modern web engineering is encumbered by historical compromises: heavy in-memory reconciliation engines, complex synthetic event trees, and megabytes of runtime styles shipped to calculate layout metrics that browser engines natively compute in C++.
+Modern client-side engineering carries significant technical debt from the early 2010s: heavy in-memory reconciliation passes, complex synthetic event hierarchies, and megabytes of runtime styling engines that duplicate calculations native browser engines compute in C++.
 
-Zuari re-establishes platform-first discipline:
+Zuari establishes a platform-first discipline:
 
-* **Surgical Granular Reactivity:** Powered by an atomic signal graph with micro-batching. State mutations target exact DOM text nodes and attribute pointers without tree reconciliation.
+* **Direct DOM Reactivity:** Powered by an atomic signal graph with micro-batching. State updates target exact DOM text nodes and element attribute pointers without tree reconciliation.
 * **W3C DOM Parts Architecture:** Pre-compiled template literal cloning (`html\`...\``) featuring automatic feature-detection for native browser `ChildNodePart` and `AttributePart` runtimes.
 * **Native CSS Layout Offloading:** Overlays, menus, tooltips, and flyouts tether natively via **CSS Anchor Positioning** and top-layer browser stacking with zero JavaScript bounding-box computation.
 * **Compositor-Level Kinetic Feedback:** Path-balanced vector glyphs morph their contour geometry (`d: path(...)`) directly on the GPU without JavaScript animation frame loops.
-* **Strict Type Soundness:** Built with total type invariance (`strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`).
+* **Strict Type Invariance:** Compiled under total type soundness (`strict: true`, `noUncheckedIndexedAccess: true`, `exactOptionalPropertyTypes: true`).
 
 ---
 
-## ⚡ Architecture
+## Platform Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -96,7 +75,7 @@ Kinetic Vector Engine                                   Pre-Built Element Suite
 
 ---
 
-## 📦 Ecosystem
+## Ecosystem
 
 Every package within the Zuari monorepo is independently versioned, tree-shakeable (`sideEffects: false`), and usable as a standalone zero-dependency module across any runtime:
 
@@ -113,7 +92,7 @@ Every package within the Zuari monorepo is independently versioned, tree-shakeab
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -132,7 +111,7 @@ pnpm add github:dr-week/fast-framework#packages/signals
 
 ---
 
-## 💻 Technical Usage
+## Technical Usage
 
 ```typescript
 import { signal } from '@zuari/signals';
@@ -168,7 +147,7 @@ document.body.appendChild(render(telemetryCard).fragment);
 
 ---
 
-## 🌐 Spatial & Multi-Platform Strategy
+## Spatial & Multi-Platform Strategy
 
 Zuari's core reactivity is decoupled from the DOM. Cross-platform support is realized via dedicated drivers:
 
@@ -181,7 +160,7 @@ Detailed specifications: [NATIVE_REQUIREMENTS.md](./NATIVE_REQUIREMENTS.md).
 
 ---
 
-## 🛠️ Verification & Continuous Integration
+## Verification & Continuous Integration
 
 Zuari maintains an automated test matrix with 100% type-soundness verification:
 
@@ -200,7 +179,7 @@ pnpm build
 
 ---
 
-## 📜 Documentation Index
+## Documentation Index
 
 * [User Manual & Developer Guidelines](./USER_MANUAL.md)
 * [Architecture & Technical Specification](./SPECIFICATION.md)
@@ -211,7 +190,7 @@ pnpm build
 
 ---
 
-## ⚖️ Legal & Governance
+## Legal & Governance
 
 Developed by **Danger.Labs**.  
 Distributed under the **MIT License**. Engineered for the future of the open web platform.
