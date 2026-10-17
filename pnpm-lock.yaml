@@ -59,6 +59,24 @@ importers:
 
   packages/tokens: {}
 
+  packages/ui:
+    dependencies:
+      '@zuari/dom':
+        specifier: workspace:*
+        version: link:../dom
+      '@zuari/glyphs':
+        specifier: workspace:*
+        version: link:../glyphs
+      '@zuari/headless':
+        specifier: workspace:*
+        version: link:../headless
+      '@zuari/recipes':
+        specifier: workspace:*
+        version: link:../recipes
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+
   playground:
     dependencies:
       '@zuari/core':

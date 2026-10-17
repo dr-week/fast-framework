@@ -1,0 +1,41 @@
+{
+  "name": "@zuari/ui",
+  "version": "0.1.0",
+  "description": "Pre-built, accessible, icon-first UI/UX components for Zuari powered by @zuari/headless, @zuari/dom, and @zuari/glyphs",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@zuari/signals": "workspace:*",
+    "@zuari/dom": "workspace:*",
+    "@zuari/headless": "workspace:*",
+    "@zuari/glyphs": "workspace:*",
+    "@zuari/recipes": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./dock": {
+      "types": "./dist/dock/index.d.ts",
+      "import": "./dist/dock/index.js"
+    },
+    "./switch": {
+      "types": "./dist/switch/index.d.ts",
+      "import": "./dist/switch/index.js"
+    },
+    "./badge": {
+      "types": "./dist/badge/index.d.ts",
+      "import": "./dist/badge/index.js"
+    },
+    "./card": {
+      "types": "./dist/card/index.d.ts",
+      "import": "./dist/card/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}
