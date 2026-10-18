@@ -17,7 +17,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9_Strict-3178C6.svg?style=for-the-badge&logo=typescript&logoColor=white)](#)
 [![Virtual DOM](https://img.shields.io/badge/Virtual_DOM-0%25_Direct_DOM-059669.svg?style=for-the-badge)](#)
 [![Runtime Size](https://img.shields.io/badge/Runtime-%3C2.5KB_gzipped-7C3AED.svg?style=for-the-badge)](#)
-[![Test Suite](https://img.shields.io/badge/Tests-91_Passed-0284C7.svg?style=for-the-badge)](#)
+[![Test Suite](https://img.shields.io/badge/Tests-94_Passed-0284C7.svg?style=for-the-badge)](#)
 
 <br />
 
@@ -129,6 +129,7 @@ Every package in Zuari is independent, tree-shakeable (`sideEffects: false`), an
 | [`create-zuari`](./packages/create-zuari) | Zero-config interactive CLI scaffolder (`minimal`, `spatial`, `wasm`, `tauri`) | **CLI** | Node / pnpm |
 | [`@zuari/vite-plugin`](./packages/vite-plugin) | Official Vite plugin (build-time template pre-compilation & instant HMR) | **0 KB (Dev)** | Vite 5/6 Tooling |
 | [`@zuari/ssr`](./packages/ssr) | Streaming Server-Side Rendering (SSR) & 0ms Edge Hydration for Cloudflare/Bun | **~1.1 KB** | Edge Runtimes |
+| [`@zuari/system-one`](./packages/system-one) | Sub-millisecond System 1 fast-reflex AI, circular fast-logs & speculative DOM pre-synthesis | **~1.2 KB** | Fast AI & Automation |
 | [`@zuari/quantum`](./packages/quantum) | Qubit statevectors, T1/T2 decoherence, OpenQASM 3.0 & cognitive spikes | **~2.0 KB** | Quantum / Neuro |
 | [`@zuari/core`](./packages/core) | Unified meta-package consolidating the entire platform | **< 2.5 KB** | Complete Framework |
 
@@ -168,7 +169,7 @@ Zuari collaborates with leading ecosystem architectures to deliver native-grade 
 git clone https://github.com/dr-week/fast-framework.git
 cd fast-framework && pnpm install
 
-# Run test suite (91 unit tests across 25 suites)
+# Run test suite (94 unit tests across 26 suites)
 pnpm test
 
 # Build all monorepo packages

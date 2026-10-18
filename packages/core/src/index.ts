@@ -21,4 +21,5 @@ export * from '@zuari/presets';
 export * from '@zuari/hardware';
 export * from '@zuari/lua';
 export * from '@zuari/quantum';
+export * from '@zuari/system-one';
 

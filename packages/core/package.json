@@ -24,7 +24,8 @@
     "@zuari/hardware": "workspace:*",
     "@zuari/presets": "workspace:*",
     "@zuari/lua": "workspace:*",
-    "@zuari/quantum": "workspace:*"
+    "@zuari/quantum": "workspace:*",
+    "@zuari/system-one": "workspace:*"
   },
   "exports": {
     ".": {
@@ -98,6 +99,10 @@
     "./quantum": {
       "types": "../quantum/dist/index.d.ts",
       "import": "../quantum/dist/index.js"
+    },
+    "./system-one": {
+      "types": "../system-one/dist/index.d.ts",
+      "import": "../system-one/dist/index.js"
     }
   },
   "scripts": {

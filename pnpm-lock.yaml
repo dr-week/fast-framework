@@ -71,6 +71,9 @@ importers:
       '@zuari/sync':
         specifier: workspace:*
         version: link:../sync
+      '@zuari/system-one':
+        specifier: workspace:*
+        version: link:../system-one
       '@zuari/tokens':
         specifier: workspace:*
         version: link:../tokens
@@ -159,6 +162,15 @@ importers:
 
   packages/sync:
     dependencies:
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+
+  packages/system-one:
+    dependencies:
+      '@zuari/dom':
+        specifier: workspace:*
+        version: link:../dom
       '@zuari/signals':
         specifier: workspace:*
         version: link:../signals
