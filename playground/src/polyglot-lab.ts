@@ -113,6 +113,8 @@ fn main(@builtin(global_invocation_id) id: vec3<u32>) {
     { id: 'qasm', label: 'OpenQASM 3.0 (QPU)' },
     { id: 'rust', label: 'Rust (#[repr(C)])' },
     { id: 'zig', label: 'Zig (extern struct)' },
+    { id: 'kotlin', label: 'Kotlin (Wasm/KMP)' },
+    { id: 'android_ndk', label: 'Android NDK (JNI)' },
     { id: 'cpp', label: 'C++23 (alignas)' },
     { id: 'wgsl', label: 'WGSL (WebGPU)' },
     { id: 'python', label: 'Python / Qiskit' },

@@ -137,6 +137,9 @@ describe('@zuari/wasm', () => {
       expect(bridge.emitSource('go')).toContain('type OrbitalState struct');
       expect(bridge.emitSource('python')).toContain('ctypes.LittleEndianStructure');
       expect(bridge.emitSource('wgsl')).toContain('struct OrbitalState');
+      expect(bridge.emitSource('kotlin')).toContain('value class OrbitalState(val view: DataView)');
+      expect(bridge.emitSource('android_ndk')).toContain('#include <jni.h>');
+      expect(bridge.emitSource('android_ndk')).toContain('GetDirectBufferAddress');
 
       const wasmKernel = instantiateEmbeddedWasmKernel();
       expect(wasmKernel.bytecodeSize).toBeGreaterThan(30);

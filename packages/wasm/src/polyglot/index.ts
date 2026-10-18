@@ -23,7 +23,9 @@ export type SystemsLanguageTarget =
   | 'cpp'
   | 'go'
   | 'python'
-  | 'wgsl';
+  | 'wgsl'
+  | 'kotlin'
+  | 'android_ndk';
 
 export interface PolyglotFieldSpec {
   readonly name: string;
@@ -256,6 +258,70 @@ export function emitPolyglotNativeStruct(
         lines.push(`    ${toSnakeCase(f.name)}: ${wgslTypes[f.type]}, // offset: +${f.offset}B`);
       }
       lines.push('};');
+      return lines.join('\n');
+    }
+
+    case 'kotlin': {
+      const ktTypes: Record<WasmNumericType, { type: string; getter: string; setter: string }> = {
+        f64: { type: 'Double', getter: 'getFloat64', setter: 'setFloat64' },
+        f32: { type: 'Float', getter: 'getFloat32', setter: 'setFloat32' },
+        i32: { type: 'Int', getter: 'getInt32', setter: 'setInt32' },
+        u32: { type: 'UInt', getter: 'getInt32', setter: 'setInt32' },
+        i64: { type: 'Long', getter: 'getBigInt64', setter: 'setBigInt64' },
+        u8: { type: 'UByte', getter: 'getUint8', setter: 'setUint8' }
+      };
+      const lines = [
+        `// [Kotlin/Wasm & Multiplatform (KMP)] — ${descriptor.purpose}`,
+        `// Direct zero-copy DataView memory layout (${layout.byteSize} bytes, align ${layout.alignment}B)`,
+        'package zuari.kernel',
+        '',
+        'import org.khronos.webgl.DataView',
+        '',
+        `@JvmInline`,
+        `value class ${pascalName}(val view: DataView) {`
+      ];
+      for (const f of layout.fields) {
+        const spec = ktTypes[f.type];
+        const camel = f.name.replace(/[-_]([a-z0-9])/gi, (_, c: string) => c.toUpperCase());
+        lines.push(`    var ${camel}: ${spec.type}`);
+        lines.push(`        get() = view.${spec.getter}(${f.offset}, true)`);
+        lines.push(`        set(value) = view.${spec.setter}(${f.offset}, value, true)`);
+        lines.push('');
+      }
+      lines.push('}');
+      return lines.join('\n');
+    }
+
+    case 'android_ndk': {
+      const cTypes: Record<WasmNumericType, string> = {
+        f64: 'jdouble',
+        f32: 'jfloat',
+        i32: 'jint',
+        u32: 'jint',
+        i64: 'jlong',
+        u8: 'jbyte'
+      };
+      const lines = [
+        `// [Android NDK / JNI C++ Bridge] — ${descriptor.purpose}`,
+        '#include <jni.h>',
+        '#include <cstdint>',
+        '',
+        `#pragma pack(push, ${layout.alignment})`,
+        `struct ${pascalName} {`
+      ];
+      for (const f of layout.fields) {
+        lines.push(`    ${cTypes[f.type]} ${toSnakeCase(f.name)}; // offset: +${f.offset}B`);
+      }
+      lines.push('};');
+      lines.push('#pragma pack(pop)');
+      lines.push('');
+      lines.push(`extern "C" JNIEXPORT void JNICALL`);
+      lines.push(`Java_com_zuari_kernel_${pascalName}_syncDirectBuffer(`);
+      lines.push(`    JNIEnv* env, jobject /* this */, jobject byteBuffer) {`);
+      lines.push(`    auto* ptr = static_cast<${pascalName}*>(env->GetDirectBufferAddress(byteBuffer));`);
+      lines.push(`    if (!ptr) return;`);
+      lines.push(`    // Direct memory pointer mutation with zero JNI reflection copy overhead`);
+      lines.push(`}`);
       return lines.join('\n');
     }
   }

@@ -22,7 +22,9 @@ Traditional web frameworks force **JavaScript** to do everything: UI reactivity,
 | **6. Hot-Reloadable Game HUD & Mod Scripting** | **Lua 5.4** | [`@zuari/lua`](./packages/lua/scripts/hud_rules.lua) | Industry standard for embedded game engines (Roblox, Defold, WoW) and IoT scripting; mutates Zuari signals live without recompiling. |
 | **7. Cross-Language Component Contracts** | **WASI 0.2 WIT (`.wit`) + TypeSpec (`.tsp`)** | [`@zuari/wit`](./packages/wit/specs/telemetry.wit), [`@zuari/wasm/spec`](./packages/wasm/src/spec) | Language-neutral IDL that computes exact byte offsets/alignments and generates Rust, Zig, C++, Go, and TypeScript signal bindings automatically. |
 | **8. AI Tensor & Scientific Compute Bridge** | **Python 3.12+ / Mojo (`ctypes`)** | [`@zuari/wasm`](./packages/wasm/kernels/tensor_bridge.py), [`@zuari/ai`](./packages/ai) | Maps `ctypes.LittleEndianStructure` and NumPy/Mojo tensor buffers directly to Zuari's binary memory layout. |
-| **9. Zero-Runtime Visual Architecture** | **Modern CSS Level 5 / SCSS (`@scope`, `@property`, `oklch()`)** | [`@zuari/tokens`](./packages/tokens), [`@zuari/recipes`](./packages/recipes) | Moves layout (CSS Anchor Positioning), scoping (`@scope`), and color math (`oklch`) off the CPU thread onto the browser's native compositor. |
+| **9. Android Native & JNI Direct Buffer Bridge** | **Android NDK (C++23) + Clang** | [`@zuari/wasm`](./packages/wasm/kernels/android_ndk_bridge.cpp) | Direct memory pointer mapping with zero JNI reflection overhead (`GetDirectBufferAddress`). |
+| **10. WasmGC & Kotlin Multiplatform (KMP)** | **Kotlin/Wasm (`wasmJs`)** | [`@zuari/wasm`](./packages/wasm/kernels/telemetry_kernel.kt) | Native W3C WasmGC alignment, zero-allocation `@JvmInline value class` wrappers over `DataView` buffers. |
+| **11. Zero-Runtime Visual Architecture** | **Modern CSS Level 5 / SCSS (`@scope`, `@property`, `oklch()`)** | [`@zuari/tokens`](./packages/tokens), [`@zuari/recipes`](./packages/recipes) | Moves layout (CSS Anchor Positioning), scoping (`@scope`), and color math (`oklch`) off the CPU thread onto the browser's native compositor. |
 
 ---
 
