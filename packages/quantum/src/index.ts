@@ -6,4 +6,5 @@
 
 export * from './types.js';
 export * from './qubit.js';
+export * from './register.js';
 export * from './cognitive.js';
