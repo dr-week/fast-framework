@@ -12,3 +12,4 @@ export * from './gaming/index.js';
 export * from './dpad/index.js';
 export * from './appliance/index.js';
 export * from './display/index.js';
+export * from './printer/index.js';

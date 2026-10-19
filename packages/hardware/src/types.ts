@@ -163,3 +163,44 @@ export interface DisplayModeController {
   cssVariables: Computed<Record<string, string>>;
   applyToElement: (target: HTMLElement) => () => void;
 }
+
+// 7. Additive Manufacturing / 3D Printer (Klipper / Marlin / Moonraker / RepRap) Types
+export type PrinterState = 'STANDBY' | 'HEATING' | 'PRINTING' | 'PAUSED' | 'ERROR' | 'COMPLETE';
+
+export interface PrinterTelemetry {
+  state: Signal<PrinterState>;
+  hotendTemp: Signal<number>;
+  hotendTarget: Signal<number>;
+  bedTemp: Signal<number>;
+  bedTarget: Signal<number>;
+  chamberTemp: Signal<number>;
+  printProgressPct: Signal<number>;
+  layerCurrent: Signal<number>;
+  layerTotal: Signal<number>;
+  fanSpeedPct: Signal<number>;
+  feedRatePct: Signal<number>;
+  flowRatePct: Signal<number>;
+  timeElapsedSec: Signal<number>;
+  timeRemainingSec: Signal<number>;
+  position: Signal<{ x: number; y: number; z: number; e: number }>;
+  isHotendTargetReached: Computed<boolean>;
+  isBedTargetReached: Computed<boolean>;
+  isActivelyPrinting: Computed<boolean>;
+  formattedRemainingTime: Computed<string>;
+  
+  // Commands & Ingestion
+  ingestGcodeResponse: (response: string) => void;
+  ingestMoonrakerStatus: (status: Partial<{
+    print_stats: { state: string; print_duration: number; filename: string };
+    extruder: { temperature: number; target: number };
+    heater_bed: { temperature: number; target: number };
+    display_status: { progress: number };
+    toolhead: { position: [number, number, number, number] };
+  }>) => void;
+  generateGcodeCommand: (cmd: string) => string;
+  setHotendTargetTemp: (celsius: number) => string;
+  setBedTargetTemp: (celsius: number) => string;
+  homeAxes: (axes?: 'ALL' | 'X' | 'Y' | 'Z') => string;
+  emergencyStop: () => string;
+}
+

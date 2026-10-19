@@ -37,6 +37,10 @@
     "./display": {
       "types": "./dist/display/index.d.ts",
       "import": "./dist/display/index.js"
+    },
+    "./printer": {
+      "types": "./dist/printer/index.d.ts",
+      "import": "./dist/printer/index.js"
     }
   },
   "scripts": {

@@ -8,7 +8,8 @@ import {
   createGamepadSignal,
   createDpadNav,
   createApplianceBridge,
-  createDisplayMode
+  createDisplayMode,
+  createPrinterTelemetry
 } from './index.js';
 
 describe('@zuari/hardware Modular IoT & Futuristic Hardware Suite', () => {
@@ -116,4 +117,44 @@ describe('@zuari/hardware Modular IoT & Futuristic Hardware Suite', () => {
     disp.mode.value = 'eink-1bit';
     expect(disp.isBistableEink.value).toBe(true);
   });
+
+  it('decodes 3D printer Marlin/RepRap G-code and Moonraker JSON status telemetry', () => {
+    const printer = createPrinterTelemetry();
+
+    // 1. Ingest Marlin M105 temperature string
+    printer.ingestGcodeResponse('ok T:215.4 /215.0 B:60.2 /60.0 C:35.0');
+    expect(printer.hotendTemp.value).toBe(215.4);
+    expect(printer.hotendTarget.value).toBe(215);
+    expect(printer.bedTemp.value).toBe(60.2);
+    expect(printer.bedTarget.value).toBe(60);
+    expect(printer.chamberTemp.value).toBe(35);
+    expect(printer.isHotendTargetReached.value).toBe(true);
+    expect(printer.isBedTargetReached.value).toBe(true);
+
+    // 2. Ingest toolhead position
+    printer.ingestGcodeResponse('X:120.50 Y:45.00 Z:12.80 E:5.40');
+    expect(printer.position.value).toEqual({ x: 120.5, y: 45, z: 12.8, e: 5.4 });
+
+    // 3. Ingest Moonraker status
+    printer.ingestMoonrakerStatus({
+      print_stats: { state: 'printing', print_duration: 3600, filename: 'benchy.gcode' },
+      display_status: { progress: 0.5 },
+      extruder: { temperature: 220, target: 220 },
+      heater_bed: { temperature: 65, target: 65 }
+    });
+
+    expect(printer.state.value).toBe('PRINTING');
+    expect(printer.isActivelyPrinting.value).toBe(true);
+    expect(printer.printProgressPct.value).toBe(50);
+    expect(printer.timeRemainingSec.value).toBe(3600);
+    expect(printer.formattedRemainingTime.value).toBe('1h 00m');
+
+    // 4. Test G-code generator helpers
+    expect(printer.setHotendTargetTemp(230)).toBe('M104 S230\n');
+    expect(printer.setBedTargetTemp(70)).toBe('M140 S70\n');
+    expect(printer.homeAxes('ALL')).toBe('G28\n');
+    expect(printer.emergencyStop()).toBe('M112\n');
+    expect(printer.state.value).toBe('ERROR');
+  });
 });
+

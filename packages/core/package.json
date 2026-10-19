@@ -26,7 +26,8 @@
     "@zuari/lua": "workspace:*",
     "@zuari/quantum": "workspace:*",
     "@zuari/system-one": "workspace:*",
-    "@zuari/devtools": "workspace:*"
+    "@zuari/devtools": "workspace:*",
+    "@zuari/kotlin": "workspace:*"
   },
   "exports": {
     ".": {
@@ -108,6 +109,10 @@
     "./devtools": {
       "types": "../devtools/dist/index.d.ts",
       "import": "../devtools/dist/index.js"
+    },
+    "./kotlin": {
+      "types": "../kotlin/dist/index.d.ts",
+      "import": "../kotlin/dist/index.js"
     }
   },
   "scripts": {

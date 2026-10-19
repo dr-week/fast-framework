@@ -23,5 +23,6 @@ export * from '@zuari/lua';
 export * from '@zuari/quantum';
 export * from '@zuari/system-one';
 export * from '@zuari/devtools';
+export * from '@zuari/kotlin';
 
 

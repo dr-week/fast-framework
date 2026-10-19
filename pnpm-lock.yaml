@@ -53,6 +53,9 @@ importers:
       '@zuari/headless':
         specifier: workspace:*
         version: link:../headless
+      '@zuari/kotlin':
+        specifier: workspace:*
+        version: link:../kotlin
       '@zuari/lua':
         specifier: workspace:*
         version: link:../lua
@@ -126,6 +129,12 @@ importers:
         version: link:../signals
 
   packages/headless:
+    dependencies:
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+
+  packages/kotlin:
     dependencies:
       '@zuari/signals':
         specifier: workspace:*
