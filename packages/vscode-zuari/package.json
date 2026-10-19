@@ -1,0 +1,40 @@
+{
+  "name": "vscode-zuari",
+  "displayName": "Zuari — HTML, Signals & DOM Parts Language Tools",
+  "description": "Syntax highlighting, autocomplete, and diagnostics for Zuari html`...` templates, @events, and ?attributes.",
+  "version": "0.1.0",
+  "publisher": "danger-labs",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Snippets"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "grammars": [
+      {
+        "scopeName": "inline.zuari-html",
+        "path": "./syntaxes/zuari-html.tmLanguage.json",
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.jsx"
+        ]
+      }
+    ],
+    "snippets": [
+      {
+        "language": "typescript",
+        "path": "./snippets/zuari.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/zuari.json"
+      }
+    ]
+  }
+}

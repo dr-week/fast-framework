@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Zuari HTML Template",
+  "scopeName": "inline.zuari-html",
+  "injectionSelector": "L:source.ts -string -comment, L:source.tsx -string -comment, L:source.js -string -comment, L:source.jsx -string -comment",
+  "patterns": [
+    {
+      "name": "meta.template.expression.zuari",
+      "begin": "(?<=html)\\s*(`)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.string.template.begin.ts" }
+      },
+      "end": "(`)",
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.string.template.end.ts" }
+      },
+      "patterns": [
+        {
+          "name": "entity.other.attribute-name.event.zuari",
+          "match": "(@[a-zA-Z0-9_-]+)(?=\\=)"
+        },
+        {
+          "name": "entity.other.attribute-name.boolean.zuari",
+          "match": "(\\?[a-zA-Z0-9_-]+)(?=\\=)"
+        },
+        {
+          "include": "text.html.basic"
+        }
+      ]
+    }
+  ]
+}

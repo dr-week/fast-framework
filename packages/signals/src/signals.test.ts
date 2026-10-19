@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { signal, computed, effect, batch } from '../src/index.js';
+import { signal, computed, effect, batch, untracked, effectScope, onMount, onDestroy } from '../src/index.js';
+
 
 describe('@zuari/signals', () => {
   it('creates an atomic signal and reads initial value', () => {
@@ -110,4 +111,68 @@ describe('@zuari/signals', () => {
     onTrue.value = 'TRUE_MUTATED';
     expect(result.value).toBe('FALSE_BRANCH_2');
   });
+
+  it('untracked reads signal value without creating a reactive subscription', () => {
+    const a = signal(10);
+    const b = signal(20);
+    const listener = vi.fn();
+
+    effect(() => {
+      const valA = a.value;
+      const valB = untracked(() => b.value);
+      listener(valA + valB);
+    });
+
+    expect(listener).toHaveBeenCalledTimes(1);
+    expect(listener).toHaveBeenCalledWith(30);
+
+    // Mutating untracked signal b should NOT trigger the effect
+    b.value = 50;
+    expect(listener).toHaveBeenCalledTimes(1);
+
+    // Mutating tracked signal a SHOULD trigger the effect, reading the fresh b value
+    a.value = 20;
+    expect(listener).toHaveBeenCalledTimes(2);
+    expect(listener).toHaveBeenCalledWith(70);
+  });
+
+  it('effectScope batches teardowns for all nested effects and cleanups', () => {
+    const count = signal(0);
+    const effectSpy = vi.fn();
+    const cleanupSpy = vi.fn();
+    const mountCleanup = vi.fn();
+
+    const scope = effectScope(() => {
+      onMount(() => {
+        return () => mountCleanup();
+      });
+
+      onDestroy(() => {
+        cleanupSpy();
+      });
+
+      effect(() => {
+        effectSpy(count.value);
+      });
+    });
+
+    expect(effectSpy).toHaveBeenCalledTimes(1);
+    expect(effectSpy).toHaveBeenCalledWith(0);
+    expect(cleanupSpy).not.toHaveBeenCalled();
+    expect(mountCleanup).not.toHaveBeenCalled();
+
+    count.value = 1;
+    expect(effectSpy).toHaveBeenCalledTimes(2);
+    expect(effectSpy).toHaveBeenCalledWith(1);
+
+    // Teardown entire scope
+    scope.stop();
+    expect(cleanupSpy).toHaveBeenCalledTimes(1);
+    expect(mountCleanup).toHaveBeenCalledTimes(1);
+
+    // Subsequent updates to count should no longer fire inner effect
+    count.value = 2;
+    expect(effectSpy).toHaveBeenCalledTimes(2);
+  });
 });
+

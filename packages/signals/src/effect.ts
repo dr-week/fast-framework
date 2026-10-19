@@ -1,5 +1,6 @@
 import type { CleanupFn, ComputationNode, EffectFn } from './types.js';
 import { setActiveSubscriber } from './scheduler.js';
+import { getActiveScope } from './scope.js';
 
 /**
  * Subscribes to signals and triggers side effects upon state changes.
@@ -38,7 +39,7 @@ export function effect(fn: EffectFn): CleanupFn {
   node.execute();
 
   // Return teardown function
-  return () => {
+  const dispose = () => {
     for (const dep of node.dependencies) {
       dep._unsubscribe(node as ComputationNode<unknown>);
     }
@@ -47,4 +48,12 @@ export function effect(fn: EffectFn): CleanupFn {
       cleanup();
     }
   };
+
+  const currentScope = getActiveScope();
+  if (currentScope) {
+    currentScope.addCleanup(dispose);
+  }
+
+  return dispose;
 }
+

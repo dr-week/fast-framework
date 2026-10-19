@@ -3,9 +3,9 @@ import { REPL_PRESETS, createReplView } from './repl.js';
 import { ZUARI_BUNDLE_MANIFEST, createProofBenchView } from './benchmark.js';
 
 describe('@zuari/playground Interactive REPL & Proof Benchmarks', () => {
-  it('exposes 3 turnkey interactive REPL presets (Direct DOM, Spatial HUD, Wasm FFI)', () => {
-    expect(REPL_PRESETS.length).toBe(3);
-    expect(REPL_PRESETS.map((p) => p.id)).toEqual(['counter', 'spatial-hud', 'wasm-ffi']);
+  it('exposes 5 turnkey interactive REPL presets (Direct DOM, Spatial HUD, Wasm FFI, Hardware, Quantum)', () => {
+    expect(REPL_PRESETS.length).toBe(5);
+    expect(REPL_PRESETS.map((p) => p.id)).toEqual(['counter', 'spatial-hud', 'wasm-ffi', 'hardware-hud', 'quantum-state']);
   });
 
   it('mounts the live in-browser REPL, executes user code, and switches presets', () => {
@@ -18,11 +18,16 @@ describe('@zuari/playground Interactive REPL & Proof Benchmarks', () => {
 
     // Switch to Wasm FFI preset
     const presetBtns = replEl.querySelectorAll<HTMLButtonElement>('.repl-preset-btn');
-    expect(presetBtns.length).toBe(3);
+    expect(presetBtns.length).toBe(5);
     presetBtns[2]!.click();
 
     expect(onInteract).toHaveBeenCalled();
     expect(preview.innerHTML).toContain('Zero Serialization');
+
+    // Switch to Quantum preset
+    presetBtns[4]!.click();
+    expect(preview.innerHTML).toContain('@zuari/quantum');
+
     document.body.removeChild(replEl);
   });
 

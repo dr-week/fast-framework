@@ -25,7 +25,8 @@
     "@zuari/presets": "workspace:*",
     "@zuari/lua": "workspace:*",
     "@zuari/quantum": "workspace:*",
-    "@zuari/system-one": "workspace:*"
+    "@zuari/system-one": "workspace:*",
+    "@zuari/devtools": "workspace:*"
   },
   "exports": {
     ".": {
@@ -103,6 +104,10 @@
     "./system-one": {
       "types": "../system-one/dist/index.d.ts",
       "import": "../system-one/dist/index.js"
+    },
+    "./devtools": {
+      "types": "../devtools/dist/index.d.ts",
+      "import": "../devtools/dist/index.js"
     }
   },
   "scripts": {

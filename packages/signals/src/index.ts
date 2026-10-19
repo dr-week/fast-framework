@@ -9,3 +9,6 @@ export * from './scheduler.js';
 export * from './signal.js';
 export * from './computed.js';
 export * from './effect.js';
+export * from './untracked.js';
+export * from './scope.js';
+

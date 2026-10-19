@@ -3,6 +3,9 @@ import { createChildPart, createAttributePart } from './parts/index.js';
 
 export * from './parts/index.js';
 export * from './transition/index.js';
+export * from './repeat.js';
+export * from './branch.js';
+
 
 export type TemplateValue = 
   | string 

@@ -4,6 +4,8 @@ import { createMorphGlyph } from '@zuari/glyphs';
 import { createSpatialAnchor, bindAnchorToElement } from '@zuari/spatial';
 import { createWasmSignal, createWasmStruct } from '@zuari/wasm';
 import { generateAnchorName, setElementAnchor, tetherToAnchor } from '@zuari/headless';
+import { createBallisticReticle, createDroneTelemetry } from '@zuari/hardware';
+import { createQuantumNodeState } from '@zuari/quantum';
 
 export interface ReplPreset {
   id: string;
@@ -168,6 +170,126 @@ const view = html\`
 \`;
 
 mount(view);`
+  },
+  {
+    id: 'hardware-hud',
+    title: 'Hardware & Tactical HUD',
+    badge: '@zuari/hardware',
+    description: 'Real-time ballistic reticle & zero-copy drone telemetry decoding.',
+    code: `// 1. Initialize Tactical Ballistic Reticle & Drone Telemetry
+const reticle = createBallisticReticle({
+  rangeMeters: 380,
+  windMps: 4.8,
+  magCapacity: 30
+});
+const drone = createDroneTelemetry();
+
+const view = html\`
+  <div class="repl-demo-card">
+    <div class="repl-demo-header">
+      <span class="badge-pill">@zuari/hardware</span>
+      <span class="repl-muted">Tactical Optic &amp; Drone OSD</span>
+    </div>
+    <div class="repl-stat-grid">
+      <div class="repl-stat-box">
+        <small>Target Range</small>
+        <strong class="repl-big-num">\${reticle.rangeMeters}m</strong>
+      </div>
+      <div class="repl-stat-box">
+        <small>Elevation Drop</small>
+        <strong class="repl-big-num">\${reticle.elevationMrad} MRAD</strong>
+      </div>
+      <div class="repl-stat-box">
+        <small>Ammo Left</small>
+        <strong class="repl-big-num">\${reticle.ammoRemaining} / 30</strong>
+      </div>
+      <div class="repl-stat-box">
+        <small>Battery 6S</small>
+        <strong class="repl-big-num">\${drone.batteryVoltage}V</strong>
+      </div>
+    </div>
+    <div class="repl-btn-row">
+      <button class="repl-action-btn" @click=\${() => {
+        reticle.triggerShotImpulse(18.5);
+      }}>
+        Fire Recoil Impulse (-1)
+      </button>
+      <button class="repl-action-btn secondary" @click=\${() => {
+        reticle.reloadMagazine();
+      }}>
+        Reload Mag
+      </button>
+      <button class="repl-action-btn secondary" @click=\${() => {
+        reticle.rangeMeters.value = reticle.rangeMeters.value === 380 ? 550 : 380;
+      }}>
+        Toggle Range (550m)
+      </button>
+    </div>
+  </div>
+\`;
+
+mount(view);`
+  },
+  {
+    id: 'quantum-state',
+    title: 'Quantum Statevector Node',
+    badge: '@zuari/quantum',
+    description: '3D Bloch sphere kinematics, unitary gate rotations & coherence modeling.',
+    code: `// 1. Initialize Quantum Node State (32-byte C-ABI Linear Memory)
+const qNode = createQuantumNodeState({
+  id: 'q0-primary',
+  initialTheta: 0,
+  initialPhi: 0,
+  t2Micros: 120
+});
+
+const view = html\`
+  <div class="repl-demo-card">
+    <div class="repl-demo-header">
+      <span class="badge-pill">@zuari/quantum</span>
+      <span class="repl-muted">Bloch Sphere Statevector</span>
+    </div>
+    <div class="repl-stat-grid">
+      <div class="repl-stat-box">
+        <small>|0⟩ Probability</small>
+        <strong class="repl-big-num">\${qNode.probZero}</strong>
+      </div>
+      <div class="repl-stat-box">
+        <small>|1⟩ Probability</small>
+        <strong class="repl-big-num">\${qNode.probOne}</strong>
+      </div>
+      <div class="repl-stat-box">
+        <small>T2 Coherence</small>
+        <strong class="repl-big-num">\${qNode.coherence}</strong>
+      </div>
+    </div>
+    <div class="repl-btn-row">
+      <button class="repl-action-btn" @click=\${() => {
+        qNode.applyGate('H');
+      }}>
+        Hadamard (H Gate)
+      </button>
+      <button class="repl-action-btn" @click=\${() => {
+        qNode.applyGate('X');
+      }}>
+        Pauli-X (NOT Gate)
+      </button>
+      <button class="repl-action-btn secondary" @click=\${() => {
+        const result = qNode.measure();
+        console.log('Qubit measured:', result);
+      }}>
+        Measure Qubit
+      </button>
+      <button class="repl-action-btn secondary" @click=\${() => {
+        qNode.reset();
+      }}>
+        Reset State
+      </button>
+    </div>
+  </div>
+\`;
+
+mount(view);`
   }
 ];
 
@@ -261,6 +383,9 @@ export function createReplView(onInteraction: () => void): HTMLElement {
         'generateAnchorName',
         'setElementAnchor',
         'tetherToAnchor',
+        'createBallisticReticle',
+        'createDroneTelemetry',
+        'createQuantumNodeState',
         executableBody
       );
 
@@ -280,7 +405,10 @@ export function createReplView(onInteraction: () => void): HTMLElement {
         createWasmStruct,
         generateAnchorName,
         setElementAnchor,
-        tetherToAnchor
+        tetherToAnchor,
+        createBallisticReticle,
+        createDroneTelemetry,
+        createQuantumNodeState
       );
 
       const dt = Math.max(0.05, performance.now() - t0);

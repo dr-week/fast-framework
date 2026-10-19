@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Zuari Reactive DevTools",
+  "version": "0.1.0",
+  "description": "Inspect live TC39 Signal graphs, Wasm linear memory buffers, active DOM Part markers, and FPS velocity in Zuari apps.",
+  "devtools_page": "devtools.html",
+  "permissions": ["activeTab"],
+  "icons": {
+    "128": "icon.png"
+  }
+}

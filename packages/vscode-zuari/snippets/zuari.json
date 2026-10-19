@@ -1,0 +1,57 @@
+{
+  "Zuari Signal": {
+    "prefix": "zsig",
+    "body": [
+      "const ${1:name} = signal(${2:initialValue});"
+    ],
+    "description": "Create a fine-grained Zuari reactive Signal"
+  },
+  "Zuari Computed": {
+    "prefix": "zcomp",
+    "body": [
+      "const ${1:derived} = computed(() => ${2:expression});"
+    ],
+    "description": "Create a memoized Zuari Computed signal"
+  },
+  "Zuari Effect": {
+    "prefix": "zeff",
+    "body": [
+      "effect(() => {",
+      "  ${1:// reactive side-effect}",
+      "});"
+    ],
+    "description": "Create a Zuari Signal Effect"
+  },
+  "Zuari HTML Template": {
+    "prefix": "zhtml",
+    "body": [
+      "const view = html`",
+      "  <div class=\"${1:card}\">",
+      "    ${2:content}",
+      "  </div>",
+      "`;",
+      "const { fragment, destroy } = render(view);"
+    ],
+    "description": "Render a Zuari HTML template result directly into DOM"
+  },
+  "Zuari Repeat": {
+    "prefix": "zrepeat",
+    "body": [
+      "\\${repeat(${1:items}, ${2:item} => ${2:item}.${3:id}, (${2:item}) => html`",
+      "  <${4:li}>\${${2:item}.${5:text}}</${4:li}>",
+      "`)}"
+    ],
+    "description": "Keyed list reconciliation primitive without Virtual DOM"
+  },
+  "Zuari When": {
+    "prefix": "zwhen",
+    "body": [
+      "\\${when(${1:condition}, () => html`",
+      "  <div>${2:Then Branch}</div>",
+      "`, () => html`",
+      "  <div>${3:Else Branch}</div>",
+      "`)}"
+    ],
+    "description": "Declarative conditional branching with state preservation"
+  }
+}

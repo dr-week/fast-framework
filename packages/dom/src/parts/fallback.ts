@@ -27,6 +27,15 @@ export class FallbackChildPart implements ChildPart {
 
   setValue(val: unknown): void {
     this.value = val;
+    if (val instanceof DocumentFragment) {
+      // DocumentFragment transfers children when appended/inserted
+      const anchor = document.createTextNode('');
+      this.parentNode.replaceChild(anchor, this._currentNode);
+      this.parentNode.insertBefore(val, anchor);
+      this._currentNode = anchor;
+      return;
+    }
+
     if (val instanceof Node) {
       if (this._currentNode !== val) {
         this.parentNode.replaceChild(val, this._currentNode);
@@ -43,6 +52,7 @@ export class FallbackChildPart implements ChildPart {
       this._currentNode = newText;
     }
   }
+
 
   disconnect(): void {
     // Teardown listener reference; preserve DOM tree integrity

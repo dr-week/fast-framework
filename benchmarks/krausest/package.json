@@ -1,0 +1,25 @@
+{
+  "name": "zuari-keyed",
+  "version": "1.0.0",
+  "description": "Zuari implementation for krausest/js-framework-benchmark",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@zuari/dom": "workspace:*",
+    "@zuari/signals": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.2.0"
+  },
+  "js-framework-benchmark": {
+    "frameworkVersion": "0.1.0",
+    "frameworkHomeURL": "https://github.com/dr-week/fast-framework",
+    "issuesURL": "https://github.com/dr-week/fast-framework/issues",
+    "useShadowRoot": false,
+    "frameworkType": "keyed"
+  }
+}

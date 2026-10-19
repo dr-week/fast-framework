@@ -1,4 +1,12 @@
-export type ZuariTemplate = 'minimal' | 'spatial' | 'wasm' | 'tauri';
+export type ZuariTemplate =
+  | 'vanilla-ts'
+  | 'minimal'
+  | 'tauri-desktop'
+  | 'tauri'
+  | 'spatial-webxr'
+  | 'spatial'
+  | 'kotlin-android'
+  | 'wasm';
 
 export interface ScaffoldOptions {
   projectName: string;
