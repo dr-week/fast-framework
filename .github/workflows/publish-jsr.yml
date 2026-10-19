@@ -1,0 +1,21 @@
+name: Publish to JSR
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Publish @zuari/signals
+        run: npx jsr publish --allow-dirty
+        working-directory: packages/signals
