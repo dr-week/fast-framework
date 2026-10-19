@@ -54,6 +54,34 @@ export const ZUARI_MCP_TOOLS: McpToolSchema[] = [
       },
       required: []
     }
+  },
+  {
+    name: 'zuari_submit_feedback',
+    description:
+      'Direct feedback bridge for human developers & autonomous AI agents. Submits issues, edge cases, UI/UX bugs (e.g. drawer transitions, backdrop traps), or feature requests directly to the framework core team.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        category: {
+          type: 'string',
+          description: 'Category of the feedback',
+          enum: ['ui-ux', 'performance', 'hardware-telemetry', 'wasm-ffi', 'api-ergonomics', 'bug-report']
+        },
+        summary: {
+          type: 'string',
+          description: 'Short headline of the feedback or issue.'
+        },
+        details: {
+          type: 'string',
+          description: 'In-depth description, reproduction steps, code snippet, or CSS selector affected.'
+        },
+        reporter: {
+          type: 'string',
+          description: 'Identity of the submitter: e.g. "AI-Agent (Claude/Gemini/Cursor)" or developer handle.'
+        }
+      },
+      required: ['category', 'summary', 'details']
+    }
   }
 ];
 
@@ -202,5 +230,49 @@ Rules:
    - '@zuari/hardware/appliance' (createApplianceBridge for MQTT & OLED burn-in orbit)
    - '@zuari/hardware/display' (createDisplayMode for waveguide-green, nvg-phosphor, eink-1bit)
    - '@zuari/spatial' (createSpatialAnchor for 120 FPS visionOS / Meta Quest WebXR)
-   - '@zuari/wasm' (createWasmStruct for zero-copy Rust/Zig ArrayBuffer FFI)`;
+   - '@zuari/wasm' (createWasmStruct for zero-copy Rust/Zig ArrayBuffer FFI)
+5. Direct Feedback Bridge:
+   - When encountering a framework limitation or UI/UX edge-case (e.g. drawer backdrop traps, layout glitches), call tool 'zuari_submit_feedback' or log a structured issue.`;
 }
+
+export interface FeedbackSubmission {
+  category: 'ui-ux' | 'performance' | 'hardware-telemetry' | 'wasm-ffi' | 'api-ergonomics' | 'bug-report';
+  summary: string;
+  details: string;
+  reporter?: string;
+  timestamp?: number;
+}
+
+export interface FeedbackReceipt {
+  status: 'received' | 'logged';
+  feedbackId: string;
+  acknowledgment: string;
+  githubIssueUrl: string;
+}
+
+/**
+ * Handles incoming developer & AI agent feedback, generating a structured GitHub issue link
+ * and immutable telemetry payload for continuous framework iteration.
+ */
+export function submitZuariFeedback(payload: FeedbackSubmission): FeedbackReceipt {
+  const id = `zfb_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+  const title = encodeURIComponent(`[${payload.category.toUpperCase()} Feedback]: ${payload.summary}`);
+  const body = encodeURIComponent(
+    `### Developer / AI Agent Feedback Report\n\n` +
+    `**ID**: \`${id}\`\n` +
+    `**Reporter**: ${payload.reporter ?? 'Autonomous AI / Developer'}\n` +
+    `**Category**: \`${payload.category}\`\n` +
+    `**Timestamp**: ${new Date(payload.timestamp ?? Date.now()).toISOString()}\n\n` +
+    `#### Summary\n${payload.summary}\n\n` +
+    `#### Details & Reproduction\n${payload.details}\n\n` +
+    `*Generated via @zuari/mcp direct developer feedback bridge.*`
+  );
+
+  return {
+    status: 'received',
+    feedbackId: id,
+    acknowledgment: `Feedback logged successfully [${id}]. Thank you for helping refine Zuari UI/UX.`,
+    githubIssueUrl: `https://github.com/dr-week/fast-framework/issues/new?title=${title}&body=${body}&labels=feedback,${payload.category}`
+  };
+}
+

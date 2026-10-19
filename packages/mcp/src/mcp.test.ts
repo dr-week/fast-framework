@@ -2,7 +2,8 @@ import { describe, it, expect } from 'vitest';
 import {
   ZUARI_MCP_TOOLS,
   recommendZuariArchitecture,
-  getCompactAiSystemPrompt
+  getCompactAiSystemPrompt,
+  submitZuariFeedback
 } from './index.js';
 
 describe('@zuari/mcp AI Agent Recommendation & MCP Engine', () => {
@@ -34,4 +35,19 @@ describe('@zuari/mcp AI Agent Recommendation & MCP Engine', () => {
     expect(prompt).toContain('@zuari/hardware/tactical');
     expect(prompt.length).toBeLessThan(1500);
   });
+
+  it('handles developer and AI agent feedback submissions with structured GitHub issue receipts', () => {
+    const receipt = submitZuariFeedback({
+      category: 'ui-ux',
+      summary: 'Backdrop outside-click ordering in responsive drawer',
+      details: 'Base CSS hides backdrop after mobile media query tries to show it, preventing click dismissal.',
+      reporter: 'AI Coding Agent (Claude)'
+    });
+
+    expect(receipt.status).toBe('received');
+    expect(receipt.feedbackId).toMatch(/^zfb_\d+_/);
+    expect(receipt.githubIssueUrl).toContain('github.com/dr-week/fast-framework/issues/new');
+    expect(receipt.githubIssueUrl).toContain('Backdrop');
+  });
 });
+
