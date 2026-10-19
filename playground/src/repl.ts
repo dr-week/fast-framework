@@ -6,6 +6,7 @@ import { createWasmSignal, createWasmStruct } from '@zuari/wasm';
 import { generateAnchorName, setElementAnchor, tetherToAnchor } from '@zuari/headless';
 import { createBallisticReticle, createDroneTelemetry } from '@zuari/hardware';
 import { createQuantumNodeState } from '@zuari/quantum';
+import { createUiDrawer } from '@zuari/ui';
 
 export interface ReplPreset {
   id: string;
@@ -290,6 +291,61 @@ const view = html\`
 \`;
 
 mount(view);`
+  },
+  {
+    id: 'smooth-drawer',
+    title: 'Smooth Sliding Drawer',
+    badge: '@zuari/ui & @zuari/headless',
+    description: 'Hardware-accelerated sliding side/bottom drawer with touch gestures and spring easing.',
+    code: `// 1. Reactive Drawer State & Spring Sliding Animation
+const placement = signal('right');
+const isOpen = signal(false);
+
+const drawer = createUiDrawer({
+  title: 'Hardware & Systems Drawer',
+  description: 'Buttery-smooth 120 FPS sliding transform with backdrop blur',
+  isOpen,
+  placement: 'right'
+});
+
+const view = html\`
+  <div class="repl-demo-card">
+    <div class="repl-demo-header">
+      <span class="badge-pill">@zuari/ui/drawer</span>
+      <span class="repl-muted">Touch-Swipe &amp; Spring Physics</span>
+    </div>
+    <div class="repl-stat-grid">
+      <div class="repl-stat-box">
+        <small>Drawer State</small>
+        <strong class="repl-big-num">\${() => isOpen.value ? 'OPEN' : 'CLOSED'}</strong>
+      </div>
+      <div class="repl-stat-box">
+        <small>Placement</small>
+        <strong class="repl-big-num">\${placement}</strong>
+      </div>
+      <div class="repl-stat-box">
+        <small>Animation Easing</small>
+        <strong class="repl-big-num">Spring 280ms</strong>
+      </div>
+    </div>
+    <div class="repl-btn-row">
+      <button class="repl-action-btn" @click=\${() => {
+        drawer.toggle();
+      }}>
+        ⚡ Toggle Sliding Drawer
+      </button>
+      <button class="repl-action-btn secondary" @click=\${() => {
+        const next = placement.value === 'right' ? 'left' : placement.value === 'left' ? 'bottom' : 'right';
+        placement.value = next;
+        drawer.placement.value = next;
+      }}>
+        Switch Placement (\${placement})
+      </button>
+    </div>
+  </div>
+\`;
+
+mount(view);`
   }
 ];
 
@@ -386,6 +442,7 @@ export function createReplView(onInteraction: () => void): HTMLElement {
         'createBallisticReticle',
         'createDroneTelemetry',
         'createQuantumNodeState',
+        'createUiDrawer',
         executableBody
       );
 
@@ -408,7 +465,8 @@ export function createReplView(onInteraction: () => void): HTMLElement {
         tetherToAnchor,
         createBallisticReticle,
         createDroneTelemetry,
-        createQuantumNodeState
+        createQuantumNodeState,
+        createUiDrawer
       );
 
       const dt = Math.max(0.05, performance.now() - t0);

@@ -1,0 +1,84 @@
+/* ==========================================================================
+   Zuari Framework - Scoped Sliding Drawer Recipe
+   High-performance, GPU-accelerated side / bottom drawers with native ::backdrop
+   ========================================================================== */
+@scope (.zuari-drawer) {
+  :scope {
+    position: fixed;
+    margin: 0;
+    padding: 24px;
+    background: var(--nova-color-surface, oklch(16% 0.02 260 / 0.85));
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid var(--nova-color-border, oklch(100% 0 0 / 0.12));
+    color: oklch(98% 0 0);
+    box-shadow: 0 24px 64px -12px oklch(0% 0 0 / 0.65);
+    outline: none;
+    will-change: transform;
+    touch-action: pan-y;
+    z-index: 9999;
+  }
+
+  /* Right Side Drawer (Default) */
+  :scope[data-placement="right"] {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: min(420px, 90vw);
+    height: 100vh;
+    height: 100dvh;
+    border-left: 1px solid var(--nova-color-border, oklch(100% 0 0 / 0.12));
+    border-right: none;
+    border-radius: 20px 0 0 20px;
+  }
+
+  /* Left Side Drawer */
+  :scope[data-placement="left"] {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: auto;
+    width: min(420px, 90vw);
+    height: 100vh;
+    height: 100dvh;
+    border-right: 1px solid var(--nova-color-border, oklch(100% 0 0 / 0.12));
+    border-left: none;
+    border-radius: 0 20px 20px 0;
+  }
+
+  /* Bottom Sheet Drawer */
+  :scope[data-placement="bottom"] {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    width: 100vw;
+    max-height: 85vh;
+    border-top: 1px solid var(--nova-color-border, oklch(100% 0 0 / 0.12));
+    border-bottom: none;
+    border-radius: 24px 24px 0 0;
+  }
+
+  /* Top Sheet Drawer */
+  :scope[data-placement="top"] {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: auto;
+    width: 100vw;
+    max-height: 85vh;
+    border-bottom: 1px solid var(--nova-color-border, oklch(100% 0 0 / 0.12));
+    border-top: none;
+    border-radius: 0 0 24px 24px;
+  }
+
+  /* Native ::backdrop styling */
+  :scope::backdrop {
+    background: oklch(0% 0 0 / 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    opacity: 1;
+    transition: opacity 240ms ease;
+  }
+}

@@ -15,4 +15,5 @@ export * from './combobox/index.js';
 export * from './toast/index.js';
 export * from './virtual/index.js';
 export * from './form/index.js';
+export * from './drawer/index.js';
 

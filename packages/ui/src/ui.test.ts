@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { signal } from '@zuari/signals';
-import { createSwitch, createBadge, createCard, createSlider, createTabs } from './index.js';
+import { createSwitch, createBadge, createCard, createSlider, createTabs, createUiDrawer } from './index.js';
 
 describe('@zuari/ui pre-built component suite', () => {
   it('creates an accessible switch with keyboard and click toggle', () => {
@@ -69,4 +69,42 @@ describe('@zuari/ui pre-built component suite', () => {
     expect(tab2?.getAttribute('aria-selected')).toBe('true');
     expect(tab1?.getAttribute('aria-selected')).toBe('false');
   });
+
+  it('creates an accessible sliding drawer component with invoker trigger and reactive state', async () => {
+    const onOpen = vi.fn();
+    const onClose = vi.fn();
+    const drawer = createUiDrawer({
+      title: 'Inspector Drawer',
+      placement: 'right',
+      onOpen,
+      onClose
+    });
+
+    expect(drawer.element.classList.contains('zuari-drawer')).toBe(true);
+    expect(drawer.element.getAttribute('data-placement')).toBe('right');
+    expect(drawer.isOpen.value).toBe(false);
+
+    // Open drawer
+    await drawer.open();
+    expect(drawer.isOpen.value).toBe(true);
+    expect(drawer.element.open).toBe(true);
+    expect(onOpen).toHaveBeenCalled();
+
+    // Toggle drawer placement
+    drawer.placement.value = 'left';
+    expect(drawer.element.getAttribute('data-placement')).toBe('left');
+
+    // Close drawer
+    await drawer.close();
+    expect(drawer.isOpen.value).toBe(false);
+
+    // Bind trigger button
+    const triggerBtn = document.createElement('button');
+    drawer.bindTrigger(triggerBtn);
+    expect(triggerBtn.getAttribute('commandfor')).toBe(drawer.element.id);
+    expect(triggerBtn.getAttribute('command')).toBe('show-modal');
+
+    drawer.destroy();
+  });
 });
+

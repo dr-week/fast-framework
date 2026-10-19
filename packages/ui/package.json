@@ -37,6 +37,10 @@
     "./popover": {
       "types": "./dist/popover/index.d.ts",
       "import": "./dist/popover/index.js"
+    },
+    "./drawer": {
+      "types": "./dist/drawer/index.d.ts",
+      "import": "./dist/drawer/index.js"
     }
   },
   "scripts": {
