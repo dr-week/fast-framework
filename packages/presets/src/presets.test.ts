@@ -9,6 +9,7 @@ import {
   createBentoGrid,
   createStampBadge,
   createMinimalDock,
+  createFeatureDivision,
   ANIMATION_PRESETS
 } from './index.js';
 import { THEME_PRESETS, generateCssVariables } from '@zuari/tokens';
@@ -153,5 +154,23 @@ describe('@zuari/presets (Easy-to-Use Minimal & Artistic UI/UX Presets & Templat
     firstBtn.click();
     expect(onSelect).toHaveBeenCalled();
   });
+
+  it('divides software features cleanly into UI/UX planes (surface, dock, drawer, command, ambient)', () => {
+    const { matrix, getFeaturesForPlane } = createFeatureDivision([
+      { id: 'canvas', label: 'Main Canvas', category: 'core', recommendedPlane: 'surface' },
+      { id: 'tools', label: 'Quick Tools', category: 'tools', recommendedPlane: 'dock' },
+      { id: 'inspector', label: 'Layer Inspector', category: 'tools', recommendedPlane: 'drawer' },
+      { id: 'search', label: 'Omni Search', category: 'core', recommendedPlane: 'command' },
+      { id: 'fps', label: 'FPS Telemetry', category: 'systems', recommendedPlane: 'ambient' }
+    ]);
+
+    expect(matrix.surfaceFeatures).toHaveLength(1);
+    expect(matrix.dockFeatures).toHaveLength(1);
+    expect(matrix.drawerFeatures).toHaveLength(1);
+    expect(matrix.commandFeatures).toHaveLength(1);
+    expect(matrix.ambientFeatures).toHaveLength(1);
+    expect(getFeaturesForPlane('drawer')[0]?.id).toBe('inspector');
+  });
 });
+
 
