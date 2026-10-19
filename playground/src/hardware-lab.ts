@@ -9,10 +9,11 @@ import {
   createDpadNav,
   createApplianceBridge,
   createDisplayMode,
+  createPrinterTelemetry,
   type HardwareDisplayPreset
 } from '@zuari/hardware';
 
-type HardwareSubTab = 'tactical' | 'drone' | 'kaios' | 'rotary' | 'appliance';
+type HardwareSubTab = 'tactical' | 'drone' | 'kaios' | 'rotary' | 'appliance' | 'printer';
 
 export function createHardwareLabView(onInteraction: () => void): HTMLElement {
   const shell = document.createElement('div');
@@ -57,6 +58,16 @@ export function createHardwareLabView(onInteraction: () => void): HTMLElement {
   const chillerTemp = appliance.subscribeTopic('fridge/chiller/tempC', 3);
   const doorState = appliance.subscribeTopic('fridge/door/status', 'SEALED');
 
+  // 6. 3D Printer (Marlin / Moonraker) Telemetry State
+  const printer = createPrinterTelemetry('PRINTING');
+  printer.hotendTemp.value = 215;
+  printer.hotendTarget.value = 215;
+  printer.bedTemp.value = 60;
+  printer.bedTarget.value = 60;
+  printer.printProgressPct.value = 42;
+  printer.timeElapsedSec.value = 2520;
+  printer.timeRemainingSec.value = 3480;
+
   // Top Bar: Sub-module selector + Optical Waveguide / E-Ink Display Switcher
   const topBar = document.createElement('div');
   topBar.className = 'hw-lab-topbar';
@@ -66,7 +77,8 @@ export function createHardwareLabView(onInteraction: () => void): HTMLElement {
     { id: 'drone', label: 'FPV Drone OSD' },
     { id: 'kaios', label: 'KaiOS / T9 D-Pad' },
     { id: 'rotary', label: 'Rotary / Handheld' },
-    { id: 'appliance', label: 'Fridge / Kiosk IoT' }
+    { id: 'appliance', label: 'Fridge / Kiosk IoT' },
+    { id: 'printer', label: '3D Printer / G-code' }
   ];
 
   const tabGroup = document.createElement('div');
@@ -360,6 +372,69 @@ export function createHardwareLabView(onInteraction: () => void): HTMLElement {
         </div>
       `;
       stage.appendChild(render(view).fragment);
+    } else if (sub === 'printer') {
+      const view = html`
+        <div class="hw-panel-grid">
+          <div class="hw-appliance-screen">
+            <div class="repl-demo-header">
+              <span class="badge-pill">@zuari/hardware/printer</span>
+              <span class="repl-muted">Klipper / Marlin Telemetry</span>
+            </div>
+            <div class="repl-stat-grid">
+              <div class="repl-stat-box">
+                <small>Hotend Nozzle</small>
+                <strong class="repl-big-num">${printer.hotendTemp}°C</strong>
+                <span class="repl-muted" style="font-size:0.75rem;">Target: ${printer.hotendTarget}°C</span>
+              </div>
+              <div class="repl-stat-box">
+                <small>Heated Bed</small>
+                <strong class="repl-big-num">${printer.bedTemp}°C</strong>
+                <span class="repl-muted" style="font-size:0.75rem;">Target: ${printer.bedTarget}°C</span>
+              </div>
+              <div class="repl-stat-box">
+                <small>Progress</small>
+                <strong class="repl-big-num">${printer.printProgressPct}%</strong>
+                <span class="repl-muted" style="font-size:0.75rem;">${printer.formattedRemainingTime} left</span>
+              </div>
+              <div class="repl-stat-box">
+                <small>State</small>
+                <strong class="repl-big-num">${printer.state}</strong>
+                <span class="repl-muted" style="font-size:0.75rem;">Axes: X:${() => printer.position.value.x} Y:${() => printer.position.value.y}</span>
+              </div>
+            </div>
+          </div>
+          <div class="hw-controls-col">
+            <div class="repl-demo-header">
+              <span class="badge-pill">Additive Manufacturing G-code</span>
+              <span class="repl-muted">Direct G-code Stream</span>
+            </div>
+            <p class="repl-muted">Fine-grained reactive signals for extruders, stepper motors &amp; Moonraker JSON-RPC status.</p>
+            <div class="repl-btn-row">
+              <button class="repl-action-btn" @click=${() => {
+                printer.ingestGcodeResponse('ok T:220.0 /220.0 B:65.0 /65.0');
+                printer.printProgressPct.value = Math.min(100, printer.printProgressPct.value + 5);
+                onInteraction();
+              }}>
+                Feed M105 Temp Response (+5%)
+              </button>
+              <button class="repl-action-btn secondary" @click=${() => {
+                printer.homeAxes('ALL');
+                printer.position.value = { x: 0, y: 0, z: 0, e: 0 };
+                onInteraction();
+              }}>
+                Home Axes (G28)
+              </button>
+              <button class="repl-action-btn secondary" style="color:var(--nova-color-danger, #ff4444);" @click=${() => {
+                printer.emergencyStop();
+                onInteraction();
+              }}>
+                Emergency Stop (M112)
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      stage.appendChild(render(view).fragment);
     }
   }
 
@@ -370,3 +445,4 @@ export function createHardwareLabView(onInteraction: () => void): HTMLElement {
 
   return shell;
 }
+
