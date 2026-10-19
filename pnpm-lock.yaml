@@ -38,6 +38,9 @@ importers:
       '@zuari/ai':
         specifier: workspace:*
         version: link:../ai
+      '@zuari/devtools':
+        specifier: workspace:*
+        version: link:../devtools
       '@zuari/dom':
         specifier: workspace:*
         version: link:../dom
