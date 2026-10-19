@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { signal } from '@zuari/signals';
-import { createSwitch, createBadge, createCard, createSlider, createTabs, createUiDrawer } from './index.js';
+import { createSwitch, createBadge, createCard, createSlider, createTabs, createUiDrawer, createButton, createTextInput } from './index.js';
 
 describe('@zuari/ui pre-built component suite', () => {
   it('creates an accessible switch with keyboard and click toggle', () => {
@@ -106,5 +106,51 @@ describe('@zuari/ui pre-built component suite', () => {
 
     drawer.destroy();
   });
+
+  it('creates an accessible reactive button with loading and disabled states', () => {
+    const onClick = vi.fn();
+    const btn = createButton({ label: 'Execute Action', variant: 'primary', onClick });
+
+    expect(btn.element.classList.contains('zuari-btn')).toBe(true);
+    expect(btn.element.getAttribute('data-variant')).toBe('primary');
+    expect(btn.element.textContent).toContain('Execute Action');
+
+    btn.element.click();
+    expect(onClick).toHaveBeenCalledTimes(1);
+
+    // Set loading state -> disables clicks
+    btn.loading.value = true;
+    expect(btn.element.disabled).toBe(true);
+    expect(btn.element.getAttribute('data-loading')).toBe('true');
+
+    btn.element.click();
+    expect(onClick).toHaveBeenCalledTimes(1); // Blocked
+
+    btn.destroy();
+  });
+
+  it('creates a validated reactive text input with error handling and signal sync', () => {
+    const onInput = vi.fn();
+    const textInput = createTextInput({ label: 'Username', placeholder: 'Enter handle', onInput });
+
+    expect(textInput.container.classList.contains('zuari-input-group')).toBe(true);
+    expect(textInput.inputElement.placeholder).toBe('Enter handle');
+
+    textInput.setValue('@zuari-user');
+    expect(textInput.value.value).toBe('@zuari-user');
+    expect(textInput.inputElement.value).toBe('@zuari-user');
+
+    // Trigger validation error
+    textInput.error.value = 'Username already taken';
+    expect(textInput.container.getAttribute('data-invalid')).toBe('true');
+    expect(textInput.container.querySelector('.zuari-input-error')?.textContent).toBe('Username already taken');
+
+    // Clear error
+    textInput.error.value = null;
+    expect(textInput.container.getAttribute('data-invalid')).toBeNull();
+
+    textInput.destroy();
+  });
 });
+
 

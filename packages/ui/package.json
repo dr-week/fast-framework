@@ -41,6 +41,14 @@
     "./drawer": {
       "types": "./dist/drawer/index.d.ts",
       "import": "./dist/drawer/index.js"
+    },
+    "./button": {
+      "types": "./dist/button/index.d.ts",
+      "import": "./dist/button/index.js"
+    },
+    "./input": {
+      "types": "./dist/input/index.d.ts",
+      "import": "./dist/input/index.js"
     }
   },
   "scripts": {
