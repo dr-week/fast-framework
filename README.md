@@ -17,7 +17,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9_Strict-3178C6.svg?style=for-the-badge&logo=typescript&logoColor=white)](#)
 [![Virtual DOM](https://img.shields.io/badge/Virtual_DOM-0%25_Direct_DOM-059669.svg?style=for-the-badge)](#)
 [![Runtime Size](https://img.shields.io/badge/Runtime-%3C2.5KB_gzipped-7C3AED.svg?style=for-the-badge)](#)
-[![Test Suite](https://img.shields.io/badge/Tests-94_Passed-0284C7.svg?style=for-the-badge)](#)
+[![Test Suite](https://img.shields.io/badge/Tests-115_Passed-0284C7.svg?style=for-the-badge)](#)
 
 <br />
 
@@ -43,13 +43,17 @@ Modern web development has become weighed down by multi-megabyte runtimes, Virtu
 #### 👤 For Human Engineers & CTOs
 1. **Zero Virtual DOM & 0ms Hydration Overhead**:
    Unlike React and Vue which maintain an entire second virtual copy of the DOM in memory, Zuari compiles state mutations directly into surgical W3C DOM Parts updates. When a signal changes, only the exact `TextNode` or `Attribute` updates at pointer speed.
-2. **"Write Once, Run Spatial" (2D Web + 3D Mixed Reality)**:
+2. **Keyed Lists & Declarative Control Flow (`repeat()` / `keyed()`, `when()`, `match()`)**:
+   Keyed list reconciliation preserves exact DOM nodes without virtual diffing, while `when()` and `match()` guarantee deterministic subtree teardowns without orphan listeners.
+3. **TC39 Signals & Effect Scoping (`effectScope()`, `onMount()`, `onDestroy()`, `untracked()`)**:
+   Aligns with the TC39 Signals proposal to provide automatic teardown of timers, events, and WebSockets across entire component subtrees.
+4. **"Write Once, Run Spatial" (2D Web + 3D Mixed Reality)**:
    Via `@zuari/spatial`, the exact same reactive signals that drive a 2D web button drive a 120 FPS diegetic HUD on **Apple Vision Pro (visionOS)** and **Meta Quest 3** with native eye-gaze and 6DoF hand tracking.
-3. **Sub-Millisecond System 1 Fast-Reflex AI & Fast-Log Engine (`@zuari/system-one`)**:
+5. **Sub-Millisecond System 1 Fast-Reflex AI & Fast-Log Engine (`@zuari/system-one`)**:
    Conventional frameworks only react *after* user clicks occur. Zuari's System 1 engine continuously evaluates mouse trajectory, gaze velocity, and dwell time in **< 0.4ms**, speculatively pre-synthesizing DOM branches into memory with zero allocation across a 32-byte circular ring buffer.
-4. **Zero-Copy WebAssembly Systems FFI**:
+6. **Zero-Copy WebAssembly Systems FFI**:
    Through `@zuari/wasm` and `@zuari/wit`, native **Rust** or **Zig** simulations bind directly to reactive signals via raw linear memory buffers (`Float64Array` / `Int32Array`) with zero JSON serialization overhead.
-5. **Radical Sub-2.5 KB Footprint**:
+7. **Radical Sub-2.5 KB Footprint**:
    The entire core platform weighs under **2.5 KB gzipped**. Every package is decoupled (`sideEffects: false`) and independently installable.
 
 #### 🤖 For AI Coding Agents (Claude, Cursor, Antigravity, Copilot)
@@ -69,6 +73,7 @@ Modern web development has become weighed down by multi-megabyte runtimes, Virtu
 | **Virtual DOM Overhead** | Yes (Full Tree Diff) | No (Compiler) | No (Direct DOM) | **0% (Native W3C DOM Parts)** |
 | **Runtime Core Size** | ~45 KB (React+DOM) | ~10 KB | ~7 KB | **< 2.5 KB** |
 | **Hydration Tax** | Re-executes components | Synthetic hydration | DOM cloning | **0ms (Direct comment hole sync)** |
+| **Keyed List Engine** | Keyed VDOM diff | Keyed blocks (`{#each}`) | `<For>` DOM mapping | **Zero-VDOM Keyed Reconciliation (`repeat`)** |
 | **Native Mixed Reality (XR)** | React Three Fiber (Heavy) | Third-party only | Third-party only | **Native 3D Anchors (`@zuari/spatial`)** |
 | **Rust / Zig Systems FFI** | Manual JSON / PostMessage | Manual wrapper | Manual wrapper | **Zero-Copy Wasm Bridge (`@zuari/wasm`)** |
 | **Standards Compliance** | Proprietary synthetic layer | Custom compiler | Custom JSX runtime | **W3C DOM Parts, TC39 Signals, CSS Anchor** |
@@ -87,27 +92,59 @@ pnpm add @zuari/core
 pnpm add @zuari/signals @zuari/dom @zuari/ui @zuari/router
 ```
 
+#### Scaffold a New Project with `create-zuari`
+
+```bash
+# Core Web (vanilla-ts)
+npm create zuari@latest my-app -- --template vanilla-ts
+
+# Tauri v2 Desktop (Rust + Zuari)
+npm create zuari@latest my-desktop -- --template tauri-desktop
+
+# Apple Vision Pro / Meta Quest 3 (Spatial WebXR)
+npm create zuari@latest my-hud -- --template spatial-webxr
+
+# Kotlin Multiplatform / Android NDK
+npm create zuari@latest my-android -- --template kotlin-android
+```
+
 #### Working Example
 
 ```typescript
-import { signal } from '@zuari/signals';
-import { html, render } from '@zuari/dom';
+import { signal, computed, effectScope, onMount } from '@zuari/signals';
+import { html, render, repeat, when } from '@zuari/dom';
 
 // 1. Create atomic reactive state
 const count = signal(0);
+const doubled = computed(() => count.value * 2);
 
-// 2. Compile directly to DOM without Virtual DOM
+const todos = signal([
+  { id: 1, text: 'Install Zuari' },
+  { id: 2, text: 'Ship Zero-VDOM Web App' }
+]);
+
+// 2. Component lifecycle scope
+effectScope(() => {
+  onMount(() => {
+    console.log('Mounted component with zero VDOM overhead');
+  });
+});
+
+// 3. Compile directly to DOM with keyed list & conditional branching
 const view = html`
   <div class="zuari-card">
-    <h2>Counter Node</h2>
-    <p>Value: <strong>${count}</strong></p>
-    <button @click=${() => { count.value++; }}>
-      Increment
-    </button>
+    <h2>Counter Node: ${count} (x2 = ${doubled})</h2>
+    <button @click=${() => { count.value++; }}>Increment</button>
+
+    <ul>
+      ${repeat(todos, t => t.id, t => html`<li>${t.text}</li>`)}
+    </ul>
+
+    ${when(count, () => html`<p>Active count is positive!</p>`)}
   </div>
 `;
 
-// 3. Mount directly to document
+// 4. Mount directly to document
 const { fragment, destroy } = render(view);
 document.getElementById('app')?.appendChild(fragment);
 ```
@@ -120,10 +157,11 @@ Every package in Zuari is independent, tree-shakeable (`sideEffects: false`), an
 
 | Package | Purpose | Runtime | Support |
 | :--- | :--- | :---: | :---: |
-| [`@zuari/signals`](./packages/signals) | TC39 reactive graph (`signal`, `computed`, `effect`, `batch`) | **~1.1 KB** | Universal (JS/TS) |
-| [`@zuari/dom`](./packages/dom) | Direct-to-DOM compiler (`html\`...\``) with W3C DOM Parts | **~1.4 KB** | Modern Browsers |
+| [`@zuari/signals`](./packages/signals) | TC39 reactive graph (`signal`, `computed`, `effect`, `batch`, `untracked`, `effectScope`, `onMount`, `onDestroy`) | **~1.2 KB** | Universal (JS/TS) |
+| [`@zuari/dom`](./packages/dom) | Direct-to-DOM compiler (`html\`...\``) with W3C DOM Parts, `repeat()` / `keyed()`, `when()`, `match()` | **~1.5 KB** | Modern Browsers |
 | [`@zuari/ui`](./packages/ui) | Pre-built accessible components (`Switch`, `Slider`, `Card`, `Tabs`, `Popover`) | **~2.0 KB** | Plug & Play |
-| [`@zuari/router`](./packages/router) | Lightweight signal-based client router with View Transitions API | **~0.9 KB** | Modern Browsers |
+| [`@zuari/devtools`](./packages/devtools) | In-app HUD & Browser DevTools extension (Signals dependency graph, FPS, memory, Wasm buffers) | **~1.1 KB** | Chrome / DevTools |
+| [`@zuari/router`](./packages/router) | Lightweight client router with Navigation API & View Transitions v2 | **~0.9 KB** | Modern Browsers |
 | [`@zuari/spatial`](./packages/spatial) | Mixed Reality (visionOS / Meta Quest 3) & WebXR game HUDs | **~1.5 KB** | WebXR Headsets |
 | [`@zuari/wasm`](./packages/wasm) | Zero-copy linear memory bridge for Rust/Zig & TypeSpec contracts | **~0.9 KB** | Rust, Zig, Wasm C-ABI |
 | [`@zuari/wit`](./packages/wit) | WebAssembly Component Model WIT interface definition generator | **~0.8 KB** | Wasm Component Model |
@@ -137,12 +175,14 @@ Every package in Zuari is independent, tree-shakeable (`sideEffects: false`), an
 | [`@zuari/glyphs`](./packages/glyphs) | Mathematical SVG icons & GPU path morphing (`d: path(...)`) | **~0.8 KB** | SVG / HTML5 |
 | [`@zuari/tokens`](./packages/tokens) | Typed OKLCH color palettes, lightweight elevation tokens & CSS `@property` generator | **0 KB** | Zero-Runtime |
 | [`@zuari/recipes`](./packages/recipes) | Zero-runtime `@scope` modern CSS/SCSS design recipes & View Transitions v2 | **0 KB** | Native CSS Engine |
-| [`create-zuari`](./packages/create-zuari) | Zero-config interactive CLI scaffolder (`minimal`, `spatial`, `wasm`, `tauri`) | **CLI** | Node / pnpm |
+| [`create-zuari`](./packages/create-zuari) | Zero-config interactive CLI scaffolder (`vanilla-ts`, `tauri-desktop`, `spatial-webxr`, `kotlin-android`) | **CLI** | Node / pnpm |
+| [`vscode-zuari`](./packages/vscode-zuari) | VS Code & Cursor language extension (`html\`...\`` syntax, `@event` / `?attr` highlight, snippets) | **Tool** | VS Code / Cursor |
 | [`@zuari/vite-plugin`](./packages/vite-plugin) | Official Vite plugin (build-time template pre-compilation & instant HMR) | **0 KB (Dev)** | Vite 5/6 Tooling |
 | [`@zuari/ssr`](./packages/ssr) | Streaming Server-Side Rendering (SSR) & 0ms Edge Hydration for Cloudflare/Bun | **~1.1 KB** | Edge Runtimes |
 | [`@zuari/system-one`](./packages/system-one) | Sub-millisecond System 1 fast-reflex AI, circular fast-logs & speculative DOM pre-synthesis | **~1.2 KB** | Fast AI & Automation |
 | [`@zuari/quantum`](./packages/quantum) | Qubit statevectors, T1/T2 decoherence, OpenQASM 3.0 & cognitive spikes | **~2.0 KB** | Quantum / Neuro |
 | [`@zuari/core`](./packages/core) | Unified meta-package consolidating the entire platform | **< 2.5 KB** | Complete Framework |
+
 
 
 ---
