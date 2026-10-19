@@ -130,19 +130,20 @@ Every package in Zuari is independent, tree-shakeable (`sideEffects: false`), an
 | [`@zuari/webgpu`](./packages/webgpu) | Hardware WebGPU compute shader pipeline bound to reactive signals | **~1.4 KB** | WebGPU Devices |
 | [`@zuari/ai`](./packages/ai) | On-device WebLLM/transformers.js token streaming & embeddings | **~1.2 KB** | Modern Browsers |
 | [`@zuari/sync`](./packages/sync) | Real-time CRDT / BroadcastChannel peer-to-peer state synchronization | **~1.1 KB** | Local-First / P2P |
-| [`@zuari/hardware`](./packages/hardware) | WebHID, WebSerial, and WebBluetooth reactive peripheral bridges | **~1.0 KB** | Hardware Peripherals |
-| [`@zuari/lua`](./packages/lua) | Embedded Lua runtime scripting bridge for game HUDs & modding | **~0.9 KB** | Game Engines & Scripts |
-| [`@zuari/headless`](./packages/headless) | Headless logic (`Dialog`, `CommandPalette`, `AnchorTooltip`, `Invoker`) | **~1.8 KB** | Framework Agnostic |
-| [`@zuari/glyphs`](./packages/glyphs) | Mathematical SVG icons & GPU path morphing (`d: path(...)`) | **~0.8 KB** | SVG / HTML5 |
-| [`@zuari/tokens`](./packages/tokens) | Typed OKLCH color palettes & CSS `@property` generator | **0 KB** | Zero-Runtime |
-| [`@zuari/recipes`](./packages/recipes) | Zero-runtime `@scope` modern CSS/SCSS design recipes | **0 KB** | Native CSS Engine |
+| [`@zuari/presets`](./packages/presets) | Minimal & artistic UI/UX presets (`paper`, `blossom`, `matcha`, `twilight`, `midnight`), lightweight elevations (`flat`, `soft`, `float`, `halo`), smooth animations (`floatUp`, `popIn`, `slideIn`), & templates (`createStoryCard`, `createBentoGrid`) | **~0.9 KB** | Design & Motion |
 | [`@zuari/hardware`](./packages/hardware) | Tactical ballistic optics, FPV drone OSD, KaiOS D-Pad/T9, rotary wheels & E-Ink/waveguide modes | **~1.1 KB** | IoT, Drones, Wearables |
+| [`@zuari/lua`](./packages/lua) | Embedded Lua runtime scripting bridge for game HUDs & modding | **~0.9 KB** | Game Engines & Scripts |
+| [`@zuari/headless`](./packages/headless) | Headless logic (`Dialog`, `CommandPalette`, `AnchorTooltip`, HTML Invoker Commands `commandfor`/`command`, CSS `reading-flow`) | **~1.8 KB** | Framework Agnostic |
+| [`@zuari/glyphs`](./packages/glyphs) | Mathematical SVG icons & GPU path morphing (`d: path(...)`) | **~0.8 KB** | SVG / HTML5 |
+| [`@zuari/tokens`](./packages/tokens) | Typed OKLCH color palettes, lightweight elevation tokens & CSS `@property` generator | **0 KB** | Zero-Runtime |
+| [`@zuari/recipes`](./packages/recipes) | Zero-runtime `@scope` modern CSS/SCSS design recipes & View Transitions v2 | **0 KB** | Native CSS Engine |
 | [`create-zuari`](./packages/create-zuari) | Zero-config interactive CLI scaffolder (`minimal`, `spatial`, `wasm`, `tauri`) | **CLI** | Node / pnpm |
 | [`@zuari/vite-plugin`](./packages/vite-plugin) | Official Vite plugin (build-time template pre-compilation & instant HMR) | **0 KB (Dev)** | Vite 5/6 Tooling |
 | [`@zuari/ssr`](./packages/ssr) | Streaming Server-Side Rendering (SSR) & 0ms Edge Hydration for Cloudflare/Bun | **~1.1 KB** | Edge Runtimes |
 | [`@zuari/system-one`](./packages/system-one) | Sub-millisecond System 1 fast-reflex AI, circular fast-logs & speculative DOM pre-synthesis | **~1.2 KB** | Fast AI & Automation |
 | [`@zuari/quantum`](./packages/quantum) | Qubit statevectors, T1/T2 decoherence, OpenQASM 3.0 & cognitive spikes | **~2.0 KB** | Quantum / Neuro |
 | [`@zuari/core`](./packages/core) | Unified meta-package consolidating the entire platform | **< 2.5 KB** | Complete Framework |
+
 
 ---
 

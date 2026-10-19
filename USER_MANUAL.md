@@ -114,7 +114,41 @@ if (aiButton.tooltipElement) {
 }
 ```
 
+### Step 3: Minimal & Artistic UI/UX Presets, Lightweight Elevations & Templates (`@zuari/presets`)
+Apply easy-to-remember themes (`'paper'`, `'blossom'`, `'matcha'`, `'twilight'`, `'midnight'`), whisper-light elevations (`'flat'`, `'soft'`, `'float'`, `'halo'`), smooth keyframe animations (`'floatUp'`, `'popIn'`, `'slideIn'`, `'brushIn'`, `'softPulse'`, `'ripple'`), and ready-made templates:
+
+```typescript
+import { createDesignPresets, createStoryCard, createBentoGrid } from '@zuari/presets';
+
+const design = createDesignPresets({
+  theme: 'paper',
+  elevation: 'soft',
+  spacing: 'balanced',
+  surface: 'paper'
+});
+
+const card = createStoryCard({
+  tag: 'Studio',
+  stamp: 'ART',
+  title: 'Human Artistic Design',
+  subtitle: 'Lightweight paper elevation with smooth anime-style motion.',
+  elevation: 'soft',
+  surface: 'paper',
+  animation: 'floatUp'
+});
+
+const bento = createBentoGrid({
+  columns: 2,
+  spacing: 'airy',
+  staggerAnimation: 'popIn',
+  items: [card]
+});
+
+document.body.appendChild(bento);
+```
+
 ---
+
 
 ## 5. Developer & Architecture Guidelines
 

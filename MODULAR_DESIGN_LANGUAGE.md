@@ -190,3 +190,29 @@ export const SubmitButton = (props) => {
 | **Theme Swapping via `@scope`** | Switch entire themes by applying `data-theme="dark"` on any sub-tree | No full-page re-renders; browser updates CSS variables instantly. |
 | **Token Math with `calc()` & `color-mix()`** | Compute hover states, disabled states, and complementary tones dynamically | Eliminates hundreds of hardcoded hex codes. |
 | **Headless + Skin Segregation** | Swap the visual skin (Material, Apple-like, Neo-Brutalist) without rewriting business logic | 100% reusable headless component library. |
+
+---
+
+## 8. Built-In Minimal & Artistic UI/UX Presets (`@zuari/presets`)
+
+To make modular design effortless and intuitive with **simple, memorable English names**:
+
+### Theme Presets (`ThemePresetName`)
+* **`'paper'`**: Warm minimal art paper, charcoal ink text, and red studio stamp accent.
+* **`'blossom'`**: Soft anime spring daylight, pastel pink blush, and clean sky tones.
+* **`'matcha'`**: Calm botanical garden greens, soft sunlight, and natural warmth.
+* **`'twilight'`**: Anime sunset dusk — deep indigo-violet sky with warm lantern amber glow.
+* **`'midnight'`**: Deep spatial dark glass with luminous cyan accents.
+
+### Lightweight Elevations (`ElevationPreset`)
+* **`'flat'`**: Zero lift with a crisp `1px` subtle border.
+* **`'soft'`**: Whisper-light `2px` paper lift for everyday cards and inputs.
+* **`'float'`**: Smooth floating panel for popovers, menus, and active tiles.
+* **`'halo'`**: Atmospheric top-layer glow for modals, dialogs, and command bars.
+
+### Smooth Animation Presets (`AnimationPresetName`)
+* **`'floatUp'`**, **`'popIn'`**, **`'slideIn'`**, **`'brushIn'`**, **`'softPulse'`**, and **`'ripple'`**, driven by native Web Animations API (`animatePreset` & `staggerPreset`).
+
+### Ready-Made Templates
+* **`createStoryCard`**, **`createBentoGrid`**, and **`createStampBadge`** for instant, cohesive layouts.
+

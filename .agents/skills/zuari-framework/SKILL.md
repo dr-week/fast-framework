@@ -33,5 +33,6 @@ document.getElementById('app')?.appendChild(fragment);
 ```
 
 ## Reference Files
-- Read `llms.txt` for the complete package decision matrix.
-- Read `llms-full.txt` for copy-pasteable recipes across `@zuari/hardware`, `@zuari/spatial`, `@zuari/wasm`, and `@zuari/webgpu`.
+- Read `llms.txt` for the complete package decision matrix (including `@zuari/presets` for minimal & artistic themes `'paper'`, `'blossom'`, `'matcha'`, `'twilight'`, `'midnight'`, lightweight elevations `'flat'`, `'soft'`, `'float'`, `'halo'`, and animations `'floatUp'`, `'popIn'`, `'slideIn'`).
+- Read `llms-full.txt` for copy-pasteable recipes across `@zuari/presets`, `@zuari/hardware`, `@zuari/spatial`, `@zuari/wasm`, and `@zuari/webgpu`.
+

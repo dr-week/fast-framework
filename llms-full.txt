@@ -170,3 +170,91 @@ const compute = createComputeShader({
 
 await compute.dispatch(1);
 ```
+
+---
+
+## 6. `@zuari/presets` (Minimal & Artistic UI/UX Presets, Lightweight Elevations, Smooth Animations & Templates)
+
+```typescript
+import {
+  createDesignPresets,
+  animatePreset,
+  staggerPreset,
+  createStoryCard,
+  createBentoGrid,
+  createStampBadge
+} from '@zuari/presets';
+
+// 1. Reactive theme ('paper' | 'blossom' | 'matcha' | 'twilight' | 'midnight'),
+//    lightweight elevation ('flat' | 'soft' | 'float' | 'halo'),
+//    spacing ('compact' | 'balanced' | 'airy'), and surface ('paper' | 'frosted' | 'canvas' | 'cel')
+const design = createDesignPresets({
+  theme: 'paper',
+  elevation: 'soft',
+  spacing: 'balanced',
+  surface: 'paper'
+});
+
+// Switch theme or elevation reactively at any time:
+design.setTheme('twilight');
+design.setElevation('float');
+
+// 2. Ready-to-use artistic UI templates with built-in animations ('floatUp' | 'popIn' | 'slideIn' | 'brushIn' | 'softPulse' | 'ripple')
+const card1 = createStoryCard({
+  tag: 'Chapter 01',
+  stamp: 'NEW',
+  title: 'Minimal Canvas',
+  subtitle: 'Whisper-light elevation and smooth motion.',
+  elevation: 'soft',
+  surface: 'paper',
+  animation: 'floatUp'
+});
+
+const card2 = createStoryCard({
+  tag: 'Chapter 02',
+  title: 'Twilight Studio',
+  subtitle: 'Crisp anime-inspired keyframe transitions.',
+  elevation: 'float',
+  surface: 'frosted',
+  animation: 'popIn'
+});
+
+const grid = createBentoGrid({
+  columns: 2,
+  spacing: 'airy',
+  staggerAnimation: 'floatUp',
+  items: [card1, card2]
+});
+
+document.getElementById('app')!.appendChild(grid);
+```
+
+---
+
+## 7. `@zuari/sync`, `@zuari/ai`, `@zuari/router` & `@zuari/wit` (2026–2028 Horizon Primitives)
+
+```typescript
+import { syncedSignal } from '@zuari/sync';
+import { createPromptStream } from '@zuari/ai';
+import { createRouter } from '@zuari/router';
+import { bindWITComponentRecord } from '@zuari/wit';
+
+// Local-First CRDT Signal (OPFS + BroadcastChannel + binary CRDT deltas)
+const docTitle = syncedSignal('doc-title', 'Untitled Note');
+docTitle.value = 'Zuari Architecture';
+
+// Zero-VDOM On-Device AI Token Streaming directly into a DOM node via Text.appendData()
+const aiStream = createPromptStream();
+aiStream.bindChildPart(document.getElementById('ai-output')!);
+await aiStream.stream('Summarize zero-VDOM reactivity');
+
+// < 1 KB Router with Navigation API + Speculation Rules prerendering + View Transitions Level 2
+const router = createRouter({
+  routes: [
+    { path: '/', action: () => 'Home', prerender: 'moderate' },
+    { path: '/notes/:id', action: (params) => `Note ${params.id}` }
+  ]
+});
+await router.navigate('/notes/42');
+```
+

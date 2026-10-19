@@ -49,11 +49,16 @@ Users do **NOT** need to adopt a monolith. Any individual package or subpath can
 - `@zuari/ui` (~2.0 KB): `createSwitch`, `createSlider`, `createTabs`, `createCard`, `createBadge`, `createPopover`
 - `@zuari/headless` (~1.8 KB): `createDialog`, `createCommandPalette`, `generateAnchorName`, `setElementAnchor`, `tetherToAnchor`
 - `@zuari/glyphs` (~0.8 KB): `createMorphGlyph` (GPU SVG `d: path(...)` vector interpolation)
-- `@zuari/tokens` (0 KB runtime): OKLCH perceptual color tokens & CSS `@property` generator
-- `@zuari/sync` (~1.0 KB): Local-first CRDT (`LWWMap`, `GCounter`) reactive signals
-- `@zuari/ai` (~0.9 KB): Streaming LLM token-buffer signals & tool-call UI state machines
-- `@zuari/router` (~0.8 KB): View-Transition native URL pattern router
+- `@zuari/tokens` (0 KB runtime): OKLCH perceptual color tokens (`paper`, `blossom`, `matcha`, `twilight`, `midnight`), lightweight elevations (`flat`, `soft`, `float`, `halo`) & CSS `@property` generator
+- `@zuari/presets` (~0.9 KB): `createDesignPresets`, `animatePreset`, `staggerPreset` (`floatUp`, `popIn`, `slideIn`, `brushIn`, `softPulse`, `ripple`), `createStoryCard`, `createBentoGrid`, `createStampBadge`
+- `@zuari/sync` (~1.0 KB): Local-first CRDT (`syncedSignal`, `encodeCRDTDelta`, `decodeCRDTDelta`) backed by OPFS, BroadcastChannel & binary deltas
+- `@zuari/ai` (~0.9 KB): `createPromptStream` (zero-latency `ChildPart` `Text.appendData` token streaming for `window.ai`) & `createWebNNGraph`
+- `@zuari/router` (~0.8 KB): `createRouter` combining W3C Navigation API, Speculation Rules API (`<script type="speculationrules">`), and View Transitions Level 2
+- `@zuari/wit` (~0.8 KB): `parseWIT`, `generateWITSignalBindings`, `bindWITComponentRecord` (WASI 0.2 Component Model zero-copy signal bindings)
+- `@zuari/system-one` (~1.2 KB): Sub-millisecond System 1 fast-reflex AI, 32-byte circular fast-log ring buffer & speculative DOM pre-synthesis
+- `@zuari/quantum` (~2.0 KB): Qubit statevectors, T1/T2 decoherence, OpenQASM 3.0 & cognitive spike streams
 - `@zuari/core` (< 2.5 KB core): Unified barrel re-exporting all Zuari modules.
+
 
 ---
 
