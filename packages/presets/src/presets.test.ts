@@ -8,6 +8,7 @@ import {
   createStoryCard,
   createBentoGrid,
   createStampBadge,
+  createMinimalDock,
   ANIMATION_PRESETS
 } from './index.js';
 import { THEME_PRESETS, generateCssVariables } from '@zuari/tokens';
@@ -130,4 +131,27 @@ describe('@zuari/presets (Easy-to-Use Minimal & Artistic UI/UX Presets & Templat
     expect(stamp.className).toBe('zuari-stamp-badge');
     expect(stamp.textContent).toBe('STUDIO');
   });
+
+  it('renders a minimalistic floating dock with responsive item interactions', () => {
+    const onSelect = vi.fn();
+    const dock = createMinimalDock({
+      items: [
+        { id: 'home', label: 'Home', active: true, onClick: onSelect },
+        { id: 'settings', label: 'Settings', badge: '3', onClick: onSelect }
+      ],
+      elevation: 'float',
+      surface: 'frosted'
+    });
+
+    expect(dock.classList.contains('zuari-minimal-dock')).toBe(true);
+    expect(dock.getAttribute('role')).toBe('toolbar');
+    expect(dock.getAttribute('data-zuari-elevation')).toBe('float');
+    expect(dock.children).toHaveLength(2);
+
+    const firstBtn = dock.children[0] as HTMLButtonElement;
+    expect(firstBtn.getAttribute('data-active')).toBe('true');
+    firstBtn.click();
+    expect(onSelect).toHaveBeenCalled();
+  });
 });
+

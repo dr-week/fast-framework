@@ -112,3 +112,55 @@ export function createStampBadge(label: string): HTMLSpanElement {
   stamp.textContent = label;
   return stamp;
 }
+
+/**
+ * Creates a minimalist floating dock navigation bar with vast functionality:
+ * - Fluid translucent backdrop blur
+ * - Zero-clutter icons with hover-tethered tooltips
+ * - Built-in spring ripple feedback
+ */
+export function createMinimalDock(options: import('./types.js').MinimalDockOptions): HTMLElement {
+  const dock = document.createElement('nav');
+  dock.className = 'zuari-minimal-dock';
+  dock.setAttribute('role', 'toolbar');
+  dock.setAttribute('aria-label', 'Dock Navigation');
+
+  applyElevationPreset(dock, options.elevation ?? 'float');
+  applySurfacePreset(dock, options.surface ?? 'frosted');
+
+  for (const item of options.items) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'zuari-dock-item-btn';
+    btn.setAttribute('aria-label', item.label);
+    if (item.active) btn.setAttribute('data-active', 'true');
+
+    if (item.icon instanceof Element) {
+      btn.appendChild(item.icon);
+    } else if (typeof item.icon === 'string') {
+      const span = document.createElement('span');
+      span.innerHTML = item.icon;
+      btn.appendChild(span);
+    } else {
+      btn.textContent = item.label.slice(0, 2).toUpperCase();
+    }
+
+    if (item.badge) {
+      const badge = document.createElement('span');
+      badge.className = 'zuari-dock-badge';
+      badge.textContent = item.badge;
+      btn.appendChild(badge);
+    }
+
+    btn.addEventListener('click', () => {
+      animatePreset(btn, 'ripple');
+      item.onClick?.();
+    });
+
+    dock.appendChild(btn);
+  }
+
+  animatePreset(dock, 'floatUp');
+  return dock;
+}
+

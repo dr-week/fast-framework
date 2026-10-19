@@ -118,3 +118,20 @@ export interface SectionHeaderTemplateOptions {
   readonly align?: 'left' | 'center' | undefined;
 }
 
+export interface MinimalDockItem {
+  id: string;
+  icon?: string | SVGElement;
+  label: string;
+  badge?: string;
+  active?: boolean;
+  onClick?: () => void;
+}
+
+export interface MinimalDockOptions {
+  items: MinimalDockItem[];
+  elevation?: ElevationPreset;
+  surface?: SurfacePreset;
+  position?: 'bottom' | 'top' | 'left' | 'right';
+}
+
+
