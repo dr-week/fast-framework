@@ -51,8 +51,10 @@ export interface NovaThemeContract {
   colors: {
     background: OKLCHColor;
     surface: OKLCHColor;
+    surfaceElevated: OKLCHColor;
     surfaceHover: OKLCHColor;
     border: OKLCHColor;
+    borderMuted: OKLCHColor;
     glyph: OKLCHColor;
     glyphActive: OKLCHColor;
     accent: OKLCHColor;

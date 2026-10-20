@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import {
   createKotlinBridge,
+  createAndroidImeBridge,
   DEFAULT_MATERIAL_LIGHT,
   DEFAULT_MATERIAL_DARK
 } from './index.js';
@@ -75,5 +76,37 @@ describe('@zuari/kotlin Native Android Bridge & Theme Synthesis', () => {
 
     delete (window as any).Android;
     delete (window as any).__zuariKotlinDispatcher;
+  });
+
+  it('manages Android IME keyboard lifecycle, text buffer, haptics, and screenshot sync (RizzBoard Integration)', async () => {
+    const bridge = createKotlinBridge();
+    const ime = createAndroidImeBridge(bridge);
+
+    expect(ime.typedBuffer.value).toBe('');
+    expect(ime.lastScreenshotUri.value).toBeNull();
+    expect(ime.clipboardHistory.value.length).toBe(0);
+
+    // Commit characters
+    await ime.commitText('H');
+    await ime.commitText('i');
+    expect(ime.typedBuffer.value).toBe('Hi');
+
+    // Delete backward
+    await ime.deleteBackward();
+    expect(ime.typedBuffer.value).toBe('H');
+
+    // Send enter / action
+    await ime.sendEnter();
+    expect(ime.typedBuffer.value).toBe('');
+
+    // Trigger screenshot event from Android native observer
+    (window as any).__zuariKotlinDispatcher('screenshotDetected', JSON.stringify({ uri: 'content://media/external/images/media/420' }));
+    expect(ime.lastScreenshotUri.value).toBe('content://media/external/images/media/420');
+
+    // Trigger clipboard sync event
+    (window as any).__zuariKotlinDispatcher('clipboardAdded', JSON.stringify({ text: 'https://zuari.dev' }));
+    expect(ime.clipboardHistory.value[0]).toBe('https://zuari.dev');
+
+    ime.destroy();
   });
 });

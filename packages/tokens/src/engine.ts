@@ -16,7 +16,7 @@ import { THEME_PRESETS, darkElevations, lightElevations, motionPresets } from '.
 import { applyThemePreset } from './generator.js';
 
 export interface ThemeLegoBricks {
-  /** Color palette brick (background, surface, accent, text/glyph, border, danger) */
+  /** Color palette brick (background, surface, surfaceElevated, accent, text/glyph, border, borderMuted, danger) */
   colors?: Partial<NovaThemeContract['colors']>;
   /** Elevation brick (flat, soft, float, halo) */
   elevations?: Partial<NovaElevationsContract>;

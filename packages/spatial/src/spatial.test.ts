@@ -3,6 +3,7 @@ import { createSpatialAnchor, bindAnchorToElement } from './anchor/anchor.js';
 import { createPinchTracker } from './gesture/gesture.js';
 import { createSpatialSession } from './session/session.js';
 import { triggerSpatialHaptic } from './haptics/haptics.js';
+import { createSpatialVolumeController } from './volume/index.js';
 
 describe('@zuari/spatial', () => {
   describe('Spatial Anchor 3D Matrix Math & DOM Binding', () => {
@@ -95,6 +96,35 @@ describe('@zuari/spatial', () => {
       const result = await triggerSpatialHaptic(mockGamepad, { durationMs: 50, intensity: 0.8 });
       expect(result).toBe(true);
       expect(pulseSpy).toHaveBeenCalledWith(0.8, 50);
+    });
+  });
+
+  describe('3D Volume & Platter Physics (ANY3D Integration)', () => {
+    it('manages 3D build plate bounds, centering, and out-of-bounds warning', () => {
+      const volume = createSpatialVolumeController({ width: 220, depth: 220, height: 250, origin: 'center' });
+      expect(volume.isOutsideBounds.value).toBe(false);
+
+      // Model within bounds (100x100x50 mm)
+      volume.setModelBounds({
+        min: { x: -50, y: 0, z: -50 },
+        max: { x: 50, y: 50, z: 50 }
+      });
+
+      expect(volume.modelDimensions.value).toEqual({ x: 100, y: 50, z: 100 });
+      expect(volume.isOutsideBounds.value).toBe(false);
+      expect(volume.boundsUtilizationPct.value).toBeGreaterThan(0);
+
+      // Translate model outside plate boundary (halfX is 110)
+      volume.translate({ x: 80 }); // max X becomes 50 + 80 = 130 > 110
+      expect(volume.isOutsideBounds.value).toBe(true);
+
+      // Auto-center returns model safely onto platter
+      volume.autoCenterAndDrop();
+      expect(volume.isOutsideBounds.value).toBe(false);
+
+      // Scale up until it exceeds volume limits
+      volume.scale(2.5); // size becomes 250x125x250, width 250 > 220
+      expect(volume.isOutsideBounds.value).toBe(true);
     });
   });
 });

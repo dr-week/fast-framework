@@ -10,21 +10,21 @@ import type {
  * Uses airy, whisper-thin borders and subtle depth instead of heavy drop shadows.
  */
 export const darkElevations: NovaElevationsContract = {
-  flat: '0 1px 2px oklch(0% 0 0 / 0.14), 0 0 0 1px oklch(100% 0 0 / 0.06)',
-  soft: '0 4px 14px -2px oklch(0% 0 0 / 0.22), 0 0 0 1px oklch(100% 0 0 / 0.08)',
-  float: '0 10px 28px -6px oklch(0% 0 0 / 0.28), 0 2px 6px oklch(0% 0 0 / 0.12)',
-  halo: '0 20px 44px -10px oklch(0% 0 0 / 0.36), 0 0 24px oklch(75% 0.15 200 / 0.12)'
+  flat: '0 0 0 1px oklch(100% 0 0 / 0.16)',
+  soft: '0 4px 16px -2px oklch(0% 0 0 / 0.45), 0 0 0 1px oklch(100% 0 0 / 0.18)',
+  float: '0 12px 32px -6px oklch(0% 0 0 / 0.6), 0 0 0 1px oklch(100% 0 0 / 0.22)',
+  halo: '0 20px 48px -8px oklch(0% 0 0 / 0.75), 0 0 0 1px oklch(100% 0 0 / 0.28), 0 0 24px oklch(75% 0.15 200 / 0.2)'
 };
 
 /**
- * Lightweight Daylight Elevations (`flat`, `soft`, `float`, `halo`)
- * Feels like layered art paper in natural sunlight.
+ * High-Contrast Daylight Elevations (`flat`, `soft`, `float`, `halo`)
+ * Crisp boxy outlines and defined separation so panels never blend into the page.
  */
 export const lightElevations: NovaElevationsContract = {
-  flat: '0 1px 2px oklch(20% 0.02 60 / 0.04), 0 0 0 1px oklch(20% 0.02 60 / 0.07)',
-  soft: '0 4px 12px -2px oklch(20% 0.02 60 / 0.06), 0 1px 3px oklch(20% 0.02 60 / 0.04)',
-  float: '0 10px 24px -6px oklch(20% 0.02 60 / 0.08), 0 2px 6px oklch(20% 0.02 60 / 0.04)',
-  halo: '0 18px 40px -8px oklch(20% 0.02 60 / 0.11), 0 4px 12px oklch(20% 0.02 60 / 0.05)'
+  flat: '0 0 0 1px oklch(20% 0.02 60 / 0.18)',
+  soft: '0 4px 16px -2px oklch(20% 0.02 60 / 0.12), 0 0 0 1px oklch(20% 0.02 60 / 0.18)',
+  float: '0 12px 30px -6px oklch(20% 0.02 60 / 0.16), 0 0 0 1px oklch(20% 0.02 60 / 0.22)',
+  halo: '0 20px 44px -8px oklch(20% 0.02 60 / 0.2), 0 0 0 1px oklch(20% 0.02 60 / 0.28)'
 };
 
 /**
@@ -51,8 +51,8 @@ const baseSpacing = {
 
 const baseRadii = {
   none: '0',
-  sm: '6px',
-  squircle: '14px',
+  sm: '4px',
+  squircle: '8px',
   full: '9999px'
 } as const;
 
@@ -62,10 +62,12 @@ const baseRadii = {
 export const midnightTokens: NovaThemeContract = {
   name: 'midnight',
   colors: {
-    background: 'oklch(14% 0.015 260)',
-    surface: 'oklch(19% 0.02 260 / 0.7)',
-    surfaceHover: 'oklch(25% 0.03 260 / 0.85)',
-    border: 'oklch(100% 0 0 / 0.09)',
+    background: 'oklch(12% 0.015 260)',
+    surface: 'oklch(18% 0.02 260 / 0.85)',
+    surfaceElevated: 'oklch(22% 0.025 260 / 0.95)',
+    surfaceHover: 'oklch(26% 0.03 260 / 0.9)',
+    border: 'oklch(100% 0 0 / 0.16)',
+    borderMuted: 'oklch(100% 0 0 / 0.08)',
     glyph: 'oklch(78% 0.015 260)',
     glyphActive: 'oklch(96% 0.01 260)',
     accent: 'oklch(75% 0.18 190)',
@@ -86,10 +88,12 @@ export const aetherDarkTokens: NovaThemeContract = midnightTokens;
 export const paperTokens: NovaThemeContract = {
   name: 'paper',
   colors: {
-    background: 'oklch(97% 0.012 85)',
-    surface: 'oklch(99% 0.008 85 / 0.82)',
-    surfaceHover: 'oklch(95% 0.016 85 / 0.92)',
-    border: 'oklch(25% 0.02 70 / 0.11)',
+    background: 'oklch(96% 0.012 85)',
+    surface: 'oklch(99% 0.005 85)',
+    surfaceElevated: 'oklch(100% 0 0)',
+    surfaceHover: 'oklch(94% 0.018 85)',
+    border: 'oklch(25% 0.02 70 / 0.22)',
+    borderMuted: 'oklch(25% 0.02 70 / 0.12)',
     glyph: 'oklch(38% 0.02 70)',
     glyphActive: 'oklch(18% 0.015 70)',
     accent: 'oklch(58% 0.21 32)',
@@ -99,7 +103,7 @@ export const paperTokens: NovaThemeContract = {
   radii: {
     none: '0',
     sm: '4px',
-    squircle: '10px',
+    squircle: '8px',
     full: '9999px'
   },
   elevations: lightElevations,
@@ -112,10 +116,12 @@ export const paperTokens: NovaThemeContract = {
 export const blossomTokens: NovaThemeContract = {
   name: 'blossom',
   colors: {
-    background: 'oklch(98% 0.01 350)',
-    surface: 'oklch(99% 0.008 350 / 0.78)',
-    surfaceHover: 'oklch(96% 0.02 350 / 0.9)',
-    border: 'oklch(45% 0.08 350 / 0.12)',
+    background: 'oklch(97% 0.012 350)',
+    surface: 'oklch(99% 0.006 350 / 0.95)',
+    surfaceElevated: 'oklch(100% 0 0)',
+    surfaceHover: 'oklch(95% 0.022 350 / 0.95)',
+    border: 'oklch(45% 0.08 350 / 0.22)',
+    borderMuted: 'oklch(45% 0.08 350 / 0.12)',
     glyph: 'oklch(42% 0.035 340)',
     glyphActive: 'oklch(22% 0.04 340)',
     accent: 'oklch(70% 0.17 352)',
@@ -124,8 +130,8 @@ export const blossomTokens: NovaThemeContract = {
   spacing: baseSpacing,
   radii: {
     none: '0',
-    sm: '8px',
-    squircle: '16px',
+    sm: '4px',
+    squircle: '8px',
     full: '9999px'
   },
   elevations: lightElevations,
@@ -138,10 +144,12 @@ export const blossomTokens: NovaThemeContract = {
 export const matchaTokens: NovaThemeContract = {
   name: 'matcha',
   colors: {
-    background: 'oklch(97% 0.014 135)',
-    surface: 'oklch(99% 0.01 135 / 0.8)',
-    surfaceHover: 'oklch(94% 0.022 135 / 0.9)',
-    border: 'oklch(30% 0.04 145 / 0.11)',
+    background: 'oklch(96% 0.015 135)',
+    surface: 'oklch(99% 0.008 135 / 0.95)',
+    surfaceElevated: 'oklch(100% 0 0)',
+    surfaceHover: 'oklch(93% 0.025 135 / 0.95)',
+    border: 'oklch(30% 0.04 145 / 0.22)',
+    borderMuted: 'oklch(30% 0.04 145 / 0.12)',
     glyph: 'oklch(38% 0.04 145)',
     glyphActive: 'oklch(20% 0.04 145)',
     accent: 'oklch(62% 0.15 148)',
@@ -150,8 +158,8 @@ export const matchaTokens: NovaThemeContract = {
   spacing: baseSpacing,
   radii: {
     none: '0',
-    sm: '6px',
-    squircle: '14px',
+    sm: '4px',
+    squircle: '8px',
     full: '9999px'
   },
   elevations: lightElevations,
@@ -164,10 +172,12 @@ export const matchaTokens: NovaThemeContract = {
 export const twilightTokens: NovaThemeContract = {
   name: 'twilight',
   colors: {
-    background: 'oklch(17% 0.035 275)',
-    surface: 'oklch(23% 0.04 275 / 0.72)',
-    surfaceHover: 'oklch(29% 0.05 275 / 0.86)',
-    border: 'oklch(90% 0.06 55 / 0.14)',
+    background: 'oklch(15% 0.035 275)',
+    surface: 'oklch(20% 0.04 275 / 0.85)',
+    surfaceElevated: 'oklch(25% 0.045 275 / 0.95)',
+    surfaceHover: 'oklch(30% 0.05 275 / 0.9)',
+    border: 'oklch(90% 0.06 55 / 0.22)',
+    borderMuted: 'oklch(90% 0.06 55 / 0.12)',
     glyph: 'oklch(82% 0.03 275)',
     glyphActive: 'oklch(98% 0.015 65)',
     accent: 'oklch(76% 0.17 55)',

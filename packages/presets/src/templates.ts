@@ -22,6 +22,11 @@ export function createStoryCard(options: StoryCardTemplateOptions): HTMLElement 
   const card = document.createElement('article');
   card.className = 'zuari-story-card';
 
+  // Apply contrasting boxiness
+  card.style.border = '1px solid var(--nova-color-border, oklch(100% 0 0 / 0.18))';
+  card.style.background = 'var(--nova-color-surface-elevated, var(--nova-color-surface, #151821))';
+  card.style.borderRadius = 'var(--nova-radius-squircle, 8px)';
+
   applyElevationPreset(card, options.elevation ?? 'soft');
   applySurfacePreset(card, options.surface ?? 'paper');
 

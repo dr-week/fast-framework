@@ -232,3 +232,5 @@ fun ${name}(
 }
 
 export * from './types.js';
+export * from './ime.js';
+

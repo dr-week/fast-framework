@@ -9,7 +9,9 @@ import {
   createDpadNav,
   createApplianceBridge,
   createDisplayMode,
-  createPrinterTelemetry
+  createPrinterTelemetry,
+  createWifiRssiSignal,
+  createStreamTelemetry
 } from './index.js';
 
 describe('@zuari/hardware Modular IoT & Futuristic Hardware Suite', () => {
@@ -155,6 +157,25 @@ describe('@zuari/hardware Modular IoT & Futuristic Hardware Suite', () => {
     expect(printer.homeAxes('ALL')).toBe('G28\n');
     expect(printer.emergencyStop()).toBe('M112\n');
     expect(printer.state.value).toBe('ERROR');
+  });
+
+  it('tracks Wi-Fi RSSI radar, signal quality percent, and distance (CamScan Integration)', () => {
+    const wifi = createWifiRssiSignal(-45, 5.0);
+    expect(wifi.signalQualityPct.value).toBeGreaterThanOrEqual(90);
+    expect(wifi.radarColor.value).toBe('#00ff88'); // Strong green
+    expect(wifi.estimatedDistanceMeters.value).toBeLessThan(10);
+
+    // Simulate moving far away into fringe zone
+    wifi.ingestDbm(-88);
+    expect(wifi.signalQualityPct.value).toBeLessThan(30);
+    expect(wifi.radarColor.value).toBe('#ff3344'); // Danger crimson
+
+    // Stream telemetry
+    const stream = createStreamTelemetry();
+    expect(stream.isHealthy.value).toBe(true);
+
+    stream.ingestStats({ fps: 8, latencyMs: 380 });
+    expect(stream.isHealthy.value).toBe(false);
   });
 });
 

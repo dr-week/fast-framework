@@ -59,15 +59,24 @@ Emojis are non-standard across operating systems, break line heights, and look a
   - Hardware & Controls: `PrinterGlyph`, `FlameGlyph`, `MonitorGlyph`, `TunerGlyph`
   - Social / Content: `HeartGlyph`, `BookmarkGlyph`, `ShareGlyph`, `MessageGlyph`
 
-### 1.5.3. Design Language & Aesthetics Hierarchy
-1. **Theming (`@zuari/presets` & `@zuari/tokens`)**:
-   - Use standardized, cohesive theme presets: `'paper'` (editorial/monochrome), `'blossom'` (warm rosé), `'matcha'` (calm organic green), `'twilight'` (slate blue), or `'midnight'` (deep AMOLED black).
-2. **Elevations & Depth (`@zuari/presets`)**:
-   - `'flat'`: Zero shadow, 1px subtle border for clean utility.
-   - `'soft'`: Whisper-light drop shadow for resting cards.
-   - `'float'`: Ambient shadow for floating action bars and docks.
-   - `'halo'`: Subdued glow for active modals and command palettes.
-3. **Motion & Transitions**:
+### 1.5.3. Design Language & Aesthetics Hierarchy: The "Contrasting Boxiness" Rule
+Never throw UI elements together onto a flat, uniform background. When everything shares the same flat tone with ambiguous borders, the interface degrades into an unreadable "question paper" that strains eyes and causes cognitive fatigue.
+
+1. **The Contrasting Boxiness Rule (Visual Depth Separation)**:
+   - **Distinct Background vs Surface Contrast**: The background (`--nova-color-background`) must always sit at least 1-2 lightness stops away from elevated cards and section blocks (`--nova-color-surface-elevated`).
+   - **Crisp Structural Boxiness**: Every interactive or semantic section must have an explicit, defined boundary:
+     - `border: 1px solid var(--nova-color-border)` (minimum 16-22% contrast opacity).
+     - Defined, clean corner radius (`border-radius: var(--nova-radius-squircle, 8px)`). Avoid overly rounded "pillows" that blur section boundaries.
+     - Defined elevation lift (`box-shadow: var(--zuari-elevation-soft)`).
+   - **Visual Chunking**: Group related controls inside distinct nested boxes (`.card-subpanel`, `.telemetry-box`) rather than leaving them floating freely in raw space.
+2. **Theming (`@zuari/presets` & `@zuari/tokens`)**:
+   - Use standardized, high-contrast theme presets: `'paper'` (crisp ink on art paper), `'blossom'` (warm rosé), `'matcha'` (calm organic green), `'twilight'` (slate blue), or `'midnight'` (deep AMOLED black with distinct elevated surface layers).
+3. **Elevations & Depth (`@zuari/presets`)**:
+   - `'flat'`: Zero shadow, crisp 1px high-contrast border for clean utilitarian separation.
+   - `'soft'`: Defined box separation with ambient drop shadow for resting cards.
+   - `'float'`: Ambient shadow and distinct border for floating action bars and docks.
+   - `'halo'`: Subdued luminous glow for active modals and command palettes.
+4. **Motion & Transitions**:
    - Use high-performance micro-interactions: `'popIn'`, `'floatUp'`, `'ripple'`, or `'softPulse'`. Avoid gratuitous, slow (>300ms) full-page animations.
 
 ### 1.5.4. The 5-Plane Placement Matrix
