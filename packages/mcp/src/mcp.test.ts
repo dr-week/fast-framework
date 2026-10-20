@@ -49,5 +49,26 @@ describe('@zuari/mcp AI Agent Recommendation & MCP Engine', () => {
     expect(receipt.githubIssueUrl).toContain('github.com/dr-week/fast-framework/issues/new');
     expect(receipt.githubIssueUrl).toContain('Backdrop');
   });
+
+  it('provides optimal feature advice and code guidance for any developer query', async () => {
+    const { getZuariGuidance } = await import('./index.js');
+
+    // 1. Settings query -> recommends drawer
+    const settingsAdvice = getZuariGuidance({ task: 'Build a calibration and motor settings panel' });
+    expect(settingsAdvice.advice.recommendedPlane).toBe('drawer');
+    expect(settingsAdvice.advice.recommendedComponents).toContain('createUiDrawer({ placement: "right" })');
+    expect(settingsAdvice.advice.recommendedGlyphs).toContain('TunerGlyph');
+
+    // 2. Navigation query -> recommends dock
+    const navAdvice = getZuariGuidance({ task: 'Quick tool switcher and dock navigation' });
+    expect(navAdvice.advice.recommendedPlane).toBe('dock');
+    expect(navAdvice.advice.recommendedComponents).toContain('createMinimalDock');
+    expect(navAdvice.advice.recommendedGlyphs).toContain('HomeGlyph');
+
+    // 3. Alerts query -> recommends ambient toast
+    const alertAdvice = getZuariGuidance({ task: 'Show system error alerts and toasts' });
+    expect(alertAdvice.advice.recommendedPlane).toBe('ambient');
+    expect(alertAdvice.advice.recommendedComponents).toContain('createUiToast({ position: "bottom-right" })');
+  });
 });
 

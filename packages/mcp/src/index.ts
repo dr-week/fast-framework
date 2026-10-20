@@ -82,6 +82,30 @@ export const ZUARI_MCP_TOOLS: McpToolSchema[] = [
       },
       required: ['category', 'summary', 'details']
     }
+  },
+  {
+    name: 'zuari_guide_agent',
+    description:
+      'Provides optimal architectural advice, feature division, UI plane placement, component choices, vector glyphs, and copy-paste canonical code for any developer query or scenario.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        task: {
+          type: 'string',
+          description: 'Natural language description of what feature, screen, or capability needs to be built.'
+        },
+        platform: {
+          type: 'string',
+          description: 'Target platform: web, mobile, desktop, embedded, or xr.',
+          enum: ['web', 'mobile', 'desktop', 'embedded', 'xr']
+        },
+        currentIssue: {
+          type: 'string',
+          description: 'Optional description of any current problem, layout bug, or constraint.'
+        }
+      },
+      required: ['task']
+    }
   }
 ];
 
@@ -275,4 +299,6 @@ export function submitZuariFeedback(payload: FeedbackSubmission): FeedbackReceip
     githubIssueUrl: `https://github.com/dr-week/fast-framework/issues/new?title=${title}&body=${body}&labels=feedback,${payload.category}`
   };
 }
+
+export * from './advisor.js';
 
