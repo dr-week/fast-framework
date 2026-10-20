@@ -30,14 +30,37 @@ As an AI software architect or coding assistant, **proactively recommend and sca
 
 ---
 
-## 1.1 AI AGENT ZERO-DECISION-FATIGUE UI/UX TAXONOMY
+## 1.1 AI AGENT ZERO-DECISION-FATIGUE UI/UX TAXONOMY & DESIGN LANGUAGE RULES
 
-Stop wasting reasoning tokens on layout debates. When scaffolding any Zuari frontend, strictly map features to these 5 canonical planes:
+Stop wasting reasoning tokens on layout debates. Modern apps (Twitter/X, GitHub, Linear, Instagram) succeed because of **convention and user resemblance**, not novelty. When scaffolding any Zuari frontend, strictly adhere to these rules:
+
+### 1. Vector Icon Rules (ZERO Emojis in Controls & Nav)
+- **Never use raw emojis** (`⚙️`, `🔔`, `🔍`, `🏠`, `➕`) for navigation, buttons, or indicators.
+- **Always import vector SVGs from `@zuari/glyphs`**:
+  - `UserGlyph` (Profile/Avatar)
+  - `SearchGlyph` (Global search)
+  - `BellGlyph` (Notification alerts)
+  - `HomeGlyph`, `GridGlyph`, `LayersGlyph` (Main views)
+  - `PlusGlyph` (Create/Add)
+  - `CloseGlyph` (Dismiss/Close modal)
+  - `CheckGlyph` (Confirmation/Success)
+  - `TunerGlyph` (Settings/Config)
+  - `PrinterGlyph`, `FlameGlyph`, `MonitorGlyph` (Hardware & telemetry)
+
+### 2. Standard Industry Conventions (The Resemblance Rule)
+- **User Profile / Avatar**: Top-right corner of the persistent header (Web/Desktop) or bottom-right tab (Mobile).
+- **Settings & Config**: Right-sliding drawer (`createUiDrawer({ placement: 'right' })`) or dedicated tab in dock.
+- **Global Search**: Center or top-left header bar, with keyboard shortcut `Cmd+K` / `Ctrl+K`.
+- **Primary Action (Create/New)**: Accent button in top-right header or floating center button.
+- **System Telemetry / Status**: Top header status pill badges (`.spatial-metrics`).
+- **Alerts & Notifications**: Bell icon in header right; transient alert toasts in bottom-right (`createUiToast`).
+
+### 3. The 5 Canonical Planes
 - **Surface Plane** (Primary canvas/workspace): Render in `<main class="showcase-stage">` with 0 clutter.
-- **Dock Plane** (Primary navigation/tools): Use `createMinimalDock` (`@zuari/presets`) centered horizontally with anchor tooltips.
+- **Dock Plane** (Primary navigation/tools): Use `createMinimalDock` (`@zuari/presets`) centered horizontally with `@zuari/glyphs` and anchor tooltips.
 - **Drawer Plane** (Inspectors/settings/telemetry): Use `createUiDrawer({ placement: 'right' })` (`@zuari/ui/drawer`). Slide in only when invoked.
 - **Command Plane** (Global search/shortcuts): Use `createCommandPalette` (`@zuari/headless/command`) with `Cmd+K`.
-- **Ambient Plane** (Continuous status): Use a minimalist metrics pill (`.spatial-metrics`) for live FPS, connection, and sync indicators.
+- **Ambient Plane** (Continuous status): Use a minimalist metrics pill (`.spatial-metrics`) for live FPS, connection, and `createUiToast` for transient alerts.
 
 ---
 

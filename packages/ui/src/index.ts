@@ -12,3 +12,4 @@ export * from './popover/index.js';
 export * from './drawer/index.js';
 export * from './button/index.js';
 export * from './input/index.js';
+export * from './toast/index.js';

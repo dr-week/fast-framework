@@ -15,7 +15,8 @@ export type TemplateValue =
   | undefined 
   | Node 
   | Signal<unknown> 
-  | (() => unknown);
+  | (() => unknown)
+  | TemplateResult;
 
 export interface TemplateResult {
   strings: TemplateStringsArray;
@@ -44,7 +45,7 @@ export function html(strings: TemplateStringsArray, ...values: TemplateValue[]):
  * Renders a TemplateResult directly into a live DOM DocumentFragment,
  * creating fine-grained signal subscriptions via W3C DOM Parts without any Virtual DOM.
  */
-export function render(result: TemplateResult): RenderInstance {
+export function render(result: TemplateResult, container?: Element | DocumentFragment): RenderInstance {
   const { strings, values } = result;
   const rawKey = strings.join('<!--?-->');
 
@@ -80,11 +81,24 @@ export function render(result: TemplateResult): RenderInstance {
     bindDynamicHole(clone, index, value, cleanups);
   });
 
+  if (container) {
+    container.appendChild(clone);
+  }
+
   return {
     fragment: clone,
     destroy: () => {
       for (const cleanup of cleanups) {
         cleanup();
+      }
+      if (container && clone.parentNode === container) {
+        if ('innerHTML' in container) {
+          (container as Element).innerHTML = '';
+        } else {
+          while (container.firstChild) {
+            container.removeChild(container.firstChild);
+          }
+        }
       }
     }
   };

@@ -23,7 +23,7 @@ import { render, type TemplateResult, type RenderInstance } from './index.js';
  * ```
  */
 export function repeat<T>(
-  itemsSignal: Signal<T[]> | (() => T[]) | T[],
+  itemsSignal: Signal<readonly T[]> | Signal<T[]> | (() => readonly T[]) | (() => T[]) | readonly T[] | T[],
   keyFn: (item: T, index: number) => string | number,
   templateFn: (item: T, index: number) => TemplateResult
 ): () => Node {

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { signal } from '@zuari/signals';
-import { createSwitch, createBadge, createCard, createSlider, createTabs, createUiDrawer, createButton, createTextInput } from './index.js';
+import { createSwitch, createBadge, createCard, createSlider, createTabs, createUiDrawer, createButton, createTextInput, createUiToast } from './index.js';
 
 describe('@zuari/ui pre-built component suite', () => {
   it('creates an accessible switch with keyboard and click toggle', () => {
@@ -150,6 +150,27 @@ describe('@zuari/ui pre-built component suite', () => {
     expect(textInput.container.getAttribute('data-invalid')).toBeNull();
 
     textInput.destroy();
+  });
+
+  it('creates an ambient toast notification container with reactive alerts', () => {
+    const toast = createUiToast({ position: 'top-right' });
+    document.body.appendChild(toast.container);
+
+    expect(toast.container.classList.contains('zuari-toast-top-right')).toBe(true);
+
+    const id = toast.success('Bed Heated', 'Bed reached 60°C');
+    expect(toast.queue.toasts.value.length).toBe(1);
+    expect(toast.queue.toasts.value[0]?.title).toBe('Bed Heated');
+    expect(toast.queue.toasts.value[0]?.type).toBe('success');
+
+    toast.warning('Filament Low');
+    expect(toast.queue.toasts.value.length).toBe(2);
+
+    toast.dismiss(id);
+    expect(toast.queue.toasts.value.some(t => t.id === id)).toBe(false);
+
+    toast.destroy();
+    expect(document.body.contains(toast.container)).toBe(false);
   });
 });
 
