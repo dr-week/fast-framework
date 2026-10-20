@@ -8,7 +8,8 @@
   "types": "./dist/index.d.ts",
   "dependencies": {
     "@zuari/signals": "workspace:*",
-    "@zuari/dom": "workspace:*"
+    "@zuari/dom": "workspace:*",
+    "@zuari/glyphs": "workspace:*"
   },
   "exports": {
     ".": {

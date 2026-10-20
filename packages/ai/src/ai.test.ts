@@ -58,4 +58,20 @@ describe('@zuari/ai', () => {
 
     runner.destroy();
   });
+
+  it('runs AI fast prototyping and creates reactive Aether badges', async () => {
+    const { createAIWorkflowEngine } = await import('./index.js');
+    const engine = createAIWorkflowEngine();
+
+    const badge = engine.createAetherBadge();
+    expect(badge.classList.contains('aether-ai-badge')).toBe(true);
+
+    const proto = await engine.synthesizePrototype('Create motor calibration settings');
+    expect(proto.recommendedPlane).toBe('drawer');
+    expect(proto.title).toContain('Settings');
+    expect(engine.state.value).toBe('complete');
+    expect(engine.activeTokens.value).toBeGreaterThan(0);
+
+    engine.destroy();
+  });
 });
