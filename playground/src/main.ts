@@ -6,6 +6,7 @@ import { createReplView } from './repl.js';
 import { createProofBenchView } from './benchmark.js';
 import { createHardwareLabView } from './hardware-lab.js';
 import { createPolyglotWorkbenchView } from './polyglot-lab.js';
+import { createShareAndFeedbackModal } from './community.js';
 import { getCompactAiSystemPrompt } from '@zuari/mcp';
 
 
@@ -90,6 +91,8 @@ header.appendChild(subtitle);
 // 10-Second CLI Scaffolder Bar + 1-Click AI Agent Context Ingestion
 const cliBar = document.createElement('div');
 cliBar.className = 'cli-scaffolder-bar';
+const communityWidget = createShareAndFeedbackModal();
+header.appendChild(communityWidget);
 const cliView = html`
   <div class="cli-preset-pills">
     <button type="button" class="cli-pill" data-preset="minimal" @click=${() => { cliPreset.value = 'minimal'; interactions.value++; }}>minimal</button>

@@ -1066,3 +1066,246 @@ body {
   border-radius: 50%;
   border: 2px dashed var(--hw-accent, var(--accent));
 }
+
+/* Community & Feedback Widget */
+.zuari-community-widget {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.community-trigger-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.community-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--text);
+  backdrop-filter: blur(12px);
+  transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+}
+
+.community-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.community-modal-card {
+  width: 100%;
+  max-width: 520px;
+  background: var(--surface-card, #13151b);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.community-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.modal-tab-pills {
+  display: flex;
+  gap: 6px;
+}
+
+.modal-tab-btn {
+  background: transparent;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 140ms ease;
+
+  &[data-active="true"] {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 2px 8px;
+  line-height: 1;
+
+  &:hover {
+    color: var(--text);
+  }
+}
+
+.community-modal-body {
+  padding: 20px;
+}
+
+.share-tab-content {
+  text-align: center;
+}
+
+.share-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.share-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.social-share-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 140ms ease;
+  border: 1px solid var(--border);
+}
+
+.social-x {
+  background: #000;
+  color: #fff;
+  border-color: #333;
+}
+
+.social-linkedin {
+  background: #0077b5;
+  color: #fff;
+  border-color: #00669c;
+}
+
+.social-reddit {
+  background: #ff4500;
+  color: #fff;
+  border-color: #e03d00;
+}
+
+.social-copy {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-label {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.form-select,
+.form-input,
+.form-textarea {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.82rem;
+  outline: none;
+  transition: border-color 140ms ease;
+
+  &:focus {
+    border-color: var(--accent);
+  }
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.submit-email-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #000;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border: none;
+  cursor: pointer;
+  transition: opacity 140ms ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.github-issue-link {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+}
+
