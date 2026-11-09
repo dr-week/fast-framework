@@ -41,6 +41,37 @@ document.body.append(page);
 
 The button recipe styles the semantic element created by `createButton`. It includes gradient primary actions, restrained hover glow, secondary/ghost/danger variants, visible keyboard focus, disabled/loading states, and reduced-motion handling. `zuari-app-canvas`, `zuari-surface-frosted`, `zuari-surface-liquid`, `zuari-accent-glow`, and `zuari-prism-glow` are opt-in classes, so existing applications keep their current styling until they choose these recipes.
 
+## Persist preferences and show contextual actions
+
+Use `createPersistentDesignPresets` when theme choices should survive reloads. It stores only the selected theme, elevation, spacing, and surface; pass `storage: null` to keep a particular app session-only.
+
+```ts
+import { createPersistentDesignPresets } from '@zuari/presets';
+
+const design = createPersistentDesignPresets({
+  theme: 'studio',
+  surface: 'liquid',
+  syncAcrossTabs: true
+});
+```
+
+For list or canvas selection, `createSelectionBar` provides the floating glass action surface. The app supplies the selected count and its own actions:
+
+```ts
+import { createSelectionBar } from '@zuari/ui/selection-bar';
+import { signal } from '@zuari/signals';
+
+const selectedCount = signal(0);
+const selectionBar = createSelectionBar({
+  selectedCount,
+  actions: [{ id: 'export', label: 'Export', onClick: exportSelected }],
+  onClear: () => clearSelectedItems()
+});
+document.body.append(selectionBar.element);
+```
+
+Call `selectionBar.destroy()` and `design.destroy()` when the owning view is removed.
+
 ## Portable visual rules
 
 - Use one primary gradient for the main positive action; keep secondary actions quiet or outlined.

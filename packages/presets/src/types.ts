@@ -76,6 +76,26 @@ export interface DesignPresetOptions {
   readonly targetElement?: HTMLElement | undefined;
 }
 
+/** Minimal Storage-compatible interface, injectable for tests and non-browser hosts. */
+export interface DesignPreferenceStorage {
+  getItem(key: string): string | null;
+  setItem(key: string, value: string): void;
+  removeItem?(key: string): void;
+}
+
+export interface PersistentDesignPresetOptions extends DesignPresetOptions {
+  /** Pass null to disable persistence; otherwise localStorage is used when available. */
+  readonly storage?: DesignPreferenceStorage | null | undefined;
+  /** Namespaced key used for the serialized design preferences. */
+  readonly storageKey?: string | undefined;
+  /** Synchronize changes from other tabs using the browser storage event. */
+  readonly syncAcrossTabs?: boolean | undefined;
+}
+
+export interface PersistentDesignPresetController extends DesignPresetController {
+  readonly storageKey: string;
+}
+
 export interface DesignPresetController {
   readonly theme: Signal<ThemePresetName>;
   readonly elevation: Signal<ElevationPreset>;
