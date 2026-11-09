@@ -18,7 +18,7 @@ const design = createDesignPresets({
 });
 ```
 
-`studio` sets a warm daylight canvas, coral-to-rose gradient accents, readable accent text, and glass-friendly elevation. Choose `midnight`, `paper`, `blossom`, `matcha`, or `twilight` for other palettes. Any theme can override `accent`, `accentSecondary`, `accentGlow`, and `onAccent` through the theme contract.
+`studio` sets a warm daylight canvas, coral-to-rose gradient accents, readable accent text, and glass-friendly elevation. Choose `noir` for the reference images' near-black surfaces with spectral violet and blue highlights; use `midnight`, `paper`, `blossom`, `matcha`, or `twilight` for other palettes. Any theme can override `accent`, `accentSecondary`, `accentGlow`, and `onAccent` through the theme contract.
 
 ## Compose a canvas, surface, and action
 
@@ -40,6 +40,24 @@ document.body.append(page);
 ```
 
 The button recipe styles the semantic element created by `createButton`. It includes gradient primary actions, restrained hover glow, secondary/ghost/danger variants, visible keyboard focus, disabled/loading states, and reduced-motion handling. `zuari-app-canvas`, `zuari-surface-frosted`, `zuari-surface-liquid`, `zuari-accent-glow`, and `zuari-prism-glow` are opt-in classes, so existing applications keep their current styling until they choose these recipes.
+
+## Editorial metrics and signal graphics
+
+The references use a strong hierarchy: small tracked labels, one dominant numeric value, then a compact visualization. Use these opt-in typography classes to establish that rhythm without turning every card into a glowing panel:
+
+```html
+<main class="zuari-app-canvas" data-zuari-theme="noir">
+  <article class="zuari-surface-liquid" data-zuari-tint="violet">
+    <span class="zuari-editorial-eyebrow">Monthly / engagement</span>
+    <strong class="zuari-editorial-value">400%</strong>
+    <div class="zuari-editorial-grid">...</div>
+  </article>
+</main>
+```
+
+Use `createSparkline({ values, label, showArea })` for a small trend, or `createRadialGauge({ value, max, label })` for a compact progress/range indicator. Both return DOM elements, use inline SVG, and expose an accessible name; provide a meaningful label because the shape alone is not sufficient to communicate the data. They support `accent`, `positive`, `warning`, and `danger` tones. Liquid surfaces accept the `rose`, `sky`, `amber`, `mint`, `violet`, and `lime` tint names.
+
+Keep charts quiet and let one accent carry meaning. Use a fine grid or luminous edge as a supporting cue; reserve strong glow for the active series or selected state. Pair each visual with labels, units, and a readable value so color and chart shape are never the only source of information.
 
 ## Persist preferences and show contextual actions
 

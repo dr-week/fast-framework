@@ -236,6 +236,30 @@ export const studioTokens: NovaThemeContract = {
   motion: motionPresets
 };
 
+/** 7. Noir Theme — editorial dark glass with restrained spectral violet and blue accents. */
+export const noirTokens: NovaThemeContract = {
+  name: 'noir',
+  colors: {
+    background: 'oklch(12% 0.012 270)',
+    surface: 'oklch(18% 0.018 270 / 0.82)',
+    surfaceElevated: 'oklch(22% 0.022 270 / 0.94)',
+    surfaceHover: 'oklch(25% 0.025 270 / 0.92)',
+    border: 'oklch(88% 0.025 270 / 0.16)',
+    borderMuted: 'oklch(88% 0.025 270 / 0.09)',
+    glyph: 'oklch(76% 0.018 270)',
+    glyphActive: 'oklch(97% 0.01 270)',
+    accent: 'oklch(72% 0.2 295)',
+    accentSecondary: 'oklch(75% 0.18 220)',
+    accentGlow: 'oklch(70% 0.22 295 / 0.24)',
+    onAccent: 'oklch(15% 0.02 270)',
+    danger: 'oklch(70% 0.2 25)'
+  },
+  spacing: baseSpacing,
+  radii: { ...baseRadii, squircle: '18px' },
+  elevations: darkElevations,
+  motion: motionPresets
+};
+
 /**
  * Easy-to-use dictionary of all built-in Theme Presets.
  */
@@ -245,7 +269,8 @@ export const THEME_PRESETS: Record<ThemePresetName, NovaThemeContract> = {
   matcha: matchaTokens,
   twilight: twilightTokens,
   midnight: midnightTokens,
-  studio: studioTokens
+  studio: studioTokens,
+  noir: noirTokens
 };
 
 

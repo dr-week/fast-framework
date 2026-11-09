@@ -194,4 +194,22 @@ export interface InfographicPanelOptions {
   readonly animation?: AnimationPresetName | false | undefined;
 }
 
+/** Options for compact, accessible inline data visualizations. */
+export interface SparklineOptions {
+  readonly values: readonly number[];
+  readonly label: string;
+  readonly tone?: 'accent' | 'positive' | 'warning' | 'danger' | undefined;
+  readonly showArea?: boolean | undefined;
+}
+
+export interface RadialGaugeOptions {
+  /** Value in the inclusive range from zero to max. */
+  readonly value: number;
+  readonly max?: number | undefined;
+  readonly label: string;
+  readonly tone?: 'accent' | 'positive' | 'warning' | 'danger' | undefined;
+  readonly size?: number | undefined;
+  readonly thickness?: number | undefined;
+}
+
 

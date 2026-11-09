@@ -9,8 +9,9 @@ export type CSSLength = `${number}px` | `${number}rem` | `${number}em` | '0';
  * - 'twilight': Anime sunset dusk (indigo-violet sky with warm sunset amber glow)
  * - 'midnight': Deep spatial dark glass with luminous cyan accents
  * - 'studio': Warm ambient light, translucent glass surfaces, and coral-rose accents
+ * - 'noir': Near-black editorial surfaces with spectral violet and blue accents
  */
-export type ThemePresetName = 'paper' | 'blossom' | 'matcha' | 'twilight' | 'midnight' | 'studio';
+export type ThemePresetName = 'paper' | 'blossom' | 'matcha' | 'twilight' | 'midnight' | 'studio' | 'noir';
 
 /**
  * Lightweight, smooth elevation levels (whisper-light borders and airy depth):
