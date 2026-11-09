@@ -8,6 +8,9 @@ import {
   createStoryCard,
   createBentoGrid,
   createStampBadge,
+  createMetricCard,
+  createThemeSection,
+  createInfoGraphicPanel,
   createMinimalDock,
   createFeatureDivision,
   ANIMATION_PRESETS
@@ -131,6 +134,49 @@ describe('@zuari/presets (Easy-to-Use Minimal & Artistic UI/UX Presets & Templat
     const stamp = createStampBadge('STUDIO');
     expect(stamp.className).toBe('zuari-stamp-badge');
     expect(stamp.textContent).toBe('STUDIO');
+  });
+
+  it('builds reusable theme sections and infographic panels for plug-and-play dashboards', () => {
+    const metric = createMetricCard({
+      label: 'Monthly Revenue',
+      value: '$214k',
+      delta: '+12.4%',
+      tone: 'positive',
+      animation: 'popIn'
+    });
+
+    expect(metric.classList.contains('zuari-metric-card')).toBe(true);
+    expect(metric.dataset.tone).toBe('positive');
+    expect(metric.querySelector('.zuari-metric-value')?.textContent).toBe('$214k');
+    expect(metric.getAttribute('data-zuari-anim')).toBe('popIn');
+
+    const section = createThemeSection({
+      eyebrow: 'Finance',
+      title: 'Revenue overview',
+      subtitle: 'Clean modular KPI surfaces for product dashboards.',
+      actions: [document.createElement('button')],
+      children: [metric],
+      animation: 'floatUp'
+    });
+
+    expect(section.classList.contains('zuari-theme-section')).toBe(true);
+    expect(section.querySelector('.zuari-theme-title')?.textContent).toBe('Revenue overview');
+    expect(section.querySelector('.zuari-theme-body')?.children).toHaveLength(1);
+
+    const infographic = createInfoGraphicPanel({
+      title: 'Acquisition funnel',
+      subtitle: 'Reach to pipeline by stage',
+      bars: [
+        { label: 'Reach', value: 90, tone: 'neutral' },
+        { label: 'Trials', value: 62, tone: 'warning' },
+        { label: 'Conversion', value: 38, tone: 'positive' }
+      ],
+      animation: 'slideIn'
+    });
+
+    expect(infographic.classList.contains('zuari-infographic-panel')).toBe(true);
+    expect(infographic.querySelectorAll('.zuari-infographic-row')).toHaveLength(3);
+    expect(infographic.getAttribute('data-zuari-anim')).toBe('slideIn');
   });
 
   it('renders a minimalistic floating dock with responsive item interactions', () => {

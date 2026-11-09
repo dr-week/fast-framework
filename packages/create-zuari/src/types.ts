@@ -6,6 +6,7 @@ export type ZuariTemplate =
   | 'spatial-webxr'
   | 'spatial'
   | 'kotlin-android'
+  | 'modular-product'
   | 'wasm';
 
 export interface ScaffoldOptions {

@@ -98,6 +98,9 @@ pnpm add @zuari/signals @zuari/dom @zuari/ui @zuari/router
 # Core Web (vanilla-ts)
 npm create zuari@latest my-app -- --template vanilla-ts
 
+# Feature-first product app with an API boundary and explicit resource states
+npm create zuari@latest my-product -- --template modular-product
+
 # Tauri v2 Desktop (Rust + Zuari)
 npm create zuari@latest my-desktop -- --template tauri-desktop
 
@@ -155,6 +158,8 @@ document.getElementById('app')?.appendChild(fragment);
 
 Every package in Zuari is independent, tree-shakeable (`sideEffects: false`), and rigorously typed:
 
+For incremental adoption in a Vue 3 + Vite 8 app, see the [Vue island example](./examples/vue-vite-island/README.md). It mounts a Zuari feature into a Vue-owned element and cleans it up on unmount; it does not require migrating the rest of the app.
+
 | Package | Purpose | Runtime | Support |
 | :--- | :--- | :---: | :---: |
 | [`@zuari/signals`](./packages/signals) | TC39 reactive graph (`signal`, `computed`, `effect`, `batch`, `untracked`, `effectScope`, `onMount`, `onDestroy`) | **~1.2 KB** | Universal (JS/TS) |
@@ -175,7 +180,7 @@ Every package in Zuari is independent, tree-shakeable (`sideEffects: false`), an
 | [`@zuari/glyphs`](./packages/glyphs) | Mathematical SVG icons & GPU path morphing (`d: path(...)`) | **~0.8 KB** | SVG / HTML5 |
 | [`@zuari/tokens`](./packages/tokens) | Typed OKLCH color palettes, lightweight elevation tokens & CSS `@property` generator | **0 KB** | Zero-Runtime |
 | [`@zuari/recipes`](./packages/recipes) | Zero-runtime `@scope` modern CSS/SCSS design recipes & View Transitions v2 | **0 KB** | Native CSS Engine |
-| [`create-zuari`](./packages/create-zuari) | Zero-config interactive CLI scaffolder (`vanilla-ts`, `tauri-desktop`, `spatial-webxr`, `kotlin-android`) | **CLI** | Node / pnpm |
+| [`create-zuari`](./packages/create-zuari) | Zero-config CLI scaffolder (`vanilla-ts`, `modular-product`, `tauri-desktop`, `spatial-webxr`, `kotlin-android`) | **CLI** | Node / pnpm |
 | [`vscode-zuari`](./packages/vscode-zuari) | VS Code & Cursor language extension (`html\`...\`` syntax, `@event` / `?attr` highlight, snippets) | **Tool** | VS Code / Cursor |
 | [`@zuari/ui`](./packages/ui) | Pre-built accessible components (`createUiDrawer`, `createUiToast`, `createSwitch`, `createButton`, `createTextInput`, `createTabs`) | **~1.5 KB** | UI/UX & Components |
 | [`@zuari/presets`](./packages/presets) | Minimalist themes (`'paper'`, `'matcha'`), lightweight elevations (`'flat'`, `'soft'`), animations (`'floatUp'`), & templates (`createMinimalDock`) | **~1.4 KB** | Design Systems |
@@ -238,6 +243,7 @@ pnpm build
 ### 📜 Documentation Directory
 
 * [**User Manual & Developer Guide**](./USER_MANUAL.md)
+* [**Product Development Workflow**](./docs/DEVELOPMENT_WORKFLOW.md)
 * [**Technical Specification**](./SPECIFICATION.md)
 * [**Partnerships & Alliance Blueprint**](./PARTNERSHIPS_AND_MARKETING.md)
 * [**Native & Wearables Specification**](./NATIVE_REQUIREMENTS.md)
