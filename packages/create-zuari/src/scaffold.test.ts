@@ -48,4 +48,43 @@ describe('create-zuari Scaffolder', () => {
     const mainTs = files.find(f => f.path === 'src/main.ts');
     expect(mainTs?.content).toContain('ZuariNativeBridge');
   });
+
+  it('generates a modular product starter with API, feature, and app boundaries', () => {
+    const files = getTemplateFiles('my-product', 'modular-product');
+    const paths = files.map(file => file.path);
+
+    expect(paths).toContain('src/api/client.ts');
+    expect(paths).toContain('src/api/contracts.ts');
+    expect(paths).toContain('src/api/contracts.test.ts');
+    expect(paths).toContain('src/features/overview/index.ts');
+    expect(paths).toContain('src/features/overview/model.ts');
+    expect(paths).toContain('src/features/overview/controller.ts');
+    expect(paths).toContain('src/features/overview/view.ts');
+    expect(paths).toContain('src/app/shell.ts');
+    expect(paths).toContain('src/app/settings.ts');
+    expect(paths).toContain('README.md');
+
+    const model = files.find(file => file.path === 'src/features/overview/model.ts');
+    expect(model?.content).toContain("'loading'");
+    expect(model?.content).toContain("'empty'");
+    expect(model?.content).toContain("'error'");
+
+    const featureView = files.find(file => file.path === 'src/features/overview/view.ts');
+    expect(featureView?.content).toContain('repeat(model.items, item => item.id');
+
+    const settings = files.find(file => file.path === 'src/app/settings.ts');
+    expect(settings?.content).toContain('createDesignPresets');
+    expect(settings?.content).toContain("'midnight'");
+
+    const parser = files.find(file => file.path === 'src/api/contracts.ts');
+    expect(parser?.content).toContain('parseOverviewItems');
+    expect(parser?.content).toContain('invalid shape');
+
+    const packageJson = files.find(file => file.path === 'package.json');
+    expect(packageJson?.content).toContain('"test": "vitest run"');
+
+    const readme = files.find(file => file.path === 'README.md');
+    expect(readme?.content).toContain('no fake business data');
+    expect(readme?.content).toContain('modular monolith');
+  });
 });

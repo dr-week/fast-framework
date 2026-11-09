@@ -134,4 +134,43 @@ export interface MinimalDockOptions {
   position?: 'bottom' | 'top' | 'left' | 'right';
 }
 
+export interface ThemeSectionOptions {
+  readonly title: string;
+  readonly subtitle?: string | undefined;
+  readonly eyebrow?: string | undefined;
+  readonly badge?: string | undefined;
+  readonly theme?: ThemePresetName | undefined;
+  readonly elevation?: ElevationPreset | undefined;
+  readonly surface?: SurfacePreset | undefined;
+  readonly actions?: readonly HTMLElement[] | undefined;
+  readonly children?: readonly HTMLElement[] | undefined;
+  readonly animation?: AnimationPresetName | false | undefined;
+}
+
+export interface MetricCardOptions {
+  readonly label: string;
+  readonly value: string;
+  readonly meta?: string | undefined;
+  readonly delta?: string | undefined;
+  readonly tone?: 'positive' | 'neutral' | 'warning' | 'danger' | undefined;
+  readonly icon?: string | SVGElement | undefined;
+  readonly animation?: AnimationPresetName | false | undefined;
+}
+
+export interface InfographicBarOptions {
+  readonly label: string;
+  readonly value: number;
+  readonly tone?: 'positive' | 'neutral' | 'warning' | 'danger' | undefined;
+}
+
+export interface InfographicPanelOptions {
+  readonly title: string;
+  readonly subtitle?: string | undefined;
+  readonly bars: readonly InfographicBarOptions[];
+  readonly maxValue?: number | undefined;
+  readonly elevation?: ElevationPreset | undefined;
+  readonly surface?: SurfacePreset | undefined;
+  readonly animation?: AnimationPresetName | false | undefined;
+}
+
 
