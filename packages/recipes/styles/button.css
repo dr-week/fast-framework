@@ -1,0 +1,74 @@
+/* Optional styling for the semantic button produced by @zuari/ui/button. */
+.zuari-btn {
+  --_zuari-button-glow: var(--nova-color-accent-glow, color-mix(in srgb, var(--nova-color-accent) 22%, transparent));
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.625rem 1rem;
+  border: 1px solid var(--nova-color-border);
+  border-radius: var(--nova-radius-squircle, 0.625rem);
+  background: var(--nova-color-surface);
+  color: var(--nova-color-glyph-active);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: transform 160ms var(--zuari-motion-crisp, cubic-bezier(0.22, 1, 0.36, 1)),
+    background-color 160ms ease, border-color 160ms ease, box-shadow 180ms ease, opacity 160ms ease;
+}
+
+.zuari-btn[data-variant="primary"] {
+  border-color: transparent;
+  background: var(--zuari-accent-gradient, linear-gradient(125deg, var(--nova-color-accent), var(--nova-color-accent-secondary, var(--nova-color-accent))));
+  color: var(--nova-color-on-accent, white);
+  box-shadow: 0 4px 16px var(--_zuari-button-glow);
+}
+
+.zuari-btn[data-variant="primary"]:hover:not(:disabled) {
+  box-shadow: 0 7px 24px var(--_zuari-button-glow);
+  transform: translateY(-1px);
+}
+
+.zuari-btn[data-variant="secondary"]:hover:not(:disabled),
+.zuari-btn[data-variant="tactical"]:hover:not(:disabled) {
+  border-color: var(--nova-color-accent-glow, var(--nova-color-accent));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nova-color-accent) 12%, transparent);
+}
+
+.zuari-btn[data-variant="ghost"] {
+  border-color: transparent;
+  background: transparent;
+  color: var(--nova-color-glyph);
+}
+
+.zuari-btn[data-variant="ghost"]:hover:not(:disabled) {
+  background: var(--nova-color-surface-hover);
+  color: var(--nova-color-glyph-active);
+}
+
+.zuari-btn[data-variant="danger"] {
+  border-color: color-mix(in srgb, var(--nova-color-danger) 42%, transparent);
+  background: color-mix(in srgb, var(--nova-color-danger) 10%, transparent);
+  color: var(--nova-color-danger);
+}
+
+.zuari-btn[data-size="sm"] { min-height: 2rem; padding: 0.4rem 0.7rem; font-size: 0.875rem; }
+.zuari-btn[data-size="lg"] { min-height: 3rem; padding: 0.8rem 1.25rem; font-size: 1.0625rem; }
+.zuari-btn-icon { display: inline-flex; flex: 0 0 auto; }
+.zuari-btn-icon > svg { width: 1.1em; height: 1.1em; }
+.zuari-btn-label { display: inline-flex; align-items: center; }
+
+.zuari-btn:focus-visible {
+  outline: 2px solid var(--nova-color-accent);
+  outline-offset: 3px;
+}
+
+.zuari-btn:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+.zuari-btn:disabled { cursor: not-allowed; opacity: 0.55; box-shadow: none; }
+.zuari-btn[data-loading="true"] { cursor: progress; }
+
+@media (prefers-reduced-motion: reduce) {
+  .zuari-btn { transition: none; }
+}

@@ -53,7 +53,7 @@ export function generateCssVariables(tokens: NovaThemeContract, selector: string
 }
 
 /**
- * Applies a named theme preset ('paper', 'blossom', 'matcha', 'twilight', 'midnight')
+ * Applies a named theme preset ('paper', 'blossom', 'matcha', 'twilight', 'midnight', 'studio')
  * directly to a DOM root element (defaults to `document.documentElement`).
  */
 export function applyThemePreset(

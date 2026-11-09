@@ -1,8 +1,8 @@
 /**
  * @fileoverview Reactive UI/UX Design Preset Controller (`createDesignPresets`).
- * Coordinates simple, intuitive themes ('paper', 'blossom', 'matcha', 'twilight', 'midnight'),
+ * Coordinates simple, intuitive themes ('paper', 'blossom', 'matcha', 'twilight', 'midnight', 'studio'),
  * lightweight elevations ('flat', 'soft', 'float', 'halo'),
- * spacing density ('compact', 'balanced', 'airy'), and surface materials ('paper', 'frosted', 'canvas', 'cel').
+ * spacing density ('compact', 'balanced', 'airy'), and surface materials ('paper', 'frosted', 'liquid', 'canvas', 'cel').
  */
 
 import { signal, effect } from '@zuari/signals';
@@ -38,7 +38,7 @@ export function applyElevationPreset(
 }
 
 /**
- * Applies a surface material preset (`paper`, `frosted`, `canvas`, `cel`) to an element.
+ * Applies a surface material preset (`paper`, `frosted`, `liquid`, `canvas`, `cel`) to an element.
  */
 export function applySurfacePreset(
   element: HTMLElement,
@@ -48,6 +48,7 @@ export function applySurfacePreset(
   element.classList.remove(
     'zuari-surface-paper',
     'zuari-surface-frosted',
+    'zuari-surface-liquid',
     'zuari-surface-canvas',
     'zuari-surface-cel'
   );

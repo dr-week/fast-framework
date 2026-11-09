@@ -14,18 +14,13 @@ import { animatePreset, staggerPreset } from './animations.js';
 /**
  * Creates an artistic, minimal Story Card template (`createStoryCard`) with:
  * - Lightweight elevation (`flat`, `soft`, `float`, `halo`)
- * - Surface finish (`paper`, `frosted`, `canvas`, `cel`)
+ * - Surface finish (`paper`, `frosted`, `liquid`, `canvas`, `cel`)
  * - Optional red stamp badge (`stamp`) and category pill (`tag`)
  * - Automatic entrance animation preset (`floatUp`, `popIn`, etc.)
  */
 export function createStoryCard(options: StoryCardTemplateOptions): HTMLElement {
   const card = document.createElement('article');
   card.className = 'zuari-story-card';
-
-  // Apply contrasting boxiness
-  card.style.border = '1px solid var(--nova-color-border, oklch(100% 0 0 / 0.18))';
-  card.style.background = 'var(--nova-color-surface-elevated, var(--nova-color-surface, #151821))';
-  card.style.borderRadius = 'var(--nova-radius-squircle, 8px)';
 
   applyElevationPreset(card, options.elevation ?? 'soft');
   applySurfacePreset(card, options.surface ?? 'paper');

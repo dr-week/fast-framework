@@ -37,7 +37,7 @@ export interface ModularThemeEngine {
   elevation: Signal<ElevationPreset>;
   /** Whether the current theme is dark mode */
   isDark: Computed<boolean>;
-  /** Switch to any registered theme preset ('paper', 'blossom', 'matcha', 'twilight', 'midnight', etc.) */
+  /** Switch to any registered theme preset ('paper', 'blossom', 'matcha', 'twilight', 'midnight', 'studio', etc.) */
   setTheme: (name: ThemePresetName | string) => void;
   /** Set elevation level ('flat', 'soft', 'float', 'halo') */
   setElevation: (level: ElevationPreset) => void;

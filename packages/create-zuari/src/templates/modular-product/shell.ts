@@ -98,7 +98,7 @@ export function createAppShell(api: ApiClient) {
 const appSettings = `import { createDesignPresets } from '@zuari/presets';
 import { createUiDrawer } from '@zuari/ui';
 
-const THEME_NAMES = ['paper', 'blossom', 'matcha', 'twilight', 'midnight'] as const;
+const THEME_NAMES = ['paper', 'blossom', 'matcha', 'twilight', 'midnight', 'studio'] as const;
 type ThemeName = typeof THEME_NAMES[number];
 
 export function createProductSettings() {

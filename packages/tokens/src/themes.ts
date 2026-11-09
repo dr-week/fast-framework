@@ -71,6 +71,9 @@ export const midnightTokens: NovaThemeContract = {
     glyph: 'oklch(78% 0.015 260)',
     glyphActive: 'oklch(96% 0.01 260)',
     accent: 'oklch(75% 0.18 190)',
+    accentSecondary: 'oklch(72% 0.16 230)',
+    accentGlow: 'oklch(75% 0.18 190 / 0.24)',
+    onAccent: 'oklch(18% 0.02 260)',
     danger: 'oklch(62% 0.22 25)'
   },
   spacing: baseSpacing,
@@ -97,6 +100,9 @@ export const paperTokens: NovaThemeContract = {
     glyph: 'oklch(38% 0.02 70)',
     glyphActive: 'oklch(18% 0.015 70)',
     accent: 'oklch(58% 0.21 32)',
+    accentSecondary: 'oklch(62% 0.19 15)',
+    accentGlow: 'oklch(58% 0.21 32 / 0.18)',
+    onAccent: 'oklch(100% 0 0)',
     danger: 'oklch(52% 0.22 25)'
   },
   spacing: baseSpacing,
@@ -125,6 +131,9 @@ export const blossomTokens: NovaThemeContract = {
     glyph: 'oklch(42% 0.035 340)',
     glyphActive: 'oklch(22% 0.04 340)',
     accent: 'oklch(70% 0.17 352)',
+    accentSecondary: 'oklch(68% 0.16 5)',
+    accentGlow: 'oklch(70% 0.17 352 / 0.2)',
+    onAccent: 'oklch(25% 0.04 340)',
     danger: 'oklch(60% 0.21 22)'
   },
   spacing: baseSpacing,
@@ -153,6 +162,9 @@ export const matchaTokens: NovaThemeContract = {
     glyph: 'oklch(38% 0.04 145)',
     glyphActive: 'oklch(20% 0.04 145)',
     accent: 'oklch(62% 0.15 148)',
+    accentSecondary: 'oklch(68% 0.14 125)',
+    accentGlow: 'oklch(62% 0.15 148 / 0.18)',
+    onAccent: 'oklch(18% 0.04 145)',
     danger: 'oklch(58% 0.2 28)'
   },
   spacing: baseSpacing,
@@ -181,11 +193,46 @@ export const twilightTokens: NovaThemeContract = {
     glyph: 'oklch(82% 0.03 275)',
     glyphActive: 'oklch(98% 0.015 65)',
     accent: 'oklch(76% 0.17 55)',
+    accentSecondary: 'oklch(72% 0.16 35)',
+    accentGlow: 'oklch(76% 0.17 55 / 0.23)',
+    onAccent: 'oklch(20% 0.04 275)',
     danger: 'oklch(64% 0.22 25)'
   },
   spacing: baseSpacing,
   radii: baseRadii,
   elevations: darkElevations,
+  motion: motionPresets
+};
+
+/**
+ * 6. Studio Theme — Warm daylight backdrop, iridescent rose actions, and liquid-glass surfaces.
+ * Keep the ambient effects opt-in via recipes.
+ */
+export const studioTokens: NovaThemeContract = {
+  name: 'studio',
+  colors: {
+    background: 'oklch(90% 0.045 55)',
+    surface: 'oklch(99% 0.025 45 / 0.56)',
+    surfaceElevated: 'oklch(100% 0.01 45 / 0.76)',
+    surfaceHover: 'oklch(100% 0.02 45 / 0.86)',
+    border: 'oklch(100% 0.02 40 / 0.58)',
+    borderMuted: 'oklch(100% 0.02 40 / 0.34)',
+    glyph: 'oklch(36% 0.035 270)',
+    glyphActive: 'oklch(22% 0.03 270)',
+    accent: 'oklch(52% 0.19 23)',
+    accentSecondary: 'oklch(53% 0.17 350)',
+    accentGlow: 'oklch(66% 0.2 20 / 0.26)',
+    onAccent: 'oklch(100% 0 0)',
+    danger: 'oklch(65% 0.2 25)'
+  },
+  spacing: baseSpacing,
+  radii: { ...baseRadii, squircle: '22px' },
+  elevations: {
+    flat: '0 0 0 1px oklch(100% 0.02 40 / 0.58), 0 1px 2px oklch(25% 0.04 30 / 0.06)',
+    soft: '0 12px 30px -14px oklch(30% 0.05 30 / 0.2), 0 0 0 1px oklch(100% 0.02 40 / 0.56)',
+    float: '0 22px 48px -18px oklch(30% 0.05 30 / 0.28), 0 0 0 1px oklch(100% 0.02 40 / 0.62)',
+    halo: '0 26px 58px -18px oklch(30% 0.05 30 / 0.28), 0 0 0 1px oklch(100% 0.02 40 / 0.66), 0 0 30px oklch(66% 0.2 20 / 0.2)'
+  },
   motion: motionPresets
 };
 
@@ -197,7 +244,8 @@ export const THEME_PRESETS: Record<ThemePresetName, NovaThemeContract> = {
   blossom: blossomTokens,
   matcha: matchaTokens,
   twilight: twilightTokens,
-  midnight: midnightTokens
+  midnight: midnightTokens,
+  studio: studioTokens
 };
 
 

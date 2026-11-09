@@ -40,10 +40,11 @@ export type SpacingPreset = 'compact' | 'balanced' | 'airy';
  * Surface Material Presets:
  * - 'paper': Matte, tactile warm card surface with crisp 1px border
  * - 'frosted': Soft translucent frosted glass with subtle blur
+ * - 'liquid': Rounded iridescent glass with color blooms and bright edge highlights
  * - 'canvas': Clean, minimal flat canvas surface
  * - 'cel': Crisp anime cel-shaded card with defined outline and zero blur
  */
-export type SurfacePreset = 'paper' | 'frosted' | 'canvas' | 'cel';
+export type SurfacePreset = 'paper' | 'frosted' | 'liquid' | 'canvas' | 'cel';
 
 export interface AnimationPresetConfig {
   readonly name: AnimationPresetName;
