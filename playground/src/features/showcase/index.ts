@@ -50,10 +50,15 @@ export function createShowcase({ getActiveTab, onInteraction }: ShowcaseOptions)
     const artwork = FEATURE_ARTWORK[activeTab];
     const artworkUrl = getArcadeArtworkUrl(artwork.station);
     stage.style.setProperty('--station-artwork', `url("${artworkUrl}")`);
+    stage.style.setProperty(
+      '--station-ambient-artwork',
+      artwork.ambient ? `url("${getArcadeArtworkUrl(artwork.ambient)}")` : 'none'
+    );
     stage.style.setProperty('--station-glow', artwork.glow);
     stage.style.setProperty('--station-hue', artwork.hue);
     stage.style.setProperty('--station-blend', artwork.blend);
     stage.style.setProperty('--station-position', artwork.position);
+    stage.style.setProperty('--station-ambient-position', artwork.ambientPosition ?? 'center');
     heading.style.setProperty('--station-glow', artwork.glow);
     stage.firstElementChild?.classList.add('showcase-enter');
   }

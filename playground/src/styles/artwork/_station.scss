@@ -28,9 +28,15 @@
 .showcase-stage::before {
   background-image:
     linear-gradient(145deg, oklch(8% 0.02 270 / 0.22), oklch(8% 0.02 270 / 0.48)),
-    var(--station-artwork);
-  background-position: center, var(--station-position, center);
-  background-size: cover;
+    var(--station-artwork),
+    var(--station-ambient-artwork, none);
+  background-position:
+    center,
+    var(--station-position, center),
+    var(--station-ambient-position, center);
+  background-size: cover, cover, auto 114%;
+  background-repeat: no-repeat;
+  background-blend-mode: normal, screen, soft-light;
   filter: saturate(1.15) hue-rotate(var(--station-hue, 0deg));
   opacity: 0.38;
   mix-blend-mode: var(--station-blend, screen);
