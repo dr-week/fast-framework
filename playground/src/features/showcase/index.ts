@@ -4,6 +4,7 @@ import { createHardwareLabView } from '../hardware/index.js';
 import { createPolyglotWorkbenchView } from '../polyglot/index.js';
 import { createReplView } from '../repl/index.js';
 import type { ActiveTab } from '../state.js';
+import { FEATURE_ARTWORK, getArcadeArtworkUrl } from '../feature-artwork.js';
 import { createAlliancesShowcase } from './alliances.js';
 import { createCoreShowcase } from './core.js';
 import { createSpatialShowcase } from './spatial.js';
@@ -46,6 +47,19 @@ export function createShowcase({ getActiveTab, onInteraction }: ShowcaseOptions)
     const activeTab = getActiveTab();
     stage.replaceChildren(views[activeTab]);
     stage.dataset.activeTab = activeTab;
+    const artwork = FEATURE_ARTWORK[activeTab];
+    const artworkUrl = getArcadeArtworkUrl(artwork.station);
+    stage.style.setProperty('--station-artwork', `url("${artworkUrl}")`);
+    stage.style.setProperty(
+      '--station-ambient-artwork',
+      artwork.ambient ? `url("${getArcadeArtworkUrl(artwork.ambient)}")` : 'none'
+    );
+    stage.style.setProperty('--station-glow', artwork.glow);
+    stage.style.setProperty('--station-hue', artwork.hue);
+    stage.style.setProperty('--station-blend', artwork.blend);
+    stage.style.setProperty('--station-position', artwork.position);
+    stage.style.setProperty('--station-ambient-position', artwork.ambientPosition ?? 'center');
+    heading.style.setProperty('--station-glow', artwork.glow);
     stage.firstElementChild?.classList.add('showcase-enter');
   }
 

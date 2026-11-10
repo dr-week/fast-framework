@@ -19,6 +19,8 @@ describe('feature mission deck', () => {
 
     expect(cards).toHaveLength(8);
     expect(deck.querySelector('[data-feature="repl"]')?.dataset.active).toBe('true');
+    expect(scaleCard.style.getPropertyValue('--card-artwork')).toContain('images/arcade/star-arc.jpg');
+    expect(scaleCard.style.getPropertyValue('--mission-artwork')).toContain('images/arcade/grid-horizon.jpg');
 
     scaleCard.querySelector<HTMLButtonElement>('[data-action="reveal"]')!.click();
     expect(scaleCard.dataset.face).toBe('mission');
