@@ -22,12 +22,11 @@ export function createShowcase({ getActiveTab, onInteraction }: ShowcaseOptions)
   heading.className = 'showcase-heading';
   const eyebrow = document.createElement('p');
   eyebrow.className = 'hero-eyebrow';
-  eyebrow.textContent = 'INTERACTIVE WORKBENCH / 01';
+  eyebrow.textContent = 'LIVE FEATURE STATION';
   const title = document.createElement('h2');
-  title.textContent = 'See the signal path for yourself.';
+  title.textContent = 'Your station is ready.';
   const description = document.createElement('p');
-  description.textContent =
-    'Edit a live example, switch workloads, and explore how one small core reaches across interfaces.';
+  description.textContent = 'Play with a real Zuari feature, then flip another card to keep exploring.';
   heading.append(eyebrow, title, description);
 
   const stage = document.createElement('section');
