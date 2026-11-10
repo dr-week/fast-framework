@@ -1,9 +1,8 @@
 import { batch, effect, type CleanupFn } from '@zuari/signals';
-import { THEME_PRESETS } from '@zuari/tokens';
+import { THEME_PRESETS, type ElevationPreset } from '@zuari/tokens';
 import { createDesignPresets } from './aesthetics.js';
 import type {
   DesignPreferenceStorage,
-  ElevationPreset,
   PersistentDesignPresetOptions,
   PersistentDesignPresetController,
   SpacingPreset,
@@ -11,10 +10,10 @@ import type {
 } from './types.js';
 
 interface StoredDesignPreferences {
-  theme?: string;
-  elevation?: string;
-  spacing?: string;
-  surface?: string;
+  theme?: string | undefined;
+  elevation?: string | undefined;
+  spacing?: string | undefined;
+  surface?: string | undefined;
 }
 
 const ELEVATIONS = new Set<ElevationPreset>(['flat', 'soft', 'float', 'halo']);
