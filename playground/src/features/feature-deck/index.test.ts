@@ -21,6 +21,9 @@ describe('feature mission deck', () => {
     expect(deck.querySelector('[data-feature="repl"]')?.dataset.active).toBe('true');
     expect(scaleCard.style.getPropertyValue('--card-artwork')).toContain('images/arcade/star-arc.jpg');
     expect(scaleCard.style.getPropertyValue('--mission-artwork')).toContain('images/arcade/grid-horizon.jpg');
+    expect(deck.querySelector('.feature-deck-eyebrow')).toBeNull();
+    expect(deck.querySelector('.feature-flashcard-art')).toBeNull();
+    expect(scaleCard.querySelector('.feature-flashcard-icon svg')).not.toBeNull();
 
     scaleCard.querySelector<HTMLButtonElement>('[data-action="reveal"]')!.click();
     expect(scaleCard.dataset.face).toBe('mission');

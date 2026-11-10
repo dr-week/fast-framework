@@ -4,7 +4,7 @@
 body {
   justify-content: flex-start;
   user-select: text;
-  padding: 30px 0 48px;
+  padding: 20px 0 40px;
   background:
     radial-gradient(ellipse at 52% 0%, oklch(32% 0.13 292 / 0.18), transparent 34rem),
     radial-gradient(ellipse at 100% 28%, oklch(35% 0.14 225 / 0.1), transparent 30rem),
@@ -21,12 +21,12 @@ body {
 #app {
   width: min(1100px, calc(100% - 48px));
   align-items: stretch;
-  gap: 18px;
+  gap: 14px;
 }
 
 .spatial-header {
   position: relative;
-  gap: 24px;
+  gap: 18px;
   align-items: stretch;
   padding: 0;
   overflow: visible;
@@ -48,8 +48,8 @@ body {
   grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
   align-items: center;
   gap: clamp(20px, 5vw, 64px);
-  min-height: 360px;
-  padding: 32px clamp(22px, 5vw, 60px);
+  min-height: 320px;
+  padding: 26px clamp(22px, 4vw, 48px);
   border: 1px solid oklch(100% 0 0 / 0.13);
   border-radius: 30px;
   background:
@@ -60,7 +60,6 @@ body {
 }
 
 .hero-copy { max-width: 590px; }
-.hero-eyebrow { margin-bottom: 18px; color: oklch(77% 0.15 295); font: 600 0.68rem/1.2 ui-monospace, monospace; letter-spacing: 0.16em; }
 .hero-copy h2 { max-width: 660px; font-size: clamp(2.45rem, 5.8vw, 4.65rem); font-weight: 500; line-height: 0.98; letter-spacing: -0.072em; }
 .hero-copy h2 em { color: transparent; background: linear-gradient(100deg, oklch(79% 0.18 295), oklch(77% 0.16 220) 68%, oklch(82% 0.16 180)); background-clip: text; -webkit-background-clip: text; font-family: var(--zuari-type-editorial, ui-serif, Georgia, serif); font-weight: 400; }
 .hero-description { max-width: 52ch; margin-top: 18px; color: oklch(76% 0.025 270); font-size: 0.94rem; line-height: 1.7; }
@@ -116,7 +115,6 @@ body {
 .dock-label { font-size: 0.66rem; white-space: nowrap; }
 .spatial-tip { display: none; }
 .showcase-heading { margin: 22px 4px -5px; animation: sceneArrive 650ms 180ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-.showcase-heading .hero-eyebrow { margin-bottom: 9px; }
 .showcase-heading h2 { font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 500; letter-spacing: -0.045em; }
 .showcase-heading > p:last-child { margin-top: 7px; color: var(--muted); font-size: 0.82rem; line-height: 1.6; }
 .showcase-stage { scroll-margin-top: 80px; }
@@ -125,7 +123,7 @@ body {
 .metric-item { color: oklch(72% 0.02 260); }
 
 @media (max-width: 760px) {
-  body { padding-top: 18px; padding-bottom: 70px; }
+  body { padding-top: 14px; padding-bottom: 58px; }
   #app { width: min(100% - 28px, 620px); gap: 14px; }
   .hero-editorial { grid-template-columns: 1fr; gap: 10px; min-height: unset; padding: 28px 22px 18px; border-radius: 24px; }
   .hero-copy h2 { font-size: clamp(2.6rem, 11vw, 4.2rem); }
