@@ -30,8 +30,8 @@ export function createSelectionBar(props: SelectionBarProps): SelectionBarInstan
     const button = createButton({
       label: action.label,
       variant: action.variant ?? 'secondary',
-      disabled: action.disabled,
-      icon: action.icon,
+      ...(action.disabled !== undefined ? { disabled: action.disabled } : {}),
+      ...(action.icon !== undefined ? { icon: action.icon } : {}),
       onClick: action.onClick
     });
     button.element.dataset.selectionAction = action.id;
