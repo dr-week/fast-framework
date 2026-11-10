@@ -1,0 +1,99 @@
+.showcase-stage {
+  --station-glow: oklch(77% 0.16 195);
+  position: relative;
+  isolation: isolate;
+  padding: clamp(8px, 1.4vw, 14px);
+  overflow: hidden;
+  border: 1px solid color-mix(in oklch, var(--station-glow) 30%, var(--border));
+  border-radius: 26px;
+  background:
+    linear-gradient(145deg, oklch(12% 0.024 265 / 0.96), oklch(8% 0.018 270 / 0.98));
+  box-shadow:
+    0 24px 70px -38px oklch(0% 0 0 / 0.9),
+    0 0 36px color-mix(in oklch, var(--station-glow) 10%, transparent),
+    inset 0 1px 0 oklch(100% 0 0 / 0.07);
+  transition: border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.showcase-stage::before,
+.showcase-stage::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  content: '';
+  pointer-events: none;
+}
+
+.showcase-stage::before {
+  background-image:
+    linear-gradient(145deg, oklch(8% 0.02 270 / 0.22), oklch(8% 0.02 270 / 0.48)),
+    var(--station-artwork);
+  background-position: center, var(--station-position, center);
+  background-size: cover;
+  filter: saturate(1.15) hue-rotate(var(--station-hue, 0deg));
+  opacity: 0.38;
+  mix-blend-mode: var(--station-blend, screen);
+  mask-image: radial-gradient(ellipse at 70% 42%, #000 0%, rgb(0 0 0 / 0.8) 44%, transparent 100%);
+  transform: scale(1.04);
+}
+
+.showcase-stage::after {
+  background:
+    radial-gradient(ellipse at 8% 4%, color-mix(in oklch, var(--station-glow) 14%, transparent), transparent 44%),
+    radial-gradient(ellipse at 94% 96%, color-mix(in oklch, var(--station-glow) 10%, transparent), transparent 42%);
+  opacity: 0.85;
+}
+
+.showcase-stage > * {
+  position: relative;
+  z-index: 0;
+}
+
+.showcase-stage .repl-shell,
+.showcase-stage .hw-lab-shell,
+.showcase-stage .feature-card {
+  border-color: color-mix(in oklch, var(--station-glow) 35%, var(--border));
+  box-shadow:
+    0 20px 56px -32px oklch(0% 0 0 / 0.85),
+    0 0 26px color-mix(in oklch, var(--station-glow) 8%, transparent),
+    inset 0 1px 0 oklch(100% 0 0 / 0.07);
+}
+
+.showcase-stage .hw-lab-shell {
+  --hw-bg: oklch(10% 0.02 270 / 0.91);
+  --hw-border: color-mix(in oklch, var(--station-glow) 30%, var(--border));
+  --hw-accent: var(--station-glow);
+  --hw-fg: var(--text);
+}
+
+.showcase-stage .repl-preset-btn[data-active="true"],
+.showcase-stage .cli-pill[data-active="true"] {
+  border-color: color-mix(in oklch, var(--station-glow) 62%, transparent);
+  color: var(--station-glow);
+  background: color-mix(in oklch, var(--station-glow) 15%, oklch(12% 0.02 270 / 0.85));
+  box-shadow: 0 0 18px color-mix(in oklch, var(--station-glow) 18%, transparent);
+}
+
+.showcase-stage .badge-pill {
+  border-color: color-mix(in oklch, var(--station-glow) 48%, var(--border));
+  color: var(--station-glow);
+  background: color-mix(in oklch, var(--station-glow) 12%, oklch(12% 0.02 270 / 0.9));
+}
+
+.showcase-heading .hero-eyebrow {
+  color: var(--station-glow, oklch(77% 0.15 295));
+  text-shadow: 0 0 22px color-mix(in oklch, var(--station-glow, oklch(77% 0.15 295)) 28%, transparent);
+  transition: color 220ms ease, text-shadow 220ms ease;
+}
+
+@media (max-width: 760px) {
+  .showcase-stage { padding: 7px; border-radius: 22px; }
+  .showcase-stage::before { opacity: 0.28; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-stage { transition: none; }
+  .showcase-stage .repl-preset-btn[data-active="true"],
+  .showcase-stage .cli-pill[data-active="true"] { box-shadow: none; }
+}

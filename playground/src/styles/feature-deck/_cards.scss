@@ -6,12 +6,6 @@
   animation: cardDeal 500ms both cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.feature-flashcard[data-tint="sky"] { --card-glow: oklch(74% 0.16 225); }
-.feature-flashcard[data-tint="mint"] { --card-glow: oklch(76% 0.16 165); }
-.feature-flashcard[data-tint="amber"] { --card-glow: oklch(78% 0.16 85); }
-.feature-flashcard[data-tint="rose"] { --card-glow: oklch(73% 0.19 15); }
-.feature-flashcard[data-tint="cyan"] { --card-glow: oklch(77% 0.14 195); }
-
 .feature-flashcard-inner {
   position: relative;
   min-height: inherit;
@@ -56,6 +50,33 @@
   transition: opacity 180ms ease;
 }
 
+.feature-flashcard-face::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background-image:
+    linear-gradient(180deg, oklch(10% 0.02 270 / 0.08), oklch(9% 0.02 270 / 0.42) 48%, oklch(8% 0.02 270 / 0.88)),
+    var(--card-artwork);
+  background-position: center, var(--artwork-position, center);
+  background-size: cover;
+  content: '';
+  filter: saturate(1.12) hue-rotate(var(--artwork-hue, 0deg));
+  opacity: 0.3;
+  pointer-events: none;
+  mix-blend-mode: var(--artwork-blend, screen);
+  mask-image: radial-gradient(ellipse at 68% 32%, #000 0%, rgb(0 0 0 / 0.82) 35%, transparent 82%);
+  transform: scale(1.06);
+  transition: opacity 220ms ease;
+}
+
+.feature-flashcard-face--back::before {
+  background-image:
+    linear-gradient(180deg, oklch(10% 0.02 270 / 0.18), oklch(9% 0.02 270 / 0.57) 48%, oklch(8% 0.02 270 / 0.93)),
+    var(--mission-artwork);
+  opacity: 0.34;
+}
+
 .feature-flashcard:hover .feature-flashcard-face,
 .feature-flashcard[data-active="true"] .feature-flashcard-face {
   border-color: color-mix(in oklch, var(--card-glow) 54%, oklch(100% 0 0 / 0.16));
@@ -64,6 +85,11 @@
 
 .feature-flashcard:hover .feature-flashcard-face::after {
   opacity: 1;
+}
+
+.feature-flashcard:hover .feature-flashcard-face::before,
+.feature-flashcard[data-active="true"] .feature-flashcard-face::before {
+  opacity: 0.48;
 }
 
 .feature-flashcard-face--back {

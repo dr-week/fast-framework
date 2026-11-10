@@ -1,4 +1,5 @@
 import type { ActiveTab } from '../state.js';
+import { FEATURE_ARTWORK, getArcadeArtworkUrl } from '../feature-artwork.js';
 import { FEATURE_CARDS, type FeatureCardDefinition } from './model.js';
 
 export interface FeatureCardElements {
@@ -78,9 +79,15 @@ function createFeatureCardView(
   const article = document.createElement('article');
   article.className = 'feature-flashcard';
   article.dataset.feature = definition.id;
-  article.dataset.tint = definition.tint;
   article.dataset.face = 'front';
   article.style.setProperty('--card-order', String(index));
+  const artwork = FEATURE_ARTWORK[definition.id];
+  article.style.setProperty('--card-artwork', `url("${getArcadeArtworkUrl(artwork.card)}")`);
+  article.style.setProperty('--mission-artwork', `url("${getArcadeArtworkUrl(artwork.station)}")`);
+  article.style.setProperty('--card-glow', artwork.glow);
+  article.style.setProperty('--artwork-hue', artwork.hue);
+  article.style.setProperty('--artwork-blend', artwork.blend);
+  article.style.setProperty('--artwork-position', artwork.position);
   article.style.animationDelay = `${index * 55}ms`;
   article.setAttribute('role', 'listitem');
 
