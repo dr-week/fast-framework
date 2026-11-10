@@ -18,14 +18,15 @@ import {
 import { THEME_PRESETS, generateCssVariables } from '@zuari/tokens';
 
 describe('@zuari/presets (Easy-to-Use Minimal & Artistic UI/UX Presets & Templates)', () => {
-  it('provides 6 easy-to-remember theme presets with lightweight elevations and motion tokens', () => {
+  it('provides 7 easy-to-remember theme presets with lightweight elevations and motion tokens', () => {
     expect(Object.keys(THEME_PRESETS)).toEqual([
       'paper',
       'blossom',
       'matcha',
       'twilight',
       'midnight',
-      'studio'
+      'studio',
+      'noir'
     ]);
 
     const paperCss = generateCssVariables(THEME_PRESETS.paper);
