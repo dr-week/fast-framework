@@ -8,8 +8,10 @@ export type CSSLength = `${number}px` | `${number}rem` | `${number}em` | '0';
  * - 'matcha': Calm botanical garden greens, soft mist, and natural warmth
  * - 'twilight': Anime sunset dusk (indigo-violet sky with warm sunset amber glow)
  * - 'midnight': Deep spatial dark glass with luminous cyan accents
+ * - 'studio': Warm ambient light, translucent glass surfaces, and coral-rose accents
+ * - 'noir': Near-black editorial surfaces with spectral violet and blue accents
  */
-export type ThemePresetName = 'paper' | 'blossom' | 'matcha' | 'twilight' | 'midnight';
+export type ThemePresetName = 'paper' | 'blossom' | 'matcha' | 'twilight' | 'midnight' | 'studio' | 'noir';
 
 /**
  * Lightweight, smooth elevation levels (whisper-light borders and airy depth):
@@ -58,6 +60,12 @@ export interface NovaThemeContract {
     glyph: OKLCHColor;
     glyphActive: OKLCHColor;
     accent: OKLCHColor;
+    /** Optional second accent stop used by gradient actions. */
+    accentSecondary?: OKLCHColor | undefined;
+    /** Optional translucent accent used by focus and glow effects. */
+    accentGlow?: OKLCHColor | undefined;
+    /** Optional foreground color chosen for readable text on accent fills. */
+    onAccent?: OKLCHColor | undefined;
     danger: OKLCHColor;
   };
   spacing: {

@@ -11,22 +11,23 @@
   "dependencies": {
     "@zuari/core": "workspace:*",
     "@zuari/dom": "workspace:*",
-    "@zuari/signals": "workspace:*",
-    "@zuari/tokens": "workspace:*",
     "@zuari/glyphs": "workspace:*",
-    "@zuari/headless": "workspace:*",
-    "@zuari/recipes": "workspace:*",
-    "@zuari/spatial": "workspace:*",
-    "@zuari/wasm": "workspace:*",
-    "@zuari/ui": "workspace:*",
     "@zuari/hardware": "workspace:*",
+    "@zuari/headless": "workspace:*",
     "@zuari/lua": "workspace:*",
-    "@zuari/webgpu": "workspace:*",
-    "@zuari/wit": "workspace:*",
     "@zuari/mcp": "workspace:*",
-    "@zuari/quantum": "workspace:*"
+    "@zuari/quantum": "workspace:*",
+    "@zuari/recipes": "workspace:*",
+    "@zuari/signals": "workspace:*",
+    "@zuari/spatial": "workspace:*",
+    "@zuari/tokens": "workspace:*",
+    "@zuari/ui": "workspace:*",
+    "@zuari/wasm": "workspace:*",
+    "@zuari/webgpu": "workspace:*",
+    "@zuari/wit": "workspace:*"
   },
   "devDependencies": {
+    "sass": "1.90.0",
     "vite": "^6.2.0"
   }
 }

@@ -173,7 +173,7 @@ For incremental adoption in a Vue 3 + Vite 8 app, see the [Vue island example](.
 | [`@zuari/webgpu`](./packages/webgpu) | Hardware WebGPU compute shader pipeline bound to reactive signals | **~1.4 KB** | WebGPU Devices |
 | [`@zuari/ai`](./packages/ai) | On-device WebLLM/transformers.js token streaming & embeddings | **~1.2 KB** | Modern Browsers |
 | [`@zuari/sync`](./packages/sync) | Real-time CRDT / BroadcastChannel peer-to-peer state synchronization | **~1.1 KB** | Local-First / P2P |
-| [`@zuari/presets`](./packages/presets) | Minimal & artistic UI/UX presets (`paper`, `blossom`, `matcha`, `twilight`, `midnight`), lightweight elevations (`flat`, `soft`, `float`, `halo`), smooth animations (`floatUp`, `popIn`, `slideIn`), & templates (`createStoryCard`, `createBentoGrid`) | **~0.9 KB** | Design & Motion |
+| [`@zuari/presets`](./packages/presets) | UI presets (`paper`, `blossom`, `matcha`, `twilight`, `midnight`, `studio`), liquid-glass and frosted surfaces, gradient actions, elevations, motion, and templates | **~0.9 KB** | Design & Motion |
 | [`@zuari/hardware`](./packages/hardware) | Tactical ballistic optics, FPV drone OSD, KaiOS D-Pad/T9, rotary wheels & E-Ink/waveguide modes | **~1.1 KB** | IoT, Drones, Wearables |
 | [`@zuari/lua`](./packages/lua) | Embedded Lua runtime scripting bridge for game HUDs & modding | **~0.9 KB** | Game Engines & Scripts |
 | [`@zuari/headless`](./packages/headless) | Headless logic (`Dialog`, `CommandPalette`, `AnchorTooltip`, HTML Invoker Commands `commandfor`/`command`, CSS `reading-flow`) | **~1.8 KB** | Framework Agnostic |
@@ -244,6 +244,7 @@ pnpm build
 
 * [**User Manual & Developer Guide**](./USER_MANUAL.md)
 * [**Product Development Workflow**](./docs/DEVELOPMENT_WORKFLOW.md)
+* [**GUI Design Recipes**](./docs/GUI_DESIGN_RECIPES.md)
 * [**Technical Specification**](./SPECIFICATION.md)
 * [**Partnerships & Alliance Blueprint**](./PARTNERSHIPS_AND_MARKETING.md)
 * [**Native & Wearables Specification**](./NATIVE_REQUIREMENTS.md)

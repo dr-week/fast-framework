@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { REPL_PRESETS, createReplView } from './repl.js';
-import { ZUARI_BUNDLE_MANIFEST, createProofBenchView } from './benchmark.js';
+import { REPL_PRESETS, createReplView } from './index.js';
 
 describe('@zuari/playground Interactive REPL & Proof Benchmarks', () => {
   it('exposes 6 turnkey interactive REPL presets (Direct DOM, Spatial HUD, Wasm FFI, Hardware, Quantum, Drawer)', () => {
@@ -29,20 +28,5 @@ describe('@zuari/playground Interactive REPL & Proof Benchmarks', () => {
     expect(preview.innerHTML).toContain('@zuari/quantum');
 
     document.body.removeChild(replEl);
-  });
-
-  it('renders the 5,000-node stress benchmark and sub-2.5KB bundle telemetry', () => {
-    const onInteract = vi.fn();
-    const benchEl = createProofBenchView(onInteract);
-    document.body.appendChild(benchEl);
-
-    expect(ZUARI_BUNDLE_MANIFEST.length).toBeGreaterThanOrEqual(5);
-    expect(benchEl.innerHTML).toContain('Krausest Stress Test');
-    expect(benchEl.innerHTML).toContain('@zuari/signals');
-
-    const runBtn = benchEl.querySelector<HTMLButtonElement>('.repl-action-btn')!;
-    runBtn.click();
-    expect(onInteract).toHaveBeenCalled();
-    document.body.removeChild(benchEl);
   });
 });

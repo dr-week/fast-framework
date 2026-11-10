@@ -98,7 +98,7 @@ export function createAppShell(api: ApiClient) {
 const appSettings = `import { createDesignPresets } from '@zuari/presets';
 import { createUiDrawer } from '@zuari/ui';
 
-const THEME_NAMES = ['paper', 'blossom', 'matcha', 'twilight', 'midnight'] as const;
+const THEME_NAMES = ['paper', 'blossom', 'matcha', 'twilight', 'midnight', 'studio', 'noir'] as const;
 type ThemeName = typeof THEME_NAMES[number];
 
 export function createProductSettings() {
@@ -124,7 +124,7 @@ export function createProductSettings() {
     const selected = themeSelect.value;
     if (!isThemeName(selected)) throw new TypeError(\`Unsupported theme preset: \${selected}\`);
     design.setTheme(selected);
-    document.documentElement.style.colorScheme = selected === 'midnight' || selected === 'twilight' ? 'dark' : 'light';
+    document.documentElement.style.colorScheme = selected === 'midnight' || selected === 'twilight' || selected === 'noir' ? 'dark' : 'light';
   }
 
   themeSelect.addEventListener('change', updateTheme);

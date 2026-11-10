@@ -40,10 +40,11 @@ export type SpacingPreset = 'compact' | 'balanced' | 'airy';
  * Surface Material Presets:
  * - 'paper': Matte, tactile warm card surface with crisp 1px border
  * - 'frosted': Soft translucent frosted glass with subtle blur
+ * - 'liquid': Rounded iridescent glass with color blooms and bright edge highlights
  * - 'canvas': Clean, minimal flat canvas surface
  * - 'cel': Crisp anime cel-shaded card with defined outline and zero blur
  */
-export type SurfacePreset = 'paper' | 'frosted' | 'canvas' | 'cel';
+export type SurfacePreset = 'paper' | 'frosted' | 'liquid' | 'canvas' | 'cel';
 
 export interface AnimationPresetConfig {
   readonly name: AnimationPresetName;
@@ -73,6 +74,26 @@ export interface DesignPresetOptions {
   readonly spacing?: SpacingPreset | undefined;
   readonly surface?: SurfacePreset | undefined;
   readonly targetElement?: HTMLElement | undefined;
+}
+
+/** Minimal Storage-compatible interface, injectable for tests and non-browser hosts. */
+export interface DesignPreferenceStorage {
+  getItem(key: string): string | null;
+  setItem(key: string, value: string): void;
+  removeItem?(key: string): void;
+}
+
+export interface PersistentDesignPresetOptions extends DesignPresetOptions {
+  /** Pass null to disable persistence; otherwise localStorage is used when available. */
+  readonly storage?: DesignPreferenceStorage | null | undefined;
+  /** Namespaced key used for the serialized design preferences. */
+  readonly storageKey?: string | undefined;
+  /** Synchronize changes from other tabs using the browser storage event. */
+  readonly syncAcrossTabs?: boolean | undefined;
+}
+
+export interface PersistentDesignPresetController extends DesignPresetController {
+  readonly storageKey: string;
 }
 
 export interface DesignPresetController {
@@ -171,6 +192,24 @@ export interface InfographicPanelOptions {
   readonly elevation?: ElevationPreset | undefined;
   readonly surface?: SurfacePreset | undefined;
   readonly animation?: AnimationPresetName | false | undefined;
+}
+
+/** Options for compact, accessible inline data visualizations. */
+export interface SparklineOptions {
+  readonly values: readonly number[];
+  readonly label: string;
+  readonly tone?: 'accent' | 'positive' | 'warning' | 'danger' | undefined;
+  readonly showArea?: boolean | undefined;
+}
+
+export interface RadialGaugeOptions {
+  /** Value in the inclusive range from zero to max. */
+  readonly value: number;
+  readonly max?: number | undefined;
+  readonly label: string;
+  readonly tone?: 'accent' | 'positive' | 'warning' | 'danger' | undefined;
+  readonly size?: number | undefined;
+  readonly thickness?: number | undefined;
 }
 
 

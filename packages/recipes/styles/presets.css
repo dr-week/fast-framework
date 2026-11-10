@@ -20,6 +20,14 @@
   --zuari-layout-gap: 16px;
   --zuari-layout-pad: 24px;
   --zuari-layout-line-height: 1.65;
+  --zuari-radius-glass: 28px;
+  /* Editorial hierarchy: quiet labels, legible values, and restrained tracked metadata. */
+  --zuari-type-display: clamp(2rem, 5vw, 3.5rem);
+  --zuari-type-editorial: ui-serif, Georgia, 'Times New Roman', serif;
+  --zuari-type-data: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  --zuari-label-tracking: 0.055em;
+  --zuari-accent-gradient: linear-gradient(125deg, var(--nova-color-accent), var(--nova-color-accent-secondary, var(--nova-color-accent)));
+  --zuari-accent-glow-shadow: 0 6px 20px var(--nova-color-accent-glow, color-mix(in srgb, var(--nova-color-accent) 22%, transparent));
 }
 
 /* 1. Paper Theme ('paper') — Warm Minimal Art Paper, Charcoal Ink & Stamp-Red Accent */
@@ -31,7 +39,9 @@
   --nova-color-glyph: oklch(38% 0.02 70);
   --nova-color-glyph-active: oklch(18% 0.015 70);
   --nova-color-accent: oklch(58% 0.21 32);
+  --nova-color-accent-secondary: oklch(62% 0.19 15);
   --nova-color-accent-glow: oklch(58% 0.21 32 / 0.18);
+  --nova-color-on-accent: oklch(100% 0 0);
   --zuari-elevation-flat: 0 1px 2px oklch(20% 0.02 60 / 0.04), 0 0 0 1px oklch(20% 0.02 60 / 0.07);
   --zuari-elevation-soft: 0 4px 12px -2px oklch(20% 0.02 60 / 0.06), 0 1px 3px oklch(20% 0.02 60 / 0.04);
   --zuari-elevation-float: 0 10px 24px -6px oklch(20% 0.02 60 / 0.08), 0 2px 6px oklch(20% 0.02 60 / 0.04);
@@ -47,7 +57,9 @@
   --nova-color-glyph: oklch(42% 0.035 340);
   --nova-color-glyph-active: oklch(22% 0.04 340);
   --nova-color-accent: oklch(70% 0.17 352);
+  --nova-color-accent-secondary: oklch(68% 0.16 5);
   --nova-color-accent-glow: oklch(70% 0.17 352 / 0.2);
+  --nova-color-on-accent: oklch(25% 0.04 340);
 }
 
 /* 3. Matcha Theme ('matcha') — Calm Garden Greens & Soft Sunlight */
@@ -59,7 +71,9 @@
   --nova-color-glyph: oklch(38% 0.04 145);
   --nova-color-glyph-active: oklch(20% 0.04 145);
   --nova-color-accent: oklch(62% 0.15 148);
+  --nova-color-accent-secondary: oklch(68% 0.14 125);
   --nova-color-accent-glow: oklch(62% 0.15 148 / 0.18);
+  --nova-color-on-accent: oklch(18% 0.04 145);
 }
 
 /* 4. Twilight Theme ('twilight') — Anime Sunset Dusk & Warm Lantern Amber */
@@ -71,7 +85,9 @@
   --nova-color-glyph: oklch(82% 0.03 275);
   --nova-color-glyph-active: oklch(98% 0.015 65);
   --nova-color-accent: oklch(76% 0.17 55);
+  --nova-color-accent-secondary: oklch(72% 0.16 35);
   --nova-color-accent-glow: oklch(76% 0.17 55 / 0.24);
+  --nova-color-on-accent: oklch(20% 0.04 275);
 }
 
 /* 5. Midnight Theme ('midnight') — Deep Spatial Glass & Cyan Glow */
@@ -83,6 +99,37 @@
   --nova-color-glyph: oklch(78% 0.015 260);
   --nova-color-glyph-active: oklch(96% 0.01 260);
   --nova-color-accent: oklch(75% 0.18 190);
+  --nova-color-accent-secondary: oklch(72% 0.16 230);
+  --nova-color-accent-glow: oklch(75% 0.18 190 / 0.24);
+  --nova-color-on-accent: oklch(18% 0.02 260);
+}
+
+/* 6. Studio Theme — warm daylight canvas and translucent liquid-glass surfaces */
+[data-zuari-theme="studio"] {
+  --nova-color-background: oklch(90% 0.045 55);
+  --nova-color-surface: oklch(99% 0.025 45 / 0.56);
+  --nova-color-surface-hover: oklch(100% 0.02 45 / 0.86);
+  --nova-color-border: oklch(100% 0.02 40 / 0.58);
+  --nova-color-glyph: oklch(36% 0.035 270);
+  --nova-color-glyph-active: oklch(22% 0.03 270);
+  --nova-color-accent: oklch(52% 0.19 23);
+  --nova-color-accent-secondary: oklch(53% 0.17 350);
+  --nova-color-accent-glow: oklch(66% 0.2 20 / 0.26);
+  --nova-color-on-accent: oklch(100% 0 0);
+  --nova-radius-squircle: 22px;
+  --zuari-elevation-flat: 0 0 0 1px oklch(100% 0.02 40 / 0.58), 0 1px 2px oklch(25% 0.04 30 / 0.06);
+  --zuari-elevation-soft: 0 12px 30px -14px oklch(30% 0.05 30 / 0.2), 0 0 0 1px oklch(100% 0.02 40 / 0.56);
+  --zuari-elevation-float: 0 22px 48px -18px oklch(30% 0.05 30 / 0.28), 0 0 0 1px oklch(100% 0.02 40 / 0.62);
+  --zuari-elevation-halo: 0 26px 58px -18px oklch(30% 0.05 30 / 0.28), 0 0 0 1px oklch(100% 0.02 40 / 0.66), 0 0 30px oklch(66% 0.2 20 / 0.2);
+}
+
+[data-zuari-theme="studio"] .zuari-app-canvas,
+.zuari-app-canvas[data-zuari-theme="studio"] {
+  background:
+    radial-gradient(ellipse at 12% 8%, oklch(78% 0.16 25 / 0.38), transparent 34%),
+    radial-gradient(ellipse at 88% 18%, oklch(84% 0.12 350 / 0.34), transparent 36%),
+    radial-gradient(ellipse at 55% 100%, oklch(82% 0.12 95 / 0.3), transparent 42%),
+    var(--nova-color-background);
 }
 
 /* Modular Elevation Presets ('flat', 'soft', 'float', 'halo') */
@@ -99,7 +146,23 @@
   box-shadow: var(--zuari-elevation-halo);
 }
 
-/* Modular Surface Material Presets ('paper', 'frosted', 'canvas', 'cel') */
+/* Ambient canvas and accent emphasis are opt-in; keep content surfaces legible. */
+.zuari-app-canvas {
+  min-height: 100%;
+  color: var(--nova-color-glyph-active);
+  background:
+    radial-gradient(ellipse at 88% 0%, color-mix(in srgb, var(--nova-color-accent) 10%, transparent), transparent 38%),
+    radial-gradient(ellipse at 4% 90%, color-mix(in srgb, var(--nova-color-accent-secondary, var(--nova-color-accent)) 6%, transparent), transparent 34%),
+    var(--nova-color-background);
+}
+
+.zuari-accent-glow {
+  border-color: color-mix(in srgb, var(--nova-color-accent) 42%, var(--nova-color-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nova-color-accent) 12%, transparent),
+    0 8px 24px var(--nova-color-accent-glow, transparent);
+}
+
+/* Modular Surface Material Presets ('paper', 'frosted', 'liquid', 'canvas', 'cel') */
 .zuari-surface-paper, [data-zuari-surface="paper"] {
   background: var(--nova-color-surface);
   border: 1px solid var(--nova-color-border);
@@ -107,11 +170,97 @@
 }
 
 .zuari-surface-frosted, [data-zuari-surface="frosted"] {
-  background: var(--nova-color-surface);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background:
+    radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--nova-color-accent) 6%, transparent), transparent 46%),
+    var(--nova-color-surface);
+  backdrop-filter: blur(18px) saturate(135%);
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
   border: 1px solid var(--nova-color-border);
   border-radius: var(--nova-radius-squircle);
+}
+
+.zuari-surface-liquid, [data-zuari-surface="liquid"] {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, white 54%, var(--nova-color-border));
+  border-radius: var(--zuari-radius-glass, 28px);
+  background:
+    radial-gradient(ellipse at 20% 0%, var(--zuari-glass-tint, color-mix(in srgb, var(--nova-color-accent) 22%, transparent)), transparent 58%),
+    radial-gradient(ellipse at 100% 100%, var(--zuari-glass-tint-secondary, color-mix(in srgb, var(--nova-color-accent-secondary, var(--nova-color-accent)) 18%, transparent)), transparent 55%),
+    linear-gradient(145deg, color-mix(in srgb, white 20%, var(--nova-color-surface)), color-mix(in srgb, var(--nova-color-surface) 72%, transparent));
+  backdrop-filter: blur(26px) saturate(155%);
+  -webkit-backdrop-filter: blur(26px) saturate(155%);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, white 62%, transparent), inset 0 -1px 0 color-mix(in srgb, white 18%, transparent), 0 18px 48px color-mix(in srgb, var(--nova-color-glyph-active) 12%, transparent);
+}
+
+.zuari-surface-liquid::before {
+  position: absolute;
+  z-index: -1;
+  inset: 1px 12% auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, white 80%, transparent), transparent);
+  content: '';
+  pointer-events: none;
+}
+
+.zuari-surface-liquid[data-zuari-tint="rose"] { --zuari-glass-tint: oklch(72% 0.2 350 / 0.28); --zuari-glass-tint-secondary: oklch(72% 0.18 25 / 0.2); }
+.zuari-surface-liquid[data-zuari-tint="sky"] { --zuari-glass-tint: oklch(76% 0.16 230 / 0.26); --zuari-glass-tint-secondary: oklch(80% 0.13 190 / 0.2); }
+.zuari-surface-liquid[data-zuari-tint="amber"] { --zuari-glass-tint: oklch(82% 0.16 70 / 0.28); --zuari-glass-tint-secondary: oklch(70% 0.18 25 / 0.2); }
+.zuari-surface-liquid[data-zuari-tint="mint"] { --zuari-glass-tint: oklch(78% 0.14 155 / 0.24); --zuari-glass-tint-secondary: oklch(76% 0.13 205 / 0.2); }
+.zuari-surface-liquid[data-zuari-tint="violet"] { --zuari-glass-tint: oklch(66% 0.22 295 / 0.3); --zuari-glass-tint-secondary: oklch(68% 0.2 345 / 0.2); }
+.zuari-surface-liquid[data-zuari-tint="lime"] { --zuari-glass-tint: oklch(80% 0.2 125 / 0.28); --zuari-glass-tint-secondary: oklch(72% 0.18 85 / 0.19); }
+
+/* Noir spectral palette: dark glass and spectral edges as an optional visual system. */
+[data-zuari-theme="noir"] {
+  --nova-color-background: oklch(12% 0.012 270);
+  --nova-color-surface: oklch(18% 0.018 270 / 0.82);
+  --nova-color-surface-hover: oklch(24% 0.025 270 / 0.92);
+  --nova-color-border: oklch(88% 0.025 270 / 0.16);
+  --nova-color-glyph: oklch(76% 0.018 270);
+  --nova-color-glyph-active: oklch(97% 0.01 270);
+  --nova-color-accent: oklch(72% 0.2 295);
+  --nova-color-accent-secondary: oklch(75% 0.18 220);
+  --nova-color-accent-glow: oklch(70% 0.22 295 / 0.24);
+  --nova-color-on-accent: oklch(15% 0.02 270);
+  --zuari-elevation-soft: 0 8px 24px -8px oklch(4% 0.02 270 / 0.72), 0 0 0 1px oklch(90% 0.03 270 / 0.08);
+  --zuari-elevation-halo: 0 18px 44px -10px oklch(4% 0.02 270 / 0.8), 0 0 26px oklch(70% 0.2 295 / 0.16);
+}
+
+[data-zuari-theme="noir"] .zuari-app-canvas,
+.zuari-app-canvas[data-zuari-theme="noir"] {
+  background:
+    radial-gradient(ellipse at 12% 0%, oklch(50% 0.22 295 / 0.16), transparent 34%),
+    radial-gradient(ellipse at 92% 24%, oklch(58% 0.18 220 / 0.13), transparent 38%),
+    var(--nova-color-background);
+}
+
+.zuari-editorial-eyebrow { font-size: 0.72rem; letter-spacing: var(--zuari-label-tracking); text-transform: uppercase; color: var(--nova-color-glyph); }
+.zuari-editorial-title { font-family: var(--zuari-type-editorial); font-weight: 500; letter-spacing: -0.035em; }
+.zuari-editorial-value { font-family: var(--zuari-type-data); font-size: var(--zuari-type-display); font-variant-numeric: tabular-nums; letter-spacing: -0.07em; line-height: 1; }
+.zuari-editorial-grid { background-image: linear-gradient(to right, color-mix(in srgb, var(--nova-color-border) 60%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--nova-color-border) 60%, transparent) 1px, transparent 1px); background-size: 28px 28px; }
+
+.zuari-sparkline { display: block; width: 100%; height: 2.25rem; overflow: visible; color: var(--nova-color-accent); }
+.zuari-sparkline-line { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 3px color-mix(in srgb, currentColor 48%, transparent)); }
+.zuari-sparkline-area { fill: currentColor; opacity: 0.12; }
+.zuari-sparkline[data-tone="positive"], .zuari-gauge-arc[data-tone="positive"] { color: oklch(75% 0.16 150); }
+.zuari-sparkline[data-tone="warning"] { color: oklch(80% 0.16 75); }
+.zuari-sparkline[data-tone="danger"] { color: oklch(70% 0.2 25); }
+.zuari-radial-gauge { position: relative; display: inline-grid; place-items: center; color: var(--nova-color-accent); }
+.zuari-radial-gauge svg { grid-area: 1 / 1; overflow: visible; }
+.zuari-gauge-track { stroke: color-mix(in srgb, var(--nova-color-glyph) 18%, transparent); }
+.zuari-gauge-arc { stroke: currentColor; stroke-linecap: round; filter: drop-shadow(0 0 4px color-mix(in srgb, currentColor 48%, transparent)); }
+.zuari-gauge-value, .zuari-gauge-label { grid-area: 1 / 1; align-self: center; text-align: center; }
+.zuari-gauge-value { margin-top: -0.45rem; font: 600 1.05rem/1 var(--zuari-type-data); font-variant-numeric: tabular-nums; }
+.zuari-gauge-label { align-self: end; margin-bottom: 25%; max-width: 70%; font-size: 0.62rem; color: var(--nova-color-glyph); }
+.zuari-radial-gauge[data-tone="positive"] { color: oklch(75% 0.16 150); }
+.zuari-radial-gauge[data-tone="warning"] { color: oklch(80% 0.16 75); }
+.zuari-radial-gauge[data-tone="danger"] { color: oklch(70% 0.2 25); }
+
+.zuari-prism-glow {
+  box-shadow: 0 0 14px color-mix(in srgb, var(--nova-color-accent) 40%, transparent),
+    0 0 28px color-mix(in srgb, var(--nova-color-accent-secondary, var(--nova-color-accent)) 30%, transparent),
+    0 0 44px color-mix(in srgb, oklch(72% 0.18 220) 16%, transparent);
 }
 
 .zuari-surface-canvas, [data-zuari-surface="canvas"] {

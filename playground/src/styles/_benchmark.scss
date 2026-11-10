@@ -1,0 +1,153 @@
+/* 5,000-Node Benchmark & Bundle Analyzer */
+.proof-bench-shell {
+  width: 100%;
+}
+.proof-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 16px;
+}
+
+@media (max-width: 780px) {
+  .proof-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.proof-card {
+  padding: 20px;
+  border-radius: 22px;
+  background: var(--glass);
+  backdrop-filter: blur(28px);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.flame-comparison {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.flame-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.flame-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+}
+
+.flame-score.accent {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.flame-score.warn {
+  color: oklch(72% 0.19 35);
+  font-weight: 600;
+}
+
+.flame-track {
+  height: 10px;
+  border-radius: 999px;
+  background: oklch(12% 0.015 260);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.flame-bar {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.zuari-bar {
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.vdom-bar {
+  background: linear-gradient(90deg, oklch(68% 0.2 40), oklch(62% 0.22 25));
+}
+
+.proof-node-strip {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  gap: 3px;
+  padding: 8px;
+  border-radius: 10px;
+  background: oklch(11% 0.015 260);
+  border: 1px solid var(--border);
+}
+
+.proof-node-cell {
+  font-family: monospace;
+  font-size: 0.62rem;
+  text-align: center;
+  padding: 2px 0;
+  border-radius: 4px;
+  background: oklch(17% 0.02 260);
+  color: var(--accent);
+}
+
+.proof-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.proof-speedup-pill {
+  font-size: 0.78rem;
+  color: var(--muted);
+
+  strong {
+    color: var(--accent);
+    font-size: 0.92rem;
+  }
+}
+
+.bundle-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bundle-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bundle-row-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.74rem;
+
+  code {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  span {
+    color: var(--muted);
+  }
+}
+
+.bundle-track {
+  height: 7px;
+  border-radius: 999px;
+  background: oklch(12% 0.015 260);
+  overflow: hidden;
+}
+
+.bundle-fill {
+  height: 100%;
+  border-radius: 999px;
+}

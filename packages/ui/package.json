@@ -49,6 +49,10 @@
     "./input": {
       "types": "./dist/input/index.d.ts",
       "import": "./dist/input/index.js"
+    },
+    "./selection-bar": {
+      "types": "./dist/selection-bar/index.d.ts",
+      "import": "./dist/selection-bar/index.js"
     }
   },
   "scripts": {

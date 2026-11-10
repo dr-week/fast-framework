@@ -1,0 +1,59 @@
+import { effect } from '@zuari/signals';
+import { createProofBenchView } from '../benchmark/index.js';
+import { createHardwareLabView } from '../hardware/index.js';
+import { createPolyglotWorkbenchView } from '../polyglot/index.js';
+import { createReplView } from '../repl/index.js';
+import type { ActiveTab } from '../state.js';
+import { createAlliancesShowcase } from './alliances.js';
+import { createCoreShowcase } from './core.js';
+import { createSpatialShowcase } from './spatial.js';
+import { createTokensShowcase } from './tokens.js';
+
+interface ShowcaseOptions {
+  getActiveTab: () => ActiveTab;
+  onInteraction: () => void;
+}
+
+export function createShowcase({ getActiveTab, onInteraction }: ShowcaseOptions): {
+  heading: HTMLElement;
+  stage: HTMLElement;
+} {
+  const heading = document.createElement('header');
+  heading.className = 'showcase-heading';
+  const eyebrow = document.createElement('p');
+  eyebrow.className = 'hero-eyebrow';
+  eyebrow.textContent = 'INTERACTIVE WORKBENCH / 01';
+  const title = document.createElement('h2');
+  title.textContent = 'See the signal path for yourself.';
+  const description = document.createElement('p');
+  description.textContent =
+    'Edit a live example, switch workloads, and explore how one small core reaches across interfaces.';
+  heading.append(eyebrow, title, description);
+
+  const stage = document.createElement('section');
+  stage.className = 'showcase-stage';
+  const views: Record<ActiveTab, HTMLElement> = {
+    repl: createReplView(onInteraction),
+    bench: createProofBenchView(onInteraction),
+    hardware: createHardwareLabView(onInteraction),
+    core: createCoreShowcase(onInteraction),
+    spatial: createSpatialShowcase(),
+    wasm: createPolyglotWorkbenchView(onInteraction),
+    tokens: createTokensShowcase(onInteraction),
+    alliances: createAlliancesShowcase()
+  };
+
+  function renderActiveShowcase(): void {
+    const activeTab = getActiveTab();
+    stage.replaceChildren(views[activeTab]);
+    stage.dataset.activeTab = activeTab;
+    stage.firstElementChild?.classList.add('showcase-enter');
+  }
+
+  effect(() => {
+    getActiveTab();
+    renderActiveShowcase();
+  });
+
+  return { heading, stage };
+}

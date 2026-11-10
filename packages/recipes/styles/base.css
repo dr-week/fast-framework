@@ -9,7 +9,9 @@
   --nova-color-glyph: oklch(78% 0.015 260);
   --nova-color-glyph-active: oklch(98% 0.01 260);
   --nova-color-accent: oklch(75% 0.18 190);
+  --nova-color-accent-secondary: oklch(72% 0.16 230);
   --nova-color-accent-glow: oklch(75% 0.18 190 / 0.25);
+  --nova-color-on-accent: oklch(18% 0.02 260);
   --nova-radius-squircle: 14px;
 }
 

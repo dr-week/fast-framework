@@ -7,5 +7,6 @@
 export * from './types.js';
 export * from './animations.js';
 export * from './aesthetics.js';
+export * from './persistence.js';
 export * from './templates.js';
 export * from './division.js';
