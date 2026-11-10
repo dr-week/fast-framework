@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { createThemeEngine, THEME_PRESETS } from './index.js';
+import { applyThemePreset, createThemeEngine, generateCssVariables, THEME_PRESETS } from './index.js';
 
 describe('@zuari/tokens Modular Plug-and-Play Theme Engine', () => {
   it('initializes with default preset and detects light/dark modes', () => {
@@ -65,5 +65,28 @@ describe('@zuari/tokens Modular Plug-and-Play Theme Engine', () => {
     expect(card.style.getPropertyValue('--nova-color-accent')).toBe('');
 
     engine.destroy();
+  });
+
+  it('skips undefined optional colors when generating and applying theme variables', () => {
+    const theme = {
+      ...THEME_PRESETS.paper,
+      colors: {
+        ...THEME_PRESETS.paper.colors,
+        accentSecondary: undefined,
+        accentGlow: undefined,
+        onAccent: undefined
+      }
+    };
+    const generatedCss = generateCssVariables(theme);
+    const element = document.createElement('div');
+
+    applyThemePreset(theme, element);
+
+    expect(generatedCss).not.toContain('--nova-color-accent-secondary');
+    expect(generatedCss).not.toContain('--nova-color-accent-glow');
+    expect(generatedCss).not.toContain('--nova-color-on-accent');
+    expect(element.style.getPropertyValue('--nova-color-accent-secondary')).toBe('');
+    expect(element.style.getPropertyValue('--nova-color-accent-glow')).toBe('');
+    expect(element.style.getPropertyValue('--nova-color-on-accent')).toBe('');
   });
 });
