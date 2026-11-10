@@ -1,7 +1,7 @@
 {
   "name": "@zuari/glyphs",
   "version": "0.1.0",
-  "description": "Zero-runtime, mathematically balanced vector glyph engine for Aether-Glyph minimalist UI",
+  "description": "Tree-shakeable SVG glyphs with optional Lucide icon adapters",
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.js",
@@ -10,9 +10,16 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./lucide": {
+      "types": "./dist/lucide.d.ts",
+      "import": "./dist/lucide.js"
     }
   },
   "scripts": {
     "build": "tsc"
+  },
+  "dependencies": {
+    "lucide": "1.70.0"
   }
 }

@@ -1,13 +1,14 @@
+import type { GlyphDefinition } from '@zuari/glyphs';
 import {
-  CommandGlyph,
-  GridGlyph,
-  LayersGlyph,
-  MonitorGlyph,
-  PrinterGlyph,
-  SparkleGlyph,
-  TunerGlyph,
-  type GlyphDefinition
-} from '@zuari/glyphs';
+  LucideActivityGlyph,
+  LucideBarChartGlyph,
+  LucideGridGlyph,
+  LucideLayersGlyph,
+  LucideMonitorGlyph,
+  LucidePrinterGlyph,
+  LucideSlidersGlyph,
+  LucideSparklesGlyph
+} from '@zuari/glyphs/lucide';
 import type { ActiveTab } from '../state.js';
 
 export interface FeatureCardDefinition {
@@ -30,7 +31,7 @@ export interface FeatureDeckOptions {
 export const FEATURE_CARDS: readonly FeatureCardDefinition[] = [
   {
     id: 'repl',
-    icon: CommandGlyph,
+    icon: LucideActivityGlyph,
     category: 'SIGNALS + DOM',
     title: 'Signal Playground',
     summary: 'Change a signal and watch its real DOM bindings respond.',
@@ -39,7 +40,7 @@ export const FEATURE_CARDS: readonly FeatureCardDefinition[] = [
   },
   {
     id: 'bench',
-    icon: SparkleGlyph,
+    icon: LucideBarChartGlyph,
     category: 'PERFORMANCE LAB',
     title: 'Scale Bench',
     summary: 'Put thousands of direct updates through their paces.',
@@ -48,7 +49,7 @@ export const FEATURE_CARDS: readonly FeatureCardDefinition[] = [
   },
   {
     id: 'hardware',
-    icon: PrinterGlyph,
+    icon: LucidePrinterGlyph,
     category: 'HARDWARE DECK',
     title: 'Device Control',
     summary: 'Try the controls built for specialized screens and inputs.',
@@ -57,7 +58,7 @@ export const FEATURE_CARDS: readonly FeatureCardDefinition[] = [
   },
   {
     id: 'core',
-    icon: SparkleGlyph,
+    icon: LucideSparklesGlyph,
     category: 'VECTOR MOTION',
     title: 'Motion Forge',
     summary: 'Morph a vector glyph through four lively states.',
@@ -66,7 +67,7 @@ export const FEATURE_CARDS: readonly FeatureCardDefinition[] = [
   },
   {
     id: 'spatial',
-    icon: LayersGlyph,
+    icon: LucideLayersGlyph,
     category: 'SPATIAL UI',
     title: 'Spatial Field',
     summary: 'Explore a radar-inspired view of spatial anchors.',
@@ -75,7 +76,7 @@ export const FEATURE_CARDS: readonly FeatureCardDefinition[] = [
   },
   {
     id: 'wasm',
-    icon: MonitorGlyph,
+    icon: LucideMonitorGlyph,
     category: 'SYSTEMS WORKBENCH',
     title: 'Memory Bridge',
     summary: 'Explore native memory, Wasm, and polyglot tooling.',
@@ -84,7 +85,7 @@ export const FEATURE_CARDS: readonly FeatureCardDefinition[] = [
   },
   {
     id: 'tokens',
-    icon: TunerGlyph,
+    icon: LucideSlidersGlyph,
     category: 'COLOR LAB',
     title: 'Token Tuner',
     summary: 'Drag the chroma control and remix the live accent.',
@@ -93,7 +94,7 @@ export const FEATURE_CARDS: readonly FeatureCardDefinition[] = [
   },
   {
     id: 'alliances',
-    icon: GridGlyph,
+    icon: LucideGridGlyph,
     category: 'FRAMEWORK MAP',
     title: 'Ecosystem Map',
     summary: 'See how the framework connects across platforms.',

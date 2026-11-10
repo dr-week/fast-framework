@@ -151,7 +151,11 @@ importers:
         specifier: workspace:*
         version: link:../signals
 
-  packages/glyphs: {}
+  packages/glyphs:
+    dependencies:
+      lucide:
+        specifier: 1.70.0
+        version: 1.70.0
 
   packages/hardware:
     dependencies:
@@ -1245,6 +1249,9 @@ packages:
     resolution: {integrity: sha512-WkUDrojuJs0xkgGf2udWxa3yGBRxPtxUkB79i6aCZLRgc7PM8fZe9TosfPDcvEpQZbuFASnHYmRLBLUbmLOIIA==}
     engines: {node: '>= 12.0.0'}
 
+  lucide@1.70.0:
+    resolution: {integrity: sha512-LxPqUjt8e5PT7JuvmnKc8ECAqgkbnLG3hIi/FV2JpqWdPWLbLCoI5P3jje/Lq84uNU2kCpe2webgyFFJJ9zPAA==}
+
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
@@ -2261,6 +2268,8 @@ snapshots:
       lightningcss-linux-x64-musl: 1.33.0
       lightningcss-win32-arm64-msvc: 1.33.0
       lightningcss-win32-x64-msvc: 1.33.0
+
+  lucide@1.70.0: {}
 
   magic-string@0.30.21:
     dependencies:
