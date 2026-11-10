@@ -1,0 +1,254 @@
+.feature-flashcard {
+  --card-glow: oklch(68% 0.18 295);
+  min-width: 0;
+  min-height: 284px;
+  perspective: 1000px;
+  animation: cardDeal 500ms both cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.feature-flashcard[data-tint="sky"] { --card-glow: oklch(74% 0.16 225); }
+.feature-flashcard[data-tint="mint"] { --card-glow: oklch(76% 0.16 165); }
+.feature-flashcard[data-tint="amber"] { --card-glow: oklch(78% 0.16 85); }
+.feature-flashcard[data-tint="rose"] { --card-glow: oklch(73% 0.19 15); }
+.feature-flashcard[data-tint="cyan"] { --card-glow: oklch(77% 0.14 195); }
+
+.feature-flashcard-inner {
+  position: relative;
+  min-height: inherit;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 520ms cubic-bezier(0.2, 0.72, 0.16, 1);
+}
+
+.feature-flashcard[data-face="mission"] .feature-flashcard-inner {
+  transform: rotateY(180deg);
+}
+
+.feature-flashcard-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100%;
+  padding: 15px;
+  overflow: hidden;
+  border: 1px solid oklch(100% 0 0 / 0.13);
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse at 90% 8%, color-mix(in oklch, var(--card-glow) 20%, transparent), transparent 48%),
+    linear-gradient(148deg, oklch(22% 0.027 270 / 0.91), oklch(14% 0.02 270 / 0.96));
+  box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.09), 0 14px 36px -24px oklch(0% 0 0 / 0.85);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.feature-flashcard-face::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, oklch(100% 0 0 / 0.075), transparent 36%);
+  content: '';
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.feature-flashcard:hover .feature-flashcard-face,
+.feature-flashcard[data-active="true"] .feature-flashcard-face {
+  border-color: color-mix(in oklch, var(--card-glow) 54%, oklch(100% 0 0 / 0.16));
+  box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.12), 0 12px 38px -22px var(--card-glow);
+}
+
+.feature-flashcard:hover .feature-flashcard-face::after {
+  opacity: 1;
+}
+
+.feature-flashcard-face--back {
+  transform: rotateY(180deg);
+  padding: 17px;
+  background:
+    radial-gradient(ellipse at 95% 2%, color-mix(in oklch, var(--card-glow) 26%, transparent), transparent 52%),
+    linear-gradient(148deg, oklch(22% 0.03 270 / 0.96), oklch(13% 0.025 270 / 0.98));
+}
+
+.feature-flashcard-meta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+}
+
+.feature-flashcard-number,
+.feature-flashcard-category {
+  color: oklch(73% 0.025 270);
+  font: 500 0.52rem/1.25 ui-monospace, monospace;
+  letter-spacing: 0.08em;
+}
+
+.feature-flashcard-category {
+  max-width: 62%;
+  overflow: hidden;
+  color: color-mix(in oklch, var(--card-glow) 72%, white);
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.feature-flashcard-icon {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-top: 16px;
+  border: 1px solid color-mix(in oklch, var(--card-glow) 46%, oklch(100% 0 0 / 0.14));
+  border-radius: 13px;
+  color: color-mix(in oklch, var(--card-glow) 84%, white);
+  background: color-mix(in oklch, var(--card-glow) 15%, oklch(14% 0.02 270 / 0.9));
+  box-shadow: 0 0 24px color-mix(in oklch, var(--card-glow) 16%, transparent);
+}
+
+.feature-flashcard-art {
+  position: absolute;
+  top: 61px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 92px;
+  height: 56px;
+  opacity: 0.85;
+}
+
+.feature-flashcard-art span {
+  position: relative;
+  display: block;
+  width: 9px;
+  height: 9px;
+  border: 1px solid color-mix(in oklch, var(--card-glow) 66%, white);
+  border-radius: 50%;
+  background: color-mix(in oklch, var(--card-glow) 40%, oklch(15% 0.02 270));
+  box-shadow: 0 0 14px color-mix(in oklch, var(--card-glow) 38%, transparent);
+}
+
+.feature-flashcard-art[data-art="signal"] span:nth-child(2n) { transform: translateY(-8px); }
+.feature-flashcard-art[data-art="scale"] { align-items: flex-end; gap: 6px; padding-bottom: 8px; }
+.feature-flashcard-art[data-art="scale"] span { width: 12px; height: 20px; border-radius: 5px 5px 2px 2px; background: linear-gradient(0deg, color-mix(in oklch, var(--card-glow) 28%, transparent), color-mix(in oklch, var(--card-glow) 72%, transparent)); }
+.feature-flashcard-art[data-art="scale"] span:nth-child(2) { height: 36px; }
+.feature-flashcard-art[data-art="scale"] span:nth-child(3) { height: 27px; }
+.feature-flashcard-art[data-art="hardware"] span { width: 13px; height: 13px; border-radius: 4px; transform: rotate(45deg); }
+.feature-flashcard-art[data-art="motion"] span { width: 19px; height: 19px; border-radius: 6px; }
+.feature-flashcard-art[data-art="motion"] span:nth-child(2n) { transform: rotate(45deg); }
+.feature-flashcard-art[data-art="spatial"] { border: 1px solid color-mix(in oklch, var(--card-glow) 45%, transparent); border-radius: 50%; background: repeating-radial-gradient(circle, transparent 0 9px, color-mix(in oklch, var(--card-glow) 25%, transparent) 10px 11px); }
+.feature-flashcard-art[data-art="spatial"] span:first-child { transform: translate(11px, -9px); }
+.feature-flashcard-art[data-art="memory"] { gap: 3px; }
+.feature-flashcard-art[data-art="memory"] span { width: 13px; height: 21px; border-radius: 3px; }
+.feature-flashcard-art[data-art="color"] span { width: 17px; height: 30px; border-radius: 5px; background: color-mix(in oklch, var(--card-glow) 34%, oklch(14% 0.02 270)); }
+.feature-flashcard-art[data-art="color"] span:nth-child(2) { opacity: 0.75; transform: translateY(-7px); }
+.feature-flashcard-art[data-art="color"] span:nth-child(3) { opacity: 0.55; }
+.feature-flashcard-art[data-art="network"] span:first-child { transform: translateY(-11px); }
+.feature-flashcard-art[data-art="network"] span:nth-child(3) { transform: translateY(11px); }
+.feature-flashcard-art[data-art="network"] span:not(:first-child) { margin-left: -1px; }
+
+.feature-flashcard h3 {
+  position: relative;
+  z-index: 1;
+  margin-top: 14px;
+  color: oklch(96% 0.012 270);
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
+.feature-flashcard-summary,
+.feature-flashcard-mission,
+.feature-flashcard-lesson {
+  position: relative;
+  z-index: 1;
+  margin-top: 6px;
+  color: oklch(72% 0.025 270);
+  font-size: 0.68rem;
+  line-height: 1.55;
+}
+
+.feature-flashcard-flip,
+.feature-flashcard-launch {
+  position: relative;
+  z-index: 1;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid oklch(100% 0 0 / 0.16);
+  border-radius: 10px;
+  color: oklch(88% 0.02 270);
+  background: oklch(100% 0 0 / 0.045);
+  font: inherit;
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
+}
+
+.feature-flashcard-front .feature-flashcard-flip {
+  margin-top: auto;
+}
+
+.feature-flashcard-flip:hover {
+  border-color: color-mix(in oklch, var(--card-glow) 58%, white);
+  background: color-mix(in oklch, var(--card-glow) 14%, oklch(100% 0 0 / 0.05));
+}
+
+.feature-flashcard-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 7px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.feature-flashcard-actions .feature-flashcard-flip {
+  flex: 0 0 auto;
+}
+
+.feature-flashcard-launch {
+  flex: 1;
+  border-color: color-mix(in oklch, var(--card-glow) 55%, transparent);
+  color: oklch(12% 0.02 270);
+  background: linear-gradient(110deg, color-mix(in oklch, var(--card-glow) 86%, white), color-mix(in oklch, var(--card-glow) 72%, oklch(75% 0.16 220)));
+  box-shadow: 0 5px 16px color-mix(in oklch, var(--card-glow) 18%, transparent);
+}
+
+.feature-flashcard-launch:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px color-mix(in oklch, var(--card-glow) 27%, transparent);
+}
+
+.feature-flashcard-lesson-label {
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+  color: color-mix(in oklch, var(--card-glow) 80%, white);
+  font: 600 0.52rem/1.2 ui-monospace, monospace;
+  letter-spacing: 0.1em;
+}
+
+.feature-flashcard-lesson {
+  margin-top: 4px;
+  color: oklch(84% 0.02 270);
+}
+
+.feature-flashcard[data-active="true"] .feature-flashcard-number::after {
+  margin-left: 6px;
+  color: color-mix(in oklch, var(--card-glow) 78%, white);
+  content: 'NOW PLAYING';
+}

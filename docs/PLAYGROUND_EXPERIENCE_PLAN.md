@@ -46,6 +46,7 @@ Use the framework in the product tour rather than recreating its primitives:
 - Keep `playground/src/main.ts` as a small composition entry point; place page sections under `playground/src/features/`.
 - Group hero, navigation, telemetry, and each showcase station in feature folders. Keep REPL, benchmark, hardware, community, and polyglot implementations in their own folders.
 - Use `playground/src/style.scss` as the SCSS entry point and `playground/src/styles/` for shared tokens plus page, showcase, and responsive partials.
+- For features with distinct responsibilities, keep data in `model.ts`, DOM construction in `view.ts`, interaction wiring in `controller.ts`, and compose them through a small feature `index.ts`. Group multi-part feature styles into named partials by concern, such as layout, cards, responsive rules, and motion.
 - Keep each interactive station's state and event handlers in its own TypeScript module. The showcase coordinator only selects and mounts those station views.
 - Use `@zuari/signals` and `@zuari/dom` for app state and direct DOM composition; `@zuari/glyphs` for navigation/action iconography; `@zuari/recipes` for reusable framework styling.
 - No React, JSX, or third-party icon CDN in the showcase shell. Keep product-specific demo calculations in their owning feature module.
