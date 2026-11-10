@@ -1,0 +1,43 @@
+$motion-ui: cubic-bezier(0.2, 0.8, 0.2, 1);
+$focus-color: oklch(82% 0.15 220);
+
+@mixin focus-ring($color: $focus-color) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 3px;
+  }
+}
+
+@mixin glass-panel($radius: 20px) {
+  border: 1px solid oklch(100% 0 0 / 0.14);
+  border-radius: $radius;
+  background: oklch(15% 0.02 270 / 0.82);
+  backdrop-filter: blur(20px) saturate(135%);
+}
+
+:root {
+  --bg: oklch(11% 0.015 260);
+  --surface-box: oklch(17% 0.02 260);
+  --surface-box-elevated: oklch(21% 0.025 260);
+  --glass: oklch(18% 0.02 260 / 0.9);
+  --glass-hover: oklch(24% 0.03 260 / 0.95);
+  --border: oklch(100% 0 0 / 0.18);
+  --border-subtle: oklch(100% 0 0 / 0.09);
+  --border-glow: oklch(75% 0.18 190 / 0.45);
+  --accent: oklch(75% 0.18 190);
+  --accent-soft: oklch(75% 0.18 190 / 0.18);
+  --text: oklch(98% 0 0);
+  --muted: oklch(72% 0.02 260);
+}
+
+.token-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.token-slider-label {
+  display: flex;
+  justify-content: space-between;
+}

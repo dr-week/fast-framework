@@ -1,0 +1,265 @@
+/* Feature Showcase Stage */
+.showcase-stage {
+  width: 100%;
+}
+.feature-card {
+  width: 100%;
+  padding: 28px;
+  border-radius: 16px;
+  background: var(--surface-box);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid var(--border);
+  box-shadow: 0 16px 48px -12px oklch(0% 0 0 / 0.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.kinetic-stage-box {
+  width: 120px;
+  height: 120px;
+  display: grid;
+  place-items: center;
+  border-radius: 32px;
+  background: oklch(20% 0.02 260 / 0.6);
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 16px 36px -8px oklch(75% 0.18 190 / 0.2);
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+
+  &:hover {
+    transform: scale(1.04);
+    box-shadow: 0 20px 48px -8px oklch(75% 0.18 190 / 0.35);
+  }
+}
+
+.card-desc {
+  text-align: center;
+  font-size: 0.825rem;
+  color: var(--muted);
+  line-height: 1.5;
+
+  strong {
+    color: var(--text);
+  }
+}
+
+.badge-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.725rem;
+  letter-spacing: 0.05em;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--border-glow);
+}
+
+/* Spatial Radar Simulation */
+.spatial-radar-preview {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 1px solid var(--border-glow);
+  background: radial-gradient(circle, oklch(75% 0.18 190 / 0.05) 0%, transparent 70%);
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.radar-sweep {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg, oklch(75% 0.18 190 / 0.3) 60deg, transparent 90deg);
+  animation: radarRotate 4s linear infinite;
+}
+
+.radar-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+@keyframes radarRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Memory Buffer FFI Visualizer */
+.memory-buffer-bar {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.memory-slot {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 0.75rem;
+  background: oklch(15% 0.015 260);
+  border: 1px solid var(--border);
+  color: var(--muted);
+
+  &.filled {
+    background: oklch(75% 0.18 190 / 0.15);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+/* Alliances Grid */
+.alliances-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  margin-top: 14px;
+}
+
+.alliance-item {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border-radius: 12px;
+  background: oklch(14% 0.015 260 / 0.7);
+  border: 1px solid var(--border);
+
+  strong {
+    font-size: 0.85rem;
+    color: var(--text);
+  }
+
+  span {
+    font-size: 0.725rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+}
+
+/* Range Slider */
+.zuari-slider {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* Telemetry Indicator */
+.spatial-metrics {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+}
+
+.metric-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: oklch(60% 0.02 260);
+  letter-spacing: 0.04em;
+
+  strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+
+/* 10-Second CLI Scaffolder Bar */
+.cli-scaffolder-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 16px;
+  background: oklch(14% 0.02 260 / 0.85);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 32px oklch(0% 0 0 / 0.35);
+}
+
+.cli-preset-pills {
+  display: flex;
+  gap: 4px;
+}
+
+.cli-pill {
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 140ms ease;
+
+  &:hover {
+    color: var(--text);
+    background: oklch(20% 0.02 260);
+  }
+
+  &[data-active="true"] {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--border-glow);
+  }
+}
+
+.cli-cmd-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  border-radius: 10px;
+  background: oklch(10% 0.015 260);
+  border: 1px solid var(--border);
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.74rem;
+    color: oklch(90% 0.02 190);
+    user-select: all;
+  }
+}
+
+.cli-copy-btn {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--border-glow);
+  cursor: pointer;
+  transition: all 140ms ease;
+
+  &:hover {
+    background: var(--accent);
+    color: oklch(12% 0.02 260);
+  }
+}
