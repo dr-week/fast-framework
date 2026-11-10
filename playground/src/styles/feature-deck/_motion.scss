@@ -1,0 +1,14 @@
+@keyframes cardDeal {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-flashcard { animation: none; }
+  .feature-flashcard-inner { transform: none !important; }
+  .feature-flashcard-face { backface-visibility: visible; -webkit-backface-visibility: visible; }
+  .feature-flashcard-face--front,
+  .feature-flashcard-face--back { transform: none !important; visibility: hidden; }
+  .feature-flashcard[data-face="front"] .feature-flashcard-face--front,
+  .feature-flashcard[data-face="mission"] .feature-flashcard-face--back { visibility: visible; }
+}
