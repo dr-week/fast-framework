@@ -15,6 +15,7 @@ export function generateCssVariables(tokens: NovaThemeContract, selector: string
 
   // Register colors
   for (const [key, value] of Object.entries(tokens.colors)) {
+    if (value === undefined) continue;
     const varName = `--nova-color-${kebabCase(key)}`;
     propertyRules.push(`@property ${varName} { syntax: "<color>"; inherits: true; initial-value: ${value}; }`);
     cssLines.push(`  ${varName}: ${value};`);
@@ -69,6 +70,7 @@ export function applyThemePreset(
       root.setAttribute('data-zuari-theme', resolved.name);
     }
     for (const [key, value] of Object.entries(resolved.colors)) {
+      if (value === undefined) continue;
       root.style.setProperty(`--nova-color-${kebabCase(key)}`, value);
     }
     for (const [key, value] of Object.entries(resolved.spacing)) {
