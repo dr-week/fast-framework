@@ -1,8 +1,8 @@
 import '@zuari/recipes/aether.css';
 import './style.scss';
 import { signal } from '@zuari/signals';
+import { createFeatureDeck } from './features/feature-deck/index.js';
 import { createHeroSection } from './features/hero/index.js';
-import { createNavigationDock } from './features/navigation/index.js';
 import { createShowcase } from './features/showcase/index.js';
 import type { ActiveTab } from './features/state.js';
 import { createTelemetryBar } from './features/telemetry/index.js';
@@ -20,25 +20,31 @@ const showcase = createShowcase({
   onInteraction: recordInteraction
 });
 
+const scrollToShowcase = () => {
+  const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+  showcase.stage.scrollIntoView({ behavior, block: 'start' });
+};
+
 const hero = createHeroSection({
   onTryPlayground: () => {
     currentTab.value = 'repl';
-    showcase.stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToShowcase();
   },
   onInteraction: recordInteraction
 });
 
-const navigation = createNavigationDock({
+const featureDeck = createFeatureDeck({
   getActiveTab: () => currentTab.value,
-  setActiveTab: (tab) => {
+  onSelect: (tab) => {
     currentTab.value = tab;
   },
+  onOpenDemo: scrollToShowcase,
   onInteraction: recordInteraction
 });
 
 app.append(
   hero,
-  navigation,
+  featureDeck,
   showcase.heading,
   showcase.stage,
   createTelemetryBar(interactions)

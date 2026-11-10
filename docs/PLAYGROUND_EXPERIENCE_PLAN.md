@@ -9,8 +9,8 @@ The experience should feel expressive and tactile: editorial dark glass, spectra
 ## Visitor journey
 
 1. **Arrive:** a concise hero says what Zuari is and offers “Try the playground” and “Explore the source”.
-2. **Choose a station:** a responsive, labelled navigation rail introduces a small set of feature demonstrations.
-3. **Play and learn:** each station has a focused interaction, a short explanation, and a copyable Zuari example or link to the relevant package documentation.
+2. **Choose a mission:** a responsive, color-tinted flash-card deck introduces each feature with a small visual preview.
+3. **Play and learn:** visitors flip a card to reveal a short mission and learning goal, then launch the matching hands-on demo. A small progress meter tracks stations explored.
 4. **Continue:** visitors can copy a starter command, open the repository, and read the framework/AI reference material.
 
 ## Demonstration concepts
@@ -30,6 +30,7 @@ Start with a compact first release: the hero, responsive feature navigation, Sig
 ## Interaction and motion direction
 
 - Use pointer coordinates for a soft light spot and a small perspective response only in `hover: hover` / `pointer: fine` environments. Touch and keyboard users get the same content and controls without hover dependencies.
+- Keep the feature deck playful but useful: cards expose a concrete interaction and package concept; flipping is a discovery cue, not a gate to the demo.
 - Provide an explicit light/mood control. Randomness is user-triggered and constrained to a small curated palette, so the page can feel fresh without changing on its own or harming readability.
 - Use short entrance and state-change transitions to guide attention. Use persistent movement only for an active simulation, not as decoration across the whole page.
 - Run continuous animation with `requestAnimationFrame` only while a demo is active; stop or pause it when the page is hidden or the station is inactive. Do not run an animation loop that competes with benchmark results.
@@ -56,6 +57,7 @@ The repository builds `playground` to `playground/dist` and has a GitHub Pages w
 ## Completion criteria
 
 - The page communicates its value and leads naturally into working demos.
+- A keyboard-accessible flash-card deck makes all feature stations easy to scan, reveal, launch, and revisit.
 - Each featured interaction calls a real Zuari API and includes a short explanation.
 - SCSS and TypeScript are divided by feature folders; `main.ts` composes features instead of containing their full implementations.
 - The site adapts to narrow/touch layouts; all actions are usable with keyboard and have visible focus.
