@@ -49,9 +49,6 @@ export function createHeroSection({ onTryPlayground, onInteraction }: HeroOption
 
   const heroCopy = document.createElement('div');
   heroCopy.className = 'hero-copy';
-  const heroEyebrow = document.createElement('p');
-  heroEyebrow.className = 'hero-eyebrow';
-  heroEyebrow.textContent = 'THE WEB, WITHOUT THE MIDDLE LAYER';
   const heroTitle = document.createElement('h2');
   heroTitle.id = 'hero-title';
   heroTitle.innerHTML = 'Build for the <em>frame</em><br> beyond the browser.';
@@ -74,7 +71,7 @@ export function createHeroSection({ onTryPlayground, onInteraction }: HeroOption
   sourceLink.rel = 'noreferrer';
   sourceLink.textContent = 'Explore the source ↗';
   heroActions.append(tryButton, sourceLink);
-  heroCopy.append(heroEyebrow, heroTitle, heroDescription, heroActions);
+  heroCopy.append(heroTitle, heroDescription, heroActions);
 
   const heroVisual = document.createElement('div');
   heroVisual.className = 'hero-visual';

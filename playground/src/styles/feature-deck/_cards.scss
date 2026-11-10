@@ -1,7 +1,7 @@
 .feature-flashcard {
   --card-glow: oklch(68% 0.18 295);
   min-width: 0;
-  min-height: 284px;
+  min-height: 248px;
   perspective: 1000px;
   animation: cardDeal 500ms both cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -133,7 +133,7 @@
   place-items: center;
   width: 38px;
   height: 38px;
-  margin-top: 16px;
+  margin-top: 12px;
   border: 1px solid color-mix(in oklch, var(--card-glow) 46%, oklch(100% 0 0 / 0.14));
   border-radius: 13px;
   color: color-mix(in oklch, var(--card-glow) 84%, white);
@@ -141,53 +141,10 @@
   box-shadow: 0 0 24px color-mix(in oklch, var(--card-glow) 16%, transparent);
 }
 
-.feature-flashcard-art {
-  position: absolute;
-  top: 61px;
-  right: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  width: 92px;
-  height: 56px;
-  opacity: 0.85;
-}
-
-.feature-flashcard-art span {
-  position: relative;
-  display: block;
-  width: 9px;
-  height: 9px;
-  border: 1px solid color-mix(in oklch, var(--card-glow) 66%, white);
-  border-radius: 50%;
-  background: color-mix(in oklch, var(--card-glow) 40%, oklch(15% 0.02 270));
-  box-shadow: 0 0 14px color-mix(in oklch, var(--card-glow) 38%, transparent);
-}
-
-.feature-flashcard-art[data-art="signal"] span:nth-child(2n) { transform: translateY(-8px); }
-.feature-flashcard-art[data-art="scale"] { align-items: flex-end; gap: 6px; padding-bottom: 8px; }
-.feature-flashcard-art[data-art="scale"] span { width: 12px; height: 20px; border-radius: 5px 5px 2px 2px; background: linear-gradient(0deg, color-mix(in oklch, var(--card-glow) 28%, transparent), color-mix(in oklch, var(--card-glow) 72%, transparent)); }
-.feature-flashcard-art[data-art="scale"] span:nth-child(2) { height: 36px; }
-.feature-flashcard-art[data-art="scale"] span:nth-child(3) { height: 27px; }
-.feature-flashcard-art[data-art="hardware"] span { width: 13px; height: 13px; border-radius: 4px; transform: rotate(45deg); }
-.feature-flashcard-art[data-art="motion"] span { width: 19px; height: 19px; border-radius: 6px; }
-.feature-flashcard-art[data-art="motion"] span:nth-child(2n) { transform: rotate(45deg); }
-.feature-flashcard-art[data-art="spatial"] { border: 1px solid color-mix(in oklch, var(--card-glow) 45%, transparent); border-radius: 50%; background: repeating-radial-gradient(circle, transparent 0 9px, color-mix(in oklch, var(--card-glow) 25%, transparent) 10px 11px); }
-.feature-flashcard-art[data-art="spatial"] span:first-child { transform: translate(11px, -9px); }
-.feature-flashcard-art[data-art="memory"] { gap: 3px; }
-.feature-flashcard-art[data-art="memory"] span { width: 13px; height: 21px; border-radius: 3px; }
-.feature-flashcard-art[data-art="color"] span { width: 17px; height: 30px; border-radius: 5px; background: color-mix(in oklch, var(--card-glow) 34%, oklch(14% 0.02 270)); }
-.feature-flashcard-art[data-art="color"] span:nth-child(2) { opacity: 0.75; transform: translateY(-7px); }
-.feature-flashcard-art[data-art="color"] span:nth-child(3) { opacity: 0.55; }
-.feature-flashcard-art[data-art="network"] span:first-child { transform: translateY(-11px); }
-.feature-flashcard-art[data-art="network"] span:nth-child(3) { transform: translateY(11px); }
-.feature-flashcard-art[data-art="network"] span:not(:first-child) { margin-left: -1px; }
-
 .feature-flashcard h3 {
   position: relative;
   z-index: 1;
-  margin-top: 14px;
+  margin-top: 10px;
   color: oklch(96% 0.012 270);
   font-size: 0.98rem;
   font-weight: 600;

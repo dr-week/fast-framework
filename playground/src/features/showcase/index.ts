@@ -21,14 +21,11 @@ export function createShowcase({ getActiveTab, onInteraction }: ShowcaseOptions)
 } {
   const heading = document.createElement('header');
   heading.className = 'showcase-heading';
-  const eyebrow = document.createElement('p');
-  eyebrow.className = 'hero-eyebrow';
-  eyebrow.textContent = 'LIVE FEATURE STATION';
   const title = document.createElement('h2');
   title.textContent = 'Your station is ready.';
   const description = document.createElement('p');
   description.textContent = 'Play with a real Zuari feature, then flip another card to keep exploring.';
-  heading.append(eyebrow, title, description);
+  heading.append(title, description);
 
   const stage = document.createElement('section');
   stage.className = 'showcase-stage';

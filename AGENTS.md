@@ -58,6 +58,7 @@ Emojis are non-standard across operating systems, break line heights, and look a
   - Validation / Success: `CheckGlyph`
   - Hardware & Controls: `PrinterGlyph`, `FlameGlyph`, `MonitorGlyph`, `TunerGlyph`
   - Social / Content: `HeartGlyph`, `BookmarkGlyph`, `ShareGlyph`, `MessageGlyph`
+- **Rule 3: Use established icon assets, not invented drawings.** Prefer icons from a maintained icon library such as `@zuari/glyphs` or Lucide. Do not approximate interface icons with CSS shapes, pseudo-elements, emoji, or arbitrary geometric decorations; keep decorative artwork separate from recognizable controls.
 
 ### 1.5.3. Design Language & Aesthetics Hierarchy: The "Contrasting Boxiness" Rule
 Never throw UI elements together onto a flat, uniform background. When everything shares the same flat tone with ambiguous borders, the interface degrades into an unreadable "question paper" that strains eyes and causes cognitive fatigue.

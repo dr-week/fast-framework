@@ -3,9 +3,9 @@
   isolation: isolate;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   width: 100%;
-  padding: clamp(18px, 3vw, 28px);
+  padding: clamp(16px, 2.5vw, 24px);
   overflow: hidden;
   border: 1px solid oklch(100% 0 0 / 0.13);
   border-radius: 26px;
@@ -22,13 +22,6 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 24px;
-}
-
-.feature-deck-eyebrow {
-  margin-bottom: 8px;
-  color: oklch(78% 0.16 295);
-  font: 600 0.63rem/1.2 ui-monospace, monospace;
-  letter-spacing: 0.15em;
 }
 
 .feature-deck-header h2 {
@@ -119,5 +112,5 @@
 .feature-deck-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
 }

@@ -27,16 +27,13 @@ export function createFeatureDeckView(): FeatureDeckView {
   const header = document.createElement('div');
   header.className = 'feature-deck-header';
   const headingCopy = document.createElement('div');
-  const eyebrow = document.createElement('p');
-  eyebrow.className = 'feature-deck-eyebrow';
-  eyebrow.textContent = 'THE FRAMEWORK ARCADE';
   const title = document.createElement('h2');
   title.id = 'feature-deck-title';
   title.textContent = 'Pick a card. Play a feature.';
   const description = document.createElement('p');
   description.className = 'feature-deck-description';
   description.textContent = 'Flip a mission card, try the live demo, and learn by doing.';
-  headingCopy.append(eyebrow, title, description);
+  headingCopy.append(title, description);
 
   const deckActions = document.createElement('div');
   deckActions.className = 'feature-deck-actions';
@@ -115,12 +112,6 @@ function createFeatureCardView(
   icon.setAttribute('aria-hidden', 'true');
   icon.appendChild(definition.icon({ size: 22 }));
 
-  const art = document.createElement('div');
-  art.className = 'feature-flashcard-art';
-  art.dataset.art = definition.art;
-  art.setAttribute('aria-hidden', 'true');
-  for (let part = 0; part < 4; part++) art.appendChild(document.createElement('span'));
-
   const cardTitle = document.createElement('h3');
   cardTitle.textContent = definition.title;
   const summary = document.createElement('p');
@@ -131,7 +122,7 @@ function createFeatureCardView(
   frontToggle.className = 'feature-flashcard-flip';
   frontToggle.dataset.action = 'reveal';
   frontToggle.textContent = 'Reveal mission';
-  front.append(frontMeta, icon, art, cardTitle, summary, frontToggle);
+  front.append(frontMeta, icon, cardTitle, summary, frontToggle);
 
   const backMeta = document.createElement('div');
   backMeta.className = 'feature-flashcard-meta';
