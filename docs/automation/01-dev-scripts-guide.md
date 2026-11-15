@@ -25,7 +25,7 @@ Manages `@zuari/*` dependencies inside monorepo apps and inspects workspace pack
 ### Subcommands & Flags
 
 - `list` — Lists all workspace packages under `packages/*` with their versions.
-- `info <pkg>` — Displays directory, version, runtime dependencies, and declared `exports` for `@zuari/<name>` or `<name>`.
+- `info <pkg>` — Displays directory, version, runtime dependencies, and declared `exports` for `@zuari/<name>` or `<name>` (for example, the 9 `@zuari/headless/*` entrypoints `.`, `./combobox`, `./command`, `./dialog`, `./drawer`, `./form`, `./menu`, `./toast`, `./virtual` and 6 `@zuari/presets/*` entrypoints `.`, `./aesthetics`, `./animations`, `./division`, `./persistence`, `./templates`).
 - `presets` — Lists the 5 curated profiles (`minimal-core`, `ui-liquid-glass`, `spatial-hud`, `tactical-hardware`, `ai-local-first`).
 - `add <pkg...> [--target <dir>]` (also accepts `--target=<dir>`) — Adds package(s) or preset(s) with `"workspace:*"` to `<target>/package.json` (sorted alphabetically; default target is `playground`).
 - `remove <pkg...> [--target <dir>]` — Removes specified package(s) from `<target>/package.json` (default target is `playground`).
@@ -61,8 +61,8 @@ Runs comprehensive workspace integrity checks across packages, subpath exports, 
 
 ### Checks Performed
 
-1. **All `packages/*/package.json` manifests**: Valid JSON, valid `name`, valid entrypoint (`exports` or `main`), `"type": "module"` present (exempts `vscode-zuari` because `engines.vscode` is set). Emits warnings if `"files"` is missing or if `main` is set without `exports`.
-2. **Subpath Export Parity**: Verifies bidirectional matching between `src/<subdir>/index.ts` and `package.json#exports["./<subdir>"]` for both `packages/ui` and `packages/hardware`.
+1. **All `packages/*/package.json` manifests**: Valid JSON, valid `name`, valid entrypoint (`exports` or `main`), `"type": "module"` present (exempts VS Code extensions with `engines.vscode` set, such as `vscode-zuari`). Emits warnings if `"files"` is missing or if a non-VS Code package sets `main` without `exports`.
+2. **Subpath Export Parity**: Verifies bidirectional matching between `src/<subdir>/index.ts` and `package.json#exports["./<subdir>"]` for `packages/ui`, `packages/hardware`, and `packages/headless`.
 3. **AI Rule Files**: Verifies presence of `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, `llms.txt`, and `llms-full.txt`.
 4. **Documentation Completeness**: Verifies all required `docs/**` guides exist (`README.md`, `architecture/01-modular-monorepo.md`, `architecture/02-package-management-cli.md`, `design-system/01-apple-liquid-glass.md`, `design-system/02-contrasting-boxiness-and-planes.md`, `ai-workflow/01-agent-automation-and-subagents.md`, `automation/01-dev-scripts-guide.md`).
 
@@ -170,4 +170,19 @@ Read-only code pattern scanner for inspecting external reference directories saf
 
 ```bash
 pnpm research:reuse -- --root ../reference-ui --query "popover anchor"
+```
+
+---
+
+## 8. CLI & Automation Test Suites (`scripts/cli.test.mjs`)
+
+All core automation CLIs are covered by isolated Vitest suites using temporary workspaces in `os.tmpdir()`:
+
+- `scripts/cli.test.mjs` — Tests `scripts/zuari-pkg.mjs` (`listPackages`, `getPackageInfo`, `listPresets`, `updateTargetPackages`), `scripts/doctor.mjs` (`runDoctor` passing workspace, VS Code `engines.vscode` exemptions, and subpath export parity mismatch detection across `ui`, `hardware`, and `headless`), `scripts/sync-ai-rules.mjs` (`syncAiRules` `--check` drift detection, synchronization write, and idempotent re-check), and `scripts/new-module.mjs` (`scaffoldModule` dry-run and write paths for both `submodule` and `package`).
+- `scripts/dev/tools.test.mjs` — Tests `scripts/dev/audit-modules.mjs` and `scripts/dev/search-docs.mjs`.
+
+Run both suites explicitly with Vitest:
+
+```bash
+npx vitest run scripts/cli.test.mjs scripts/dev/tools.test.mjs
 ```

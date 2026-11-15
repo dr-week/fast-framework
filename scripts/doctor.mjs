@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-const PARITY_PACKAGES = Object.freeze(['ui', 'hardware']);
+const PARITY_PACKAGES = Object.freeze(['ui', 'hardware', 'headless']);
 
 const REQUIRED_AI_FILES = Object.freeze([
   'AGENTS.md',
@@ -170,7 +170,7 @@ export async function runDoctor({ root = ROOT } = {}) {
       warnings.push(`packages/${entry.name}: missing "files" whitelist in package.json.`);
     }
 
-    if (hasMain && !hasExports) {
+    if (!isVscodeExtension && hasMain && !hasExports) {
       warnings.push(`packages/${entry.name}: uses "main"-only manifest without modern "exports" map.`);
     }
   }

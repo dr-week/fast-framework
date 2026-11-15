@@ -7,7 +7,7 @@ export default defineConfig({
       'packages/**/*.{test,spec}.ts',
       'packages/**/__tests__/**/*.ts',
       'playground/**/*.{test,spec}.ts',
-      'scripts/dev/**/*.{test,spec}.mjs'
+      'scripts/**/*.{test,spec}.mjs'
     ],
     coverage: {
       provider: 'v8',

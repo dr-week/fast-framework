@@ -5,6 +5,9 @@
   "type": "module",
   "sideEffects": ["./styles/**/*.css", "./styles/**/*.scss"],
   "main": "./styles/index.css",
+  "files": [
+    "styles"
+  ],
   "exports": {
     "./aether.css": "./styles/aether.css",
     "./aether.scss": "./styles/aether.scss"

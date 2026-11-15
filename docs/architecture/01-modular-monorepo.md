@@ -9,7 +9,7 @@ Zuari (`@zuari/*`) is engineered as a **zero-monolith monorepo** spanning 27 foc
 1. **Zero Virtual DOM**: Reactive values (`signal`, `computed`) bind directly to DOM text and attribute sites via `html\`...\`` and `render()` without diffing trees.
 2. **Strict Tree-Shaking (`"sideEffects": false`)**: All runtime packages declare `"sideEffects": false` in `package.json`, except `@zuari/recipes`, which scopes its side effects explicitly to CSS/SCSS files (`["./styles/**/*.css", "./styles/**/*.scss"]`). Developer/IDE packages (`create-zuari`, `@zuari/devtools`, `vscode-zuari`) omit `sideEffects`.
 3. **ESM-First Workspace**: 26 of 27 packages use `"type": "module"` with native ESM `.js` exports and `.d.ts` declarations. Only `vscode-zuari` omits `"type": "module"` because VS Code extensions target CommonJS (`"main": "./dist/extension.js"`).
-4. **Granular Subpath Exports**: Packages with multiple domains or controls (`@zuari/ui`, `@zuari/hardware`, `@zuari/spatial`, `@zuari/wasm`, `@zuari/glyphs`, `@zuari/recipes`, `@zuari/core`) expose individual subpath exports so bundlers exclude unused controls, drivers, or ABIs.
+4. **Granular Subpath Exports**: Packages with multiple domains or controls (`@zuari/ui`, `@zuari/hardware`, `@zuari/headless`, `@zuari/presets`, `@zuari/spatial`, `@zuari/wasm`, `@zuari/glyphs`, `@zuari/recipes`, `@zuari/core`) expose individual subpath exports so bundlers exclude unused controls, drivers, or ABIs.
 
 ---
 
@@ -73,6 +73,35 @@ Hardware adapters depend only on `@zuari/signals` and never pull browser UI widg
 | `@zuari/hardware/printer` | `createPrinterTelemetry` |
 | `@zuari/hardware/network` | `createWifiRssiSignal`, `createStreamTelemetry` |
 
+### `@zuari/headless/*` (9 Entrypoints)
+
+Unstyled accessible UI primitives live in `packages/headless/src/<primitive>/index.ts` and are exposed individually alongside the barrel root `.` (which also exports `anchor`, `tooltip`, `button`, and `invoker` helpers):
+
+| Import Path | Primary Export(s) |
+| :--- | :--- |
+| `@zuari/headless` | Barrel re-export of all headless primitives |
+| `@zuari/headless/combobox` | `createCombobox` |
+| `@zuari/headless/command` | `createCommandPalette` |
+| `@zuari/headless/dialog` | `createDialog` |
+| `@zuari/headless/drawer` | `createDrawer` |
+| `@zuari/headless/form` | `createField`, `createForm` |
+| `@zuari/headless/menu` | `createDropdownMenu`, `createContextMenu` |
+| `@zuari/headless/toast` | `createToastQueue` |
+| `@zuari/headless/virtual` | `createVirtualList` |
+
+### `@zuari/presets/*` (6 Entrypoints)
+
+Design presets, animations, persistence, 5-plane feature classification, and minimal templates are exposed independently alongside the barrel root `.`:
+
+| Import Path | Primary Export(s) |
+| :--- | :--- |
+| `@zuari/presets` | Barrel re-export of all preset modules |
+| `@zuari/presets/aesthetics` | `SPACING_PRESET_VALUES`, `applyElevationPreset`, `applySurfacePreset`, `createDesignPresets` |
+| `@zuari/presets/animations` | `ANIMATION_PRESETS`, `animatePreset`, `staggerPreset` |
+| `@zuari/presets/division` | `classifyFeaturePlane`, `createFeatureDivision` |
+| `@zuari/presets/persistence` | `createPersistentDesignPresets` |
+| `@zuari/presets/templates` | `createStoryCard`, `createBentoGrid`, `createStampBadge`, `createMetricCard`, `createThemeSection`, `createInfoGraphicPanel`, `createSparkline`, `createRadialGauge`, `createMinimalDock` |
+
 ### Other Multi-Subpath Packages
 
 - `@zuari/spatial`: `.`, `./anchor`, `./gesture`, `./haptics`, `./session`
@@ -95,8 +124,8 @@ All workspace packages share version `0.1.0`.
 | `@zuari/tokens` | `packages/tokens` | `@zuari/signals` | `.` | OKLCH theme tokens, `THEME_PRESETS`, Liquid Glass CSS variables, theme engine |
 | `@zuari/recipes` | `packages/recipes` | None | `./aether.css`, `./aether.scss` | Scoped CSS (`@scope`) component, surface, and Liquid Glass stylesheets |
 | `@zuari/glyphs` | `packages/glyphs` | `lucide` | `.`, `./lucide` | Crisp `24x24` stroke SVG glyphs, morph paths, and Lucide adapters |
-| `@zuari/headless` | `packages/headless` | `@zuari/signals` | `.` | CSS Anchor positioning, Popover/Invoker commands, dialog, drawer, command palette, form, virtual list |
-| `@zuari/presets` | `packages/presets` | `@zuari/signals`, `@zuari/tokens` | `.` | Aesthetic presets, animations, persistence, 5-plane classification, `createMinimalDock`, `createBentoGrid`, data cards |
+| `@zuari/headless` | `packages/headless` | `@zuari/signals` | `.`, `./combobox`, `./command`, `./dialog`, `./drawer`, `./form`, `./menu`, `./toast`, `./virtual` | CSS Anchor positioning, Popover/Invoker commands, dialog, drawer, command palette, form, virtual list |
+| `@zuari/presets` | `packages/presets` | `@zuari/signals`, `@zuari/tokens` | `.`, `./aesthetics`, `./animations`, `./division`, `./persistence`, `./templates` | Aesthetic presets, animations, persistence, 5-plane classification, `createMinimalDock`, `createBentoGrid`, data cards |
 | `@zuari/ui` | `packages/ui` | `@zuari/signals`, `@zuari/dom`, `@zuari/headless`, `@zuari/glyphs`, `@zuari/recipes` | `.`, `./switch`, `./badge`, `./card`, `./slider`, `./tabs`, `./popover`, `./drawer`, `./button`, `./input`, `./toast`, `./selection-bar` | Ready-made reactive UI components |
 | `@zuari/spatial` | `packages/spatial` | `@zuari/signals` | `.`, `./anchor`, `./gesture`, `./haptics`, `./session` | WebXR 120 FPS spatial anchors, pinch tracking, haptics, and volume controller |
 | `@zuari/hardware` | `packages/hardware` | `@zuari/signals` | `.`, `./tactical`, `./drone`, `./gaming`, `./dpad`, `./appliance`, `./display`, `./printer`, `./network` | Telemetry and device input drivers across optics, drones, gaming, KaiOS, appliances, displays, printers, and Wi-Fi |
@@ -121,9 +150,10 @@ All workspace packages share version `0.1.0`.
 
 ## Parity & Integrity Checks
 
-Two automated checks enforce monorepo modularity invariants:
+Automated checks and tests enforce monorepo modularity invariants:
 
-- `pnpm run doctor` validates that every package declares valid ESM metadata, valid entrypoints, and bidirectional parity between `src/<subdir>/index.ts` and `package.json#exports["./<subdir>"]` in `@zuari/ui` and `@zuari/hardware`.
+- `pnpm run doctor` validates that every package declares valid ESM metadata (exempting VS Code extensions with `engines.vscode` from `"type": "module"` and `"main"`-only `"exports"` warnings while keeping `"files"` whitelist warnings), valid entrypoints, and bidirectional parity between `src/<subdir>/index.ts` and `package.json#exports["./<subdir>"]` in `@zuari/ui`, `@zuari/hardware`, and `@zuari/headless`.
 - `pnpm run new:module` scaffolds new submodules in `@zuari/ui` or `@zuari/hardware` (updating `src/index.ts` and `package.json#exports` in lockstep) or standalone workspace packages.
+- `scripts/cli.test.mjs` verifies `zuari-pkg`, `doctor`, `sync-ai-rules`, and `new-module` against isolated temporary workspaces.
 
 See [02 — Package Management CLI](./02-package-management-cli.md) and [01 — Developer Scripts & CLI Reference](../automation/01-dev-scripts-guide.md) for usage.
