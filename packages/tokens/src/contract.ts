@@ -55,8 +55,12 @@ export interface NovaThemeContract {
     surface: OKLCHColor;
     surfaceElevated: OKLCHColor;
     surfaceHover: OKLCHColor;
+    /** Optional translucent surface fill for floating bars, docks, and liquid glass cards. */
+    surfaceFloating?: OKLCHColor | undefined;
     border: OKLCHColor;
     borderMuted: OKLCHColor;
+    /** Optional specular top-rim highlight color for optical glass edge refraction. */
+    specularHighlight?: OKLCHColor | undefined;
     glyph: OKLCHColor;
     glyphActive: OKLCHColor;
     accent: OKLCHColor;
@@ -84,6 +88,12 @@ export interface NovaThemeContract {
   };
   elevations?: NovaElevationsContract | undefined;
   motion?: NovaMotionContract | undefined;
+  /** Optional optical glass blur, saturation, and specular rim shadow tokens. */
+  glass?: {
+    blur: string;
+    saturation: string;
+    rimShadow: string;
+  } | undefined;
 }
 
 

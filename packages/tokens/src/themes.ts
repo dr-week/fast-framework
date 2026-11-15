@@ -66,8 +66,10 @@ export const midnightTokens: NovaThemeContract = {
     surface: 'oklch(18% 0.02 260 / 0.85)',
     surfaceElevated: 'oklch(22% 0.025 260 / 0.95)',
     surfaceHover: 'oklch(26% 0.03 260 / 0.9)',
+    surfaceFloating: 'oklch(24% 0.028 260 / 0.78)',
     border: 'oklch(100% 0 0 / 0.16)',
     borderMuted: 'oklch(100% 0 0 / 0.08)',
+    specularHighlight: 'oklch(100% 0 0 / 0.22)',
     glyph: 'oklch(78% 0.015 260)',
     glyphActive: 'oklch(96% 0.01 260)',
     accent: 'oklch(75% 0.18 190)',
@@ -79,7 +81,12 @@ export const midnightTokens: NovaThemeContract = {
   spacing: baseSpacing,
   radii: baseRadii,
   elevations: darkElevations,
-  motion: motionPresets
+  motion: motionPresets,
+  glass: {
+    blur: '24px',
+    saturation: '155%',
+    rimShadow: 'inset 0 1px 0 oklch(100% 0 0 / 0.22)'
+  }
 };
 
 /** Alias for backwards compatibility */
@@ -95,8 +102,10 @@ export const paperTokens: NovaThemeContract = {
     surface: 'oklch(99% 0.005 85)',
     surfaceElevated: 'oklch(100% 0 0)',
     surfaceHover: 'oklch(94% 0.018 85)',
+    surfaceFloating: 'oklch(99% 0.008 85 / 0.82)',
     border: 'oklch(25% 0.02 70 / 0.22)',
     borderMuted: 'oklch(25% 0.02 70 / 0.12)',
+    specularHighlight: 'oklch(100% 0 0 / 0.78)',
     glyph: 'oklch(38% 0.02 70)',
     glyphActive: 'oklch(18% 0.015 70)',
     accent: 'oklch(58% 0.21 32)',
@@ -113,7 +122,12 @@ export const paperTokens: NovaThemeContract = {
     full: '9999px'
   },
   elevations: lightElevations,
-  motion: motionPresets
+  motion: motionPresets,
+  glass: {
+    blur: '20px',
+    saturation: '140%',
+    rimShadow: 'inset 0 1px 0 oklch(100% 0 0 / 0.78)'
+  }
 };
 
 /**
@@ -126,8 +140,10 @@ export const blossomTokens: NovaThemeContract = {
     surface: 'oklch(99% 0.006 350 / 0.95)',
     surfaceElevated: 'oklch(100% 0 0)',
     surfaceHover: 'oklch(95% 0.022 350 / 0.95)',
+    surfaceFloating: 'oklch(99% 0.01 350 / 0.82)',
     border: 'oklch(45% 0.08 350 / 0.22)',
     borderMuted: 'oklch(45% 0.08 350 / 0.12)',
+    specularHighlight: 'oklch(100% 0 0 / 0.8)',
     glyph: 'oklch(42% 0.035 340)',
     glyphActive: 'oklch(22% 0.04 340)',
     accent: 'oklch(70% 0.17 352)',
@@ -144,7 +160,12 @@ export const blossomTokens: NovaThemeContract = {
     full: '9999px'
   },
   elevations: lightElevations,
-  motion: motionPresets
+  motion: motionPresets,
+  glass: {
+    blur: '22px',
+    saturation: '150%',
+    rimShadow: 'inset 0 1px 0 oklch(100% 0 0 / 0.8)'
+  }
 };
 
 /**
@@ -157,8 +178,10 @@ export const matchaTokens: NovaThemeContract = {
     surface: 'oklch(99% 0.008 135 / 0.95)',
     surfaceElevated: 'oklch(100% 0 0)',
     surfaceHover: 'oklch(93% 0.025 135 / 0.95)',
+    surfaceFloating: 'oklch(99% 0.012 135 / 0.82)',
     border: 'oklch(30% 0.04 145 / 0.22)',
     borderMuted: 'oklch(30% 0.04 145 / 0.12)',
+    specularHighlight: 'oklch(100% 0 0 / 0.76)',
     glyph: 'oklch(38% 0.04 145)',
     glyphActive: 'oklch(20% 0.04 145)',
     accent: 'oklch(62% 0.15 148)',
@@ -175,7 +198,12 @@ export const matchaTokens: NovaThemeContract = {
     full: '9999px'
   },
   elevations: lightElevations,
-  motion: motionPresets
+  motion: motionPresets,
+  glass: {
+    blur: '20px',
+    saturation: '145%',
+    rimShadow: 'inset 0 1px 0 oklch(100% 0 0 / 0.76)'
+  }
 };
 
 /**
@@ -188,8 +216,10 @@ export const twilightTokens: NovaThemeContract = {
     surface: 'oklch(20% 0.04 275 / 0.85)',
     surfaceElevated: 'oklch(25% 0.045 275 / 0.95)',
     surfaceHover: 'oklch(30% 0.05 275 / 0.9)',
+    surfaceFloating: 'oklch(26% 0.045 275 / 0.78)',
     border: 'oklch(90% 0.06 55 / 0.22)',
     borderMuted: 'oklch(90% 0.06 55 / 0.12)',
+    specularHighlight: 'oklch(96% 0.04 65 / 0.24)',
     glyph: 'oklch(82% 0.03 275)',
     glyphActive: 'oklch(98% 0.015 65)',
     accent: 'oklch(76% 0.17 55)',
@@ -201,7 +231,12 @@ export const twilightTokens: NovaThemeContract = {
   spacing: baseSpacing,
   radii: baseRadii,
   elevations: darkElevations,
-  motion: motionPresets
+  motion: motionPresets,
+  glass: {
+    blur: '24px',
+    saturation: '160%',
+    rimShadow: 'inset 0 1px 0 oklch(96% 0.04 65 / 0.24)'
+  }
 };
 
 /**
@@ -215,8 +250,10 @@ export const studioTokens: NovaThemeContract = {
     surface: 'oklch(99% 0.025 45 / 0.56)',
     surfaceElevated: 'oklch(100% 0.01 45 / 0.76)',
     surfaceHover: 'oklch(100% 0.02 45 / 0.86)',
+    surfaceFloating: 'oklch(100% 0.015 45 / 0.68)',
     border: 'oklch(100% 0.02 40 / 0.58)',
     borderMuted: 'oklch(100% 0.02 40 / 0.34)',
+    specularHighlight: 'oklch(100% 0 0 / 0.65)',
     glyph: 'oklch(36% 0.035 270)',
     glyphActive: 'oklch(22% 0.03 270)',
     accent: 'oklch(52% 0.19 23)',
@@ -233,7 +270,12 @@ export const studioTokens: NovaThemeContract = {
     float: '0 22px 48px -18px oklch(30% 0.05 30 / 0.28), 0 0 0 1px oklch(100% 0.02 40 / 0.62)',
     halo: '0 26px 58px -18px oklch(30% 0.05 30 / 0.28), 0 0 0 1px oklch(100% 0.02 40 / 0.66), 0 0 30px oklch(66% 0.2 20 / 0.2)'
   },
-  motion: motionPresets
+  motion: motionPresets,
+  glass: {
+    blur: '26px',
+    saturation: '165%',
+    rimShadow: 'inset 0 1px 0 oklch(100% 0 0 / 0.65)'
+  }
 };
 
 /** 7. Noir Theme — editorial dark glass with restrained spectral violet and blue accents. */
@@ -244,8 +286,10 @@ export const noirTokens: NovaThemeContract = {
     surface: 'oklch(18% 0.018 270 / 0.82)',
     surfaceElevated: 'oklch(22% 0.022 270 / 0.94)',
     surfaceHover: 'oklch(25% 0.025 270 / 0.92)',
+    surfaceFloating: 'oklch(24% 0.024 270 / 0.76)',
     border: 'oklch(88% 0.025 270 / 0.16)',
     borderMuted: 'oklch(88% 0.025 270 / 0.09)',
+    specularHighlight: 'oklch(100% 0 0 / 0.24)',
     glyph: 'oklch(76% 0.018 270)',
     glyphActive: 'oklch(97% 0.01 270)',
     accent: 'oklch(72% 0.2 295)',
@@ -257,7 +301,12 @@ export const noirTokens: NovaThemeContract = {
   spacing: baseSpacing,
   radii: { ...baseRadii, squircle: '18px' },
   elevations: darkElevations,
-  motion: motionPresets
+  motion: motionPresets,
+  glass: {
+    blur: '26px',
+    saturation: '165%',
+    rimShadow: 'inset 0 1px 0 oklch(100% 0 0 / 0.24)'
+  }
 };
 
 /**

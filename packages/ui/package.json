@@ -18,10 +18,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./dock": {
-      "types": "./dist/dock/index.d.ts",
-      "import": "./dist/dock/index.js"
-    },
     "./switch": {
       "types": "./dist/switch/index.d.ts",
       "import": "./dist/switch/index.js"
@@ -33,6 +29,14 @@
     "./card": {
       "types": "./dist/card/index.d.ts",
       "import": "./dist/card/index.js"
+    },
+    "./slider": {
+      "types": "./dist/slider/index.d.ts",
+      "import": "./dist/slider/index.js"
+    },
+    "./tabs": {
+      "types": "./dist/tabs/index.d.ts",
+      "import": "./dist/tabs/index.js"
     },
     "./popover": {
       "types": "./dist/popover/index.d.ts",
@@ -49,6 +53,10 @@
     "./input": {
       "types": "./dist/input/index.d.ts",
       "import": "./dist/input/index.js"
+    },
+    "./toast": {
+      "types": "./dist/toast/index.d.ts",
+      "import": "./dist/toast/index.js"
     },
     "./selection-bar": {
       "types": "./dist/selection-bar/index.d.ts",

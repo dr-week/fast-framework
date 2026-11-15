@@ -1,6 +1,6 @@
 /**
  * @fileoverview Reactive UI/UX Design Preset Controller (`createDesignPresets`).
- * Coordinates simple, intuitive themes ('paper', 'blossom', 'matcha', 'twilight', 'midnight', 'studio'),
+ * Coordinates simple, intuitive themes ('paper', 'blossom', 'matcha', 'twilight', 'midnight', 'studio', 'noir'),
  * lightweight elevations ('flat', 'soft', 'float', 'halo'),
  * spacing density ('compact', 'balanced', 'airy'), and surface materials ('paper', 'frosted', 'liquid', 'canvas', 'cel').
  */
@@ -53,6 +53,18 @@ export function applySurfacePreset(
     'zuari-surface-cel'
   );
   element.classList.add(`zuari-surface-${surface}`);
+
+  if (surface === 'liquid' || surface === 'frosted') {
+    element.style.setProperty('--zuari-active-glass-blur', 'var(--zuari-glass-blur, 24px)');
+  } else {
+    element.style.removeProperty('--zuari-active-glass-blur');
+  }
+
+  if (surface === 'liquid') {
+    element.setAttribute('data-zuari-optics', 'liquid-glass');
+  } else {
+    element.removeAttribute('data-zuari-optics');
+  }
 }
 
 /**

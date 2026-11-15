@@ -383,8 +383,22 @@ export function createMinimalDock(options: import('./types.js').MinimalDockOptio
   dock.setAttribute('role', 'toolbar');
   dock.setAttribute('aria-label', 'Dock Navigation');
 
-  applyElevationPreset(dock, options.elevation ?? 'float');
-  applySurfacePreset(dock, options.surface ?? 'frosted');
+  const elevation = options.elevation ?? 'float';
+  const surface = options.surface ?? 'frosted';
+
+  applyElevationPreset(dock, elevation);
+  applySurfacePreset(dock, surface);
+
+  dock.style.border = '1px solid var(--nova-color-border, oklch(100% 0 0 / 0.18))';
+  const elevationShadow =
+    elevation === 'float'
+      ? 'var(--zuari-elevation-float, 0 12px 32px -8px rgba(0,0,0,0.45))'
+      : `var(--zuari-elevation-${elevation}, 0 12px 32px -8px rgba(0,0,0,0.45))`;
+  dock.style.boxShadow = `var(--zuari-glass-rim-shadow, inset 0 1px 0 oklch(100% 0 0 / 0.16)), ${elevationShadow}`;
+
+  if (surface === 'liquid' || surface === 'frosted') {
+    dock.setAttribute('data-zuari-optics', 'liquid-glass');
+  }
 
   for (const item of options.items) {
     const btn = document.createElement('button');

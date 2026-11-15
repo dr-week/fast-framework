@@ -50,11 +50,18 @@ export function generateCssVariables(tokens: NovaThemeContract, selector: string
     }
   }
 
+  // Register optical glass tokens (blur, saturation, rimShadow)
+  if (tokens.glass) {
+    cssLines.push(`  --zuari-glass-blur: ${tokens.glass.blur};`);
+    cssLines.push(`  --zuari-glass-saturation: ${tokens.glass.saturation};`);
+    cssLines.push(`  --zuari-glass-rim-shadow: ${tokens.glass.rimShadow};`);
+  }
+
   return `/* Nova Framework AOT @property Definitions */\n${propertyRules.join('\n')}\n\n${selector} {\n${cssLines.join('\n')}\n}`;
 }
 
 /**
- * Applies a named theme preset ('paper', 'blossom', 'matcha', 'twilight', 'midnight', 'studio')
+ * Applies a named theme preset ('paper', 'blossom', 'matcha', 'twilight', 'midnight', 'studio', 'noir')
  * directly to a DOM root element (defaults to `document.documentElement`).
  */
 export function applyThemePreset(
@@ -88,6 +95,11 @@ export function applyThemePreset(
       for (const [key, value] of Object.entries(resolved.motion)) {
         root.style.setProperty(`--zuari-motion-${kebabCase(key)}`, value);
       }
+    }
+    if (resolved.glass) {
+      root.style.setProperty('--zuari-glass-blur', resolved.glass.blur);
+      root.style.setProperty('--zuari-glass-saturation', resolved.glass.saturation);
+      root.style.setProperty('--zuari-glass-rim-shadow', resolved.glass.rimShadow);
     }
   }
 

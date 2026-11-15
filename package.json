@@ -11,6 +11,10 @@
     "audit:modules": "node scripts/dev/audit-modules.mjs",
     "docs:search": "node scripts/dev/search-docs.mjs",
     "research:reuse": "node scripts/dev/research-reuse.mjs",
+    "zuari:pkg": "node scripts/zuari-pkg.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "sync:rules": "node scripts/sync-ai-rules.mjs",
+    "new:module": "node scripts/new-module.mjs",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish"

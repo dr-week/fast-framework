@@ -89,4 +89,66 @@ describe('@zuari/tokens Modular Plug-and-Play Theme Engine', () => {
     expect(element.style.getPropertyValue('--nova-color-accent-glow')).toBe('');
     expect(element.style.getPropertyValue('--nova-color-on-accent')).toBe('');
   });
+
+  it('skips undefined optical optional colors and glass block when omitted', () => {
+    const theme = {
+      ...THEME_PRESETS.paper,
+      colors: {
+        ...THEME_PRESETS.paper.colors,
+        surfaceFloating: undefined,
+        specularHighlight: undefined
+      },
+      glass: undefined
+    };
+    const generatedCss = generateCssVariables(theme);
+    const element = document.createElement('div');
+
+    applyThemePreset(theme, element);
+
+    expect(generatedCss).not.toContain('--nova-color-surface-floating');
+    expect(generatedCss).not.toContain('--nova-color-specular-highlight');
+    expect(generatedCss).not.toContain('--zuari-glass-blur');
+    expect(generatedCss).not.toContain('--zuari-glass-saturation');
+    expect(generatedCss).not.toContain('--zuari-glass-rim-shadow');
+    expect(element.style.getPropertyValue('--nova-color-surface-floating')).toBe('');
+    expect(element.style.getPropertyValue('--nova-color-specular-highlight')).toBe('');
+    expect(element.style.getPropertyValue('--zuari-glass-blur')).toBe('');
+    expect(element.style.getPropertyValue('--zuari-glass-saturation')).toBe('');
+    expect(element.style.getPropertyValue('--zuari-glass-rim-shadow')).toBe('');
+  });
+
+  it('generates and applies liquid glass optical tokens across built-in themes', () => {
+    for (const [name, preset] of Object.entries(THEME_PRESETS)) {
+      const generatedCss = generateCssVariables(preset);
+      const element = document.createElement('div');
+      applyThemePreset(preset, element);
+
+      expect(preset.colors.surfaceFloating, `${name} surfaceFloating`).toBeDefined();
+      expect(preset.colors.specularHighlight, `${name} specularHighlight`).toBeDefined();
+      expect(preset.glass, `${name} glass`).toBeDefined();
+
+      expect(generatedCss).toContain(`--nova-color-surface-floating: ${preset.colors.surfaceFloating};`);
+      expect(generatedCss).toContain(`--nova-color-specular-highlight: ${preset.colors.specularHighlight};`);
+      expect(generatedCss).toContain(`--zuari-glass-blur: ${preset.glass!.blur};`);
+      expect(generatedCss).toContain(`--zuari-glass-saturation: ${preset.glass!.saturation};`);
+      expect(generatedCss).toContain(`--zuari-glass-rim-shadow: ${preset.glass!.rimShadow};`);
+
+      expect(element.style.getPropertyValue('--nova-color-surface-floating')).toBe(preset.colors.surfaceFloating);
+      expect(element.style.getPropertyValue('--nova-color-specular-highlight')).toBe(preset.colors.specularHighlight);
+      expect(element.style.getPropertyValue('--zuari-glass-blur')).toBe(preset.glass!.blur);
+      expect(element.style.getPropertyValue('--zuari-glass-saturation')).toBe(preset.glass!.saturation);
+      expect(element.style.getPropertyValue('--zuari-glass-rim-shadow')).toBe(preset.glass!.rimShadow);
+    }
+
+    expect(THEME_PRESETS.studio.glass).toEqual({
+      blur: '26px',
+      saturation: '165%',
+      rimShadow: 'inset 0 1px 0 oklch(100% 0 0 / 0.65)'
+    });
+    expect(THEME_PRESETS.noir.glass).toEqual({
+      blur: '26px',
+      saturation: '165%',
+      rimShadow: 'inset 0 1px 0 oklch(100% 0 0 / 0.24)'
+    });
+  });
 });

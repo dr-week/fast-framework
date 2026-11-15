@@ -41,6 +41,10 @@
     "./printer": {
       "types": "./dist/printer/index.d.ts",
       "import": "./dist/printer/index.js"
+    },
+    "./network": {
+      "types": "./dist/network/index.d.ts",
+      "import": "./dist/network/index.js"
     }
   },
   "scripts": {
