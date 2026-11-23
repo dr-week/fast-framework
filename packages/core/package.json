@@ -30,7 +30,8 @@
     "@zuari/quantum": "workspace:*",
     "@zuari/system-one": "workspace:*",
     "@zuari/devtools": "workspace:*",
-    "@zuari/kotlin": "workspace:*"
+    "@zuari/kotlin": "workspace:*",
+    "@zuari/visual-bot": "workspace:*"
   },
   "exports": {
     ".": {
@@ -116,6 +117,10 @@
     "./kotlin": {
       "types": "../kotlin/dist/index.d.ts",
       "import": "../kotlin/dist/index.js"
+    },
+    "./visual-bot": {
+      "types": "../visual-bot/dist/index.d.ts",
+      "import": "../visual-bot/dist/index.js"
     }
   },
   "scripts": {

@@ -80,6 +80,16 @@ export const FEATURE_ARTWORK: Record<ActiveTab, FeatureArtwork> = {
     blend: 'lighten',
     position: 'center 48%'
   },
+  'visual-bot': {
+    card: 'glass-polyhedron.jpg',
+    station: 'grid-horizon.jpg',
+    ambient: 'cosmic-streak.jpg',
+    glow: 'oklch(78% 0.16 160)',
+    hue: '4deg',
+    blend: 'screen',
+    position: 'center 48%',
+    ambientPosition: 'center 52%'
+  },
   alliances: {
     card: 'violet-portal.jpg',
     station: 'amber-orb.jpg',

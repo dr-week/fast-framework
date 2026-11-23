@@ -87,4 +87,16 @@ describe('create-zuari Scaffolder', () => {
     expect(readme?.content).toContain('no fake business data');
     expect(readme?.content).toContain('modular monolith');
   });
+
+  it('generates visual-bot starter template with self-healing cascade and quota guard', () => {
+    const files = getTemplateFiles('my-visual-bot', 'visual-bot');
+    const pkg = files.find(f => f.path === 'package.json');
+    expect(pkg?.content).toContain('@zuari/visual-bot');
+
+    const main = files.find(f => f.path === 'src/main.ts');
+    expect(main?.content).toContain('createVisualBot');
+    expect(main?.content).toContain('createDomDriver');
+    expect(main?.content).toContain('createQuotaGuard');
+    expect(main?.content).toContain('createWorkflowEngine');
+  });
 });

@@ -94,6 +94,7 @@ Users do **NOT** need to adopt a monolith. Any individual package or subpath can
 - `@zuari/wit` (~0.8 KB): `parseWIT`, `generateWITSignalBindings`, `bindWITComponentRecord` (WASI 0.2 Component Model zero-copy signal bindings)
 - `@zuari/system-one` (~1.2 KB): Sub-millisecond System 1 fast-reflex AI, 32-byte circular fast-log ring buffer & speculative DOM pre-synthesis
 - `@zuari/quantum` (~2.0 KB): Qubit statevectors, T1/T2 decoherence, OpenQASM 3.0 & cognitive spike streams
+- `@zuari/visual-bot` (11 modular subpaths): Self-healing 3-layer Visual Bot & Adaptable Automation Framework (`vision` Sobel + multi-scale 2D NCC, `som` Set-of-Mark A11y indexer & debug overlay, `cascade` reactive `createVisualBot`, `motion` biometric Bezier/Gaussian kinematics, `recorder` fail-closed workflow replay, `bridge` React Fiber & passive `fetch` sniffer, `memory` zero-repeat dedupe + 5x Taste DNA + portable snapshots, `llm` tiered multi-provider cascade, `runtime` event bus + quota guard + checkpointed workflow retries, `drivers` pluggable DOM & Android ADB drivers, `pipeline` stratified batcher + quality filter)
 - `@zuari/core` (< 2.5 KB core): Unified barrel re-exporting all Zuari modules.
 
 

@@ -22,6 +22,7 @@
     "@zuari/spatial": "workspace:*",
     "@zuari/tokens": "workspace:*",
     "@zuari/ui": "workspace:*",
+    "@zuari/visual-bot": "workspace:*",
     "@zuari/wasm": "workspace:*",
     "@zuari/webgpu": "workspace:*",
     "@zuari/wit": "workspace:*"

@@ -35,6 +35,40 @@ export interface GuidanceResponse {
 export function getZuariGuidance(query: AdvisorQuery): GuidanceResponse {
   const text = `${query.task} ${query.currentIssue ?? ''}`.toLowerCase();
 
+  // 0. Visual Bot / Self-Healing Automation / Set-of-Mark / Content Pipeline
+  if (
+    text.includes('visual bot') ||
+    text.includes('set-of-mark') ||
+    text.includes('self-heal') ||
+    text.includes('sobel') ||
+    text.includes('automation')
+  ) {
+    return {
+      querySummary: 'Visual Bot & Self-Healing Automation',
+      advice: {
+        scenario: 'Modular Visual Bot, Self-Healing Selectors & Automation Pipeline',
+        recommendedPlane: 'surface',
+        recommendedPackages: ['@zuari/visual-bot', '@zuari/signals'],
+        recommendedComponents: ['createVisualBot', 'createActionRunner', 'createDomDriver', 'createQuotaGuard', 'createWorkflowEngine'],
+        recommendedGlyphs: ['MonitorGlyph', 'CheckGlyph', 'TunerGlyph'],
+        optimalPattern: 'Use the 3-layer cascade (Cached Selector -> Set-of-Mark A11y -> Sobel/Multi-Scale NCC) with fail-closed sensitive guards and sliding-window quotas.',
+        codeSnippet: `import { createVisualBot } from '@zuari/visual-bot/cascade';
+import { createActionRunner, createDomDriver } from '@zuari/visual-bot/drivers';
+const bot = createVisualBot({ initialSelectors: { submit: '.old-cls' } });
+const runner = createActionRunner(createDomDriver({ bot }), { maxActionsPerHour: 30 });
+await runner.resolveAndClick('submit', { query: 'Approve' });`,
+        antiPatternsToAvoid: [
+          'Do not interact with password, OTP, or payment inputs; rely on isSensitiveElement().',
+          'Do not run unbounded loops without createQuotaGuard().'
+        ]
+      },
+      verificationSteps: [
+        'Verify broken Layer 1 selectors self-heal via Layer 2 Set-of-Mark.',
+        'Verify sensitive password/OTP/payment controls are excluded from indexing.'
+      ]
+    };
+  }
+
   // 1. Settings / Configuration / Hardware Calibration
   if (text.includes('setting') || text.includes('config') || text.includes('tuning') || text.includes('inspector') || text.includes('calibrate')) {
     return {
