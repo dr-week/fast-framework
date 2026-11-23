@@ -24,5 +24,6 @@ export * from '@zuari/quantum';
 export * from '@zuari/system-one';
 export * from '@zuari/devtools';
 export * from '@zuari/kotlin';
+export * from '@zuari/visual-bot';
 
 

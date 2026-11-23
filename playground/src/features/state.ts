@@ -6,4 +6,5 @@ export type ActiveTab =
   | 'spatial'
   | 'wasm'
   | 'tokens'
+  | 'visual-bot'
   | 'alliances';

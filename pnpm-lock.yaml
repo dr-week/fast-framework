@@ -120,6 +120,9 @@ importers:
       '@zuari/ui':
         specifier: workspace:*
         version: link:../ui
+      '@zuari/visual-bot':
+        specifier: workspace:*
+        version: link:../visual-bot
       '@zuari/wasm':
         specifier: workspace:*
         version: link:../wasm
@@ -262,6 +265,12 @@ importers:
         specifier: workspace:*
         version: link:../signals
 
+  packages/visual-bot:
+    dependencies:
+      '@zuari/signals':
+        specifier: workspace:*
+        version: link:../signals
+
   packages/vite-plugin:
     dependencies:
       '@zuari/signals':
@@ -335,6 +344,9 @@ importers:
       '@zuari/ui':
         specifier: workspace:*
         version: link:../packages/ui
+      '@zuari/visual-bot':
+        specifier: workspace:*
+        version: link:../packages/visual-bot
       '@zuari/wasm':
         specifier: workspace:*
         version: link:../packages/wasm

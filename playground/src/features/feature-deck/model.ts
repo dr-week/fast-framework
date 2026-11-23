@@ -93,6 +93,15 @@ export const FEATURE_CARDS: readonly FeatureCardDefinition[] = [
     lesson: 'Typed design tokens make themes interactive and reusable.'
   },
   {
+    id: 'visual-bot',
+    icon: LucideActivityGlyph,
+    category: 'VISUAL AUTOMATION',
+    title: 'Visual Bot Studio',
+    summary: 'Self-healing Set-of-Mark DOM indexing, Sobel vision, and Bezier kinematics.',
+    mission: 'Scan the sandbox, break a cached selector, and watch the 3-layer cascade self-heal.',
+    lesson: 'Modular automation primitives run cleanly with zero Virtual DOM overhead.'
+  },
+  {
     id: 'alliances',
     icon: LucideGridGlyph,
     category: 'FRAMEWORK MAP',

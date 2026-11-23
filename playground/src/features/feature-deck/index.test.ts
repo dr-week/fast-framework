@@ -17,7 +17,7 @@ describe('feature mission deck', () => {
     const cards = deck.querySelectorAll<HTMLElement>('.feature-flashcard');
     const scaleCard = deck.querySelector<HTMLElement>('[data-feature="bench"]')!;
 
-    expect(cards).toHaveLength(8);
+    expect(cards).toHaveLength(9);
     expect(deck.querySelector('[data-feature="repl"]')?.dataset.active).toBe('true');
     expect(scaleCard.style.getPropertyValue('--card-artwork')).toContain('images/arcade/star-arc.jpg');
     expect(scaleCard.style.getPropertyValue('--mission-artwork')).toContain('images/arcade/grid-horizon.jpg');
@@ -35,7 +35,7 @@ describe('feature mission deck', () => {
     expect(currentTab.value).toBe('bench');
     expect(scaleCard.dataset.active).toBe('true');
     expect((deck.querySelector('.feature-deck-progress') as HTMLProgressElement).value).toBe(1);
-    expect(deck.querySelector('.feature-deck-progress-copy')?.textContent).toBe('1 / 8 stations explored');
+    expect(deck.querySelector('.feature-deck-progress-copy')?.textContent).toBe('1 / 9 stations explored');
     expect(onOpenDemo).toHaveBeenCalledOnce();
     expect(onInteraction).toHaveBeenCalledTimes(2);
   });

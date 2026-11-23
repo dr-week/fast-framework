@@ -1,0 +1,68 @@
+{
+  "name": "@zuari/visual-bot",
+  "version": "0.1.0",
+  "description": "Self-healing 3-layer Visual Bot framework for Zuari: theme-invariant Sobel + multi-scale 2D NCC vision, Set-of-Mark A11y DOM indexing, biometric human motion, safe workflow replay, fiber/network bridges, zero-repeat memory, Taste DNA, and tiered LLM cascades",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@zuari/signals": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./vision": {
+      "types": "./dist/vision/index.d.ts",
+      "import": "./dist/vision/index.js"
+    },
+    "./som": {
+      "types": "./dist/som/index.d.ts",
+      "import": "./dist/som/index.js"
+    },
+    "./cascade": {
+      "types": "./dist/cascade/index.d.ts",
+      "import": "./dist/cascade/index.js"
+    },
+    "./motion": {
+      "types": "./dist/motion/index.d.ts",
+      "import": "./dist/motion/index.js"
+    },
+    "./recorder": {
+      "types": "./dist/recorder/index.d.ts",
+      "import": "./dist/recorder/index.js"
+    },
+    "./bridge": {
+      "types": "./dist/bridge/index.d.ts",
+      "import": "./dist/bridge/index.js"
+    },
+    "./memory": {
+      "types": "./dist/memory/index.d.ts",
+      "import": "./dist/memory/index.js"
+    },
+    "./llm": {
+      "types": "./dist/llm/index.d.ts",
+      "import": "./dist/llm/index.js"
+    },
+    "./runtime": {
+      "types": "./dist/runtime/index.d.ts",
+      "import": "./dist/runtime/index.js"
+    },
+    "./drivers": {
+      "types": "./dist/drivers/index.d.ts",
+      "import": "./dist/drivers/index.js"
+    },
+    "./pipeline": {
+      "types": "./dist/pipeline/index.d.ts",
+      "import": "./dist/pipeline/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}

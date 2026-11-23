@@ -9,6 +9,7 @@ import { createAlliancesShowcase } from './alliances.js';
 import { createCoreShowcase } from './core.js';
 import { createSpatialShowcase } from './spatial.js';
 import { createTokensShowcase } from './tokens.js';
+import { createVisualBotStudio } from '../visual-bot/index.js';
 
 interface ShowcaseOptions {
   getActiveTab: () => ActiveTab;
@@ -37,6 +38,7 @@ export function createShowcase({ getActiveTab, onInteraction }: ShowcaseOptions)
     spatial: createSpatialShowcase(),
     wasm: createPolyglotWorkbenchView(onInteraction),
     tokens: createTokensShowcase(onInteraction),
+    'visual-bot': createVisualBotStudio(onInteraction),
     alliances: createAlliancesShowcase()
   };
 
